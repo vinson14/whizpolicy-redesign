@@ -41,7 +41,10 @@ const Dashboard = () => {
         <List>
           {sidebarItems.map((item) => (
             <ListItem key={item.value}>
-              <ListItemButton onClick={() => setActiveOption(item.value)}>
+              <ListItemButton
+                selected={activeOption === item.value}
+                onClick={() => setActiveOption(item.value)}
+              >
                 <ListItemIcon>{item.icon}</ListItemIcon>
                 <ListItemText primary={item.label} />
               </ListItemButton>
