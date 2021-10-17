@@ -1,9 +1,10 @@
-import { Grid } from "@mui/material";
+import { Divider, Grid } from "@mui/material";
 import ContactCard from "./contact-card";
 import NameCard from "./name-card";
 import AboutCard from "./about-card";
 import DependantsCard from "./dependants-card";
 import CoverageCard from "./coverage-card";
+import PolicyCards from "./policy-cards";
 
 const ClientDetails = ({ client }) => {
   return (
@@ -13,6 +14,12 @@ const ClientDetails = ({ client }) => {
           <Component client={client} />
         </Grid>
       ))}
+      <Grid item xs={12}>
+        <Divider variant="middle" />
+      </Grid>
+      <Grid item xs={12}>
+        <PolicyCards client={client} />
+      </Grid>
     </>
   );
 };

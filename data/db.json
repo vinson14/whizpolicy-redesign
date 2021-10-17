@@ -40,7 +40,69 @@
         "accidentalMedical": {
           "currentCoverage": 3000
         }
-      }
+      },
+      "policies": [
+        {
+          "id": 1,
+          "clientName": "Vinson Ong",
+          "clientId": 1,
+          "category": "life",
+          "policyName": "Guaranteed Protect Plus",
+          "policyType": "Whole Life",
+          "sumAssured": 1000000,
+          "annualPremium": 5000,
+          "insurer": "AIA"
+        },
+        {
+          "id": 2,
+          "clientName": "Vinson Ong",
+          "clientId": 1,
+          "category": "hospital",
+          "policyName": "Healthshield Gold Max A",
+          "policyType": "Integrated Shield Plan",
+          "sumAssured": 2000000,
+          "annualPolicyLimit": 2000000,
+          "annualPremium": 700,
+          "insurer": "AIA",
+          "rider": "Full"
+        },
+
+        {
+          "id": 3,
+          "clientName": "Vinson Ong",
+          "clientId": 1,
+          "category": "health",
+          "policyName": "Vitalhealth Max A",
+          "policyType": "ISP Rider",
+          "sumAssured": 2000000,
+          "annualPremium": 500,
+          "insurer": "AIA"
+        },
+        {
+          "id": 4,
+          "clientName": "Vinson Ong",
+          "clientId": 1,
+          "category": "accident",
+          "policyName": "Solitaire Personal Accident",
+          "policyType": "Personal Accident",
+          "sumAssured": 1000000,
+          "annualPremium": 500,
+          "insurer": "AIA"
+        },
+        {
+          "id": 5,
+          "clientName": "Vinson Ong",
+          "clientId": 1,
+          "category": "hospital",
+          "policyName": "ProHealth",
+          "policyType": "Global excl. US",
+          "sumAssured": 2000000,
+          "annualPolicyLimit": 2000000,
+          "annualPremium": 700,
+          "insurer": "AIG",
+          "rider": "NA"
+        }
+      ]
     },
     {
       "id": 2,
