@@ -4,19 +4,87 @@
       "id": 1,
       "name": "Vinson Ong",
       "occupation": "Full Stack Developer",
-      "age": 28
+      "age": 28,
+      "mobile": "9431 8747",
+      "email": "vinson1493@gmail.com",
+      "gender": "Male",
+      "birthday": "1 Apr 1993",
+      "maritalStatus": "Single",
+      "smoker": "No",
+      "dependants": [
+        {
+          "relationship": "Spouse",
+          "name": "Chio Bu"
+        },
+        {
+          "relationship": "Son",
+          "name": "Boy Boy"
+        }
+      ],
+      "financialOverview": {
+        "death": {
+          "currentCoverage": 1000000
+        },
+        "tpd": {
+          "currentCoverage": 1000000
+        },
+        "majorCi": {
+          "currentCoverage": 300000
+        },
+        "earlyCi": {
+          "currentCoverage": 100000
+        },
+        "accidentalDeath": {
+          "currentCoverage": 200000
+        },
+        "accidentalMedical": {
+          "currentCoverage": 3000
+        }
+      }
     },
     {
       "id": 2,
       "name": "Alex Teng",
       "occupation": "Certis Cisco Officer",
-      "age": 33
+      "age": 33,
+      "mobile": "9431 8747",
+      "email": "vinson1493@gmail.com",
+      "gender": "Male",
+      "birthday": "1 Apr 1993",
+      "maritalStatus": "Single",
+      "smoker": "No",
+      "dependants": [
+        {
+          "relationship": "Spouse",
+          "name": "Chio Bu"
+        },
+        {
+          "relationship": "Son",
+          "name": "Boy Boy"
+        }
+      ]
     },
     {
       "id": 3,
       "name": "Choi Chi Min",
       "occupation": "Data Analyst",
-      "age": 28
+      "age": 28,
+      "mobile": "9431 8747",
+      "email": "vinson1493@gmail.com",
+      "gender": "Male",
+      "birthday": "1 Apr 1993",
+      "maritalStatus": "Single",
+      "smoker": "No",
+      "dependants": [
+        {
+          "relationship": "Spouse",
+          "name": "Chio Bu"
+        },
+        {
+          "relationship": "Son",
+          "name": "Boy Boy"
+        }
+      ]
     }
   ]
 }

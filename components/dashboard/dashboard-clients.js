@@ -2,22 +2,44 @@ import { Box, Grid, Typography, Button } from "@mui/material";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { getClients } from "../../utils/api";
+import { findClientById } from "../../utils/utils";
 import AddButton from "../stateless/interface/buttons/add-button";
 import ClientCard from "../stateless/interface/cards/client-card";
+import ClientCards from "../stateless/interface/cards/client-cards";
 import CustomBreadcrumbs from "../stateless/interface/navigation/breadcrumbs";
 import MainHeader from "../stateless/interface/text/main-header";
+import ClientDetails from "./client-details/dashboard-client-details";
 
 const DashboardClients = () => {
   const router = useRouter();
   const [clients, setClients] = useState([]);
-  const [selectedClient, setSelectedClient] = useState();
+  const [selectedClient, setSelectedClient] = useState(null);
+  const [breadcrumbLinks, setBreadcrumbLinks] = useState(
+    defaultBreadcrumbLinks
+  );
+
   useEffect(() => {
+    console.log("useEffect 1 ran");
     getClients().then((clients) => setClients(clients));
   }, []);
 
-  const selectClient = (id) => {
-    setSelectedClient(id);
-    router.push(`?clientId=${id}`, undefined, { shallow: true });
+  useEffect(() => {
+    console.log("useEffect 2 ran");
+    const clientId = router.query.clientId;
+    if (clients.length === 0) return;
+    if (clientId == null) {
+      setSelectedClient(null);
+      setBreadcrumbLinks(defaultBreadcrumbLinks);
+    } else {
+      const client = findClientById(clients, clientId);
+      setSelectedClient(client);
+      setBreadcrumbLinks([...defaultBreadcrumbLinks, { label: client.name }]);
+    }
+  }, [clients, router.query.clientId]);
+
+  const selectClient = (client) => {
+    setSelectedClient(client);
+    router.push(`?clientId=${client.id}`, undefined, { shallow: true });
   };
 
   return (
@@ -25,7 +47,7 @@ const DashboardClients = () => {
       <Grid container>
         <Grid item>
           <MainHeader>Clients</MainHeader>
-          <CustomBreadcrumbs links={links} />
+          <CustomBreadcrumbs links={breadcrumbLinks} />
         </Grid>
         <Grid
           item
@@ -37,23 +59,19 @@ const DashboardClients = () => {
           <AddButton>New Client</AddButton>
         </Grid>
       </Grid>
-      <Grid container mt={5} spacing={3}>
-        {clients.map((client) => (
-          <Grid key={client.id} item lg={4} sm={12} xs={12}>
-            <ClientCard
-              onClick={() => selectClient(client.id)}
-              client={client}
-            />
-          </Grid>
-        ))}
+      <Grid container mt={5} spacing={3} alignItems="stretch">
+        {selectedClient == null && (
+          <ClientCards clients={clients} selectClient={selectClient} />
+        )}
+        {selectedClient != null && <ClientDetails client={selectedClient} />}
       </Grid>
     </Box>
   );
 };
 
-const links = [
-  { label: "Dashboard", route: "/" },
-  { label: "Clients", route: "/" },
+const defaultBreadcrumbLinks = [
+  { label: "Dashboard", route: "/dashboard" },
+  { label: "Clients", route: "/dashboard" },
 ];
 
 export default DashboardClients;

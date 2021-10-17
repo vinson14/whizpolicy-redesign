@@ -1,22 +1,31 @@
-import { Breadcrumbs, Link } from "@mui/material";
+import { Breadcrumbs, Link, Typography } from "@mui/material";
+import NextLink from "next/link";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
 const CustomBreadcrumbs = ({ links }) => {
-  const getColor = (index) => {
-    return index === links.length - 1 ? "text.primary" : "text.secondary";
+  const isLast = (index) => {
+    return index === links.length - 1;
   };
 
   return (
-    <Breadcrumbs aria-label="breadcrumb">
-      {links.map((link, index) => (
-        <Link
-          href={link.route}
-          color={() => getColor(index)}
-          underline="hover"
-          key={link.label}
-        >
-          {link.label}
-        </Link>
-      ))}
+    <Breadcrumbs aria-label="breadcrumb" separator={<ChevronRightIcon />}>
+      {links.map((link, index) => {
+        if (!isLast(index)) {
+          return (
+            <NextLink href={link.route} key={link.label} passHref>
+              <Link color="text.secondary" underline="hover">
+                {link.label}
+              </Link>
+            </NextLink>
+          );
+        } else {
+          return (
+            <Typography color="text.primary" key={link.label}>
+              {link.label}
+            </Typography>
+          );
+        }
+      })}
     </Breadcrumbs>
   );
 };
