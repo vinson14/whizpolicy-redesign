@@ -2,7 +2,21 @@
   "clients": [
     {
       "id": 1,
-      "name": "Vinson"
+      "name": "Vinson Ong",
+      "occupation": "Full Stack Developer",
+      "age": 28
+    },
+    {
+      "id": 2,
+      "name": "Alex Teng",
+      "occupation": "Certis Cisco Officer",
+      "age": 33
+    },
+    {
+      "id": 3,
+      "name": "Choi Chi Min",
+      "occupation": "Data Analyst",
+      "age": 28
     }
   ]
 }

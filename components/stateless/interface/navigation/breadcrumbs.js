@@ -12,7 +12,6 @@ const CustomBreadcrumbs = ({ links }) => {
           href={link.route}
           color={() => getColor(index)}
           underline="hover"
-          s
           key={link.label}
         >
           {link.label}

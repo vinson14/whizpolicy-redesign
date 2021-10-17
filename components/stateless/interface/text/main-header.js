@@ -1,8 +1,8 @@
 import { Typography } from "@mui/material";
 
-const MainHeader = ({ children }) => {
+const MainHeader = ({ children, ...props }) => {
   return (
-    <Typography variant="h4" color="text.primary">
+    <Typography variant="h4" color="text.primary" {...props}>
       {children}
     </Typography>
   );

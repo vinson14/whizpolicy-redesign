@@ -35,3 +35,14 @@ export const sidebarItems = [
     icon: <AccountCircleIcon />,
   },
 ];
+
+export const clientCardFields = [
+  {
+    label: "Occupation",
+    key: "occupation",
+  },
+  {
+    label: "Age",
+    key: "age",
+  },
+];
