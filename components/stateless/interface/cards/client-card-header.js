@@ -2,7 +2,7 @@ import { Typography } from "@mui/material";
 
 const ClientCardHeader = ({ children }) => {
   return (
-    <Typography variant="h1" sx={{ fontWeight: 700 }}>
+    <Typography variant="h6" sx={{ fontWeight: 700 }}>
       {children}
     </Typography>
   );

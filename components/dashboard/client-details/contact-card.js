@@ -1,10 +1,4 @@
-import {
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  Typography,
-} from "@mui/material";
+import { Box, Grid, ListItemIcon, Typography } from "@mui/material";
 import ClientDetailCard from "../../stateless/interface/cards/client-detail-card";
 import { clientDetailsContactFields } from "../../../data/ui";
 import ClientCardHeader from "../../stateless/interface/cards/client-card-header";
@@ -13,14 +7,26 @@ const ContactCard = ({ client }) => {
   return (
     <ClientDetailCard>
       <ClientCardHeader>Contact Info</ClientCardHeader>
-      <List>
+      <Grid container>
         {clientDetailsContactFields.map((field) => (
-          <ListItem disableGutters key={field.label}>
+          <Grid
+            key={field.label}
+            item
+            xs={12}
+            py={2}
+            display="flex"
+            alignItems="center"
+          >
             <ListItemIcon>{field.icon}</ListItemIcon>
-            <ListItemText primary={client[field.key]} secondary={field.label} />
-          </ListItem>
+            <Box>
+              <Typography variant="body2" color="text.secondary">
+                {field.label}
+              </Typography>
+              <Typography variant="body1">{client[field.key]}</Typography>
+            </Box>
+          </Grid>
         ))}
-      </List>
+      </Grid>
     </ClientDetailCard>
   );
 };

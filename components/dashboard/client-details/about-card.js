@@ -9,13 +9,11 @@ const AboutCard = ({ client }) => {
       <ClientCardHeader>About</ClientCardHeader>
       <Grid container>
         {clientDetailsAboutFields.map((field) => (
-          <Grid key={field.label} item xs={6}>
-            <ListItem disableGutters>
-              <ListItemText
-                primary={client[field.key]}
-                secondary={field.label}
-              />
-            </ListItem>
+          <Grid key={field.label} item xs={6} py={2}>
+            <Typography variant="body2" color="text.secondary">
+              {field.label}
+            </Typography>
+            <Typography variant="body1">{client[field.key]}</Typography>
           </Grid>
         ))}
       </Grid>

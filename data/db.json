@@ -44,17 +44,20 @@
       "policies": [
         {
           "id": 1,
+          "policyNumber": "L54342541",
           "clientName": "Vinson Ong",
           "clientId": 1,
           "category": "life",
           "policyName": "Guaranteed Protect Plus",
           "policyType": "Whole Life",
           "sumAssured": 1000000,
-          "annualPremium": 5000,
+          "premium": 5000,
+          "premiumMode": "Annually",
           "insurer": "AIA"
         },
         {
           "id": 2,
+          "policyNumber": "L54342541",
           "clientName": "Vinson Ong",
           "clientId": 1,
           "category": "hospital",
@@ -62,35 +65,41 @@
           "policyType": "Integrated Shield Plan",
           "sumAssured": 2000000,
           "annualPolicyLimit": 2000000,
-          "annualPremium": 700,
+          "premium": 700,
+          "premiumMode": "Annually",
           "insurer": "AIA",
           "rider": "Full"
         },
 
         {
           "id": 3,
+          "policyNumber": "L54342541",
           "clientName": "Vinson Ong",
           "clientId": 1,
           "category": "health",
           "policyName": "Vitalhealth Max A",
           "policyType": "ISP Rider",
           "sumAssured": 2000000,
-          "annualPremium": 500,
+          "premium": 50,
+          "premiumMode": "Monthly",
           "insurer": "AIA"
         },
         {
           "id": 4,
+          "policyNumber": "L54342541",
           "clientName": "Vinson Ong",
           "clientId": 1,
           "category": "accident",
           "policyName": "Solitaire Personal Accident",
           "policyType": "Personal Accident",
           "sumAssured": 1000000,
-          "annualPremium": 500,
+          "premium": 500,
+          "premiumMode": "Annually",
           "insurer": "AIA"
         },
         {
           "id": 5,
+          "policyNumber": "L54342541",
           "clientName": "Vinson Ong",
           "clientId": 1,
           "category": "hospital",
@@ -98,7 +107,8 @@
           "policyType": "Global excl. US",
           "sumAssured": 2000000,
           "annualPolicyLimit": 2000000,
-          "annualPremium": 700,
+          "premium": 700,
+          "premiumMode": "Annually",
           "insurer": "AIG",
           "rider": "NA"
         }

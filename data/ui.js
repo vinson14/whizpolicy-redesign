@@ -116,3 +116,9 @@ export const clientDetailsFinancialOverviewFields = [
     icon: <LocalHospitalIcon />,
   },
 ];
+
+export const policyCardFields = [
+  { label: "Policy Number", key: "policyNumber" },
+  { label: "Premium", key: "premium" },
+  { label: "Premium Mode", key: "premiumMode" },
+];

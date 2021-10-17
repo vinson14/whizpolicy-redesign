@@ -8,13 +8,11 @@ const DependantsCard = ({ client }) => {
       <ClientCardHeader>Dependants</ClientCardHeader>
       <Grid container>
         {client.dependants.map((dependant) => (
-          <Grid key={dependant.name} item xs={6}>
-            <ListItem disableGutters>
-              <ListItemText
-                primary={dependant.name}
-                secondary={dependant.relationship}
-              />
-            </ListItem>
+          <Grid key={dependant.name} item xs={6} py={2}>
+            <Typography variant="body2" color="text.secondary">
+              {dependant.relationship}
+            </Typography>
+            <Typography variant="body1">{dependant.name}</Typography>
           </Grid>
         ))}
       </Grid>
