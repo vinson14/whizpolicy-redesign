@@ -2,6 +2,7 @@ import { Box, Grid, ListItemIcon, Typography } from "@mui/material";
 import ClientDetailCard from "../../stateless/interface/cards/client-detail-card";
 import { clientDetailsContactFields } from "../../../data/ui";
 import ClientCardHeader from "../../stateless/interface/cards/client-card-header";
+import ClientCardInfoText from "../../stateless/interface/cards/client-card-info-text";
 
 const ContactCard = ({ client }) => {
   return (
@@ -9,22 +10,12 @@ const ContactCard = ({ client }) => {
       <ClientCardHeader>Contact Info</ClientCardHeader>
       <Grid container>
         {clientDetailsContactFields.map((field) => (
-          <Grid
-            key={field.label}
-            item
-            xs={12}
-            py={2}
-            display="flex"
-            alignItems="center"
-          >
-            <ListItemIcon>{field.icon}</ListItemIcon>
-            <Box>
-              <Typography variant="body2" color="text.secondary">
-                {field.label}
-              </Typography>
-              <Typography variant="body1">{client[field.key]}</Typography>
-            </Box>
-          </Grid>
+          <ClientCardInfoText
+            key={field.key}
+            value={client[field.key]}
+            label={field.label}
+            icon={field.icon}
+          />
         ))}
       </Grid>
     </ClientDetailCard>

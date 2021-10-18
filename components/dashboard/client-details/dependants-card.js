@@ -1,5 +1,7 @@
+import { FileDownload } from "@mui/icons-material";
 import { Grid, ListItem, ListItemText, Typography } from "@mui/material";
 import ClientCardHeader from "../../stateless/interface/cards/client-card-header";
+import ClientCardInfoText from "../../stateless/interface/cards/client-card-info-text";
 import ClientDetailCard from "../../stateless/interface/cards/client-detail-card";
 
 const DependantsCard = ({ client }) => {
@@ -8,12 +10,11 @@ const DependantsCard = ({ client }) => {
       <ClientCardHeader>Dependants</ClientCardHeader>
       <Grid container>
         {client.dependants.map((dependant) => (
-          <Grid key={dependant.name} item xs={6} py={2}>
-            <Typography variant="body2" color="text.secondary">
-              {dependant.relationship}
-            </Typography>
-            <Typography variant="body1">{dependant.name}</Typography>
-          </Grid>
+          <ClientCardInfoText
+            key={dependant.name}
+            label={dependant.relationship}
+            value={dependant.name}
+          />
         ))}
       </Grid>
     </ClientDetailCard>

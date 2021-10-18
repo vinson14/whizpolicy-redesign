@@ -5,9 +5,6 @@ export const getInitials = (name) => {
 };
 
 export const findClientById = (clients, id) => {
-  console.log(clients);
-  console.log(id);
-  console.log(clients.find((client) => client.id == id));
   return clients.find((client) => client.id == id);
 };
 

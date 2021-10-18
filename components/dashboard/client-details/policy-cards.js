@@ -2,6 +2,7 @@ import { Grid, ListItem, ListItemText, Typography } from "@mui/material";
 import { policyCardFields } from "../../../data/ui";
 import formatNumber from "../../../utils/utils";
 import ClientCardHeader from "../../stateless/interface/cards/client-card-header";
+import ClientCardInfoText from "../../stateless/interface/cards/client-card-info-text";
 import ClientDetailCard from "../../stateless/interface/cards/client-detail-card";
 
 const PolicyCards = ({ client }) => {
@@ -39,14 +40,11 @@ const PolicyCard = ({ policy }) => {
       </ClientCardHeader>
       <Grid container>
         {policyCardFields.map((field) => (
-          <Grid key={field.label} item xs={6} py={2}>
-            <Typography variant="body2" color="text.secondary">
-              {field.label}
-            </Typography>
-            <Typography variant="body1">
-              {formatData(policy[field.key], field)}
-            </Typography>
-          </Grid>
+          <ClientCardInfoText
+            key={field.key}
+            label={field.label}
+            value={formatData(policy[field.key], field)}
+          />
         ))}
       </Grid>
     </ClientDetailCard>

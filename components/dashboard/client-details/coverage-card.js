@@ -9,6 +9,7 @@ import {
 import { clientDetailsFinancialOverviewFields } from "../../../data/ui";
 import formatNumber from "../../../utils/utils";
 import ClientCardHeader from "../../stateless/interface/cards/client-card-header";
+import ClientCardInfoText from "../../stateless/interface/cards/client-card-info-text";
 import ClientDetailCard from "../../stateless/interface/cards/client-detail-card";
 
 const CoverageCard = ({ client }) => {
@@ -17,24 +18,15 @@ const CoverageCard = ({ client }) => {
       <ClientCardHeader>Coverage Overview</ClientCardHeader>
       <Grid container>
         {clientDetailsFinancialOverviewFields.map((field) => (
-          <Grid
-            key={field.label}
-            item
-            xs={6}
-            py={2}
-            display="flex"
-            alignItems="center"
-          >
-            <ListItemIcon>{field.icon}</ListItemIcon>
-            <Box>
-              <Typography variant="body2" color="text.secondary">
-                {field.label}
-              </Typography>
-              <Typography variant="body1">{`$${formatNumber(
-                client.financialOverview[field.key]["currentCoverage"]
-              )}`}</Typography>
-            </Box>
-          </Grid>
+          <ClientCardInfoText
+            key={field.key}
+            icon={field.icon}
+            label={field.label}
+            value={`$${formatNumber(
+              client.financialOverview[field.key]["currentCoverage"]
+            )}`}
+            clickable
+          />
         ))}
       </Grid>
     </ClientDetailCard>
