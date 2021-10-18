@@ -4,6 +4,7 @@
       "id": 1,
       "name": "Vinson Ong",
       "occupation": "Full Stack Developer",
+      "annualIncome": 100000,
       "age": 28,
       "mobile": "9431 8747",
       "email": "vinson1493@gmail.com",
@@ -19,26 +20,36 @@
         {
           "relationship": "Son",
           "name": "Boy Boy"
+        },
+        {
+          "relationship": "Daughter",
+          "name": "Girl girl"
         }
       ],
       "financialOverview": {
         "death": {
-          "currentCoverage": 1000000
+          "currentCoverage": 1000000,
+          "idealCoverage": 1000000
         },
         "tpd": {
-          "currentCoverage": 1000000
+          "currentCoverage": 1000000,
+          "idealCoverage": 1000000
         },
         "majorCi": {
-          "currentCoverage": 300000
+          "currentCoverage": 200000,
+          "idealCoverage": 500000
         },
         "earlyCi": {
-          "currentCoverage": 100000
+          "currentCoverage": 50000,
+          "idealCoverage": 200000
         },
         "accidentalDeath": {
-          "currentCoverage": 200000
+          "currentCoverage": 1000000,
+          "idealCoverage": 1000000
         },
         "accidentalMedical": {
-          "currentCoverage": 3000
+          "currentCoverage": 1000000,
+          "idealCoverage": 1000000
         }
       },
       "policies": [

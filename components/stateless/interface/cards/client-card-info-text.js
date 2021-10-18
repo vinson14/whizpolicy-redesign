@@ -1,30 +1,28 @@
-import { Box, Grid, ListItemIcon, Typography } from "@mui/material";
+import { Box, Grid, IconButton, ListItemIcon, Typography } from "@mui/material";
 
-const ClientCardInfoText = ({ label, value, icon, clickable, ...props }) => {
-  const gridSx = {
-    ":hover": {
-      bgcolor: (theme) => theme.palette.primary.main,
-      color: (theme) => theme.palette.primary.contrastText,
-    },
-  };
-
+const ClientCardInfoText = ({
+  xs = 6,
+  label,
+  value,
+  icon,
+  endIcon,
+  endIconOnClick,
+  ...props
+}) => {
   return (
-    <Grid
-      item
-      xs={6}
-      py={2}
-      display="flex"
-      sx={clickable && gridSx}
-      alignItems="center"
-      {...props}
-    >
+    <Grid item xs={xs} py={2} display="flex" alignItems="center" {...props}>
       {icon && <ListItemIcon>{icon}</ListItemIcon>}
-      <Box>
+      <Box flexGrow={1}>
         <Typography variant="body2" color="text.secondary">
           {label}
         </Typography>
         <Typography variant="body1">{value}</Typography>
       </Box>
+      {endIcon && (
+        <ListItemIcon>
+          <IconButton onClick={endIconOnClick}>{endIcon}</IconButton>
+        </ListItemIcon>
+      )}
     </Grid>
   );
 };
