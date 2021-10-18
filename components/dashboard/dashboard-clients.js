@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { getClients } from "../../utils/api";
 import { findClientById } from "../../utils/utils";
 import AddButton from "../stateless/interface/buttons/add-button";
+import EditButton from "../stateless/interface/buttons/edit-button";
 import ClientCard from "../stateless/interface/cards/client-card";
 import ClientCards from "../stateless/interface/cards/client-cards";
 import CustomBreadcrumbs from "../stateless/interface/navigation/breadcrumbs";
@@ -42,6 +43,11 @@ const DashboardClients = () => {
     router.push(`?clientId=${client.id}`, undefined, { shallow: true });
   };
 
+  const renderButton = () => {
+    if (selectedClient == null) return <AddButton>Add Client</AddButton>;
+    return <EditButton>Edit Client</EditButton>;
+  };
+
   return (
     <Box p={5}>
       <Grid container>
@@ -56,7 +62,7 @@ const DashboardClients = () => {
           justifyContent="end"
           alignItems="center"
         >
-          <AddButton>New Client</AddButton>
+          {renderButton()}
         </Grid>
       </Grid>
       <Grid container mt={5} spacing={3} alignItems="stretch">

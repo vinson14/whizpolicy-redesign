@@ -13,7 +13,7 @@ import { getInitials } from "../../../../utils/utils";
 
 const ClientCard = ({ client, onClick }) => {
   return (
-    <Card>
+    <Card sx={{ height: 1 }}>
       <CardActionArea onClick={onClick}>
         <CardContent>
           <Box display="flex" justifyContent="center" mt={3} mb={1}>
