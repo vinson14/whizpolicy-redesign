@@ -29,12 +29,6 @@ import DashboardPortfolio from "../components/dashboard/dashboard-portfolio";
 
 const Dashboard = () => {
   const [activeOption, setActiveOption] = useState(CLIENTS_VALUE);
-
-  const mainComponent = {
-    [CLIENTS_VALUE]: <DashboardClients />,
-    [PORTFOLIO_VALUE]: <DashboardPortfolio />,
-  };
-
   return (
     <DashboardContainer>
       <Sidebar>
@@ -55,6 +49,10 @@ const Dashboard = () => {
       <Container>{mainComponent[activeOption]}</Container>
     </DashboardContainer>
   );
+};
+const mainComponent = {
+  [CLIENTS_VALUE]: <DashboardClients />,
+  [PORTFOLIO_VALUE]: <DashboardPortfolio />,
 };
 
 export default Dashboard;

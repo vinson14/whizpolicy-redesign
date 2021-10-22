@@ -8,6 +8,9 @@ import PersonOffIcon from "@mui/icons-material/PersonOff";
 import AccessibleForwardIcon from "@mui/icons-material/AccessibleForward";
 import HotelIcon from "@mui/icons-material/Hotel";
 import LocalHospitalIcon from "@mui/icons-material/LocalHospital";
+
+import countryList from "react-select-country-list";
+
 // Constants
 export const CLIENTS_VALUE = "clients";
 export const CLIENTS_LABEL = "Clients";
@@ -17,6 +20,9 @@ export const SETTINGS_LABEL = "Settings";
 export const SETTINGS_VALUE = "settings";
 export const PROFILE_LABEL = "Profile";
 export const PROFILE_VALUE = "profile";
+export const INPUT_TYPE_TEXT = "text";
+export const INPUT_TYPE_RADIO = "radio";
+export const INPUT_TYPE_AUTOCOMPLETE = "autocomplete";
 
 export const sidebarItems = [
   {
@@ -39,6 +45,11 @@ export const sidebarItems = [
     value: PROFILE_VALUE,
     icon: <AccountCircleIcon />,
   },
+];
+
+export const defaultBreadcrumbLinks = [
+  { label: "Dashboard", route: "/dashboard" },
+  { label: "Clients", route: "/dashboard" },
 ];
 
 export const clientCardFields = [
@@ -159,3 +170,85 @@ export const coverageInfoPopoverContent = {
     { qns: "Why do you need accMed3", ans: "because thats why" },
   ],
 };
+
+export const addClientFormFields = [
+  {
+    name: "givenName",
+    label: "Given Name",
+    defaultValue: "",
+    type: INPUT_TYPE_TEXT,
+    col: {
+      xs: 12,
+      md: 6,
+      lg: 5,
+    },
+  },
+  {
+    name: "familyName",
+    label: "Family Name",
+    defaultValue: "",
+    type: INPUT_TYPE_TEXT,
+    col: {
+      xs: 12,
+      md: 6,
+      lg: 5,
+    },
+  },
+  {
+    name: "salutation",
+    label: "Salutation",
+    defaultValue: "mr",
+    type: INPUT_TYPE_RADIO,
+    options: [
+      { label: "Mr", value: "mr" },
+      { label: "Ms", value: "ms" },
+      { label: "Mrs", value: "mrs" },
+      { label: "Dr", value: "dr" },
+    ],
+    col: {
+      xs: 12,
+    },
+  },
+  {
+    name: "gender",
+    label: "Gender",
+    defaultValue: "male",
+    type: INPUT_TYPE_RADIO,
+    options: [
+      { label: "Male", value: "male" },
+      { label: "Female", value: "female" },
+      { label: "Others", value: "Others" },
+    ],
+    col: {
+      xs: 12,
+    },
+  },
+  {
+    name: "maritalStatus",
+    label: "Marital Status",
+    defaultValue: "single",
+    type: INPUT_TYPE_RADIO,
+    options: [
+      { label: "Single", value: "single" },
+      { label: "Married", value: "married" },
+      { label: "Divorced", value: "divorced" },
+      { label: "Separated", value: "separated" },
+      { label: "Widowed", value: "widowed" },
+    ],
+    col: {
+      xs: 12,
+    },
+  },
+  {
+    name: "nationality",
+    label: "Nationality",
+    defaultValue: "Singapore",
+    type: INPUT_TYPE_AUTOCOMPLETE,
+    options: countryList().getLabels(),
+    col: {
+      xs: 12,
+      md: 6,
+      lg: 5,
+    },
+  },
+];

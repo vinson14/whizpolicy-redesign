@@ -1,4 +1,4 @@
-import { Box, Grid, Typography, Button } from "@mui/material";
+import { Box, Grid, Typography, Modal, Card } from "@mui/material";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { getClients } from "../../utils/api";
@@ -10,6 +10,8 @@ import ClientCards from "../stateless/interface/cards/client-cards";
 import CustomBreadcrumbs from "../stateless/interface/navigation/breadcrumbs";
 import MainHeader from "../stateless/interface/text/main-header";
 import ClientDetails from "./client-details/dashboard-client-details";
+import { defaultBreadcrumbLinks } from "../../data/ui";
+import AddClientFormModal from "./add-client-form/add-client-form-modal";
 
 const DashboardClients = () => {
   const router = useRouter();
@@ -18,6 +20,7 @@ const DashboardClients = () => {
   const [breadcrumbLinks, setBreadcrumbLinks] = useState(
     defaultBreadcrumbLinks
   );
+  const [openAddClientModal, setOpenAddClientModal] = useState(false);
 
   useEffect(() => {
     console.log("useEffect 1 ran");
@@ -44,40 +47,48 @@ const DashboardClients = () => {
   };
 
   const renderButton = () => {
-    if (selectedClient == null) return <AddButton>Add Client</AddButton>;
+    if (selectedClient == null)
+      return (
+        <AddButton onClick={() => setOpenAddClientModal(true)}>
+          Add Client
+        </AddButton>
+      );
     return <EditButton>Edit Client</EditButton>;
   };
 
+  const handleCloseAddClientModal = () => setOpenAddClientModal(false);
+
   return (
-    <Box p={5}>
-      <Grid container>
-        <Grid item>
-          <MainHeader>Clients</MainHeader>
-          <CustomBreadcrumbs links={breadcrumbLinks} />
+    <>
+      <Box p={5}>
+        <Grid container>
+          <Grid item>
+            <MainHeader>Clients</MainHeader>
+            <CustomBreadcrumbs links={breadcrumbLinks} />
+          </Grid>
+          <Grid
+            item
+            flexGrow={1}
+            display="flex"
+            justifyContent="end"
+            alignItems="center"
+          >
+            {renderButton()}
+          </Grid>
         </Grid>
-        <Grid
-          item
-          flexGrow={1}
-          display="flex"
-          justifyContent="end"
-          alignItems="center"
-        >
-          {renderButton()}
+        <Grid container mt={5} spacing={3} alignItems="stretch">
+          {selectedClient == null && (
+            <ClientCards clients={clients} selectClient={selectClient} />
+          )}
+          {selectedClient != null && <ClientDetails client={selectedClient} />}
         </Grid>
-      </Grid>
-      <Grid container mt={5} spacing={3} alignItems="stretch">
-        {selectedClient == null && (
-          <ClientCards clients={clients} selectClient={selectClient} />
-        )}
-        {selectedClient != null && <ClientDetails client={selectedClient} />}
-      </Grid>
-    </Box>
+      </Box>
+      <AddClientFormModal
+        open={openAddClientModal}
+        handleClose={handleCloseAddClientModal}
+      />
+    </>
   );
 };
-
-const defaultBreadcrumbLinks = [
-  { label: "Dashboard", route: "/dashboard" },
-  { label: "Clients", route: "/dashboard" },
-];
 
 export default DashboardClients;
