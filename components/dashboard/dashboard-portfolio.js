@@ -5,22 +5,23 @@ import { defaultBreadcrumbLinks } from "../../data/ui";
 import { getPolicies } from "../../utils/api";
 import CustomBreadcrumbs from "../stateless/interface/navigation/breadcrumbs";
 import MainHeader from "../stateless/interface/text/main-header";
+import DashboardHeaderContainer from "../stateless/layout/dashboard-header-container";
 import { PolicyCard } from "./client-details/policy-cards";
 
-const DashboardPortfolio = () => {
+const DashboardPortfolio = ({ openSidebar }) => {
   const [policies, setPolicies] = useState([]);
   useEffect(() => {
     getPolicies().then((policies) => setPolicies(policies));
   }, []);
   return (
     <>
-      <Box p={5}>
-        <Grid container>
+      <Box sx={{ p: { md: 5, xs: 1 } }}>
+        <DashboardHeaderContainer openSidebar={openSidebar}>
           <Grid item>
             <MainHeader>Portfolio</MainHeader>
             <CustomBreadcrumbs links={defaultBreadcrumbLinks} />
           </Grid>
-        </Grid>
+        </DashboardHeaderContainer>
         <Grid container mt={5} spacing={3} alignItems="stretch">
           {policies.map((policy) => {
             console.log(policies);

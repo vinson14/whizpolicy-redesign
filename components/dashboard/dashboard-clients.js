@@ -14,7 +14,8 @@ import { defaultBreadcrumbLinks } from "../../data/ui";
 import AddClientFormModal from "./add-client-form/add-client-form-modal";
 import useModal from "../../utils/useModal";
 import PolicyDetails from "./policy-details/policy-details";
-import MenuIcon from "@mui/icons-material/Menu";
+import SidebarButton from "../stateless/interface/buttons/sidebar-button";
+import DashboardHeaderContainer from "../stateless/layout/dashboard-header-container";
 
 const DashboardClients = ({ openSidebar }) => {
   const router = useRouter();
@@ -80,12 +81,7 @@ const DashboardClients = ({ openSidebar }) => {
   return (
     <>
       <Box sx={{ p: { md: 5, xs: 1 } }}>
-        <Grid container alignItems="center">
-          <Grid item xs={1} sx={{ display: { xs: "block", md: "none" } }}>
-            <IconButton onClick={openSidebar}>
-              <MenuIcon />
-            </IconButton>
-          </Grid>
+        <DashboardHeaderContainer openSidebar={openSidebar}>
           <Grid item>
             <MainHeader>Clients</MainHeader>
             <CustomBreadcrumbs links={breadcrumbLinks} />
@@ -99,7 +95,7 @@ const DashboardClients = ({ openSidebar }) => {
           >
             {renderButton()}
           </Grid>
-        </Grid>
+        </DashboardHeaderContainer>
         <Grid container mt={5} spacing={3} alignItems="stretch">
           {selectedClient == null && (
             <ClientCards clients={clients} selectClient={selectClient} />
