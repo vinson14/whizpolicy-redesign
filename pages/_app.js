@@ -1,5 +1,4 @@
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { grey } from "@mui/material/colors";
 import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {

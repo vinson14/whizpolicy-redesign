@@ -1,20 +1,21 @@
-import { Grid, ListItem, ListItemText, Typography } from "@mui/material";
-import { clientDetailsAboutFields } from "../../../data/ui";
+import { Grid } from "@mui/material";
+import { policyDetailsCoverageCardFields } from "../../../data/ui";
 import ClientCardHeader from "../../stateless/interface/cards/client-card-header";
 import ClientCardInfoText from "../../stateless/interface/cards/client-card-info-text";
 import ClientDetailCard from "../../stateless/interface/cards/client-detail-card";
 
-const AboutCard = ({ client }) => {
+const PolicyCoverageCard = ({ policy }) => {
   return (
     <ClientDetailCard>
-      <ClientCardHeader>About</ClientCardHeader>
+      <ClientCardHeader>Policy Benefits</ClientCardHeader>
       <Grid container>
-        {clientDetailsAboutFields.map((field) => (
+        {policyDetailsCoverageCardFields.map((field) => (
           <ClientCardInfoText
-            key={field.key}
+            value={policy[field.key]}
             label={field.label}
-            value={client[field.key]}
             type={field.type}
+            key={field.key}
+            icon={field.icon}
           />
         ))}
       </Grid>
@@ -22,4 +23,4 @@ const AboutCard = ({ client }) => {
   );
 };
 
-export default AboutCard;
+export default PolicyCoverageCard;

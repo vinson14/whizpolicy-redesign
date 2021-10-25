@@ -42,9 +42,8 @@ const CoverageCard = ({ client }) => {
               endIconOnClick={(event) => openPopover(event, field.key)}
               pr={2}
               label={field.label}
-              value={`$${formatNumber(
-                client.financialOverview[field.key]["currentCoverage"]
-              )}`}
+              type={field.type}
+              value={client.financialOverview[field.key]["currentCoverage"]}
             />
           </Fragment>
         ))}

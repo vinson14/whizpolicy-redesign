@@ -2,9 +2,15 @@ import { Autocomplete, TextField } from "@mui/material";
 import { useState } from "react";
 import { Controller } from "react-hook-form";
 
-const AutocompleteInput = ({ name, control, label, defaultValue, options }) => {
-  const [inputValue, setInputValue] = useState(defaultValue);
-  console.log(options);
+const AutocompleteInput = ({
+  name,
+  control,
+  label,
+  defaultValue,
+  options,
+  placeholder,
+  shrink = true,
+}) => {
   return (
     <Controller
       name={name}
@@ -12,11 +18,19 @@ const AutocompleteInput = ({ name, control, label, defaultValue, options }) => {
       defaultValue={defaultValue}
       render={({ field }) => (
         <Autocomplete
-          {...field}
+          value={field.value}
+          onChange={(event, value, reason) => {
+            field.onChange(value);
+          }}
           options={options}
-          inputValue={inputValue}
-          onInputChange={(event, newInputValue) => setInputValue(newInputValue)}
-          renderInput={(params) => <TextField {...params} label={label} />}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label={label}
+              InputLabelProps={{ shrink }}
+              placeholder={placeholder}
+            />
+          )}
         />
       )}
     />

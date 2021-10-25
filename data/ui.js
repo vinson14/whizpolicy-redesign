@@ -10,8 +10,20 @@ import HotelIcon from "@mui/icons-material/Hotel";
 import LocalHospitalIcon from "@mui/icons-material/LocalHospital";
 
 import countryList from "react-select-country-list";
+import RadioInput from "../components/stateless/interface/form/radio-input";
+import TextInput from "../components/stateless/interface/form/text-input";
+import AutocompleteInput from "../components/stateless/interface/form/autocomplete-input";
+import SelectInput from "../components/stateless/interface/form/select-input";
+import DateInput from "../components/stateless/interface/form/date-input";
+import CurrencyInput from "../components/stateless/interface/form/currency-input";
+import YearInput from "../components/stateless/interface/form/year-input";
+import ContactCard from "../components/dashboard/client-details/contact-card";
+import NameCard from "../components/dashboard/client-details/name-card";
+import AboutCard from "../components/dashboard/client-details/about-card";
+import DependantsCard from "../components/dashboard/client-details/dependants-card";
+import CoverageCard from "../components/dashboard/client-details/coverage-card";
 
-// Constants
+// Sidebar Constants
 export const CLIENTS_VALUE = "clients";
 export const CLIENTS_LABEL = "Clients";
 export const PORTFOLIO_LABEL = "Portfolio";
@@ -20,9 +32,69 @@ export const SETTINGS_LABEL = "Settings";
 export const SETTINGS_VALUE = "settings";
 export const PROFILE_LABEL = "Profile";
 export const PROFILE_VALUE = "profile";
+
+// Client Object files
+
+// Input Types
 export const INPUT_TYPE_TEXT = "text";
 export const INPUT_TYPE_RADIO = "radio";
+export const INPUT_TYPE_SELECT = "select";
 export const INPUT_TYPE_AUTOCOMPLETE = "autocomplete";
+export const INPUT_TYPE_DATEPICKER = "datepicker";
+export const INPUT_TYPE_CURRENCY = "currencyInput";
+export const INPUT_TYPE_YEAR = "yearInput";
+
+// Field Types
+export const FIELD_TYPE_TEXT = "text";
+export const FIELD_TYPE_CURRENCY = "currency";
+
+// Policy Categories
+export const POLICY_CATEGORY_WHOLE_LIFE_KEY = "wholeLife";
+export const POLICY_CATEGORY_TERM_LIFE_KEY = "termLife";
+export const POLICY_CATEGORY_ENDOWMENT_KEY = "endowment";
+
+// Policy Categories Labels
+export const POLICY_CATEGORY_WHOLE_LIFE_LABEL = "Whole Life";
+export const POLICY_CATEGORY_TERM_LIFE_LABEL = "Term Life";
+export const POLICY_CATEGORY_ENDOWMENT_LABEL = "Endowment";
+
+// Policy Object Keys
+export const POLICY_NUMBER_KEY = "policyNumber";
+export const POLICY_NAME_KEY = "policyName";
+export const POLICY_INSURER_KEY = "insurer";
+export const POLICY_LIFE_ASSURED_KEY = "lifeAssured";
+export const POLICY_CATEGORY_KEY = "policyCategory";
+export const POLICY_PREMIUM_KEY = "premium";
+export const POLICY_PREMIUM_MODE_KEY = "premiumMode";
+export const POLICY_DEATH_BENEFIT_KEY = "deathBenefit";
+export const POLICY_TPD_BENEFIT_KEY = "tpdBenefit";
+export const POLICY_MAJOR_CI_BENEFIT_KEY = "majorCiBenefit";
+export const POLICY_EARLY_CI_BENEFIT_KEY = "earlyCiBenefit";
+export const POLICY_MATURITY_DATE_KEY = "maturityDate";
+export const POLICY_TERM_KEY = "policyTerm";
+export const POLICY_PREMIUM_TERM_KEY = "premiumTerm";
+export const POLICY_GUARANTEED_MATURITY_BENEFIT_KEY =
+  "guaranteedMaturityBenefit";
+export const POLICY_INCEPTION_DATE_KEY = "inceptionDate";
+
+// Policy Object Labels
+export const POLICY_NUMBER_LABEL = "Policy Number";
+export const POLICY_NAME_LABEL = "Policy Name";
+export const POLICY_INSURER_LABEL = "Insurer";
+export const POLICY_LIFE_ASSURED_LABEL = "Life Assured";
+export const POLICY_CATEGORY_LABEL = "Category";
+export const POLICY_PREMIUM_LABEL = "Premium";
+export const POLICY_PREMIUM_MODE_LABEL = "Premium Mode";
+export const POLICY_DEATH_BENEFIT_LABEL = "Death Benefit";
+export const POLICY_TPD_BENEFIT_LABEL = "Total Permanent Disability";
+export const POLICY_MAJOR_CI_BENEFIT_LABEL = "Major Critical Illness";
+export const POLICY_EARLY_CI_BENEFIT_LABEL = "Early Critical Illness";
+export const POLICY_MATURITY_DATE_LABEL = "Maturity Date";
+export const POLICY_TERM_LABEL = "Policy Term";
+export const POLICY_PREMIUM_TERM_LABEL = "Premium Term";
+export const POLICY_GUARANTEED_MATURITY_BENEFIT_LABEL =
+  "Guaranteed Maturity Benefit";
+export const POLICY_INCEPTION_DATE_LABEL = "Inception Date";
 
 export const sidebarItems = [
   {
@@ -99,39 +171,66 @@ export const clientDetailsFinancialOverviewFields = [
   {
     label: "Death",
     key: "death",
+    type: FIELD_TYPE_CURRENCY,
     icon: <PersonOffIcon />,
   },
   {
     label: "Total Permanent Disability",
     key: "tpd",
+    type: FIELD_TYPE_CURRENCY,
     icon: <AccessibleForwardIcon />,
   },
   {
     label: "Major Critical Illness",
     key: "majorCi",
+    type: FIELD_TYPE_CURRENCY,
     icon: <HotelIcon />,
   },
   {
     label: "Early Critical Illness",
     key: "earlyCi",
+    type: FIELD_TYPE_CURRENCY,
     icon: <HotelIcon />,
   },
   {
     label: "Accidental Death",
     key: "accidentalDeath",
+    type: FIELD_TYPE_CURRENCY,
     icon: <PersonOffIcon />,
   },
   {
     label: "Accidental Medical Reimbursement",
     key: "accidentalMedical",
+    type: FIELD_TYPE_CURRENCY,
     icon: <LocalHospitalIcon />,
   },
 ];
 
+export const clientDetailsCards = [
+  NameCard,
+  ContactCard,
+  AboutCard,
+  DependantsCard,
+  CoverageCard,
+];
+
 export const policyCardFields = [
-  { label: "Policy Number", key: "policyNumber" },
-  { label: "Premium", key: "premium" },
-  { label: "Premium Mode", key: "premiumMode" },
+  { label: POLICY_NUMBER_LABEL, key: POLICY_NUMBER_KEY, type: FIELD_TYPE_TEXT },
+  {
+    label: POLICY_CATEGORY_LABEL,
+    key: POLICY_CATEGORY_KEY,
+    type: FIELD_TYPE_TEXT,
+  },
+  {
+    label: POLICY_PREMIUM_LABEL,
+    key: POLICY_PREMIUM_KEY,
+    type: FIELD_TYPE_CURRENCY,
+  },
+  {
+    label: POLICY_PREMIUM_MODE_LABEL,
+    key: POLICY_PREMIUM_MODE_KEY,
+    type: FIELD_TYPE_TEXT,
+  },
 ];
 
 export const coverageInfoPopoverContent = {
@@ -177,6 +276,7 @@ export const addClientFormFields = [
     label: "Given Name",
     defaultValue: "",
     type: INPUT_TYPE_TEXT,
+    placeholder: "John",
     col: {
       xs: 12,
       md: 6,
@@ -187,6 +287,7 @@ export const addClientFormFields = [
     name: "familyName",
     label: "Family Name",
     defaultValue: "",
+    placeholder: "Doe",
     type: INPUT_TYPE_TEXT,
     col: {
       xs: 12,
@@ -198,7 +299,7 @@ export const addClientFormFields = [
     name: "salutation",
     label: "Salutation",
     defaultValue: "mr",
-    type: INPUT_TYPE_RADIO,
+    type: INPUT_TYPE_SELECT,
     options: [
       { label: "Mr", value: "mr" },
       { label: "Ms", value: "ms" },
@@ -207,13 +308,15 @@ export const addClientFormFields = [
     ],
     col: {
       xs: 12,
+      md: 6,
+      lg: 5,
     },
   },
   {
     name: "gender",
     label: "Gender",
     defaultValue: "male",
-    type: INPUT_TYPE_RADIO,
+    type: INPUT_TYPE_SELECT,
     options: [
       { label: "Male", value: "male" },
       { label: "Female", value: "female" },
@@ -221,13 +324,39 @@ export const addClientFormFields = [
     ],
     col: {
       xs: 12,
+      md: 6,
+      lg: 5,
+    },
+  },
+  {
+    name: "email",
+    label: "Email",
+    defaultValue: "",
+    placeholder: "johndoe@gmail.com",
+    type: INPUT_TYPE_TEXT,
+    col: {
+      xs: 12,
+      md: 6,
+      lg: 5,
+    },
+  },
+  {
+    name: "mobile",
+    label: "Mobile",
+    defaultValue: "",
+    placeholder: "+65",
+    type: INPUT_TYPE_TEXT,
+    col: {
+      xs: 12,
+      md: 6,
+      lg: 5,
     },
   },
   {
     name: "maritalStatus",
     label: "Marital Status",
     defaultValue: "single",
-    type: INPUT_TYPE_RADIO,
+    type: INPUT_TYPE_SELECT,
     options: [
       { label: "Single", value: "single" },
       { label: "Married", value: "married" },
@@ -237,12 +366,15 @@ export const addClientFormFields = [
     ],
     col: {
       xs: 12,
+      md: 6,
+      lg: 5,
     },
   },
   {
     name: "nationality",
     label: "Nationality",
     defaultValue: "Singapore",
+    placeholder: "Singapore",
     type: INPUT_TYPE_AUTOCOMPLETE,
     options: countryList().getLabels(),
     col: {
@@ -250,5 +382,378 @@ export const addClientFormFields = [
       md: 6,
       lg: 5,
     },
+  },
+  {
+    name: "smoker",
+    label: "Smoker",
+    defaultValue: "no",
+    type: INPUT_TYPE_SELECT,
+    options: [
+      { label: "No", value: "no" },
+      { label: "Yes", value: "yes" },
+    ],
+    col: {
+      xs: 12,
+      md: 6,
+      lg: 5,
+    },
+  },
+  {
+    name: "birthday",
+    label: "Birthday",
+    defaultValue: new Date("Jan 01, 2000"),
+    type: INPUT_TYPE_DATEPICKER,
+    col: {
+      xs: 12,
+      md: 6,
+      lg: 5,
+    },
+  },
+  {
+    name: "occupation",
+    label: "Occupation",
+    defaultValue: "",
+    placeholder: "Occupation",
+    type: INPUT_TYPE_TEXT,
+    col: {
+      xs: 12,
+      md: 6,
+      lg: 5,
+    },
+  },
+  {
+    name: "annualIncome",
+    label: "Annual Income",
+    defaultValue: "",
+    placeholder: "1,000,000",
+    startAdornment: "$",
+    type: INPUT_TYPE_CURRENCY,
+    col: {
+      xs: 12,
+      md: 6,
+      lg: 5,
+    },
+  },
+];
+
+export const addPolicyFormFields = {
+  [POLICY_NAME_KEY]: {
+    name: POLICY_NAME_KEY,
+    label: POLICY_NAME_LABEL,
+    defaultValue: "",
+    type: INPUT_TYPE_TEXT,
+    placeholder: POLICY_NAME_LABEL,
+    col: {
+      xs: 12,
+      md: 6,
+      lg: 5,
+    },
+  },
+  [POLICY_NUMBER_KEY]: {
+    name: POLICY_NUMBER_KEY,
+    label: POLICY_NUMBER_LABEL,
+    defaultValue: "",
+    type: INPUT_TYPE_TEXT,
+    placeholder: POLICY_NUMBER_LABEL,
+    col: {
+      xs: 12,
+      md: 6,
+      lg: 5,
+    },
+  },
+  [POLICY_INSURER_KEY]: {
+    name: POLICY_INSURER_KEY,
+    label: POLICY_INSURER_LABEL,
+    defaultValue: "",
+    type: INPUT_TYPE_SELECT,
+    col: {
+      xs: 12,
+      md: 6,
+      lg: 5,
+    },
+    options: [
+      { label: "AIA", value: "aia" },
+      { label: "Great Eastern", value: "greatEastern" },
+      { label: "Prudential", value: "prudential" },
+      { label: "NTUC Income", value: "ntucIncome" },
+    ],
+  },
+  [POLICY_PREMIUM_MODE_KEY]: {
+    name: POLICY_PREMIUM_MODE_KEY,
+    label: POLICY_PREMIUM_MODE_LABEL,
+    defaultValue: "",
+    type: INPUT_TYPE_SELECT,
+    col: {
+      xs: 12,
+      md: 6,
+      lg: 5,
+    },
+    options: [
+      { label: "Annually", value: "annually" },
+      { label: "Monthly", value: "monthly" },
+      { label: "Quarterly", value: "quarterly" },
+      { label: "Semi-annually", value: "semi-annually" },
+    ],
+  },
+  [POLICY_PREMIUM_KEY]: {
+    name: POLICY_PREMIUM_KEY,
+    label: POLICY_PREMIUM_LABEL,
+    defaultValue: "",
+    type: INPUT_TYPE_CURRENCY,
+    col: {
+      xs: 12,
+      md: 6,
+      lg: 5,
+    },
+  },
+  [POLICY_DEATH_BENEFIT_KEY]: {
+    name: POLICY_DEATH_BENEFIT_KEY,
+    label: POLICY_DEATH_BENEFIT_LABEL,
+    defaultValue: "",
+    type: INPUT_TYPE_CURRENCY,
+    col: {
+      xs: 12,
+      md: 6,
+      lg: 5,
+    },
+  },
+  [POLICY_TPD_BENEFIT_KEY]: {
+    name: POLICY_TPD_BENEFIT_KEY,
+    label: POLICY_TPD_BENEFIT_LABEL,
+    defaultValue: "",
+    type: INPUT_TYPE_CURRENCY,
+    col: {
+      xs: 12,
+      md: 6,
+      lg: 5,
+    },
+  },
+  [POLICY_MAJOR_CI_BENEFIT_KEY]: {
+    name: POLICY_MAJOR_CI_BENEFIT_KEY,
+    label: POLICY_MAJOR_CI_BENEFIT_LABEL,
+    defaultValue: "",
+    type: INPUT_TYPE_CURRENCY,
+    col: {
+      xs: 12,
+      md: 6,
+      lg: 5,
+    },
+  },
+  [POLICY_EARLY_CI_BENEFIT_KEY]: {
+    name: POLICY_EARLY_CI_BENEFIT_KEY,
+    label: POLICY_EARLY_CI_BENEFIT_LABEL,
+    defaultValue: "",
+    type: INPUT_TYPE_CURRENCY,
+    col: {
+      xs: 12,
+      md: 6,
+      lg: 5,
+    },
+  },
+  [POLICY_MATURITY_DATE_KEY]: {
+    name: POLICY_MATURITY_DATE_KEY,
+    label: POLICY_MATURITY_DATE_LABEL,
+    defaultValue: new Date(),
+    type: INPUT_TYPE_DATEPICKER,
+    col: {
+      xs: 12,
+      md: 6,
+      lg: 5,
+    },
+  },
+  [POLICY_TERM_KEY]: {
+    name: POLICY_TERM_KEY,
+    label: POLICY_TERM_LABEL,
+    defaultValue: "",
+    type: INPUT_TYPE_YEAR,
+    col: {
+      xs: 12,
+      md: 6,
+      lg: 5,
+    },
+  },
+  [POLICY_PREMIUM_TERM_KEY]: {
+    name: POLICY_PREMIUM_TERM_KEY,
+    label: POLICY_PREMIUM_TERM_LABEL,
+    defaultValue: "",
+    type: INPUT_TYPE_YEAR,
+    col: {
+      xs: 12,
+      md: 6,
+      lg: 5,
+    },
+  },
+  [POLICY_GUARANTEED_MATURITY_BENEFIT_KEY]: {
+    name: POLICY_GUARANTEED_MATURITY_BENEFIT_KEY,
+    label: POLICY_GUARANTEED_MATURITY_BENEFIT_LABEL,
+    defaultValue: "",
+    type: INPUT_TYPE_CURRENCY,
+    col: {
+      xs: 12,
+      md: 6,
+      lg: 5,
+    },
+  },
+  [POLICY_INCEPTION_DATE_KEY]: {
+    name: POLICY_INCEPTION_DATE_KEY,
+    label: POLICY_INCEPTION_DATE_LABEL,
+    defaultValue: new Date(),
+    type: INPUT_TYPE_DATEPICKER,
+    col: {
+      xs: 12,
+      md: 6,
+      lg: 5,
+    },
+  },
+};
+
+export const policyCategorySelect = {
+  name: POLICY_CATEGORY_KEY,
+  label: POLICY_CATEGORY_LABEL,
+  defaultValue: POLICY_CATEGORY_WHOLE_LIFE_KEY,
+  type: INPUT_TYPE_SELECT,
+  options: [
+    {
+      label: POLICY_CATEGORY_WHOLE_LIFE_LABEL,
+      value: POLICY_CATEGORY_WHOLE_LIFE_KEY,
+    },
+    {
+      label: POLICY_CATEGORY_TERM_LIFE_LABEL,
+      value: POLICY_CATEGORY_TERM_LIFE_KEY,
+    },
+    {
+      label: POLICY_CATEGORY_ENDOWMENT_LABEL,
+      value: POLICY_CATEGORY_ENDOWMENT_KEY,
+    },
+  ],
+  col: {
+    xs: 12,
+    md: 6,
+    lg: 5,
+  },
+};
+
+export const defaultPolicyFields = [
+  POLICY_NAME_KEY,
+  POLICY_NUMBER_KEY,
+  POLICY_INSURER_KEY,
+  POLICY_PREMIUM_KEY,
+  POLICY_PREMIUM_MODE_KEY,
+  POLICY_PREMIUM_TERM_KEY,
+  POLICY_TERM_KEY,
+  POLICY_INCEPTION_DATE_KEY,
+];
+
+export const defaultLifePolicyFields = [
+  ...defaultPolicyFields,
+  POLICY_DEATH_BENEFIT_KEY,
+  POLICY_TPD_BENEFIT_KEY,
+  POLICY_MAJOR_CI_BENEFIT_KEY,
+  POLICY_EARLY_CI_BENEFIT_KEY,
+];
+
+export const policyCategoryFields = {
+  [POLICY_CATEGORY_WHOLE_LIFE_KEY]: [...defaultLifePolicyFields],
+  [POLICY_CATEGORY_TERM_LIFE_KEY]: [...defaultLifePolicyFields],
+  [POLICY_CATEGORY_ENDOWMENT_KEY]: [
+    ...defaultPolicyFields,
+    POLICY_DEATH_BENEFIT_KEY,
+    POLICY_MATURITY_DATE_KEY,
+    POLICY_GUARANTEED_MATURITY_BENEFIT_KEY,
+  ],
+};
+
+export const inputTypeMapping = {
+  [INPUT_TYPE_TEXT]: TextInput,
+  [INPUT_TYPE_RADIO]: RadioInput,
+  [INPUT_TYPE_SELECT]: SelectInput,
+  [INPUT_TYPE_AUTOCOMPLETE]: AutocompleteInput,
+  [INPUT_TYPE_DATEPICKER]: DateInput,
+  [INPUT_TYPE_CURRENCY]: CurrencyInput,
+  [INPUT_TYPE_YEAR]: YearInput,
+};
+
+export const policyDetailsAboutCardFields = [
+  {
+    label: POLICY_NUMBER_LABEL,
+    key: POLICY_NUMBER_KEY,
+    type: FIELD_TYPE_TEXT,
+  },
+  {
+    label: POLICY_NAME_LABEL,
+    key: POLICY_NAME_KEY,
+    type: FIELD_TYPE_TEXT,
+  },
+  {
+    label: POLICY_CATEGORY_LABEL,
+    key: POLICY_CATEGORY_KEY,
+    type: FIELD_TYPE_TEXT,
+  },
+  {
+    label: POLICY_LIFE_ASSURED_LABEL,
+    key: POLICY_LIFE_ASSURED_KEY,
+    type: FIELD_TYPE_TEXT,
+  },
+  {
+    label: POLICY_PREMIUM_LABEL,
+    key: POLICY_PREMIUM_KEY,
+    type: FIELD_TYPE_CURRENCY,
+  },
+  {
+    label: POLICY_PREMIUM_MODE_LABEL,
+    key: POLICY_PREMIUM_MODE_KEY,
+    type: FIELD_TYPE_TEXT,
+  },
+  {
+    label: POLICY_INSURER_LABEL,
+    key: POLICY_INSURER_KEY,
+    type: FIELD_TYPE_TEXT,
+  },
+  {
+    label: POLICY_INCEPTION_DATE_LABEL,
+    key: POLICY_INCEPTION_DATE_KEY,
+    type: FIELD_TYPE_TEXT,
+  },
+  {
+    label: POLICY_TERM_LABEL,
+    key: POLICY_TERM_KEY,
+    type: FIELD_TYPE_TEXT,
+  },
+  {
+    label: POLICY_MATURITY_DATE_LABEL,
+    key: POLICY_MATURITY_DATE_KEY,
+    type: FIELD_TYPE_TEXT,
+  },
+  {
+    label: POLICY_PREMIUM_TERM_LABEL,
+    key: POLICY_PREMIUM_TERM_KEY,
+    type: FIELD_TYPE_TEXT,
+  },
+];
+
+export const policyDetailsCoverageCardFields = [
+  {
+    label: POLICY_DEATH_BENEFIT_LABEL,
+    key: POLICY_DEATH_BENEFIT_KEY,
+    type: FIELD_TYPE_CURRENCY,
+    icon: <PersonOffIcon />,
+  },
+  {
+    label: POLICY_TPD_BENEFIT_LABEL,
+    key: POLICY_TPD_BENEFIT_KEY,
+    type: FIELD_TYPE_CURRENCY,
+    icon: <AccessibleForwardIcon />,
+  },
+  {
+    label: POLICY_MAJOR_CI_BENEFIT_LABEL,
+    key: POLICY_MAJOR_CI_BENEFIT_KEY,
+    type: FIELD_TYPE_CURRENCY,
+    icon: <HotelIcon />,
+  },
+  {
+    label: POLICY_EARLY_CI_BENEFIT_LABEL,
+    key: POLICY_EARLY_CI_BENEFIT_KEY,
+    type: FIELD_TYPE_CURRENCY,
+    icon: <HotelIcon />,
   },
 ];

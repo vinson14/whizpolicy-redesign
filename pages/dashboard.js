@@ -1,21 +1,14 @@
 import {
-  Box,
-  Button,
   Container,
-  Drawer,
   List,
   ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  Typography,
 } from "@mui/material";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import AcUnitIcon from "@mui/icons-material/AcUnit";
-import { createElement, useState } from "react";
-import { getClients } from "../utils/api";
+import { useState } from "react";
+import { useRouter } from "next/router";
 import Sidebar from "../components/stateless/interface/sidebar";
-import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import {
   CLIENTS_VALUE,
   PORTFOLIO_VALUE,
@@ -28,6 +21,7 @@ import DashboardClients from "../components/dashboard/dashboard-clients";
 import DashboardPortfolio from "../components/dashboard/dashboard-portfolio";
 
 const Dashboard = () => {
+  const router = useRouter();
   const [activeOption, setActiveOption] = useState(CLIENTS_VALUE);
   return (
     <DashboardContainer>
@@ -37,7 +31,10 @@ const Dashboard = () => {
             <ListItem key={item.value}>
               <ListItemButton
                 selected={activeOption === item.value}
-                onClick={() => setActiveOption(item.value)}
+                onClick={() => {
+                  setActiveOption(item.value);
+                  router.push("/dashboard");
+                }}
               >
                 <ListItemIcon>{item.icon}</ListItemIcon>
                 <ListItemText primary={item.label} />

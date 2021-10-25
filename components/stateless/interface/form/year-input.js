@@ -1,13 +1,12 @@
 import { InputAdornment, TextField } from "@mui/material";
 import { Controller } from "react-hook-form";
 
-const TextInput = ({
+const YearInput = ({
   name,
   control,
-  label,
   defaultValue,
+  label,
   placeholder,
-  startAdornment,
   shrink = true,
   variant = "outlined",
 }) => {
@@ -21,22 +20,16 @@ const TextInput = ({
           {...field}
           label={label}
           variant={variant}
-          InputProps={
-            startAdornment && {
-              startAdornment: (
-                <InputAdornment position="start">
-                  {startAdornment}
-                </InputAdornment>
-              ),
-            }
-          }
           placeholder={placeholder}
-          fullWidth
+          InputProps={{
+            endAdornment: <InputAdornment position="end">years</InputAdornment>,
+          }}
           InputLabelProps={{ shrink }}
+          inputProps={{ type: "number" }}
         />
       )}
     />
   );
 };
 
-export default TextInput;
+export default YearInput;

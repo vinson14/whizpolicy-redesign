@@ -1,15 +1,11 @@
 import { Divider, Grid } from "@mui/material";
-import ContactCard from "./contact-card";
-import NameCard from "./name-card";
-import AboutCard from "./about-card";
-import DependantsCard from "./dependants-card";
-import CoverageCard from "./coverage-card";
+import { clientDetailsCards } from "../../../data/ui";
 import PolicyCards from "./policy-cards";
 
 const ClientDetails = ({ client }) => {
   return (
     <>
-      {components.map((Component, index) => (
+      {clientDetailsCards.map((Component, index) => (
         <Grid key={index} item xs={12} lg={6}>
           <Component client={client} />
         </Grid>
@@ -23,13 +19,5 @@ const ClientDetails = ({ client }) => {
     </>
   );
 };
-
-const components = [
-  NameCard,
-  ContactCard,
-  AboutCard,
-  DependantsCard,
-  CoverageCard,
-];
 
 export default ClientDetails;

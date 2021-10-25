@@ -8,7 +8,11 @@ export const findClientById = (clients, id) => {
   return clients.find((client) => client.id == id);
 };
 
-export default function formatNumber(num, decPlaces = 0) {
+export const findPolicyByPolicyNumber = (policies, policyNumber) => {
+  return policies.find((policy) => policy.policyNumber == policyNumber);
+};
+
+export function formatNumber(num, decPlaces = 0) {
   if (!num) return " - ";
   return num.toFixed(decPlaces).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
 }
