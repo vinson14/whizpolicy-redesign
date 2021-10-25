@@ -20,6 +20,9 @@ const theme = createTheme({
   typography: {
     fontFamily: "Public Sans, sans-serif",
   },
+  shape: {
+    borderRadius: 4,
+  },
 });
 
 export default MyApp;

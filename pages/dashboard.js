@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import Sidebar from "../components/stateless/interface/sidebar";
+import Sidebar from "../components/stateless/interface/navigation/sidebar";
 import {
   CLIENTS_VALUE,
   PORTFOLIO_VALUE,
@@ -19,13 +19,16 @@ import {
 import DashboardContainer from "../components/dashboard/dashboard-container";
 import DashboardClients from "../components/dashboard/dashboard-clients";
 import DashboardPortfolio from "../components/dashboard/dashboard-portfolio";
+import useModal from "../utils/useModal";
 
 const Dashboard = () => {
   const router = useRouter();
   const [activeOption, setActiveOption] = useState(CLIENTS_VALUE);
+  const [showSidebar, openSidebar, closeSidebar] = useModal();
+  const MainComponent = mainComponentMapping[activeOption];
   return (
     <DashboardContainer>
-      <Sidebar>
+      <Sidebar open={showSidebar} onClose={closeSidebar}>
         <List>
           {sidebarItems.map((item) => (
             <ListItem key={item.value}>
@@ -43,13 +46,15 @@ const Dashboard = () => {
           ))}
         </List>
       </Sidebar>
-      <Container>{mainComponent[activeOption]}</Container>
+      <Container>
+        <MainComponent openSidebar={openSidebar} />
+      </Container>
     </DashboardContainer>
   );
 };
-const mainComponent = {
-  [CLIENTS_VALUE]: <DashboardClients />,
-  [PORTFOLIO_VALUE]: <DashboardPortfolio />,
+const mainComponentMapping = {
+  [CLIENTS_VALUE]: DashboardClients,
+  [PORTFOLIO_VALUE]: DashboardPortfolio,
 };
 
 export default Dashboard;

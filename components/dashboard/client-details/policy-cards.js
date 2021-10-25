@@ -31,7 +31,7 @@ const PolicyCards = ({ client }) => {
   );
 };
 
-const PolicyCard = ({ policy }) => {
+export const PolicyCard = ({ policy }) => {
   const router = useRouter();
   const onClick = () => {
     router.push(
