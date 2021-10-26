@@ -1,23 +1,16 @@
-import {
-  Box,
-  Button,
-  Grid,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  Popover,
-  Typography,
-} from "@mui/material";
+import { Box, Grid, IconButton, Popover } from "@mui/material";
 import {
   clientDetailsFinancialOverviewFields,
+  CLIENT_ANNUAL_INCOME_KEY,
   coverageInfoPopoverContent,
 } from "../../../data/ui";
-import formatNumber from "../../../utils/utils";
 import ClientCardHeader from "../../stateless/interface/cards/client-card-header";
 import ClientCardInfoText from "../../stateless/interface/cards/client-card-info-text";
 import ClientDetailCard from "../../stateless/interface/cards/client-detail-card";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { Fragment, useState } from "react";
+import { formatNumber } from "../../../utils/utils";
+import CloseIcon from "@mui/icons-material/Close";
 
 const CoverageCard = ({ client }) => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -70,7 +63,7 @@ const CoverageInfoPopover = ({
   const clientInfoText = [
     {
       label: "Current Income",
-      value: `$${formatNumber(client.annualIncome)}`,
+      value: `$${formatNumber(client[CLIENT_ANNUAL_INCOME_KEY])}`,
     },
     {
       label: "Current Coverage",
@@ -94,7 +87,12 @@ const CoverageInfoPopover = ({
       anchorOrigin={{ vertical: "center", horizontal: "right" }}
       transformOrigin={{ vertical: "center", horizontal: "left" }}
     >
-      <Box p={3} maxWidth={500}>
+      <Grid container p={3} maxWidth={500}>
+        <Grid item xs={12} display="flex" justifyContent="end">
+          <IconButton onClick={handleClose}>
+            <CloseIcon />
+          </IconButton>
+        </Grid>
         {content.map((qns) => (
           <Fragment key={qns.qns}>
             <ClientCardInfoText xs={12} label={qns.qns} value={qns.ans} />
@@ -108,7 +106,7 @@ const CoverageInfoPopover = ({
             key={text.label}
           />
         ))}
-      </Box>
+      </Grid>
     </Popover>
   );
 };

@@ -128,6 +128,23 @@ export const CLIENT_SALUTATION_LABEL = "Salutation";
 export const CLIENT_NATIONALITY_LABEL = "Nationality";
 export const CLIENT_ANNUAL_INCOME_LABEL = "Annual Income";
 
+// Client financial overview keys and labels
+export const CLIENT_FINANCIAL_OVERVIEW_DEATH_KEY = "death";
+export const CLIENT_FINANCIAL_OVERVIEW_TPD_KEY = "tpd";
+export const CLIENT_FINANCIAL_OVERVIEW_MAJOR_CI_KEY = "majorCi";
+export const CLIENT_FINANCIAL_OVERVIEW_EARLY_CI_KEY = "earlyCi";
+export const CLIENT_FINANCIAL_OVERVIEW_ACC_DEATH_KEY = "accidentalDeath";
+export const CLIENT_FINANCIAL_OVERVIEW_ACC_MED_KEY = "accidentalMedical";
+export const CLIENT_FINANCIAL_OVERVIEW_DEATH_LABEL = "Death";
+export const CLIENT_FINANCIAL_OVERVIEW_TPD_LABEL = "Total Permanent Disability";
+export const CLIENT_FINANCIAL_OVERVIEW_MAJOR_CI_LABEL =
+  "Major Critical Illness";
+export const CLIENT_FINANCIAL_OVERVIEW_EARLY_CI_LABEL =
+  "Early Critical Illness";
+export const CLIENT_FINANCIAL_OVERVIEW_ACC_DEATH_LABEL = "Accidental Death";
+export const CLIENT_FINANCIAL_OVERVIEW_ACC_MED_LABEL =
+  "Accidental Medical Reimbursement";
+
 // Insurer Keys and Labels
 export const INSURER_AIA_KEY = "aia";
 export const INSURER_AIA_LABEL = "AIA";
@@ -244,38 +261,38 @@ export const clientDetailsAboutFields = [
 
 export const clientDetailsFinancialOverviewFields = [
   {
-    label: "Death",
-    key: "death",
+    label: CLIENT_FINANCIAL_OVERVIEW_DEATH_LABEL,
+    key: CLIENT_FINANCIAL_OVERVIEW_DEATH_KEY,
     type: FIELD_TYPE_CURRENCY,
     icon: <PersonOffIcon />,
   },
   {
-    label: "Total Permanent Disability",
-    key: "tpd",
+    label: CLIENT_FINANCIAL_OVERVIEW_TPD_LABEL,
+    key: CLIENT_FINANCIAL_OVERVIEW_TPD_KEY,
     type: FIELD_TYPE_CURRENCY,
     icon: <AccessibleForwardIcon />,
   },
   {
-    label: "Major Critical Illness",
-    key: "majorCi",
+    label: CLIENT_FINANCIAL_OVERVIEW_MAJOR_CI_LABEL,
+    key: CLIENT_FINANCIAL_OVERVIEW_MAJOR_CI_KEY,
     type: FIELD_TYPE_CURRENCY,
     icon: <HotelIcon />,
   },
   {
-    label: "Early Critical Illness",
-    key: "earlyCi",
+    label: CLIENT_FINANCIAL_OVERVIEW_EARLY_CI_LABEL,
+    key: CLIENT_FINANCIAL_OVERVIEW_EARLY_CI_KEY,
     type: FIELD_TYPE_CURRENCY,
     icon: <HotelIcon />,
   },
   {
-    label: "Accidental Death",
-    key: "accidentalDeath",
+    label: CLIENT_FINANCIAL_OVERVIEW_ACC_DEATH_LABEL,
+    key: CLIENT_FINANCIAL_OVERVIEW_ACC_DEATH_KEY,
     type: FIELD_TYPE_CURRENCY,
     icon: <PersonOffIcon />,
   },
   {
-    label: "Accidental Medical Reimbursement",
-    key: "accidentalMedical",
+    label: CLIENT_FINANCIAL_OVERVIEW_ACC_MED_LABEL,
+    key: CLIENT_FINANCIAL_OVERVIEW_ACC_MED_KEY,
     type: FIELD_TYPE_CURRENCY,
     icon: <LocalHospitalIcon />,
   },

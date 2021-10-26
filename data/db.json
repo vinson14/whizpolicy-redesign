@@ -49,8 +49,8 @@
           "idealCoverage": 1000000
         },
         "accidentalMedical": {
-          "currentCoverage": 1000000,
-          "idealCoverage": 1000000
+          "currentCoverage": 3000,
+          "idealCoverage": 3000
         }
       },
       "policies": [
