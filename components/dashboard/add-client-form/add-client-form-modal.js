@@ -8,6 +8,7 @@ import {
 import { useForm } from "react-hook-form";
 import { addClientFormFields, inputTypeMapping } from "../../../data/ui";
 import FormContainer from "../../stateless/interface/form/form-container";
+import ModalContainer from "../../stateless/interface/modal/modal-container";
 
 const ClientFormModal = ({ open, handleClose, defaultValues, edit }) => {
   const { control, handleSubmit } = useForm({
@@ -16,8 +17,7 @@ const ClientFormModal = ({ open, handleClose, defaultValues, edit }) => {
   const onSubmit = (formData) => console.log(formData);
 
   return (
-    <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>Add Client</DialogTitle>
+    <ModalContainer open={open} onClose={handleClose} title="Add Client">
       <DialogContent>
         <FormContainer handleSubmit={handleSubmit} onSubmit={onSubmit}>
           <Grid p={3} spacing={1} justifyContent="space-between" container>
@@ -37,7 +37,7 @@ const ClientFormModal = ({ open, handleClose, defaultValues, edit }) => {
           </Grid>
         </FormContainer>
       </DialogContent>
-    </Dialog>
+    </ModalContainer>
   );
 };
 

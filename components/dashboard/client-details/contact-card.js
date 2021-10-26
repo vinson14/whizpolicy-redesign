@@ -12,6 +12,7 @@ const ContactCard = ({ client }) => {
         {clientDetailsContactFields.map((field) => (
           <ClientCardInfoText
             xs={12}
+            md={12}
             key={field.key}
             value={client[field.key]}
             label={field.label}

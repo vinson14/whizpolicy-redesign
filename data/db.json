@@ -4,6 +4,7 @@
       "id": 1,
       "name": "Vinson Ong",
       "occupation": "Full Stack Developer",
+      "image": "vinson.jpg",
       "annualIncome": 100000,
       "age": 28,
       "mobile": "9431 8747",

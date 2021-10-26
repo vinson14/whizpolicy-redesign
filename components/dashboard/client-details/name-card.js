@@ -4,7 +4,12 @@ import ClientDetailCard from "../../stateless/interface/cards/client-detail-card
 const NameCard = ({ client }) => {
   return (
     <ClientDetailCard>
-      <Box minHeight={180} height={1} position="relative">
+      <Box
+        minHeight={180}
+        height={1}
+        position="relative"
+        display={{ xs: "none", sm: "block" }}
+      >
         <Box sx={avatarBoxSx}>
           <Avatar src="/vinson.jpg" alt="Vinson Ong" sx={avatarSx} />
         </Box>
@@ -17,6 +22,25 @@ const NameCard = ({ client }) => {
           </Typography>
         </Box>
         <Box height={0.3}></Box>
+      </Box>
+      <Box display={{ xs: "block", sm: "none" }} position="relative">
+        <Box
+          display="flex"
+          justifyContent="center"
+          position="absolute"
+          top={(theme) => theme.spacing(-8)}
+          width={1}
+        >
+          <Avatar src="/vinson.jpg" alt="Vinson Ong" sx={avatarSx} />
+        </Box>
+        <Box sx={nameBoxSx} mt={8} pt={8} pb={2}>
+          <Typography variant="h5" align="center" sx={{ fontWeight: 700 }}>
+            {client.name}
+          </Typography>
+          <Typography component="h6" variant="caption" align="center">
+            {client.occupation}
+          </Typography>
+        </Box>
       </Box>
     </ClientDetailCard>
   );

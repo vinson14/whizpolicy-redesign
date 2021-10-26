@@ -3,8 +3,8 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { getClients } from "../../utils/api";
 import { findClientById, findPolicyByPolicyNumber } from "../../utils/utils";
-import AddButton from "../stateless/interface/buttons/add-button";
-import EditButton from "../stateless/interface/buttons/edit-button";
+import FloatingAddButton from "../stateless/interface/buttons/floating-add-button";
+import FloatingEditButton from "../stateless/interface/buttons/floating-edit-button";
 import ClientCards from "../stateless/interface/cards/client-cards";
 import CustomBreadcrumbs from "../stateless/interface/navigation/breadcrumbs";
 import MainHeader from "../stateless/interface/text/main-header";
@@ -75,9 +75,21 @@ const DashboardClients = ({ openSidebar }) => {
   };
 
   const renderButton = () => {
-    if (selectedClient == null)
-      return <AddButton onClick={openClientFormModal}>Add Client</AddButton>;
-    return <EditButton onClick={openEditClientModal}>Edit Client</EditButton>;
+    if (selectedClient != null && selectedPolicy != null) {
+      return null;
+    } else if (selectedClient != null && selectedPolicy == null) {
+      return (
+        <FloatingEditButton onClick={openEditClientModal} bottom={10}>
+          Edit Client
+        </FloatingEditButton>
+      );
+    } else if (selectedClient == null) {
+      return (
+        <FloatingAddButton onClick={openClientFormModal}>
+          Add Client
+        </FloatingAddButton>
+      );
+    }
   };
 
   return (

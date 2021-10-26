@@ -1,12 +1,12 @@
 import { Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 
-const AddButton = ({ children, ...props }) => {
+const AddButton = ({ children, color = "primary", ...props }) => {
   return (
     <Button
-      variant="contained"
       {...props}
-      color="success"
+      variant="contained"
+      aria-label={children}
       startIcon={<AddIcon />}
     >
       {children}

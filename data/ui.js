@@ -23,6 +23,9 @@ import AboutCard from "../components/dashboard/client-details/about-card";
 import DependantsCard from "../components/dashboard/client-details/dependants-card";
 import CoverageCard from "../components/dashboard/client-details/coverage-card";
 
+// Dimensions
+export const FLOATING_ACTION_BUTTON_WIDTH = 160;
+
 // Sidebar Constants
 export const CLIENTS_VALUE = "clients";
 export const CLIENTS_LABEL = "Clients";
@@ -47,6 +50,7 @@ export const INPUT_TYPE_YEAR = "yearInput";
 // Field Types
 export const FIELD_TYPE_TEXT = "text";
 export const FIELD_TYPE_CURRENCY = "currency";
+export const FIELD_TYPE_INTEGER = "integer";
 
 // Policy Categories
 export const POLICY_CATEGORY_WHOLE_LIFE_KEY = "wholeLife";
@@ -709,7 +713,7 @@ export const policyDetailsAboutCardFields = [
   {
     label: POLICY_TERM_LABEL,
     key: POLICY_TERM_KEY,
-    type: FIELD_TYPE_TEXT,
+    type: FIELD_TYPE_INTEGER,
   },
   {
     label: POLICY_MATURITY_DATE_LABEL,
@@ -719,7 +723,7 @@ export const policyDetailsAboutCardFields = [
   {
     label: POLICY_PREMIUM_TERM_LABEL,
     key: POLICY_PREMIUM_TERM_KEY,
-    type: FIELD_TYPE_TEXT,
+    type: FIELD_TYPE_INTEGER,
   },
 ];
 

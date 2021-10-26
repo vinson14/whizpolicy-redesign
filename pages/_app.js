@@ -16,6 +16,15 @@ const theme = createTheme({
       secondary: "#637381",
       disabled: "#919EAB",
     },
+    primary: {
+      main: "#118ab2",
+    },
+    secondary: {
+      main: "#049F76",
+    },
+    info: {
+      main: "#073B4C",
+    },
   },
   typography: {
     fontFamily: "Public Sans, sans-serif",

@@ -2,7 +2,7 @@ import { Box, CardActionArea, Grid, Typography } from "@mui/material";
 import { policyCardFields } from "../../../data/ui";
 import useModal from "../../../utils/useModal";
 import formatNumber from "../../../utils/utils";
-import AddButton from "../../stateless/interface/buttons/add-button";
+import FloatingAddButton from "../../stateless/interface/buttons/floating-add-button";
 import ClientCardHeader from "../../stateless/interface/cards/client-card-header";
 import ClientCardInfoText from "../../stateless/interface/cards/client-card-info-text";
 import ClientDetailCard from "../../stateless/interface/cards/client-detail-card";
@@ -26,7 +26,7 @@ const PolicyCards = ({ client }) => {
     <>
       <Box sx={{ display: "flex", justifyContent: "space-between", py: 3 }}>
         <MainHeader>Policies</MainHeader>
-        <AddButton onClick={openModal}>Add Policy</AddButton>
+        <FloatingAddButton onClick={openModal}>Add Policy</FloatingAddButton>
         <AddPolicyForm open={modalState} handleClose={closeModal} />
       </Box>
 

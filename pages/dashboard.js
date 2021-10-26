@@ -47,7 +47,7 @@ const Dashboard = () => {
           ))}
         </List>
       </Sidebar>
-      <Container>
+      <Container sx={{ pb: 3 }}>
         <MainComponent openSidebar={openSidebar} />
       </Container>
     </DashboardContainer>

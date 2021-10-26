@@ -9,8 +9,10 @@ import {
   POLICY_CATEGORY_KEY,
 } from "../../../data/ui";
 import FormContainer from "../../stateless/interface/form/form-container";
-import AddButton from "../../stateless/interface/buttons/add-button";
+import FloatingAddButton from "../../stateless/interface/buttons/floating-add-button";
 import CancelButton from "../../stateless/interface/buttons/cancel-button";
+import ModalContainer from "../../stateless/interface/modal/modal-container";
+import AddButton from "../../stateless/interface/buttons/add-button";
 
 const AddPolicyForm = ({ open, handleClose }) => {
   const { control, handleSubmit } = useForm();
@@ -23,12 +25,11 @@ const AddPolicyForm = ({ open, handleClose }) => {
   const SelectCategoryComponent = inputTypeMapping[policyCategorySelect.type];
 
   return (
-    <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>Add Policy</DialogTitle>
+    <ModalContainer open={open} onClose={handleClose} title="Add Policy">
       <DialogContent>
         <FormContainer handleSubmit={handleSubmit} onSubmit={onSubmit}>
           <Grid container p={3} spacing={1} justifyContent="space-between">
-            <Grid item {...policyCategorySelect.col}>
+            <Grid item {...policyCategorySelect.col} p={2}>
               <SelectCategoryComponent
                 {...policyCategorySelect}
                 control={control}
@@ -44,15 +45,13 @@ const AddPolicyForm = ({ open, handleClose }) => {
               );
             })}
             <Grid item xs={12}>
-              <AddButton type="submit" sx={{ mr: 2 }}>
-                Add Policy
-              </AddButton>
+              <AddButton sx={{ mr: 2 }}>Add Policy</AddButton>
               <CancelButton onClick={handleClose}>Cancel</CancelButton>
             </Grid>
           </Grid>
         </FormContainer>
       </DialogContent>
-    </Dialog>
+    </ModalContainer>
   );
 };
 
