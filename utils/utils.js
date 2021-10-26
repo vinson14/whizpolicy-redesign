@@ -16,3 +16,8 @@ export function formatNumber(num, decPlaces = 0) {
   if (!num) return " - ";
   return num.toFixed(decPlaces).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
 }
+
+export function formatString(string) {
+  const properCase = string.replace(/([A-Z])/g, " $1");
+  return properCase.charAt(0).toUpperCase() + properCase.slice(1);
+}

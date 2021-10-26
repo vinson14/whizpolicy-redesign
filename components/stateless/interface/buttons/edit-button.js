@@ -1,14 +1,13 @@
 import { Button } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
-
-const AddButton = ({ children, mr = 2, color = "primary", ...props }) => {
+import EditIcon from "@mui/icons-material/Edit";
+const EditButton = ({ children, mr = 2, color = "secondary", ...props }) => {
   return (
     <Button
       {...props}
       color={color}
       variant="contained"
       aria-label={children}
-      startIcon={<AddIcon />}
+      startIcon={<EditIcon />}
       sx={{ mr: mr }}
     >
       {children}
@@ -16,4 +15,4 @@ const AddButton = ({ children, mr = 2, color = "primary", ...props }) => {
   );
 };
 
-export default AddButton;
+export default EditButton;

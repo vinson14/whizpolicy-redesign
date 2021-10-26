@@ -100,6 +100,66 @@ export const POLICY_GUARANTEED_MATURITY_BENEFIT_LABEL =
   "Guaranteed Maturity Benefit";
 export const POLICY_INCEPTION_DATE_LABEL = "Inception Date";
 
+// Client Object Keys
+export const CLIENT_NAME_KEY = "name";
+export const CLIENT_OCCUPATION_KEY = "occupation";
+export const CLIENT_AGE_KEY = "age";
+export const CLIENT_MOBILE_KEY = "mobile";
+export const CLIENT_EMAIL_KEY = "email";
+export const CLIENT_GENDER_KEY = "gender";
+export const CLIENT_BIRTHDAY_KEY = "birthday";
+export const CLIENT_MARITAL_STATUS_KEY = "maritalStatus";
+export const CLIENT_SMOKER_KEY = "smoker";
+export const CLIENT_SALUTATION_KEY = "salutation";
+export const CLIENT_NATIONALITY_KEY = "nationality";
+export const CLIENT_ANNUAL_INCOME_KEY = "annualIncome";
+
+// Client Object Labels
+export const CLIENT_NAME_LABEL = "Name";
+export const CLIENT_OCCUPATION_LABEL = "Occupation";
+export const CLIENT_AGE_LABEL = "Age";
+export const CLIENT_MOBILE_LABEL = "Mobile";
+export const CLIENT_EMAIL_LABEL = "Email";
+export const CLIENT_GENDER_LABEL = "Gender";
+export const CLIENT_BIRTHDAY_LABEL = "Birthday";
+export const CLIENT_MARITAL_STATUS_LABEL = "Marital Status";
+export const CLIENT_SMOKER_LABEL = "Smoker";
+export const CLIENT_SALUTATION_LABEL = "Salutation";
+export const CLIENT_NATIONALITY_LABEL = "Nationality";
+export const CLIENT_ANNUAL_INCOME_LABEL = "Annual Income";
+
+// Insurer Keys and Labels
+export const INSURER_AIA_KEY = "aia";
+export const INSURER_AIA_LABEL = "AIA";
+export const INSURER_PRU_KEY = "prudential";
+export const INSURER_PRU_LABEL = "Prudential";
+export const INSURER_GREAT_EASTERN_KEY = "greatEastern";
+export const INSURER_GREAT_EASTERN_LABEL = "Great Eastern";
+export const INSURER_NTUC_KEY = "ntucIncome";
+export const INSURER_NTUC_LABEL = "NTUC Income";
+
+// Premium Mode Keys and Labels
+export const PREMIUM_MODE_ANNUALLY_KEY = "annually";
+export const PREMIUM_MODE_MONTHLY_KEY = "monthly";
+export const PREMIUM_MODE_QUARTERLY_KEY = "quarterly";
+export const PREMIUM_MODE_SEMI_ANNUALLY_KEY = "semiAnnually";
+export const PREMIUM_MODE_ANNUALLY_LABEL = "Annually";
+export const PREMIUM_MODE_MONTHLY_LABEL = "Monthly";
+export const PREMIUM_MODE_QUARTERLY_LABEL = "Quarterly";
+export const PREMIUM_MODE_SEMI_ANNUALLY_LABEL = "Semi-annually";
+
+// Marital Status Keys and Labels
+export const MARITAL_STATUS_SINGLE_KEY = "single";
+export const MARITAL_STATUS_MARRIED_KEY = "married";
+export const MARITAL_STATUS_DIVORCED_KEY = "divorced";
+export const MARITAL_STATUS_SEPARATED_KEY = "separated";
+export const MARITAL_STATUS_WIDOWED_KEY = "widowed";
+export const MARITAL_STATUS_SINGLE_LABEL = "Single";
+export const MARITAL_STATUS_MARRIED_LABEL = "Married";
+export const MARITAL_STATUS_DIVORCED_LABEL = "Divorced";
+export const MARITAL_STATUS_SEPARATED_LABEL = "Separated";
+export const MARITAL_STATUS_WIDOWED_LABEL = "Widowed";
+
 export const sidebarItems = [
   {
     label: CLIENTS_LABEL,
@@ -123,6 +183,12 @@ export const sidebarItems = [
   },
 ];
 
+export const insurerLabels = {
+  [INSURER_AIA_KEY]: INSURER_AIA_LABEL,
+  [INSURER_PRU_KEY]: INSURER_PRU_LABEL,
+  [INSURER_GREAT_EASTERN_KEY]: INSURER_GREAT_EASTERN_LABEL,
+};
+
 export const defaultDashboardClientBreadcrumbs = [
   { label: "Dashboard", route: "/dashboard" },
   { label: "Clients", route: "/dashboard" },
@@ -135,44 +201,44 @@ export const defaultDashboardPortfolioBreadcrumbs = [
 
 export const clientCardFields = [
   {
-    label: "Occupation",
-    key: "occupation",
+    label: CLIENT_OCCUPATION_LABEL,
+    key: CLIENT_OCCUPATION_KEY,
   },
   {
-    label: "Age",
-    key: "age",
+    label: CLIENT_AGE_LABEL,
+    key: CLIENT_AGE_KEY,
   },
 ];
 
 export const clientDetailsContactFields = [
   {
-    label: "Mobile",
-    key: "mobile",
+    label: CLIENT_MOBILE_LABEL,
+    key: CLIENT_MOBILE_KEY,
     icon: <PhoneIcon />,
   },
   {
-    label: "Email",
-    key: "email",
+    label: CLIENT_EMAIL_LABEL,
+    key: CLIENT_EMAIL_KEY,
     icon: <EmailIcon />,
   },
 ];
 
 export const clientDetailsAboutFields = [
   {
-    label: "Gender",
-    key: "gender",
+    label: CLIENT_GENDER_LABEL,
+    key: CLIENT_GENDER_KEY,
   },
   {
-    label: "Birthday",
-    key: "birthday",
+    label: CLIENT_BIRTHDAY_LABEL,
+    key: CLIENT_BIRTHDAY_KEY,
   },
   {
-    label: "Marital Status",
-    key: "maritalStatus",
+    label: CLIENT_MARITAL_STATUS_LABEL,
+    key: CLIENT_MARITAL_STATUS_KEY,
   },
   {
-    label: "Smoker",
-    key: "smoker",
+    label: CLIENT_SMOKER_LABEL,
+    key: CLIENT_SMOKER_KEY,
   },
 ];
 
@@ -281,8 +347,8 @@ export const coverageInfoPopoverContent = {
 
 export const addClientFormFields = [
   {
-    name: "name",
-    label: "Name",
+    name: CLIENT_NAME_KEY,
+    label: CLIENT_NAME_LABEL,
     defaultValue: "",
     type: INPUT_TYPE_TEXT,
     placeholder: "John Doe",
@@ -293,8 +359,8 @@ export const addClientFormFields = [
     },
   },
   {
-    name: "salutation",
-    label: "Salutation",
+    name: CLIENT_SALUTATION_KEY,
+    label: CLIENT_SALUTATION_LABEL,
     defaultValue: "mr",
     type: INPUT_TYPE_SELECT,
     options: [
@@ -310,8 +376,8 @@ export const addClientFormFields = [
     },
   },
   {
-    name: "gender",
-    label: "Gender",
+    name: CLIENT_GENDER_KEY,
+    label: CLIENT_GENDER_LABEL,
     defaultValue: "male",
     type: INPUT_TYPE_SELECT,
     options: [
@@ -326,8 +392,8 @@ export const addClientFormFields = [
     },
   },
   {
-    name: "email",
-    label: "Email",
+    name: CLIENT_EMAIL_KEY,
+    label: CLIENT_EMAIL_LABEL,
     defaultValue: "",
     placeholder: "johndoe@gmail.com",
     type: INPUT_TYPE_TEXT,
@@ -338,8 +404,8 @@ export const addClientFormFields = [
     },
   },
   {
-    name: "mobile",
-    label: "Mobile",
+    name: CLIENT_MOBILE_KEY,
+    label: CLIENT_MOBILE_LABEL,
     defaultValue: "",
     placeholder: "+65",
     type: INPUT_TYPE_TEXT,
@@ -350,16 +416,28 @@ export const addClientFormFields = [
     },
   },
   {
-    name: "maritalStatus",
-    label: "Marital Status",
-    defaultValue: "single",
+    name: CLIENT_MARITAL_STATUS_KEY,
+    label: CLIENT_MARITAL_STATUS_KEY,
+    defaultValue: MARITAL_STATUS_SINGLE_KEY,
     type: INPUT_TYPE_SELECT,
     options: [
-      { label: "Single", value: "single" },
-      { label: "Married", value: "married" },
-      { label: "Divorced", value: "divorced" },
-      { label: "Separated", value: "separated" },
-      { label: "Widowed", value: "widowed" },
+      { label: MARITAL_STATUS_SINGLE_LABEL, value: MARITAL_STATUS_SINGLE_KEY },
+      {
+        label: MARITAL_STATUS_MARRIED_LABEL,
+        value: MARITAL_STATUS_MARRIED_KEY,
+      },
+      {
+        label: MARITAL_STATUS_DIVORCED_LABEL,
+        value: MARITAL_STATUS_DIVORCED_KEY,
+      },
+      {
+        label: MARITAL_STATUS_SEPARATED_LABEL,
+        value: MARITAL_STATUS_SEPARATED_KEY,
+      },
+      {
+        label: MARITAL_STATUS_WIDOWED_LABEL,
+        value: MARITAL_STATUS_WIDOWED_KEY,
+      },
     ],
     col: {
       xs: 12,
@@ -368,8 +446,8 @@ export const addClientFormFields = [
     },
   },
   {
-    name: "nationality",
-    label: "Nationality",
+    name: CLIENT_NATIONALITY_KEY,
+    label: CLIENT_NATIONALITY_LABEL,
     defaultValue: "Singapore",
     placeholder: "Singapore",
     type: INPUT_TYPE_AUTOCOMPLETE,
@@ -381,8 +459,8 @@ export const addClientFormFields = [
     },
   },
   {
-    name: "smoker",
-    label: "Smoker",
+    name: CLIENT_SMOKER_KEY,
+    label: CLIENT_SMOKER_LABEL,
     defaultValue: "no",
     type: INPUT_TYPE_SELECT,
     options: [
@@ -396,8 +474,8 @@ export const addClientFormFields = [
     },
   },
   {
-    name: "birthday",
-    label: "Birthday",
+    name: CLIENT_BIRTHDAY_KEY,
+    label: CLIENT_BIRTHDAY_LABEL,
     defaultValue: new Date("Jan 01, 2000"),
     type: INPUT_TYPE_DATEPICKER,
     col: {
@@ -407,8 +485,8 @@ export const addClientFormFields = [
     },
   },
   {
-    name: "occupation",
-    label: "Occupation",
+    name: CLIENT_OCCUPATION_KEY,
+    label: CLIENT_OCCUPATION_LABEL,
     placeholder: "Occupation",
     type: INPUT_TYPE_TEXT,
     col: {
@@ -418,8 +496,8 @@ export const addClientFormFields = [
     },
   },
   {
-    name: "annualIncome",
-    label: "Annual Income",
+    name: CLIENT_ANNUAL_INCOME_KEY,
+    label: CLIENT_ANNUAL_INCOME_LABEL,
     defaultValue: "",
     placeholder: "1,000,000",
     startAdornment: "$",
@@ -468,10 +546,10 @@ export const addPolicyFormFields = {
       lg: 5,
     },
     options: [
-      { label: "AIA", value: "aia" },
-      { label: "Great Eastern", value: "greatEastern" },
-      { label: "Prudential", value: "prudential" },
-      { label: "NTUC Income", value: "ntucIncome" },
+      { label: INSURER_AIA_LABEL, value: INSURER_AIA_KEY },
+      { label: INSURER_GREAT_EASTERN_LABEL, value: INSURER_GREAT_EASTERN_KEY },
+      { label: INSURER_PRU_LABEL, value: INSURER_PRU_KEY },
+      { label: INSURER_NTUC_LABEL, value: INSURER_NTUC_KEY },
     ],
   },
   [POLICY_PREMIUM_MODE_KEY]: {
@@ -485,10 +563,16 @@ export const addPolicyFormFields = {
       lg: 5,
     },
     options: [
-      { label: "Annually", value: "annually" },
-      { label: "Monthly", value: "monthly" },
-      { label: "Quarterly", value: "quarterly" },
-      { label: "Semi-annually", value: "semi-annually" },
+      { label: PREMIUM_MODE_ANNUALLY_LABEL, value: PREMIUM_MODE_ANNUALLY_KEY },
+      { label: PREMIUM_MODE_MONTHLY_LABEL, value: PREMIUM_MODE_MONTHLY_KEY },
+      {
+        label: PREMIUM_MODE_QUARTERLY_LABEL,
+        value: PREMIUM_MODE_QUARTERLY_KEY,
+      },
+      {
+        label: PREMIUM_MODE_SEMI_ANNUALLY_LABEL,
+        value: PREMIUM_MODE_SEMI_ANNUALLY_KEY,
+      },
     ],
   },
   [POLICY_PREMIUM_KEY]: {

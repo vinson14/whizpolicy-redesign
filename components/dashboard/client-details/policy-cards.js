@@ -1,7 +1,7 @@
 import { Box, CardActionArea, Grid, Typography } from "@mui/material";
-import { policyCardFields } from "../../../data/ui";
+import { insurerLabels, policyCardFields } from "../../../data/ui";
 import useModal from "../../../utils/useModal";
-import formatNumber from "../../../utils/utils";
+import formatNumber, { formatString } from "../../../utils/utils";
 import FloatingAddButton from "../../stateless/interface/buttons/floating-add-button";
 import ClientCardHeader from "../../stateless/interface/cards/client-card-header";
 import ClientCardInfoText from "../../stateless/interface/cards/client-card-info-text";
@@ -45,7 +45,7 @@ export const PolicyCard = ({ policy, onClick }) => {
   return (
     <ClientDetailCard onClick={onClick}>
       <ClientCardHeader>
-        {policy.insurer} - {policy.policyName}
+        {insurerLabels[policy.insurer]} - {policy.policyName}
       </ClientCardHeader>
       <Grid container>
         {policyCardFields.map((field) => (

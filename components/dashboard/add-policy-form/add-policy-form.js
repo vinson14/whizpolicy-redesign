@@ -13,9 +13,12 @@ import FloatingAddButton from "../../stateless/interface/buttons/floating-add-bu
 import CancelButton from "../../stateless/interface/buttons/cancel-button";
 import ModalContainer from "../../stateless/interface/modal/modal-container";
 import AddButton from "../../stateless/interface/buttons/add-button";
+import EditButton from "../../stateless/interface/buttons/edit-button";
 
-const AddPolicyForm = ({ open, handleClose }) => {
-  const { control, handleSubmit } = useForm();
+const AddPolicyForm = ({ open, handleClose, defaultValues, edit }) => {
+  const { control, handleSubmit } = useForm({
+    defaultValues: defaultValues != null ? defaultValues : null,
+  });
   const policyFormCategory = useWatch({
     control,
     name: POLICY_CATEGORY_KEY,
@@ -45,7 +48,9 @@ const AddPolicyForm = ({ open, handleClose }) => {
               );
             })}
             <Grid item xs={12}>
-              <AddButton sx={{ mr: 2 }}>Add Policy</AddButton>
+              {(edit && <EditButton type="submit">Edit Policy</EditButton>) || (
+                <AddButton type="submit">Add Policy</AddButton>
+              )}
               <CancelButton onClick={handleClose}>Cancel</CancelButton>
             </Grid>
           </Grid>

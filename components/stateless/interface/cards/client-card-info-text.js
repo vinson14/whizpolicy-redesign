@@ -4,7 +4,7 @@ import {
   FIELD_TYPE_INTEGER,
   FIELD_TYPE_TEXT,
 } from "../../../../data/ui";
-import { formatNumber } from "../../../../utils/utils";
+import { formatNumber, formatString } from "../../../../utils/utils";
 const ClientCardInfoText = ({
   xs = 12,
   sm = 6,
@@ -21,8 +21,7 @@ const ClientCardInfoText = ({
     if (type === FIELD_TYPE_CURRENCY) return `$${formatNumber(value)}`;
     if (type === FIELD_TYPE_INTEGER) return value;
     if (type === FIELD_TYPE_TEXT) {
-      const properCase = value.replace(/([A-Z])/g, " $1");
-      return properCase.charAt(0).toUpperCase() + properCase.slice(1);
+      return formatString(value);
     }
   };
 
