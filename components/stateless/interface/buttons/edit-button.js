@@ -5,8 +5,8 @@ const EditButton = ({ children, ...props }) => {
     <Button
       variant="contained"
       {...props}
-      startIcon={<EditIcon />}
       color="success"
+      startIcon={<EditIcon />}
     >
       {children}
     </Button>

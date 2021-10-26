@@ -119,9 +119,14 @@ export const sidebarItems = [
   },
 ];
 
-export const defaultBreadcrumbLinks = [
+export const defaultDashboardClientBreadcrumbs = [
   { label: "Dashboard", route: "/dashboard" },
   { label: "Clients", route: "/dashboard" },
+];
+
+export const defaultDashboardPortfolioBreadcrumbs = [
+  { label: "Dashboard", route: "/dashboard" },
+  { label: "Portfolio", route: "/dashboard" },
 ];
 
 export const clientCardFields = [
@@ -272,23 +277,11 @@ export const coverageInfoPopoverContent = {
 
 export const addClientFormFields = [
   {
-    name: "givenName",
-    label: "Given Name",
+    name: "name",
+    label: "Name",
     defaultValue: "",
     type: INPUT_TYPE_TEXT,
-    placeholder: "John",
-    col: {
-      xs: 12,
-      md: 6,
-      lg: 5,
-    },
-  },
-  {
-    name: "familyName",
-    label: "Family Name",
-    defaultValue: "",
-    placeholder: "Doe",
-    type: INPUT_TYPE_TEXT,
+    placeholder: "John Doe",
     col: {
       xs: 12,
       md: 6,
@@ -412,7 +405,6 @@ export const addClientFormFields = [
   {
     name: "occupation",
     label: "Occupation",
-    defaultValue: "",
     placeholder: "Occupation",
     type: INPUT_TYPE_TEXT,
     col: {

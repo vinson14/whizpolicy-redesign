@@ -13,7 +13,11 @@ const ClientCardInfoText = ({
 }) => {
   const formattedValue = () => {
     if (value == null) return "N.A.";
-    return type === FIELD_TYPE_CURRENCY ? `$${formatNumber(value)}` : value;
+    if (type === FIELD_TYPE_CURRENCY) return `$${formatNumber(value)}`;
+    if (type === FIELD_TYPE_TEXT) {
+      const properCase = value.replace(/([A-Z])/g, " $1");
+      return properCase.charAt(0).toUpperCase() + properCase.slice(1);
+    }
   };
 
   return (

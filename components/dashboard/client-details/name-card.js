@@ -30,7 +30,7 @@ const avatarSx = {
 };
 
 const nameBoxSx = {
-  bgcolor: "primary.dark",
+  bgcolor: "primary.main",
   color: "primary.contrastText",
 };
 

@@ -1,17 +1,16 @@
-import { Box, Grid, Typography, Modal, Card, IconButton } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { getClients } from "../../utils/api";
 import { findClientById, findPolicyByPolicyNumber } from "../../utils/utils";
 import AddButton from "../stateless/interface/buttons/add-button";
 import EditButton from "../stateless/interface/buttons/edit-button";
-import ClientCard from "../stateless/interface/cards/client-card";
 import ClientCards from "../stateless/interface/cards/client-cards";
 import CustomBreadcrumbs from "../stateless/interface/navigation/breadcrumbs";
 import MainHeader from "../stateless/interface/text/main-header";
 import ClientDetails from "./client-details/dashboard-client-details";
-import { defaultBreadcrumbLinks } from "../../data/ui";
-import AddClientFormModal from "./add-client-form/add-client-form-modal";
+import { defaultDashboardClientBreadcrumbs } from "../../data/ui";
+import ClientFormModal from "./add-client-form/add-client-form-modal";
 import useModal from "../../utils/useModal";
 import PolicyDetails from "./policy-details/policy-details";
 import SidebarButton from "../stateless/interface/buttons/sidebar-button";
@@ -23,9 +22,11 @@ const DashboardClients = ({ openSidebar }) => {
   const [selectedClient, setSelectedClient] = useState(null);
   const [selectedPolicy, setSelectedPolicy] = useState(null);
   const [breadcrumbLinks, setBreadcrumbLinks] = useState(
-    defaultBreadcrumbLinks
+    defaultDashboardClientBreadcrumbs
   );
   const [clientFormModalState, openClientFormModal, closeClientFormModal] =
+    useModal();
+  const [editClientModalState, openEditClientModal, closeEditClientModal] =
     useModal();
 
   useEffect(() => {
@@ -42,12 +43,13 @@ const DashboardClients = ({ openSidebar }) => {
     if (clientId == null) {
       setSelectedClient(null);
       setSelectedPolicy(null);
-      setBreadcrumbLinks(defaultBreadcrumbLinks);
+      setBreadcrumbLinks(defaultDashboardClientBreadcrumbs);
     } else if (policyNumber == null) {
       const client = findClientById(clients, clientId);
+      setSelectedClient(client);
       setSelectedPolicy(null);
       setBreadcrumbLinks([
-        ...defaultBreadcrumbLinks,
+        ...defaultDashboardClientBreadcrumbs,
         { label: client.name, route: `/dashboard?clientId=${clientId}` },
       ]);
     } else {
@@ -57,7 +59,7 @@ const DashboardClients = ({ openSidebar }) => {
         findPolicyByPolicyNumber(client.policies, policyNumber)
       );
       setBreadcrumbLinks([
-        ...defaultBreadcrumbLinks,
+        ...defaultDashboardClientBreadcrumbs,
         { label: client.name, route: `/dashboard?clientId=${clientId}` },
         {
           label: policyNumber,
@@ -75,7 +77,7 @@ const DashboardClients = ({ openSidebar }) => {
   const renderButton = () => {
     if (selectedClient == null)
       return <AddButton onClick={openClientFormModal}>Add Client</AddButton>;
-    return <EditButton>Edit Client</EditButton>;
+    return <EditButton onClick={openEditClientModal}>Edit Client</EditButton>;
   };
 
   return (
@@ -108,10 +110,18 @@ const DashboardClients = ({ openSidebar }) => {
           )}
         </Grid>
       </Box>
-      <AddClientFormModal
+      <ClientFormModal
         open={clientFormModalState}
         handleClose={closeClientFormModal}
       />
+      {selectedClient && (
+        <ClientFormModal
+          open={editClientModalState}
+          handleClose={closeEditClientModal}
+          defaultValues={selectedClient}
+          edit
+        />
+      )}
     </>
   );
 };

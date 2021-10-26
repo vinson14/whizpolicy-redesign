@@ -37,6 +37,7 @@ const Dashboard = () => {
                 onClick={() => {
                   setActiveOption(item.value);
                   router.push("/dashboard");
+                  closeSidebar();
                 }}
               >
                 <ListItemIcon>{item.icon}</ListItemIcon>

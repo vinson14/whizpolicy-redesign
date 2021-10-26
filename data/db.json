@@ -8,21 +8,21 @@
       "age": 28,
       "mobile": "9431 8747",
       "email": "vinson1493@gmail.com",
-      "gender": "Male",
+      "gender": "male",
       "birthday": "1 Apr 1993",
-      "maritalStatus": "Single",
-      "smoker": "No",
+      "maritalStatus": "single",
+      "smoker": "no",
       "dependants": [
         {
-          "relationship": "Spouse",
+          "relationship": "spouse",
           "name": "Chio Bu"
         },
         {
-          "relationship": "Son",
+          "relationship": "son",
           "name": "Boy Boy"
         },
         {
-          "relationship": "Daughter",
+          "relationship": "daughter",
           "name": "Girl girl"
         }
       ],

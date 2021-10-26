@@ -12,6 +12,16 @@ import { useRouter } from "next/router";
 
 const PolicyCards = ({ client }) => {
   const [modalState, openModal, closeModal] = useModal();
+  const router = useRouter();
+  const onClick = (policy) => {
+    router.push(
+      `${router.asPath}&policyNumber=${policy.policyNumber}`,
+      undefined,
+      {
+        shallow: true,
+      }
+    );
+  };
   return (
     <>
       <Box sx={{ display: "flex", justifyContent: "space-between", py: 3 }}>
@@ -23,7 +33,7 @@ const PolicyCards = ({ client }) => {
       <Grid container spacing={3} alignItems="stretch">
         {client.policies.map((policy) => (
           <Grid key={policy.policyNumber} item xs={12} lg={6}>
-            <PolicyCard policy={policy} />
+            <PolicyCard policy={policy} onClick={() => onClick(policy)} />
           </Grid>
         ))}
       </Grid>
@@ -31,18 +41,7 @@ const PolicyCards = ({ client }) => {
   );
 };
 
-export const PolicyCard = ({ policy }) => {
-  const router = useRouter();
-  const onClick = () => {
-    router.push(
-      `${router.asPath}&policyNumber=${policy.policyNumber}`,
-      undefined,
-      {
-        shallow: true,
-      }
-    );
-  };
-
+export const PolicyCard = ({ policy, onClick }) => {
   return (
     <ClientDetailCard onClick={onClick}>
       <ClientCardHeader>
