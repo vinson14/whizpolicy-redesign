@@ -95,12 +95,18 @@ const CoverageInfoPopover = ({
         </Grid>
         {content.map((qns) => (
           <Fragment key={qns.qns}>
-            <ClientCardInfoText xs={12} label={qns.qns} value={qns.ans} />
+            <ClientCardInfoText
+              xs={12}
+              sm={12}
+              label={qns.qns}
+              value={qns.ans}
+            />
           </Fragment>
         ))}
         {clientInfoText.map((text) => (
           <ClientCardInfoText
             xs={12}
+            sm={12}
             label={text.label}
             value={text.value}
             key={text.label}
