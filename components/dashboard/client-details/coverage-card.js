@@ -7,7 +7,7 @@ import {
 import ClientCardHeader from "../../stateless/interface/cards/client-card-header";
 import ClientCardInfoText from "../../stateless/interface/cards/client-card-info-text";
 import ClientDetailCard from "../../stateless/interface/cards/client-detail-card";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import InfoIcon from "@mui/icons-material/Info";
 import { Fragment, useState } from "react";
 import { formatNumber } from "../../../utils/utils";
 import CloseIcon from "@mui/icons-material/Close";
@@ -31,7 +31,7 @@ const CoverageCard = ({ client }) => {
           <Fragment key={field.key}>
             <ClientCardInfoText
               icon={field.icon}
-              endIcon={<ChevronRightIcon />}
+              endIcon={<InfoIcon />}
               endIconOnClick={(event) => openPopover(event, field.key)}
               pr={2}
               label={field.label}

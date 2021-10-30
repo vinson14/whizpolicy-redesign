@@ -1,4 +1,4 @@
-const endpoint = "http://localhost:3001";
+const endpoint = "https://a3dk3p85vd.execute-api.us-east-1.amazonaws.com/dev";
 
 export const getClients = async () => {
   const response = await fetch(`${endpoint}/clients`);

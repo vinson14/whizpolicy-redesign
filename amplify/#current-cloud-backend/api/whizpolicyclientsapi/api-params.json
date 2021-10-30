@@ -1,0 +1,35 @@
+{
+  "paths": [
+    {
+      "name": "/clients",
+      "lambdaFunction": "whizpolicyclientslambda",
+      "privacy": {
+        "open": true
+      },
+      "policyResourceName": "/clients"
+    }
+  ],
+  "resourceName": "whizpolicyclientsapi",
+  "apiName": "whizpolicyclientsapi",
+  "functionArns": [
+    {
+      "lambdaFunction": "whizpolicyclientslambda"
+    }
+  ],
+  "privacy": {
+    "auth": 0,
+    "unauth": 0,
+    "authRoleName": "amplify-whizpolicyamplify-dev-30057-authRole",
+    "unAuthRoleName": "amplify-whizpolicyamplify-dev-30057-unauthRole"
+  },
+  "dependsOn": [
+    {
+      "category": "function",
+      "resourceName": "whizpolicyclientslambda",
+      "attributes": [
+        "Name",
+        "Arn"
+      ]
+    }
+  ]
+}

@@ -11,7 +11,6 @@ import AddPolicyForm from "../add-policy-form/add-policy-form";
 import { useRouter } from "next/router";
 
 const PolicyCards = ({ client }) => {
-  const [modalState, openModal, closeModal] = useModal();
   const router = useRouter();
   const onClick = (policy) => {
     router.push(
@@ -26,8 +25,6 @@ const PolicyCards = ({ client }) => {
     <>
       <Box sx={{ display: "flex", justifyContent: "space-between", py: 3 }}>
         <MainHeader>Policies</MainHeader>
-        <FloatingAddButton onClick={openModal}>Add Policy</FloatingAddButton>
-        <AddPolicyForm open={modalState} handleClose={closeModal} />
       </Box>
 
       <Grid container spacing={3} alignItems="stretch">

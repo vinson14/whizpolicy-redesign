@@ -15,6 +15,7 @@ import useModal from "../../utils/useModal";
 import PolicyDetails from "./policy-details/policy-details";
 import SidebarButton from "../stateless/interface/buttons/sidebar-button";
 import DashboardHeaderContainer from "../stateless/layout/dashboard-header-container";
+import AddPolicyForm from "./add-policy-form/add-policy-form";
 
 const DashboardClients = ({ openSidebar }) => {
   const router = useRouter();
@@ -28,6 +29,11 @@ const DashboardClients = ({ openSidebar }) => {
     useModal();
   const [editClientModalState, openEditClientModal, closeEditClientModal] =
     useModal();
+  const [
+    addPolicyFormModalState,
+    openAddPolicyFormModal,
+    closeAddPolicyFormModal,
+  ] = useModal();
 
   useEffect(() => {
     console.log("useEffect 1 ran");
@@ -79,15 +85,37 @@ const DashboardClients = ({ openSidebar }) => {
       return null;
     } else if (selectedClient != null && selectedPolicy == null) {
       return (
-        <FloatingEditButton onClick={openEditClientModal} bottom={10}>
-          Edit Client
-        </FloatingEditButton>
+        <>
+          <FloatingEditButton onClick={openEditClientModal} bottom={10}>
+            Edit Client
+          </FloatingEditButton>
+          <ClientFormModal
+            open={editClientModalState}
+            handleClose={closeEditClientModal}
+            defaultValues={selectedClient}
+            edit
+          />
+          <FloatingAddButton onClick={openAddPolicyFormModal}>
+            Add Policy
+          </FloatingAddButton>
+          <AddPolicyForm
+            open={addPolicyFormModalState}
+            handleClose={closeAddPolicyFormModal}
+            client={selectedClient}
+          />
+        </>
       );
     } else if (selectedClient == null) {
       return (
-        <FloatingAddButton onClick={openClientFormModal}>
-          Add Client
-        </FloatingAddButton>
+        <>
+          <FloatingAddButton onClick={openClientFormModal}>
+            Add Client
+          </FloatingAddButton>
+          <ClientFormModal
+            open={clientFormModalState}
+            handleClose={closeClientFormModal}
+          />
+        </>
       );
     }
   };
@@ -122,18 +150,6 @@ const DashboardClients = ({ openSidebar }) => {
           )}
         </Grid>
       </Box>
-      <ClientFormModal
-        open={clientFormModalState}
-        handleClose={closeClientFormModal}
-      />
-      {selectedClient && (
-        <ClientFormModal
-          open={editClientModalState}
-          handleClose={closeEditClientModal}
-          defaultValues={selectedClient}
-          edit
-        />
-      )}
     </>
   );
 };

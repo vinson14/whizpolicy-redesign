@@ -1,0 +1,111 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-whizpolicyamplify-dev-30057-authRole",
+      "UnauthRoleArn": "arn:aws:iam::066354352598:role/amplify-whizpolicyamplify-dev-30057-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::066354352598:role/amplify-whizpolicyamplify-dev-30057-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-whizpolicyamplify-dev-30057-deployment",
+      "UnauthRoleName": "amplify-whizpolicyamplify-dev-30057-unauthRole",
+      "StackName": "amplify-whizpolicyamplify-dev-30057",
+      "StackId": "arn:aws:cloudformation:us-east-1:066354352598:stack/amplify-whizpolicyamplify-dev-30057/908daf30-38ea-11ec-b56e-0ebf20b80863",
+      "AmplifyAppId": "dh1u3jgxp78hz"
+    }
+  },
+  "function": {
+    "whizpolicyclientslambda": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "lastBuildTimeStamp": "2021-10-29T19:18:36.212Z",
+      "lastBuildType": "PROD",
+      "lastPackageTimeStamp": "2021-10-29T19:18:38.247Z",
+      "distZipFilename": "whizpolicyclientslambda-524b7679494178556558-build.zip",
+      "s3Bucket": {
+        "deploymentBucketName": "amplify-whizpolicyamplify-dev-30057-deployment",
+        "s3Key": "amplify-builds/whizpolicyclientslambda-524b7679494178556558-build.zip"
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-whizpolicyamplify-dev-30057-deployment/amplify-cfn-templates/function/whizpolicyclientslambda-cloudformation-template.json",
+        "logicalId": "functionwhizpolicyclientslambda"
+      },
+      "lastPushTimeStamp": "2021-10-29T19:37:41.961Z",
+      "output": {
+        "Region": "us-east-1",
+        "Arn": "arn:aws:lambda:us-east-1:066354352598:function:whizpolicyclientslambda-dev",
+        "Name": "whizpolicyclientslambda-dev",
+        "LambdaExecutionRole": "whizpolicyamplifyLambdaRole88151b6d-dev"
+      },
+      "lastPushDirHash": "RKvyIAxUeXeqJa6U97mlPpAIS2I="
+    }
+  },
+  "api": {
+    "whizpolicyclientsapi": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "whizpolicyclientslambda",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        }
+      ],
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-whizpolicyamplify-dev-30057-deployment/amplify-cfn-templates/api/whizpolicyclientsapi-cloudformation-template.json",
+        "logicalId": "apiwhizpolicyclientsapi"
+      },
+      "lastPushTimeStamp": "2021-10-29T19:37:41.970Z",
+      "output": {
+        "ApiName": "whizpolicyclientsapi",
+        "RootUrl": "https://a3dk3p85vd.execute-api.us-east-1.amazonaws.com/dev",
+        "ApiId": "a3dk3p85vd"
+      },
+      "lastPushDirHash": "BEOq9z7CQK5xL8+gBOHXIZ09W8s="
+    }
+  },
+  "auth": {
+    "whizpolicyamplify1a74d288": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false,
+      "frontendAuthConfig": {
+        "loginMechanisms": [
+          "EMAIL"
+        ],
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": []
+        },
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-whizpolicyamplify-dev-30057-deployment/amplify-cfn-templates/auth/whizpolicyamplify1a74d288-cloudformation-template.yml",
+        "logicalId": "authwhizpolicyamplify1a74d288"
+      },
+      "lastPushTimeStamp": "2021-10-29T19:37:41.991Z",
+      "output": {
+        "UserPoolId": "us-east-1_Kqgcdk4RT",
+        "AppClientIDWeb": "2u3q7htfcdqq76qj4r51rnbid7",
+        "AppClientID": "11d16irpn57lr2u4p415a9edr1",
+        "IdentityPoolId": "us-east-1:751f4a86-66ed-4baf-a76a-fd15e09afc38",
+        "UserPoolArn": "arn:aws:cognito-idp:us-east-1:066354352598:userpool/us-east-1_Kqgcdk4RT",
+        "IdentityPoolName": "whizpolicyamplify1a74d288_identitypool_1a74d288__dev",
+        "UserPoolName": "whizpolicyamplify1a74d288_userpool_1a74d288"
+      },
+      "lastPushDirHash": "4svDlt7ZvZdQ3BTLEmG3V2p8wJE="
+    }
+  }
+}

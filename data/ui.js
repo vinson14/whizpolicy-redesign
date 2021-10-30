@@ -224,6 +224,16 @@ export const clientCardFields = [
   {
     label: CLIENT_AGE_LABEL,
     key: CLIENT_AGE_KEY,
+    type: FIELD_TYPE_INTEGER,
+  },
+  {
+    label: CLIENT_ANNUAL_INCOME_LABEL,
+    key: CLIENT_ANNUAL_INCOME_KEY,
+    type: FIELD_TYPE_CURRENCY,
+  },
+  {
+    label: CLIENT_MOBILE_LABEL,
+    key: CLIENT_MOBILE_KEY,
   },
 ];
 

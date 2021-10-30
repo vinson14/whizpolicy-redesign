@@ -9,6 +9,7 @@ const ClientCardInfoText = ({
   xs = 12,
   sm = 6,
   label,
+  align = "left",
   value,
   icon,
   type = FIELD_TYPE_TEXT,
@@ -37,10 +38,12 @@ const ClientCardInfoText = ({
     >
       {icon && <ListItemIcon>{icon}</ListItemIcon>}
       <Box flexGrow={1}>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body2" color="text.secondary" align={align}>
           {label}
         </Typography>
-        <Typography variant="body1">{formattedValue()}</Typography>
+        <Typography variant="body1" align={align}>
+          {formattedValue()}
+        </Typography>
       </Box>
       {endIcon && (
         <ListItemIcon>
