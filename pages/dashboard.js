@@ -10,10 +10,10 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import Sidebar from "../components/stateless/interface/navigation/sidebar";
 import {
-  CLIENTS_VALUE,
-  PORTFOLIO_VALUE,
-  SETTINGS_VALUE,
-  PROFILE_VALUE,
+  SIDEBAR_CLIENTS_VALUE,
+  SIDEBAR_PORTFOLIO_VALUE,
+  SIDEBAR_SETTINGS_VALUE,
+  SIDEBAR_PROFILE_VALUE,
   sidebarItems,
 } from "../data/ui";
 import DashboardContainer from "../components/dashboard/dashboard-container";
@@ -21,12 +21,41 @@ import DashboardClients from "../components/dashboard/dashboard-clients";
 import DashboardPortfolio from "../components/dashboard/dashboard-portfolio";
 import useModal from "../utils/useModal";
 import { getClients, getPolicies } from "../utils/api";
+import useUrlQuery from "../utils/useUrlQuery";
 
 const Dashboard = ({ clients, policies }) => {
   const router = useRouter();
-  const [activeOption, setActiveOption] = useState(CLIENTS_VALUE);
   const [showSidebar, openSidebar, closeSidebar] = useModal();
-  const MainComponent = mainComponentMapping[activeOption];
+  const [
+    selectedClient,
+    selectedPolicy,
+    breadcrumbLinks,
+    activeSidebarOption,
+    setActiveSidebarOption,
+  ] = useUrlQuery(clients, policies);
+
+  const mainComponent = {
+    [SIDEBAR_CLIENTS_VALUE]: (
+      <DashboardClients
+        openSidebar={openSidebar}
+        clients={clients}
+        selectedClient={selectedClient}
+        selectedPolicy={selectedPolicy}
+        breadcrumbLinks={breadcrumbLinks}
+      />
+    ),
+    [SIDEBAR_PORTFOLIO_VALUE]: (
+      <DashboardPortfolio
+        openSidebar={openSidebar}
+        policies={policies}
+        selectedPolicy={selectedPolicy}
+        breadcrumbLinks={breadcrumbLinks}
+      />
+    ),
+  };
+
+  const sideBarOptionOnClick = () => {};
+
   return (
     <DashboardContainer>
       <Sidebar open={showSidebar} onClose={closeSidebar}>
@@ -34,10 +63,10 @@ const Dashboard = ({ clients, policies }) => {
           {sidebarItems.map((item) => (
             <ListItem key={item.value}>
               <ListItemButton
-                selected={activeOption === item.value}
+                selected={activeSidebarOption === item.value}
                 onClick={() => {
-                  setActiveOption(item.value);
                   router.push("/dashboard");
+                  setActiveSidebarOption(item.value);
                   closeSidebar();
                 }}
               >
@@ -48,21 +77,10 @@ const Dashboard = ({ clients, policies }) => {
           ))}
         </List>
       </Sidebar>
-      <Container sx={{ pb: 3 }}>
-        <MainComponent
-          openSidebar={openSidebar}
-          clients={clients}
-          policies={policies}
-        />
-      </Container>
+      <Container sx={{ pb: 3 }}>{mainComponent[activeSidebarOption]}</Container>
     </DashboardContainer>
   );
 };
-const mainComponentMapping = {
-  [CLIENTS_VALUE]: DashboardClients,
-  [PORTFOLIO_VALUE]: DashboardPortfolio,
-};
-
 export async function getServerSideProps({ req }) {
   const clients = await getClients(req);
   const policies = await getPolicies();

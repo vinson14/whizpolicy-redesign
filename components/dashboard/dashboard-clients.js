@@ -16,12 +16,15 @@ import PolicyDetails from "./policy-details/policy-details";
 import SidebarButton from "../stateless/interface/buttons/sidebar-button";
 import DashboardHeaderContainer from "../stateless/layout/dashboard-header-container";
 import AddPolicyForm from "./add-policy-form/add-policy-form";
-import useUrlQuery from "../../utils/useUrlQuery";
 
-const DashboardClients = ({ openSidebar, clients }) => {
+const DashboardClients = ({
+  openSidebar,
+  clients,
+  selectedClient,
+  selectedPolicy,
+  breadcrumbLinks,
+}) => {
   const router = useRouter();
-  const [selectedClient, selectedPolicy, breadcrumbLinks] =
-    useUrlQuery(clients);
   const [clientFormModalState, openClientFormModal, closeClientFormModal] =
     useModal();
   const [editClientModalState, openEditClientModal, closeEditClientModal] =
@@ -31,7 +34,6 @@ const DashboardClients = ({ openSidebar, clients }) => {
     openAddPolicyFormModal,
     closeAddPolicyFormModal,
   ] = useModal();
-  useUrlQuery(clients);
 
   const selectClient = (client) => {
     router.push(`?clientId=${client.id}`, undefined, { shallow: true });

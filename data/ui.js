@@ -27,14 +27,14 @@ import CoverageCard from "../components/dashboard/client-details/coverage-card";
 export const FLOATING_ACTION_BUTTON_WIDTH = 160;
 
 // Sidebar Constants
-export const CLIENTS_VALUE = "clients";
-export const CLIENTS_LABEL = "Clients";
-export const PORTFOLIO_LABEL = "Portfolio";
-export const PORTFOLIO_VALUE = "portfolio";
-export const SETTINGS_LABEL = "Settings";
-export const SETTINGS_VALUE = "settings";
-export const PROFILE_LABEL = "Profile";
-export const PROFILE_VALUE = "profile";
+export const SIDEBAR_CLIENTS_VALUE = "clients";
+export const SIDEBAR_CLIENTS_LABEL = "Clients";
+export const SIDEBAR_PORTFOLIO_LABEL = "Portfolio";
+export const SIDEBAR_PORTFOLIO_VALUE = "portfolio";
+export const SIDEBAR_SETTINGS_LABEL = "Settings";
+export const SIDEBAR_SETTINGS_VALUE = "settings";
+export const SIDEBAR_PROFILE_LABEL = "Profile";
+export const SIDEBAR_PROFILE_VALUE = "profile";
 
 // Client Object files
 
@@ -179,23 +179,23 @@ export const MARITAL_STATUS_WIDOWED_LABEL = "Widowed";
 
 export const sidebarItems = [
   {
-    label: CLIENTS_LABEL,
-    value: CLIENTS_VALUE,
+    label: SIDEBAR_CLIENTS_LABEL,
+    value: SIDEBAR_CLIENTS_VALUE,
     icon: <PeopleAltIcon />,
   },
   {
-    label: PORTFOLIO_LABEL,
-    value: PORTFOLIO_VALUE,
+    label: SIDEBAR_PORTFOLIO_LABEL,
+    value: SIDEBAR_PORTFOLIO_VALUE,
     icon: <ListAltIcon />,
   },
   {
-    label: SETTINGS_LABEL,
-    value: SETTINGS_VALUE,
+    label: SIDEBAR_SETTINGS_LABEL,
+    value: SIDEBAR_SETTINGS_VALUE,
     icon: <SettingsIcon />,
   },
   {
-    label: PROFILE_LABEL,
-    value: PROFILE_VALUE,
+    label: SIDEBAR_PROFILE_LABEL,
+    value: SIDEBAR_PROFILE_VALUE,
     icon: <AccountCircleIcon />,
   },
 ];
