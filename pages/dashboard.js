@@ -6,7 +6,7 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Sidebar from "../components/stateless/interface/navigation/sidebar";
 import {
@@ -20,8 +20,12 @@ import DashboardContainer from "../components/dashboard/dashboard-container";
 import DashboardClients from "../components/dashboard/dashboard-clients";
 import DashboardPortfolio from "../components/dashboard/dashboard-portfolio";
 import useModal from "../utils/useModal";
-import { getClients, getPolicies } from "../utils/api";
+import { getClients, getClientsWithAuth, getPolicies } from "../utils/api";
 import useUrlQuery from "../utils/useUrlQuery";
+import { Amplify, Auth } from "aws-amplify";
+import awsmobile from "../src/aws-exports";
+import { AmplifyAuthenticator } from "@aws-amplify/ui-react";
+Amplify.configure(awsmobile);
 
 const Dashboard = ({ clients, policies }) => {
   const router = useRouter();
@@ -33,6 +37,10 @@ const Dashboard = ({ clients, policies }) => {
     activeSidebarOption,
     setActiveSidebarOption,
   ] = useUrlQuery(clients, policies);
+
+  useEffect(() => {
+    getClientsWithAuth().then((data) => console.log(data));
+  }, []);
 
   const mainComponent = {
     [SIDEBAR_CLIENTS_VALUE]: (
@@ -54,31 +62,38 @@ const Dashboard = ({ clients, policies }) => {
     ),
   };
 
-  const sideBarOptionOnClick = () => {};
-
   return (
-    <DashboardContainer>
-      <Sidebar open={showSidebar} onClose={closeSidebar}>
-        <List>
-          {sidebarItems.map((item) => (
-            <ListItem key={item.value}>
-              <ListItemButton
-                selected={activeSidebarOption === item.value}
-                onClick={() => {
-                  router.push("/dashboard");
-                  setActiveSidebarOption(item.value);
-                  closeSidebar();
-                }}
-              >
-                <ListItemIcon>{item.icon}</ListItemIcon>
-                <ListItemText primary={item.label} />
+    <AmplifyAuthenticator>
+      <DashboardContainer>
+        <Sidebar open={showSidebar} onClose={closeSidebar}>
+          <List>
+            {sidebarItems.map((item) => (
+              <ListItem key={item.value}>
+                <ListItemButton
+                  selected={activeSidebarOption === item.value}
+                  onClick={() => {
+                    router.push("/dashboard");
+                    setActiveSidebarOption(item.value);
+                    closeSidebar();
+                  }}
+                >
+                  <ListItemIcon>{item.icon}</ListItemIcon>
+                  <ListItemText primary={item.label} />
+                </ListItemButton>
+              </ListItem>
+            ))}
+            <ListItem>
+              <ListItemButton onClick={() => Auth.signOut()}>
+                <ListItemText primary="Sign Out" />
               </ListItemButton>
             </ListItem>
-          ))}
-        </List>
-      </Sidebar>
-      <Container sx={{ pb: 3 }}>{mainComponent[activeSidebarOption]}</Container>
-    </DashboardContainer>
+          </List>
+        </Sidebar>
+        <Container sx={{ pb: 3 }}>
+          {mainComponent[activeSidebarOption]}
+        </Container>
+      </DashboardContainer>
+    </AmplifyAuthenticator>
   );
 };
 export async function getServerSideProps({ req }) {

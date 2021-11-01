@@ -1,0 +1,55 @@
+{
+    "paths": [
+        {
+            "name": "/clients",
+            "lambdaFunction": "whizpolicyclientslambda",
+            "privacy": {
+                "open": true
+            },
+            "policyResourceName": "/clients"
+        },
+        {
+            "name": "/policies",
+            "lambdaFunction": "whizpolicypolicieslambda",
+            "privacy": {
+                "open": true
+            },
+            "policyResourceName": "/policies"
+        }
+    ],
+    "resourceName": "whizpolicyclientsapi",
+    "apiName": "whizpolicyclientsapi",
+    "functionArns": [
+        {
+            "lambdaFunction": "whizpolicyclientslambda"
+        },
+        {
+            "lambdaFunction": "whizpolicypolicieslambda"
+        }
+    ],
+    "privacy": {
+        "auth": 0,
+        "unauth": 0,
+        "authRoleName": "amplify-whizpolicyamplify-dev-30057-authRole",
+        "unAuthRoleName": "amplify-whizpolicyamplify-dev-30057-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "whizpolicyclientslambda",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        },
+        {
+            "category": "function",
+            "resourceName": "whizpolicypolicieslambda",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ],
+    "uuid": "ebcf1c07"
+}

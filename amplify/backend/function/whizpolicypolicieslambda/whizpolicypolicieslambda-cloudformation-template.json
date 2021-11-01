@@ -47,12 +47,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "whizpolicypolicieslambda2",
+            "whizpolicypolicieslambda",
             {
               "Fn::Join": [
                 "",
                 [
-                  "whizpolicypolicieslambda2",
+                  "whizpolicypolicieslambda",
                   "-",
                   {
                     "Ref": "env"
@@ -89,12 +89,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "whizpolicyredesign2LambdaRole9a6202a9",
+            "whizpolicyamplifyLambdaRoleabb16d31",
             {
               "Fn::Join": [
                 "",
                 [
-                  "whizpolicyredesign2LambdaRole9a6202a9",
+                  "whizpolicyamplifyLambdaRoleabb16d31",
                   "-",
                   {
                     "Ref": "env"

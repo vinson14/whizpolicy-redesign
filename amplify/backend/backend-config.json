@@ -1,24 +1,24 @@
 {
   "function": {
-    "whizpolicyclientslambda2": {
+    "whizpolicyclientslambda": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
-    "whizpolicypolicieslambda2": {
+    "whizpolicypolicieslambda": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     }
   },
   "api": {
-    "whizpolicyclientsapi2": {
+    "whizpolicyclientsapi": {
       "service": "API Gateway",
       "providerPlugin": "awscloudformation",
       "dependsOn": [
         {
           "category": "function",
-          "resourceName": "whizpolicyclientslambda2",
+          "resourceName": "whizpolicyclientslambda",
           "attributes": [
             "Name",
             "Arn"
@@ -26,13 +26,40 @@
         },
         {
           "category": "function",
-          "resourceName": "whizpolicypolicieslambda2",
+          "resourceName": "whizpolicypolicieslambda",
           "attributes": [
             "Name",
             "Arn"
           ]
         }
       ]
+    }
+  },
+  "auth": {
+    "whizpolicyamplify1a74d288": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false,
+      "frontendAuthConfig": {
+        "loginMechanisms": [
+          "EMAIL"
+        ],
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": []
+        },
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      }
     }
   }
 }
