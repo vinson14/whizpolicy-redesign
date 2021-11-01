@@ -15,7 +15,7 @@ import ModalContainer from "../../stateless/interface/modal/modal-container";
 
 const ClientFormModal = ({ open, handleClose, defaultValues, edit }) => {
   const { control, handleSubmit } = useForm({
-    defaultValues: defaultValues != null ? defaultValues : null,
+    defaultValues: defaultValues,
   });
   const onSubmit = (formData) => console.log(formData);
 

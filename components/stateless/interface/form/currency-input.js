@@ -25,7 +25,7 @@ const CurrencyInput = ({
             startAdornment: <InputAdornment position="start">$</InputAdornment>,
           }}
           InputLabelProps={{ shrink }}
-          inputProps={{ type: "number" }}
+          inputProps={{ type: "number", step: 0.01 }}
         />
       )}
     />

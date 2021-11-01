@@ -20,8 +20,9 @@ import DashboardContainer from "../components/dashboard/dashboard-container";
 import DashboardClients from "../components/dashboard/dashboard-clients";
 import DashboardPortfolio from "../components/dashboard/dashboard-portfolio";
 import useModal from "../utils/useModal";
+import { getClients, getPolicies } from "../utils/api";
 
-const Dashboard = () => {
+const Dashboard = ({ clients, policies }) => {
   const router = useRouter();
   const [activeOption, setActiveOption] = useState(CLIENTS_VALUE);
   const [showSidebar, openSidebar, closeSidebar] = useModal();
@@ -48,7 +49,11 @@ const Dashboard = () => {
         </List>
       </Sidebar>
       <Container sx={{ pb: 3 }}>
-        <MainComponent openSidebar={openSidebar} />
+        <MainComponent
+          openSidebar={openSidebar}
+          clients={clients}
+          policies={policies}
+        />
       </Container>
     </DashboardContainer>
   );
@@ -57,5 +62,12 @@ const mainComponentMapping = {
   [CLIENTS_VALUE]: DashboardClients,
   [PORTFOLIO_VALUE]: DashboardPortfolio,
 };
+
+export async function getServerSideProps({ req }) {
+  const clients = await getClients(req);
+  const policies = await getPolicies();
+
+  return { props: { clients, policies } };
+}
 
 export default Dashboard;

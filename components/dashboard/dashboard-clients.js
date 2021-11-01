@@ -16,15 +16,12 @@ import PolicyDetails from "./policy-details/policy-details";
 import SidebarButton from "../stateless/interface/buttons/sidebar-button";
 import DashboardHeaderContainer from "../stateless/layout/dashboard-header-container";
 import AddPolicyForm from "./add-policy-form/add-policy-form";
+import useUrlQuery from "../../utils/useUrlQuery";
 
-const DashboardClients = ({ openSidebar }) => {
+const DashboardClients = ({ openSidebar, clients }) => {
   const router = useRouter();
-  const [clients, setClients] = useState([]);
-  const [selectedClient, setSelectedClient] = useState(null);
-  const [selectedPolicy, setSelectedPolicy] = useState(null);
-  const [breadcrumbLinks, setBreadcrumbLinks] = useState(
-    defaultDashboardClientBreadcrumbs
-  );
+  const [selectedClient, selectedPolicy, breadcrumbLinks] =
+    useUrlQuery(clients);
   const [clientFormModalState, openClientFormModal, closeClientFormModal] =
     useModal();
   const [editClientModalState, openEditClientModal, closeEditClientModal] =
@@ -34,49 +31,9 @@ const DashboardClients = ({ openSidebar }) => {
     openAddPolicyFormModal,
     closeAddPolicyFormModal,
   ] = useModal();
-
-  useEffect(() => {
-    console.log("useEffect 1 ran");
-    getClients().then((clients) => setClients(clients));
-  }, []);
-
-  useEffect(() => {
-    if (clients.length === 0) return;
-
-    const clientId = router.query.clientId;
-    const policyNumber = router.query.policyNumber;
-
-    if (clientId == null) {
-      setSelectedClient(null);
-      setSelectedPolicy(null);
-      setBreadcrumbLinks(defaultDashboardClientBreadcrumbs);
-    } else if (policyNumber == null) {
-      const client = findClientById(clients, clientId);
-      setSelectedClient(client);
-      setSelectedPolicy(null);
-      setBreadcrumbLinks([
-        ...defaultDashboardClientBreadcrumbs,
-        { label: client.name, route: `/dashboard?clientId=${clientId}` },
-      ]);
-    } else {
-      const client = findClientById(clients, clientId);
-      setSelectedClient(client);
-      setSelectedPolicy(
-        findPolicyByPolicyNumber(client.policies, policyNumber)
-      );
-      setBreadcrumbLinks([
-        ...defaultDashboardClientBreadcrumbs,
-        { label: client.name, route: `/dashboard?clientId=${clientId}` },
-        {
-          label: policyNumber,
-          route: `/dashboard?clientId=${clientId}&policyNumber=${policyNumber}`,
-        },
-      ]);
-    }
-  }, [clients, router.query.clientId, router.query.policyNumber]);
+  useUrlQuery(clients);
 
   const selectClient = (client) => {
-    setSelectedClient(client);
     router.push(`?clientId=${client.id}`, undefined, { shallow: true });
   };
 
@@ -111,10 +68,6 @@ const DashboardClients = ({ openSidebar }) => {
           <FloatingAddButton onClick={openClientFormModal}>
             Add Client
           </FloatingAddButton>
-          <ClientFormModal
-            open={clientFormModalState}
-            handleClose={closeClientFormModal}
-          />
         </>
       );
     }
@@ -148,6 +101,10 @@ const DashboardClients = ({ openSidebar }) => {
           {selectedClient != null && selectedPolicy != null && (
             <PolicyDetails policy={selectedPolicy} />
           )}
+          <ClientFormModal
+            open={clientFormModalState}
+            handleClose={closeClientFormModal}
+          />
         </Grid>
       </Box>
     </>

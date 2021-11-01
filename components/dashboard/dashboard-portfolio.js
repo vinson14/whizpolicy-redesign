@@ -14,16 +14,12 @@ import { useRouter } from "next/router";
 import { findPolicyByPolicyNumber } from "../../utils/utils";
 import PolicyDetails from "./policy-details/policy-details";
 
-const DashboardPortfolio = ({ openSidebar }) => {
-  const [policies, setPolicies] = useState([]);
+const DashboardPortfolio = ({ openSidebar, policies }) => {
   const [selectedPolicy, setSelectedPolicy] = useState(null);
   const [breadcrumbLinks, setBreadcrumbLinks] = useState(
     defaultDashboardPortfolioBreadcrumbs
   );
   const router = useRouter();
-  useEffect(() => {
-    getPolicies().then((policies) => setPolicies(policies));
-  }, []);
 
   useEffect(() => {
     const policyNumber = router.query.policyNumber;
@@ -63,7 +59,6 @@ const DashboardPortfolio = ({ openSidebar }) => {
         <Grid container mt={5} spacing={3} alignItems="stretch">
           {selectedPolicy == null &&
             policies.map((policy) => {
-              console.log(policies);
               return (
                 <Grid key={policy.policyNumber} item xs={12} lg={6}>
                   <PolicyCard

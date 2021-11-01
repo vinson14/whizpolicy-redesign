@@ -12,7 +12,7 @@ const CustomBreadcrumbs = ({ links }) => {
       {links.map((link, index) => {
         if (!isLast(index)) {
           return (
-            <NextLink href={link.route} key={link.label} passHref>
+            <NextLink href={link.route} key={link.label} shallow passHref>
               <Link color="text.secondary" underline="hover">
                 {link.label}
               </Link>
