@@ -6,6 +6,7 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
+import LoadingButton from "@mui/lab/LoadingButton";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Sidebar from "../components/stateless/interface/navigation/sidebar";
@@ -25,10 +26,14 @@ import useUrlQuery from "../utils/useUrlQuery";
 import { Amplify, Auth } from "aws-amplify";
 import awsmobile from "../src/aws-exports";
 import { AmplifyAuthenticator } from "@aws-amplify/ui-react";
+import SidebarLogoutButton from "../components/stateless/interface/buttons/sidebar-logout-button";
 Amplify.configure(awsmobile);
 
-const Dashboard = ({ clients, policies }) => {
+const Dashboard = () => {
   const router = useRouter();
+  const [clients, setClients] = useState([]);
+  const [policies, setPolicies] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [showSidebar, openSidebar, closeSidebar] = useModal();
   const [
     selectedClient,
@@ -38,8 +43,14 @@ const Dashboard = ({ clients, policies }) => {
     setActiveSidebarOption,
   ] = useUrlQuery(clients, policies);
 
+  const handleLogout = () => {
+    setLoading(true);
+    Auth.signOut().then(setLoading(false));
+  };
+
   useEffect(() => {
-    getClientsWithAuth().then((data) => console.log(data));
+    getClients().then((data) => setClients(data));
+    getPolicies().then((policies) => setPolicies(policies));
   }, []);
 
   const mainComponent = {
@@ -64,6 +75,7 @@ const Dashboard = ({ clients, policies }) => {
 
   return (
     <AmplifyAuthenticator>
+      {loading && "loading"}
       <DashboardContainer>
         <Sidebar open={showSidebar} onClose={closeSidebar}>
           <List>
@@ -82,11 +94,7 @@ const Dashboard = ({ clients, policies }) => {
                 </ListItemButton>
               </ListItem>
             ))}
-            <ListItem>
-              <ListItemButton onClick={() => Auth.signOut()}>
-                <ListItemText primary="Sign Out" />
-              </ListItemButton>
-            </ListItem>
+            <SidebarLogoutButton onClick={handleLogout} />
           </List>
         </Sidebar>
         <Container sx={{ pb: 3 }}>
@@ -96,11 +104,5 @@ const Dashboard = ({ clients, policies }) => {
     </AmplifyAuthenticator>
   );
 };
-export async function getServerSideProps({ req }) {
-  const clients = await getClients();
-  const policies = await getPolicies();
-
-  return { props: { clients, policies } };
-}
 
 export default Dashboard;
