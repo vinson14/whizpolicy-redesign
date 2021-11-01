@@ -82,7 +82,7 @@ const Dashboard = ({ clients, policies }) => {
   );
 };
 export async function getServerSideProps({ req }) {
-  const clients = await getClients(req);
+  const clients = await getClients();
   const policies = await getPolicies();
 
   return { props: { clients, policies } };
