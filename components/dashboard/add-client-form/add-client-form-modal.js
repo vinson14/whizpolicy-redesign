@@ -33,8 +33,8 @@ const ClientFormModal = ({ open, handleClose, defaultValues, edit }) => {
               );
             })}
             <Grid item xs={12}>
-              {(edit && <EditButton type="submit">Edit Policy</EditButton>) || (
-                <AddButton type="submit">Add Policy</AddButton>
+              {(edit && <EditButton type="submit">Edit Client</EditButton>) || (
+                <AddButton type="submit">Add Client</AddButton>
               )}
               <CancelButton onClick={handleClose}>Cancel</CancelButton>
             </Grid>
