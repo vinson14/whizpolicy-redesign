@@ -48,6 +48,8 @@ def create_client(event):
   jwtToken = event["headers"].get("Authorization", None)
   claims = jwt.get_unverified_claims(jwtToken)
   client = json.loads(event["body"])
+  print(client)
+  print(type(client))
   client["agent_sub"] = claims["sub"]
   client["client_id"] = get_uuid()
   print(client)

@@ -6,9 +6,7 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import LoadingButton from "@mui/lab/LoadingButton";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
 import Sidebar from "../components/stateless/interface/navigation/sidebar";
 import {
   SIDEBAR_CLIENTS_VALUE,
@@ -22,7 +20,6 @@ import DashboardClients from "../components/dashboard/dashboard-clients";
 import DashboardPortfolio from "../components/dashboard/dashboard-portfolio";
 import useModal from "../utils/useModal";
 import { getClients, getClientsWithAuth, getPolicies } from "../utils/api";
-import useUrlQuery from "../utils/useUrlQuery";
 import { Amplify, Auth } from "aws-amplify";
 import awsmobile from "../src/aws-exports";
 import { AmplifyAuthenticator } from "@aws-amplify/ui-react";
@@ -35,6 +32,7 @@ const Dashboard = () => {
   const [clients, setClients] = useState([]);
   const [policies, setPolicies] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [updateClients, setUpdateClients] = useState(false);
   const [showSidebar, openSidebar, closeSidebar] = useModal();
   const [
     selectedSidebarOption,
@@ -52,9 +50,11 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
+    console.log("this ran");
     getClients().then((data) => setClients(data));
     getPolicies().then((policies) => setPolicies(policies));
-  }, []);
+    setUpdateClients(false);
+  }, [updateClients]);
 
   onAuthUIStateChange((nextAuthState, authData) => {
     console.log("onAuthUIStateChange ran");
@@ -72,6 +72,7 @@ const Dashboard = () => {
         breadcrumbLinks={breadcrumbLinks}
         clientOnClick={clientOnClick}
         policyOnClick={policyOnClick}
+        setUpdateClients={setUpdateClients}
       />
     ),
     [SIDEBAR_PORTFOLIO_VALUE]: (

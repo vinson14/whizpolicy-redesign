@@ -14,11 +14,21 @@ import EditButton from "../../stateless/interface/buttons/edit-button";
 import FormContainer from "../../stateless/interface/form/form-container";
 import ModalContainer from "../../stateless/interface/modal/modal-container";
 
-const ClientFormModal = ({ open, handleClose, defaultValues, edit }) => {
+const ClientFormModal = ({
+  open,
+  handleClose,
+  defaultValues,
+  setUpdateClients,
+  edit,
+}) => {
   const { control, handleSubmit } = useForm({
     defaultValues: defaultValues,
   });
-  const onSubmit = (formData) => postClient(formData);
+  const onSubmit = (formData) => {
+    postClient(formData);
+    setUpdateClients(true);
+    handleClose();
+  };
 
   return (
     <ModalContainer open={open} onClose={handleClose} title="Add Client">

@@ -18,11 +18,15 @@ const PolicyCards = ({ client, policyOnClick }) => {
       </Box>
 
       <Grid container spacing={3} alignItems="stretch">
-        {client.policies.map((policy) => (
-          <Grid key={policy.policyNumber} item xs={12} lg={6}>
-            <PolicyCard policy={policy} onClick={() => policyOnClick(policy)} />
-          </Grid>
-        ))}
+        {client.policies &&
+          client.policies.map((policy) => (
+            <Grid key={policy.policyNumber} item xs={12} lg={6}>
+              <PolicyCard
+                policy={policy}
+                onClick={() => policyOnClick(policy)}
+              />
+            </Grid>
+          ))}
       </Grid>
     </>
   );

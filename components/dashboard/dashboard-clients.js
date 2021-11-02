@@ -25,6 +25,7 @@ const DashboardClients = ({
   breadcrumbLinks,
   clientOnClick,
   policyOnClick,
+  setUpdateClients,
 }) => {
   const [clientFormModalState, openClientFormModal, closeClientFormModal] =
     useModal();
@@ -49,6 +50,7 @@ const DashboardClients = ({
             open={editClientModalState}
             handleClose={closeEditClientModal}
             defaultValues={selectedClient}
+            setUpdateClients={setUpdateClients}
             edit
           />
           <FloatingAddButton onClick={openAddPolicyFormModal}>
@@ -106,6 +108,7 @@ const DashboardClients = ({
           <ClientFormModal
             open={clientFormModalState}
             handleClose={closeClientFormModal}
+            setUpdateClients={setUpdateClients}
           />
         </Grid>
       </Box>

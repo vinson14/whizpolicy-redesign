@@ -27,11 +27,18 @@ export const getClients = async () => {
 export const postClient = async (client) => {
   const jwtToken = (await Auth.currentSession()).getIdToken().getJwtToken();
   console.log(client);
-  const response = await API.post("whizpolicyclientsapi", "/clients", {
-    body: JSON.stringify(client),
+  console.log(JSON.stringify(client));
+  const apiName = "whizpolicyclientsapi";
+  const path = "/clients";
+  const init = {
+    body: {
+      ...client,
+    },
     headers: {
+      "Content-Type": "application/json",
       Authorization: `${jwtToken}`,
     },
-  });
+  };
+  const response = await API.post(apiName, path, init);
   return response;
 };
