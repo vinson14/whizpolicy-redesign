@@ -10,17 +10,7 @@ import MainHeader from "../../stateless/interface/text/main-header";
 import AddPolicyForm from "../add-policy-form/add-policy-form";
 import { useRouter } from "next/router";
 
-const PolicyCards = ({ client }) => {
-  const router = useRouter();
-  const onClick = (policy) => {
-    router.push(
-      `${router.asPath}&policyNumber=${policy.policyNumber}`,
-      undefined,
-      {
-        shallow: true,
-      }
-    );
-  };
+const PolicyCards = ({ client, policyOnClick }) => {
   return (
     <>
       <Box sx={{ display: "flex", justifyContent: "space-between", py: 3 }}>
@@ -30,7 +20,7 @@ const PolicyCards = ({ client }) => {
       <Grid container spacing={3} alignItems="stretch">
         {client.policies.map((policy) => (
           <Grid key={policy.policyNumber} item xs={12} lg={6}>
-            <PolicyCard policy={policy} onClick={() => onClick(policy)} />
+            <PolicyCard policy={policy} onClick={() => policyOnClick(policy)} />
           </Grid>
         ))}
       </Grid>

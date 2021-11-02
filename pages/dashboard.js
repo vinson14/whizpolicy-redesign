@@ -27,21 +27,24 @@ import { Amplify, Auth } from "aws-amplify";
 import awsmobile from "../src/aws-exports";
 import { AmplifyAuthenticator } from "@aws-amplify/ui-react";
 import SidebarLogoutButton from "../components/stateless/interface/buttons/sidebar-logout-button";
+import { onAuthUIStateChange } from "@aws-amplify/ui-components";
+import useDashboardState from "../utils/useUrlQuery";
 Amplify.configure(awsmobile);
 
 const Dashboard = () => {
-  const router = useRouter();
   const [clients, setClients] = useState([]);
   const [policies, setPolicies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showSidebar, openSidebar, closeSidebar] = useModal();
   const [
+    selectedSidebarOption,
     selectedClient,
     selectedPolicy,
     breadcrumbLinks,
-    activeSidebarOption,
-    setActiveSidebarOption,
-  ] = useUrlQuery(clients, policies);
+    sidebarOptionOnClick,
+    clientOnClick,
+    policyOnClick,
+  ] = useDashboardState();
 
   const handleLogout = () => {
     setLoading(true);
@@ -53,6 +56,12 @@ const Dashboard = () => {
     getPolicies().then((policies) => setPolicies(policies));
   }, []);
 
+  onAuthUIStateChange((nextAuthState, authData) => {
+    console.log("onAuthUIStateChange ran");
+    console.log(nextAuthState);
+    console.log(authData);
+  });
+
   const mainComponent = {
     [SIDEBAR_CLIENTS_VALUE]: (
       <DashboardClients
@@ -61,6 +70,8 @@ const Dashboard = () => {
         selectedClient={selectedClient}
         selectedPolicy={selectedPolicy}
         breadcrumbLinks={breadcrumbLinks}
+        clientOnClick={clientOnClick}
+        policyOnClick={policyOnClick}
       />
     ),
     [SIDEBAR_PORTFOLIO_VALUE]: (
@@ -69,23 +80,22 @@ const Dashboard = () => {
         policies={policies}
         selectedPolicy={selectedPolicy}
         breadcrumbLinks={breadcrumbLinks}
+        policyOnClick={policyOnClick}
       />
     ),
   };
 
   return (
     <AmplifyAuthenticator>
-      {loading && "loading"}
       <DashboardContainer>
         <Sidebar open={showSidebar} onClose={closeSidebar}>
           <List>
             {sidebarItems.map((item) => (
               <ListItem key={item.value}>
                 <ListItemButton
-                  selected={activeSidebarOption === item.value}
+                  selected={selectedSidebarOption === item.value}
                   onClick={() => {
-                    router.push("/dashboard");
-                    setActiveSidebarOption(item.value);
+                    sidebarOptionOnClick(item.value);
                     closeSidebar();
                   }}
                 >
@@ -98,7 +108,7 @@ const Dashboard = () => {
           </List>
         </Sidebar>
         <Container sx={{ pb: 3 }}>
-          {mainComponent[activeSidebarOption]}
+          {mainComponent[selectedSidebarOption]}
         </Container>
       </DashboardContainer>
     </AmplifyAuthenticator>

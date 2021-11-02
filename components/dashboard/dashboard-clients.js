@@ -23,8 +23,9 @@ const DashboardClients = ({
   selectedClient,
   selectedPolicy,
   breadcrumbLinks,
+  clientOnClick,
+  policyOnClick,
 }) => {
-  const router = useRouter();
   const [clientFormModalState, openClientFormModal, closeClientFormModal] =
     useModal();
   const [editClientModalState, openEditClientModal, closeEditClientModal] =
@@ -34,10 +35,6 @@ const DashboardClients = ({
     openAddPolicyFormModal,
     closeAddPolicyFormModal,
   ] = useModal();
-
-  const selectClient = (client) => {
-    router.push(`?clientId=${client.id}`, undefined, { shallow: true });
-  };
 
   const renderButton = () => {
     if (selectedClient != null && selectedPolicy != null) {
@@ -95,10 +92,13 @@ const DashboardClients = ({
         </DashboardHeaderContainer>
         <Grid container mt={5} spacing={3} alignItems="stretch">
           {selectedClient == null && (
-            <ClientCards clients={clients} selectClient={selectClient} />
+            <ClientCards clients={clients} selectClient={clientOnClick} />
           )}
           {selectedClient != null && selectedPolicy == null && (
-            <ClientDetails client={selectedClient} />
+            <ClientDetails
+              client={selectedClient}
+              policyOnClick={policyOnClick}
+            />
           )}
           {selectedClient != null && selectedPolicy != null && (
             <PolicyDetails policy={selectedPolicy} />
