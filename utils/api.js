@@ -18,7 +18,19 @@ export const getClients = async () => {
   const jwtToken = (await Auth.currentSession()).getIdToken().getJwtToken();
   const response = await API.get("whizpolicyclientsapi", "/clients", {
     headers: {
-      Authorization: `Bearer ${jwtToken}`,
+      Authorization: `${jwtToken}`,
+    },
+  });
+  return response;
+};
+
+export const postClient = async (client) => {
+  const jwtToken = (await Auth.currentSession()).getIdToken().getJwtToken();
+  console.log(client);
+  const response = await API.post("whizpolicyclientsapi", "/clients", {
+    body: JSON.stringify(client),
+    headers: {
+      Authorization: `${jwtToken}`,
     },
   });
   return response;

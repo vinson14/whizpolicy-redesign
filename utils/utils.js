@@ -5,7 +5,7 @@ export const getInitials = (name) => {
 };
 
 export const findClientById = (clients, id) => {
-  return clients.find((client) => client.id == id);
+  return clients.find((client) => client.client_id == id);
 };
 
 export const findPolicyByPolicyNumber = (policies, policyNumber) => {

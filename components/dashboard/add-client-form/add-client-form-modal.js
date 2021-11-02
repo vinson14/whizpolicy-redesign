@@ -7,6 +7,7 @@ import {
 } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { addClientFormFields, inputTypeMapping } from "../../../data/ui";
+import { postClient } from "../../../utils/api";
 import AddButton from "../../stateless/interface/buttons/add-button";
 import CancelButton from "../../stateless/interface/buttons/cancel-button";
 import EditButton from "../../stateless/interface/buttons/edit-button";
@@ -17,7 +18,7 @@ const ClientFormModal = ({ open, handleClose, defaultValues, edit }) => {
   const { control, handleSubmit } = useForm({
     defaultValues: defaultValues,
   });
-  const onSubmit = (formData) => console.log(formData);
+  const onSubmit = (formData) => postClient(formData);
 
   return (
     <ModalContainer open={open} onClose={handleClose} title="Add Client">
