@@ -23,20 +23,20 @@
         "Name": "whizpolicyclientslambda-dev",
         "LambdaExecutionRole": "whizpolicyamplifyLambdaRole88151b6d-dev"
       },
-      "lastPushTimeStamp": "2021-11-02T08:51:26.542Z",
+      "lastPushTimeStamp": "2021-11-02T09:39:08.032Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-whizpolicyamplify-dev-30057-deployment/amplify-cfn-templates/function/whizpolicyclientslambda-cloudformation-template.json",
         "logicalId": "functionwhizpolicyclientslambda"
       },
-      "lastBuildTimeStamp": "2021-11-02T08:50:09.812Z",
+      "lastBuildTimeStamp": "2021-11-02T09:37:40.830Z",
       "lastBuildType": "PROD",
-      "lastPackageTimeStamp": "2021-11-02T08:50:12.539Z",
-      "distZipFilename": "whizpolicyclientslambda-516b6f6561556d537635-build.zip",
+      "lastPackageTimeStamp": "2021-11-02T09:37:43.831Z",
+      "distZipFilename": "whizpolicyclientslambda-395369794d4477446643-build.zip",
       "s3Bucket": {
         "deploymentBucketName": "amplify-whizpolicyamplify-dev-30057-deployment",
-        "s3Key": "amplify-builds/whizpolicyclientslambda-516b6f6561556d537635-build.zip"
+        "s3Key": "amplify-builds/whizpolicyclientslambda-395369794d4477446643-build.zip"
       },
-      "lastPushDirHash": "QkoeaUmSv54ChaDGxk5wWADFmSI="
+      "lastPushDirHash": "9SiyMDwDfCrdUzKI63l1Eay9iRE="
     },
     "whizpolicypolicieslambda": {
       "build": true,
@@ -48,14 +48,14 @@
         "Name": "whizpolicypolicieslambda-dev",
         "LambdaExecutionRole": "whizpolicyamplifyLambdaRoleabb16d31-dev"
       },
-      "lastPushTimeStamp": "2021-11-02T08:51:26.526Z",
+      "lastPushTimeStamp": "2021-11-02T09:39:08.004Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-whizpolicyamplify-dev-30057-deployment/amplify-cfn-templates/function/whizpolicypolicieslambda-cloudformation-template.json",
         "logicalId": "functionwhizpolicypolicieslambda"
       },
-      "lastBuildTimeStamp": "2021-11-01T14:38:35.690Z",
+      "lastBuildTimeStamp": "2021-11-02T09:17:10.312Z",
       "lastBuildType": "PROD",
-      "lastPackageTimeStamp": "2021-11-01T14:38:39.036Z",
+      "lastPackageTimeStamp": "2021-11-02T09:17:14.394Z",
       "distZipFilename": "whizpolicypolicieslambda-4c5033766b7a3246616d-build.zip",
       "s3Bucket": {
         "deploymentBucketName": "amplify-whizpolicyamplify-dev-30057-deployment",
@@ -91,7 +91,7 @@
         "RootUrl": "https://a3dk3p85vd.execute-api.us-east-1.amazonaws.com/dev",
         "ApiId": "a3dk3p85vd"
       },
-      "lastPushTimeStamp": "2021-11-02T08:51:26.531Z",
+      "lastPushTimeStamp": "2021-11-02T09:39:08.012Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-whizpolicyamplify-dev-30057-deployment/amplify-cfn-templates/api/whizpolicyclientsapi-cloudformation-template.json",
         "logicalId": "apiwhizpolicyclientsapi"
@@ -132,7 +132,7 @@
         "IdentityPoolName": "whizpolicyamplify1a74d288_identitypool_1a74d288__dev",
         "UserPoolName": "whizpolicyamplify1a74d288_userpool_1a74d288"
       },
-      "lastPushTimeStamp": "2021-11-02T08:51:26.533Z",
+      "lastPushTimeStamp": "2021-11-02T09:39:08.020Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-whizpolicyamplify-dev-30057-deployment/amplify-cfn-templates/auth/whizpolicyamplify1a74d288-cloudformation-template.yml",
         "logicalId": "authwhizpolicyamplify1a74d288"

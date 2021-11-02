@@ -4,6 +4,7 @@ import boto3
 import uuid
 from jose import jwt
 from boto3.dynamodb.types import TypeDeserializer, TypeSerializer
+from boto3.dynamodb.conditions import Key
 
 table_name = 'whizpolicy_clients'
 dynamo_client = boto3.client('dynamodb')
@@ -16,8 +17,16 @@ def serialize_client(client):
 def deserialize_client(client):
   return {key: deserializer.deserialize(client[key]) for key in client}
 
+def get_token_claims(event):
+  jwtToken = event["headers"].get("Authorization", None)
+  return jwt.get_unverified_claims(jwtToken)
+
 def get_clients(event):
-  clients = dynamo_client.scan(TableName=table_name)["Items"]
+  claims = get_token_claims(event)
+  clients = dynamo_client.query(TableName=table_name,
+   KeyConditionExpression='agent_sub = :agent_sub', 
+   ExpressionAttributeValues={':agent_sub': serializer.serialize(claims['sub'])})['Items']
+  print(clients)
   return [deserialize_client(client) for client in clients]
 
 def get_uuid():

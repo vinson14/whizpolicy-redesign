@@ -83,7 +83,7 @@
         "TemplateURL": "https://s3.amazonaws.com/amplify-whizpolicyamplify-dev-30057-deployment/amplify-cfn-templates/function/whizpolicyclientslambda-cloudformation-template.json",
         "Parameters": {
           "deploymentBucketName": "amplify-whizpolicyamplify-dev-30057-deployment",
-          "s3Key": "amplify-builds/whizpolicyclientslambda-516b6f6561556d537635-build.zip",
+          "s3Key": "amplify-builds/whizpolicyclientslambda-395369794d4477446643-build.zip",
           "env": "dev"
         }
       }
