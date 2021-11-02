@@ -1,198 +1,62 @@
+import simplejson
 import json
+import boto3
+import uuid
+from jose import jwt
+from boto3.dynamodb.types import TypeDeserializer, TypeSerializer
+
+table_name = 'whizpolicy_clients'
+dynamo_client = boto3.client('dynamodb')
+deserializer = TypeDeserializer()
+serializer = TypeSerializer()
+
+def serialize_client(client):
+  return {key: serializer.serialize(client[key]) for key in client}
+
+def deserialize_client(client):
+  return {key: deserializer.deserialize(client[key]) for key in client}
+
+def get_clients(event):
+  clients = dynamo_client.scan(TableName=table_name)["Items"]
+  return [deserialize_client(client) for client in clients]
+
+def get_uuid():
+  return str(uuid.uuid4())
+
+def response(body):
+  return {
+    "statusCode": 200,
+    "body": simplejson.dumps(body),
+    "headers": {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Headers': '*',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
+    },
+  }
+
+def create_client(event):
+  jwtToken = event["headers"].get("Authorization", None)
+  claims = jwt.get_unverified_claims(jwtToken)
+  client = json.loads(event["body"])
+  client["agent_sub"] = claims["sub"]
+  client["client_id"] = get_uuid()
+  print(client)
+  client = serialize_client(client)
+  dynamo_client.put_item(TableName=table_name, Item=client)
+  
+  return "client added"
+
+
 
 def handler(event, context):
-  print('received event:')
-  print(event)
 
-  sample_clients = [
-    {
-      "id": 1,
-      "name": "Vinson Ong",
-      "occupation": "Full Stack Developer",
-      "image": "vinson.jpg",
-      "annualIncome": 100000,
-      "age": 28,
-      "mobile": "9431 8747",
-      "email": "vinson1493@gmail.com",
-      "gender": "male",
-      "birthday": "1 Apr 1993",
-      "maritalStatus": "single",
-      "smoker": "no",
-      "dependants": [
-        {
-          "relationship": "spouse",
-          "name": "Chio Bu"
-        },
-        {
-          "relationship": "son",
-          "name": "Boy Boy"
-        },
-        {
-          "relationship": "daughter",
-          "name": "Girl girl"
-        }
-      ],
-      "financialOverview": {
-        "death": {
-          "currentCoverage": 1000000,
-          "idealCoverage": 1000000
-        },
-        "tpd": {
-          "currentCoverage": 1000000,
-          "idealCoverage": 1000000
-        },
-        "majorCi": {
-          "currentCoverage": 200000,
-          "idealCoverage": 500000
-        },
-        "earlyCi": {
-          "currentCoverage": 50000,
-          "idealCoverage": 200000
-        },
-        "accidentalDeath": {
-          "currentCoverage": 1000000,
-          "idealCoverage": 1000000
-        },
-        "accidentalMedical": {
-          "currentCoverage": 3000,
-          "idealCoverage": 3000
-        }
-      },
-      "policies": [
-        {
-          "id": 1,
-          "policyNumber": "L54678912",
-          "policyCategory": "wholeLife",
-          "policyName": "Guaranteed Protect Plus",
-          "lifeAssured": "self",
-          "insurer": "aia",
-          "premiumMode": "annually",
-          "premium": 3000,
-          "deathBenefit": 1000000,
-          "tpdBenefit": 1000000,
-          "majorCiBenefit": 200000,
-          "earlyCiBenefit": 50000,
-          "policyTerm": 99,
-          "premiumTerm": 20,
-          "inceptionDate": "1 Apr 2021"
-        },
-        {
-          "id": 2,
-          "policyNumber": "L54678953",
-          "policyCategory": "termLife",
-          "policyName": "Flexi Term 20",
-          "lifeAssured": "self",
-          "insurer": "aia",
-          "premiumMode": "monthly",
-          "premium": 30,
-          "deathBenefit": 500000,
-          "tpdBenefit": 500000,
-          "majorCiBenefit": 0,
-          "earlyCiBenefit": 0,
-          "policyTerm": 20,
-          "premiumTerm": 20,
-          "inceptionDate": "1 Apr 2021"
-        }
-      ]
-    },
-    {
-      "id": 2,
-      "name": "Alex Teng",
-      "occupation": "Certis Cisco Officer",
-      "image": "vinson.jpg",
-      "annualIncome": 100000,
-      "age": 33,
-      "mobile": "9431 8747",
-      "email": "alexteng@gmail.com",
-      "gender": "male",
-      "birthday": "1 Apr 1983",
-      "maritalStatus": "married",
-      "smoker": "no",
-      "dependants": [
-        {
-          "relationship": "spouse",
-          "name": "Chio Bu"
-        },
-        {
-          "relationship": "son",
-          "name": "Boy Boy"
-        },
-        {
-          "relationship": "daughter",
-          "name": "Girl girl"
-        }
-      ],
-      "financialOverview": {
-        "death": {
-          "currentCoverage": 1000000,
-          "idealCoverage": 1000000
-        },
-        "tpd": {
-          "currentCoverage": 1000000,
-          "idealCoverage": 1000000
-        },
-        "majorCi": {
-          "currentCoverage": 200000,
-          "idealCoverage": 500000
-        },
-        "earlyCi": {
-          "currentCoverage": 50000,
-          "idealCoverage": 200000
-        },
-        "accidentalDeath": {
-          "currentCoverage": 1000000,
-          "idealCoverage": 1000000
-        },
-        "accidentalMedical": {
-          "currentCoverage": 3000,
-          "idealCoverage": 3000
-        }
-      },
-      "policies": [
-        {
-          "id": 1,
-          "policyNumber": "L54678912",
-          "policyCategory": "wholeLife",
-          "policyName": "Guaranteed Protect Plus",
-          "lifeAssured": "self",
-          "insurer": "aia",
-          "premiumMode": "annually",
-          "premium": 3000,
-          "deathBenefit": 1000000,
-          "tpdBenefit": 1000000,
-          "majorCiBenefit": 200000,
-          "earlyCiBenefit": 50000,
-          "policyTerm": 99,
-          "premiumTerm": 20,
-          "inceptionDate": "1 Apr 2021"
-        },
-        {
-          "id": 2,
-          "policyNumber": "L54678953",
-          "policyCategory": "termLife",
-          "policyName": "Flexi Term 20",
-          "lifeAssured": "self",
-          "insurer": "aia",
-          "premiumMode": "monthly",
-          "premium": 30,
-          "deathBenefit": 500000,
-          "tpdBenefit": 500000,
-          "majorCiBenefit": 0,
-          "earlyCiBenefit": 0,
-          "policyTerm": 20,
-          "premiumTerm": 20,
-          "inceptionDate": "1 Apr 2021"
-        }
-      ]
-    }
-  ]
-  
-  return {
-      'statusCode': 200,
-      'headers': {
-          'Access-Control-Allow-Headers': '*',
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
-      },
-      'body': json.dumps(sample_clients)
+  methods = {
+    'GET': get_clients,
+    'POST': create_client
   }
+
+  method = event["httpMethod"]
+  if method in methods:
+    body = methods[method](event)
+    return response(body)
