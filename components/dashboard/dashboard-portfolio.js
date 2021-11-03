@@ -19,19 +19,8 @@ const DashboardPortfolio = ({
   policies,
   selectedPolicy,
   breadcrumbLinks,
+  policyOnClick,
 }) => {
-  const router = useRouter();
-
-  const selectPolicy = (policy) => {
-    router.push(
-      `${router.asPath}?policyNumber=${policy.policyNumber}`,
-      undefined,
-      {
-        shallow: true,
-      }
-    );
-  };
-
   return (
     <>
       <Box sx={{ p: { md: 5, xs: 1 } }}>
@@ -48,7 +37,7 @@ const DashboardPortfolio = ({
                 <Grid key={policy.policyNumber} item xs={12} lg={6}>
                   <PolicyCard
                     policy={policy}
-                    onClick={() => selectPolicy(policy)}
+                    onClick={() => policyOnClick(policy)}
                   />
                 </Grid>
               );

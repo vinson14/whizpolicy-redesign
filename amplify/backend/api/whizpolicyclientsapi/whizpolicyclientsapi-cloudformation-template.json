@@ -8,29 +8,29 @@
         },
     
     
-          "functionwhizpolicyclientslambda2Name": {
+          "functionwhizpolicyclientslambdaName": {
             "Type": "String",
-            "Default": "functionwhizpolicyclientslambda2Name"
+            "Default": "functionwhizpolicyclientslambdaName"
           },
 
           
-          "functionwhizpolicyclientslambda2Arn": {
+          "functionwhizpolicyclientslambdaArn": {
             "Type": "String",
-            "Default": "functionwhizpolicyclientslambda2Arn"
+            "Default": "functionwhizpolicyclientslambdaArn"
           },
 
           
           
     
-          "functionwhizpolicypolicieslambda2Name": {
+          "functionwhizpolicypolicieslambdaName": {
             "Type": "String",
-            "Default": "functionwhizpolicypolicieslambda2Name"
+            "Default": "functionwhizpolicypolicieslambdaName"
           },
 
           
-          "functionwhizpolicypolicieslambda2Arn": {
+          "functionwhizpolicypolicieslambdaArn": {
             "Type": "String",
-            "Default": "functionwhizpolicypolicieslambda2Arn"
+            "Default": "functionwhizpolicypolicieslambdaArn"
           }
 
           
@@ -53,16 +53,16 @@
         
         
         
-      "whizpolicyclientsapi2": {
+      "whizpolicyclientsapi": {
         "Type": "AWS::ApiGateway::RestApi",
         "Properties": {
           "Description": "",
-          "Name": "whizpolicyclientsapi2",
+          "Name": "whizpolicyclientsapi",
           "Body": {
             "swagger": "2.0",
             "info": {
               "version": "2018-05-24T17:52:00Z",
-              "title": "whizpolicyclientsapi2"
+              "title": "whizpolicyclientsapi"
             },
             "host": {
                 "Fn::Join": [
@@ -184,7 +184,7 @@
                             
                             {
 
-                                "Ref": "functionwhizpolicyclientslambda2Arn"
+                                "Ref": "functionwhizpolicyclientslambdaArn"
                             },
                             
                             "/invocations"
@@ -283,7 +283,7 @@
                           
                           {
 
-                            "Ref": "functionwhizpolicyclientslambda2Arn"
+                            "Ref": "functionwhizpolicyclientslambdaArn"
                           },
                           
                           "/invocations"
@@ -383,7 +383,7 @@
                             
                             {
 
-                                "Ref": "functionwhizpolicypolicieslambda2Arn"
+                                "Ref": "functionwhizpolicypolicieslambdaArn"
                             },
                             
                             "/invocations"
@@ -482,7 +482,7 @@
                           
                           {
 
-                            "Ref": "functionwhizpolicypolicieslambda2Arn"
+                            "Ref": "functionwhizpolicypolicieslambdaArn"
                           },
                           
                           "/invocations"
@@ -539,12 +539,12 @@
       
         
 
-        "functionwhizpolicyclientslambda2Permissionwhizpolicyclientsapi2": {
+        "functionwhizpolicyclientslambdaPermissionwhizpolicyclientsapi": {
             "Type": "AWS::Lambda::Permission",
             "Properties": {
                 "FunctionName": 
                     {
-                        "Ref":  "functionwhizpolicyclientslambda2Name"
+                        "Ref":  "functionwhizpolicyclientslambdaName"
                     },
                     
                     "Action": "lambda:InvokeFunction",
@@ -563,7 +563,7 @@
                             },
                             ":",
                             {
-                                "Ref": "whizpolicyclientsapi2"
+                                "Ref": "whizpolicyclientsapi"
                             },
                             "/*/*/*"
                         ]
@@ -573,12 +573,12 @@
         },
         
 
-        "functionwhizpolicypolicieslambda2Permissionwhizpolicyclientsapi2": {
+        "functionwhizpolicypolicieslambdaPermissionwhizpolicyclientsapi": {
             "Type": "AWS::Lambda::Permission",
             "Properties": {
                 "FunctionName": 
                     {
-                        "Ref":  "functionwhizpolicypolicieslambda2Name"
+                        "Ref":  "functionwhizpolicypolicieslambdaName"
                     },
                     
                     "Action": "lambda:InvokeFunction",
@@ -597,7 +597,7 @@
                             },
                             ":",
                             {
-                                "Ref": "whizpolicyclientsapi2"
+                                "Ref": "whizpolicyclientsapi"
                             },
                             "/*/*/*"
                         ]
@@ -608,7 +608,7 @@
         
         
 
-      "DeploymentAPIGWwhizpolicyclientsapi2": {
+      "DeploymentAPIGWwhizpolicyclientsapiebcf1c07": {
         "Type": "AWS::ApiGateway::Deployment",
         "Properties": {
           "Description": "The Development stage deployment of your API.",
@@ -622,7 +622,7 @@
             ]
           },
           "RestApiId": {
-            "Ref": "whizpolicyclientsapi2"
+            "Ref": "whizpolicyclientsapi"
           }
         }
       }
@@ -630,15 +630,15 @@
     "Outputs": {
         "RootUrl": {
             "Description": "Root URL of the API gateway",
-            "Value": {"Fn::Join": ["", ["https://", {"Ref": "whizpolicyclientsapi2"}, ".execute-api.", {"Ref": "AWS::Region"}, ".amazonaws.com/", {"Fn::If": ["ShouldNotCreateEnvResources","Prod", {"Ref": "env"} ]}]]}
+            "Value": {"Fn::Join": ["", ["https://", {"Ref": "whizpolicyclientsapi"}, ".execute-api.", {"Ref": "AWS::Region"}, ".amazonaws.com/", {"Fn::If": ["ShouldNotCreateEnvResources","Prod", {"Ref": "env"} ]}]]}
         },
         "ApiName": {
           "Description": "API Friendly name",
-          "Value": "whizpolicyclientsapi2"
+          "Value": "whizpolicyclientsapi"
         },
         "ApiId": {
           "Description": "API ID (prefix of API URL)",
-          "Value": {"Ref": "whizpolicyclientsapi2"}
+          "Value": {"Ref": "whizpolicyclientsapi"}
         }
     }
   }

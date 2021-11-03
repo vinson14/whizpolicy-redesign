@@ -27,19 +27,20 @@ const CoverageCard = ({ client }) => {
     <ClientDetailCard>
       <ClientCardHeader>Coverage Overview</ClientCardHeader>
       <Grid container>
-        {clientDetailsFinancialOverviewFields.map((field) => (
-          <Fragment key={field.key}>
-            <ClientCardInfoText
-              icon={field.icon}
-              endIcon={<InfoIcon />}
-              endIconOnClick={(event) => openPopover(event, field.key)}
-              pr={2}
-              label={field.label}
-              type={field.type}
-              value={client.financialOverview[field.key]["currentCoverage"]}
-            />
-          </Fragment>
-        ))}
+        {client.financialOverview &&
+          clientDetailsFinancialOverviewFields.map((field) => (
+            <Fragment key={field.key}>
+              <ClientCardInfoText
+                icon={field.icon}
+                endIcon={<InfoIcon />}
+                endIconOnClick={(event) => openPopover(event, field.key)}
+                pr={2}
+                label={field.label}
+                type={field.type}
+                value={client.financialOverview[field.key]["currentCoverage"]}
+              />
+            </Fragment>
+          ))}
         {selectedKey && (
           <CoverageInfoPopover
             client={client}

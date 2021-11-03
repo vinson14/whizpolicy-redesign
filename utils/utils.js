@@ -5,7 +5,7 @@ export const getInitials = (name) => {
 };
 
 export const findClientById = (clients, id) => {
-  return clients.find((client) => client.id == id);
+  return clients.find((client) => client.client_id == id);
 };
 
 export const findPolicyByPolicyNumber = (policies, policyNumber) => {
@@ -13,8 +13,11 @@ export const findPolicyByPolicyNumber = (policies, policyNumber) => {
 };
 
 export function formatNumber(num, decPlaces = 0) {
-  if (!num) return " - ";
-  return num.toFixed(decPlaces).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+  try {
+    return num.toFixed(decPlaces).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+  } catch (err) {
+    return num;
+  }
 }
 
 export function formatString(string) {

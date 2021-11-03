@@ -2,7 +2,7 @@ import { Divider, Grid } from "@mui/material";
 import { clientDetailsCards } from "../../../data/ui";
 import PolicyCards from "./policy-cards";
 
-const ClientDetails = ({ client }) => {
+const ClientDetails = ({ client, policyOnClick }) => {
   return (
     <>
       {clientDetailsCards.map((Component, index) => (
@@ -14,7 +14,7 @@ const ClientDetails = ({ client }) => {
         <Divider variant="middle" />
       </Grid>
       <Grid item xs={12}>
-        <PolicyCards client={client} />
+        <PolicyCards client={client} policyOnClick={policyOnClick} />
       </Grid>
     </>
   );

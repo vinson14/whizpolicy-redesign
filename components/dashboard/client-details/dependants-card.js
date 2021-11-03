@@ -9,13 +9,14 @@ const DependantsCard = ({ client }) => {
     <ClientDetailCard>
       <ClientCardHeader>Dependants</ClientCardHeader>
       <Grid container>
-        {client.dependants.map((dependant) => (
-          <ClientCardInfoText
-            key={dependant.name}
-            label={dependant.relationship}
-            value={dependant.name}
-          />
-        ))}
+        {client.dependants &&
+          client.dependants.map((dependant) => (
+            <ClientCardInfoText
+              key={dependant.name}
+              label={dependant.relationship}
+              value={dependant.name}
+            />
+          ))}
       </Grid>
     </ClientDetailCard>
   );

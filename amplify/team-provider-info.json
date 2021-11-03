@@ -1,26 +1,29 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-whizpolicyredesign2-dev-153226-authRole",
-      "UnauthRoleArn": "arn:aws:iam::066354352598:role/amplify-whizpolicyredesign2-dev-153226-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::066354352598:role/amplify-whizpolicyredesign2-dev-153226-authRole",
+      "AuthRoleName": "amplify-whizpolicyamplify-dev-30057-authRole",
+      "UnauthRoleArn": "arn:aws:iam::066354352598:role/amplify-whizpolicyamplify-dev-30057-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::066354352598:role/amplify-whizpolicyamplify-dev-30057-authRole",
       "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-whizpolicyredesign2-dev-153226-deployment",
-      "UnauthRoleName": "amplify-whizpolicyredesign2-dev-153226-unauthRole",
-      "StackName": "amplify-whizpolicyredesign2-dev-153226",
-      "StackId": "arn:aws:cloudformation:us-east-1:066354352598:stack/amplify-whizpolicyredesign2-dev-153226/df9fb3f0-3ae5-11ec-afe2-0eef82912825",
-      "AmplifyAppId": "d1wwe1kr4aopde"
+      "DeploymentBucketName": "amplify-whizpolicyamplify-dev-30057-deployment",
+      "UnauthRoleName": "amplify-whizpolicyamplify-dev-30057-unauthRole",
+      "StackName": "amplify-whizpolicyamplify-dev-30057",
+      "StackId": "arn:aws:cloudformation:us-east-1:066354352598:stack/amplify-whizpolicyamplify-dev-30057/908daf30-38ea-11ec-b56e-0ebf20b80863",
+      "AmplifyAppId": "dh1u3jgxp78hz"
     },
     "categories": {
       "function": {
-        "whizpolicyclientslambda2": {
-          "deploymentBucketName": "amplify-whizpolicyredesign2-dev-153226-deployment",
-          "s3Key": "amplify-builds/whizpolicyclientslambda2-744e6a57627052482f58-build.zip"
+        "whizpolicyclientslambda": {
+          "deploymentBucketName": "amplify-whizpolicyamplify-dev-30057-deployment",
+          "s3Key": "amplify-builds/whizpolicyclientslambda-6c685045426e73343869-build.zip"
         },
-        "whizpolicypolicieslambda2": {
-          "deploymentBucketName": "amplify-whizpolicyredesign2-dev-153226-deployment",
-          "s3Key": "amplify-builds/whizpolicypolicieslambda2-7861562f42786a58476b-build.zip"
+        "whizpolicypolicieslambda": {
+          "deploymentBucketName": "amplify-whizpolicyamplify-dev-30057-deployment",
+          "s3Key": "amplify-builds/whizpolicypolicieslambda-4c5033766b7a3246616d-build.zip"
         }
+      },
+      "auth": {
+        "whizpolicyamplify1a74d288": {}
       }
     }
   }

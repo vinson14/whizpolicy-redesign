@@ -207,12 +207,10 @@ export const insurerLabels = {
 };
 
 export const defaultDashboardClientBreadcrumbs = [
-  { label: "Dashboard", route: "/dashboard" },
   { label: "Clients", route: "/dashboard" },
 ];
 
 export const defaultDashboardPortfolioBreadcrumbs = [
-  { label: "Dashboard", route: "/dashboard" },
   { label: "Portfolio", route: "/dashboard" },
 ];
 
