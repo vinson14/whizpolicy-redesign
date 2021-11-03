@@ -24,7 +24,7 @@ import { Amplify, Auth } from "aws-amplify";
 import awsmobile from "../src/aws-exports";
 import { AmplifyAuthenticator } from "@aws-amplify/ui-react";
 import SidebarLogoutButton from "../components/stateless/interface/buttons/sidebar-logout-button";
-import { onAuthUIStateChange } from "@aws-amplify/ui-components";
+import { AuthState, onAuthUIStateChange } from "@aws-amplify/ui-components";
 import useDashboardState from "../utils/useUrlQuery";
 Amplify.configure(awsmobile);
 
@@ -32,6 +32,7 @@ const Dashboard = () => {
   const [clients, setClients] = useState([]);
   const [policies, setPolicies] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [authState, setAuthState] = useState();
   const [updateClients, setUpdateClients] = useState(false);
   const [showSidebar, openSidebar, closeSidebar] = useModal();
   const [
@@ -50,16 +51,22 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    console.log("this ran");
-    getClients().then((data) => setClients(data));
-    getPolicies().then((policies) => setPolicies(policies));
+    if (authState === AuthState.SignedIn) {
+      getClients().then((data) => setClients(data));
+      getPolicies().then((policies) => setPolicies(policies));
+    } else {
+      setClients([]);
+      setPolicies([]);
+    }
+
     setUpdateClients(false);
-  }, [updateClients]);
+  }, [updateClients, authState]);
 
   onAuthUIStateChange((nextAuthState, authData) => {
     console.log("onAuthUIStateChange ran");
     console.log(nextAuthState);
     console.log(authData);
+    setAuthState(nextAuthState);
   });
 
   const mainComponent = {
