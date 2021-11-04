@@ -7,7 +7,7 @@ Amplify.configure(awsmobile);
 
 export const getPolicies = async () => {
   const jwtToken = (await Auth.currentSession()).getIdToken().getJwtToken();
-  const response = await API.get("whizpolicyclientsapi", "/policies", {
+  const response = await API.get(apiName, "/policies", {
     headers: {
       Authorization: `Bearer ${jwtToken}`,
     },

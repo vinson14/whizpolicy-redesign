@@ -7,6 +7,7 @@ See the License for the specific language governing permissions and limitations 
 */
 
 const AWS = require("aws-sdk");
+const { v4: uuidv4 } = require("uuid");
 var awsServerlessExpressMiddleware = require("aws-serverless-express/middleware");
 var express = require("express");
 
@@ -19,7 +20,7 @@ if (process.env.ENV && process.env.ENV !== "NONE") {
   tableName = tableName + "-" + process.env.ENV;
 }
 
-const userIdPresent = false; // TODO: update in case is required to use that definition
+const userIdPresent = true; // TODO: update in case is required to use that definition
 const partitionKeyName = "agentId";
 const partitionKeyType = "S";
 const sortKeyName = "clientId";
@@ -51,30 +52,38 @@ const convertUrlType = (param, type) => {
   }
 };
 
+const generateUuid = () => {
+  return uuidv4();
+};
+
 /********************************
  * HTTP Get method for list objects *
  ********************************/
 
-app.get(path + hashKeyPath, function (req, res) {
+app.get(path, function (req, res) {
   var condition = {};
   condition[partitionKeyName] = {
     ComparisonOperator: "EQ",
   };
 
-  if (userIdPresent && req.apiGateway) {
-    condition[partitionKeyName]["AttributeValueList"] = [
-      req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH,
-    ];
-  } else {
-    try {
-      condition[partitionKeyName]["AttributeValueList"] = [
-        convertUrlType(req.params[partitionKeyName], partitionKeyType),
-      ];
-    } catch (err) {
-      res.statusCode = 500;
-      res.json({ error: "Wrong column type " + err });
-    }
-  }
+  condition[partitionKeyName]["AttributeValueList"] = [
+    convertUrlType(req.requestContext.claims.sub, partitionKeyType),
+  ];
+
+  // if (userIdPresent && req.apiGateway) {
+  //   condition[partitionKeyName]["AttributeValueList"] = [
+  //     req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH,
+  //   ];
+  // } else {
+  //   try {
+  //     condition[partitionKeyName]["AttributeValueList"] = [
+  //       convertUrlType(req.params[partitionKeyName], partitionKeyType),
+  //     ];
+  //   } catch (err) {
+  //     res.statusCode = 500;
+  //     res.json({ error: "Wrong column type " + err });
+  //   }
+  // }
 
   let queryParams = {
     TableName: tableName,
@@ -148,10 +157,15 @@ app.get(path + "/object" + hashKeyPath + sortKeyPath, function (req, res) {
  *************************************/
 
 app.put(path, function (req, res) {
-  if (userIdPresent) {
-    req.body["userId"] =
-      req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH;
-  }
+  // if (userIdPresent) {
+  //   req.body["userId"] =
+  //     req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH;
+  // }
+
+  req.body.agentId = convertUrlType(
+    req.requestContext.claims.sub,
+    partitionKeyType
+  );
 
   let putItemParams = {
     TableName: tableName,
@@ -172,10 +186,17 @@ app.put(path, function (req, res) {
  *************************************/
 
 app.post(path, function (req, res) {
-  if (userIdPresent) {
-    req.body["userId"] =
-      req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH;
-  }
+  // if (userIdPresent) {
+  //   req.body["userId"] =
+  //     req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH;
+  // }
+
+  req.body.agentId = convertUrlType(
+    req.requestContext.claims.sub,
+    partitionKeyType
+  );
+
+  req.body.clientId = convertUrlType(generateUuid(), sortKeyType);
 
   let putItemParams = {
     TableName: tableName,

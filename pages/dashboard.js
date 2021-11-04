@@ -21,12 +21,12 @@ import DashboardPortfolio from "../components/dashboard/dashboard-portfolio";
 import useModal from "../utils/useModal";
 import { getClients, getClientsWithAuth, getPolicies } from "../utils/api";
 import { Amplify, Auth } from "aws-amplify";
-import awsmobile from "../src/aws-exports";
+import awsConfig from "../src/aws-exports";
 import { AmplifyAuthenticator } from "@aws-amplify/ui-react";
 import SidebarLogoutButton from "../components/stateless/interface/buttons/sidebar-logout-button";
 import { onAuthUIStateChange } from "@aws-amplify/ui-components";
 import useDashboardState from "../utils/useUrlQuery";
-Amplify.configure(awsmobile);
+Amplify.configure(awsConfig);
 
 const Dashboard = () => {
   const [clients, setClients] = useState([]);
@@ -87,30 +87,32 @@ const Dashboard = () => {
   };
 
   return (
-    <DashboardContainer>
-      <Sidebar open={showSidebar} onClose={closeSidebar}>
-        <List>
-          {sidebarItems.map((item) => (
-            <ListItem key={item.value}>
-              <ListItemButton
-                selected={selectedSidebarOption === item.value}
-                onClick={() => {
-                  sidebarOptionOnClick(item.value);
-                  closeSidebar();
-                }}
-              >
-                <ListItemIcon>{item.icon}</ListItemIcon>
-                <ListItemText primary={item.label} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-          <SidebarLogoutButton onClick={handleLogout} />
-        </List>
-      </Sidebar>
-      <Container sx={{ pb: 3 }}>
-        {mainComponent[selectedSidebarOption]}
-      </Container>
-    </DashboardContainer>
+    <AmplifyAuthenticator>
+      <DashboardContainer>
+        <Sidebar open={showSidebar} onClose={closeSidebar}>
+          <List>
+            {sidebarItems.map((item) => (
+              <ListItem key={item.value}>
+                <ListItemButton
+                  selected={selectedSidebarOption === item.value}
+                  onClick={() => {
+                    sidebarOptionOnClick(item.value);
+                    closeSidebar();
+                  }}
+                >
+                  <ListItemIcon>{item.icon}</ListItemIcon>
+                  <ListItemText primary={item.label} />
+                </ListItemButton>
+              </ListItem>
+            ))}
+            <SidebarLogoutButton onClick={handleLogout} />
+          </List>
+        </Sidebar>
+        <Container sx={{ pb: 3 }}>
+          {mainComponent[selectedSidebarOption]}
+        </Container>
+      </DashboardContainer>
+    </AmplifyAuthenticator>
   );
 };
 
