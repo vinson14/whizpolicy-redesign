@@ -15,6 +15,14 @@
     },
     "s3Key": {
       "Type": "String"
+    },
+    "storagewhizpolicynodejsdynamodbName": {
+      "Type": "String",
+      "Default": "storagewhizpolicynodejsdynamodbName"
+    },
+    "storagewhizpolicynodejsdynamodbArn": {
+      "Type": "String",
+      "Default": "storagewhizpolicynodejsdynamodbArn"
     }
   },
   "Conditions": {
@@ -47,12 +55,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "whizpolicyclientslambda",
+            "whizpolicynodejspolicieslambda",
             {
               "Fn::Join": [
                 "",
                 [
-                  "whizpolicyclientslambda",
+                  "whizpolicynodejspolicieslambda",
                   "-",
                   {
                     "Ref": "env"
@@ -78,7 +86,7 @@
             "Arn"
           ]
         },
-        "Runtime": "python3.8",
+        "Runtime": "nodejs14.x",
         "Layers": [],
         "Timeout": 25
       }
@@ -89,12 +97,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "whizpolicyamplifyLambdaRole88151b6d",
+            "whizpolicynodejsLambdaRole1f368b08",
             {
               "Fn::Join": [
                 "",
                 [
-                  "whizpolicyamplifyLambdaRole88151b6d",
+                  "whizpolicynodejsLambdaRole1f368b08",
                   "-",
                   {
                     "Ref": "env"
@@ -160,6 +168,34 @@
                   }
                 ]
               }
+            },
+            {
+              "Effect": "Allow",
+              "Action": [
+                "dynamodb:DescribeTable",
+                "dynamodb:GetItem",
+                "dynamodb:Query",
+                "dynamodb:Scan",
+                "dynamodb:PutItem",
+                "dynamodb:UpdateItem",
+                "dynamodb:DeleteItem"
+              ],
+              "Resource": [
+                {
+                  "Ref": "storagewhizpolicynodejsdynamodbArn"
+                },
+                {
+                  "Fn::Join": [
+                    "/",
+                    [
+                      {
+                        "Ref": "storagewhizpolicynodejsdynamodbArn"
+                      },
+                      "index/*"
+                    ]
+                  ]
+                }
+              ]
             }
           ]
         }

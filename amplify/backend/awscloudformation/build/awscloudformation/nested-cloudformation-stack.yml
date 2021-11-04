@@ -77,54 +77,36 @@
         }
       }
     },
-    "functionwhizpolicyclientslambda": {
+    "storagewhizpolicynodejsdynamodb": {
       "Type": "AWS::CloudFormation::Stack",
       "Properties": {
-        "TemplateURL": "https://s3.amazonaws.com/amplify-whizpolicyamplify-dev-30057-deployment/amplify-cfn-templates/function/whizpolicyclientslambda-cloudformation-template.json",
+        "TemplateURL": "https://s3.amazonaws.com/amplify-whizpolicynodejs-dev-130704-deployment/amplify-cfn-templates/storage/whizpolicynodejsdynamodb-cloudformation-template.json",
         "Parameters": {
-          "deploymentBucketName": "amplify-whizpolicyamplify-dev-30057-deployment",
-          "s3Key": "amplify-builds/whizpolicyclientslambda-6c685045426e73343869-build.zip",
+          "tableName": "whizpolicy_nodejs_clients",
+          "partitionKeyName": "agentId",
+          "partitionKeyType": "S",
+          "sortKeyName": "clientId",
+          "sortKeyType": "S",
           "env": "dev"
         }
       }
     },
-    "functionwhizpolicypolicieslambda": {
+    "functionwhizpolicynodejsclientslambda": {
       "Type": "AWS::CloudFormation::Stack",
       "Properties": {
-        "TemplateURL": "https://s3.amazonaws.com/amplify-whizpolicyamplify-dev-30057-deployment/amplify-cfn-templates/function/whizpolicypolicieslambda-cloudformation-template.json",
+        "TemplateURL": "https://s3.amazonaws.com/amplify-whizpolicynodejs-dev-130704-deployment/amplify-cfn-templates/function/whizpolicynodejsclientslambda-cloudformation-template.json",
         "Parameters": {
-          "deploymentBucketName": "amplify-whizpolicyamplify-dev-30057-deployment",
-          "s3Key": "amplify-builds/whizpolicypolicieslambda-4c5033766b7a3246616d-build.zip",
-          "env": "dev"
-        }
-      }
-    },
-    "apiwhizpolicyclientsapi": {
-      "Type": "AWS::CloudFormation::Stack",
-      "Properties": {
-        "TemplateURL": "https://s3.amazonaws.com/amplify-whizpolicyamplify-dev-30057-deployment/amplify-cfn-templates/api/whizpolicyclientsapi-cloudformation-template.json",
-        "Parameters": {
-          "functionwhizpolicyclientslambdaName": {
+          "deploymentBucketName": "amplify-whizpolicynodejs-dev-130704-deployment",
+          "s3Key": "amplify-builds/whizpolicynodejsclientslambda-74434b586a5556415249-build.zip",
+          "storagewhizpolicynodejsdynamodbName": {
             "Fn::GetAtt": [
-              "functionwhizpolicyclientslambda",
+              "storagewhizpolicynodejsdynamodb",
               "Outputs.Name"
             ]
           },
-          "functionwhizpolicyclientslambdaArn": {
+          "storagewhizpolicynodejsdynamodbArn": {
             "Fn::GetAtt": [
-              "functionwhizpolicyclientslambda",
-              "Outputs.Arn"
-            ]
-          },
-          "functionwhizpolicypolicieslambdaName": {
-            "Fn::GetAtt": [
-              "functionwhizpolicypolicieslambda",
-              "Outputs.Name"
-            ]
-          },
-          "functionwhizpolicypolicieslambdaArn": {
-            "Fn::GetAtt": [
-              "functionwhizpolicypolicieslambda",
+              "storagewhizpolicynodejsdynamodb",
               "Outputs.Arn"
             ]
           },
@@ -132,226 +114,60 @@
         }
       }
     },
-    "authwhizpolicyamplify1a74d288": {
+    "functionwhizpolicynodejspolicieslambda": {
       "Type": "AWS::CloudFormation::Stack",
       "Properties": {
-        "TemplateURL": "https://s3.amazonaws.com/amplify-whizpolicyamplify-dev-30057-deployment/amplify-cfn-templates/auth/whizpolicyamplify1a74d288-cloudformation-template.yml",
+        "TemplateURL": "https://s3.amazonaws.com/amplify-whizpolicynodejs-dev-130704-deployment/amplify-cfn-templates/function/whizpolicynodejspolicieslambda-cloudformation-template.json",
         "Parameters": {
-          "identityPoolName": "whizpolicyamplify1a74d288_identitypool_1a74d288",
-          "allowUnauthenticatedIdentities": false,
-          "resourceNameTruncated": "whizpo1a74d288",
-          "userPoolName": "whizpolicyamplify1a74d288_userpool_1a74d288",
-          "autoVerifiedAttributes": "email",
-          "mfaConfiguration": "OFF",
-          "mfaTypes": "SMS Text Message",
-          "smsAuthenticationMessage": "Your authentication code is {####}",
-          "smsVerificationMessage": "Your verification code is {####}",
-          "emailVerificationSubject": "Your verification code",
-          "emailVerificationMessage": "Your verification code is {####}",
-          "defaultPasswordPolicy": false,
-          "passwordPolicyMinLength": 8,
-          "passwordPolicyCharacters": "",
-          "requiredAttributes": "email",
-          "aliasAttributes": "",
-          "userpoolClientGenerateSecret": false,
-          "userpoolClientRefreshTokenValidity": 30,
-          "userpoolClientWriteAttributes": "email",
-          "userpoolClientReadAttributes": "email",
-          "userpoolClientLambdaRole": "whizpo1a74d288_userpoolclient_lambda_role",
-          "userpoolClientSetAttributes": false,
-          "sharedId": "1a74d288",
-          "resourceName": "whizpolicyamplify1a74d288",
-          "authSelections": "identityPoolAndUserPool",
-          "authRoleArn": {
+          "deploymentBucketName": "amplify-whizpolicynodejs-dev-130704-deployment",
+          "s3Key": "amplify-builds/whizpolicynodejspolicieslambda-394c6f59556e5842544a-build.zip",
+          "storagewhizpolicynodejsdynamodbName": {
             "Fn::GetAtt": [
-              "AuthRole",
-              "Arn"
+              "storagewhizpolicynodejsdynamodb",
+              "Outputs.Name"
             ]
           },
-          "unauthRoleArn": {
+          "storagewhizpolicynodejsdynamodbArn": {
             "Fn::GetAtt": [
-              "UnauthRole",
-              "Arn"
+              "storagewhizpolicynodejsdynamodb",
+              "Outputs.Arn"
             ]
           },
-          "useDefault": "default",
-          "usernameAttributes": "email",
-          "userPoolGroupList": "",
-          "serviceName": "Cognito",
-          "usernameCaseSensitive": false,
-          "dependsOn": "",
           "env": "dev"
         }
       }
     },
-    "UpdateRolesWithIDPFunction": {
-      "DependsOn": [
-        "AuthRole",
-        "UnauthRole",
-        "authwhizpolicyamplify1a74d288"
-      ],
-      "Type": "AWS::Lambda::Function",
+    "apiwhizpolicynodejsapi": {
+      "Type": "AWS::CloudFormation::Stack",
       "Properties": {
-        "Code": {
-          "ZipFile": {
-            "Fn::Join": [
-              "\n",
-              [
-                "const response = require('cfn-response');",
-                "const aws = require('aws-sdk');",
-                "let responseData = {};",
-                "exports.handler = function(event, context) {",
-                "  try {",
-                "    let authRoleName = event.ResourceProperties.authRoleName;",
-                "    let unauthRoleName = event.ResourceProperties.unauthRoleName;",
-                "    let idpId = event.ResourceProperties.idpId;",
-                "    let promises = [];",
-                "    let authParamsJson = { 'Version': '2012-10-17','Statement': [{'Effect': 'Allow','Principal': {'Federated': 'cognito-identity.amazonaws.com'},'Action': 'sts:AssumeRoleWithWebIdentity','Condition': {'StringEquals': {'cognito-identity.amazonaws.com:aud': idpId},'ForAnyValue:StringLike': {'cognito-identity.amazonaws.com:amr': 'authenticated'}}}]};",
-                "    let unauthParamsJson = { 'Version': '2012-10-17','Statement': [{'Effect': 'Allow','Principal': {'Federated': 'cognito-identity.amazonaws.com'},'Action': 'sts:AssumeRoleWithWebIdentity','Condition': {'StringEquals': {'cognito-identity.amazonaws.com:aud': idpId},'ForAnyValue:StringLike': {'cognito-identity.amazonaws.com:amr': 'unauthenticated'}}}]};",
-                "    if (event.RequestType == 'Delete') {",
-                "        delete authParamsJson.Statement[0].Condition;",
-                "        delete unauthParamsJson.Statement[0].Condition;",
-                "        let authParams = { PolicyDocument: JSON.stringify(authParamsJson),RoleName: authRoleName};",
-                "        let unauthParams = {PolicyDocument: JSON.stringify(unauthParamsJson),RoleName: unauthRoleName};",
-                "        const iam = new aws.IAM({ apiVersion: '2010-05-08', region: event.ResourceProperties.region});",
-                "        promises.push(iam.updateAssumeRolePolicy(authParams).promise());",
-                "        promises.push(iam.updateAssumeRolePolicy(unauthParams).promise());",
-                "        Promise.all(promises)",
-                "         .then((res) => {",
-                "            console.log(\"delete response data\" + JSON.stringify(res));",
-                "            response.send(event, context, response.SUCCESS, {});",
-                "         });",
-                "    }",
-                "    if (event.RequestType == 'Update' || event.RequestType == 'Create') {",
-                "       const iam = new aws.IAM({ apiVersion: '2010-05-08', region: event.ResourceProperties.region});",
-                "        let authParams = { PolicyDocument: JSON.stringify(authParamsJson),RoleName: authRoleName};",
-                "        let unauthParams = {PolicyDocument: JSON.stringify(unauthParamsJson),RoleName: unauthRoleName};",
-                "        promises.push(iam.updateAssumeRolePolicy(authParams).promise());",
-                "        promises.push(iam.updateAssumeRolePolicy(unauthParams).promise());",
-                "        Promise.all(promises)",
-                "         .then((res) => {",
-                "            console.log(\"createORupdate\" + res);",
-                "            console.log(\"response data\" + JSON.stringify(res));",
-                "            response.send(event, context, response.SUCCESS, {});",
-                "         });",
-                "    }",
-                "  } catch(err) {",
-                "       console.log(err.stack);",
-                "       responseData = {Error: err};",
-                "       response.send(event, context, response.FAILED, responseData);",
-                "       throw err;",
-                "  }",
-                "};"
-              ]
+        "TemplateURL": "https://s3.amazonaws.com/amplify-whizpolicynodejs-dev-130704-deployment/amplify-cfn-templates/api/whizpolicynodejsapi-cloudformation-template.json",
+        "Parameters": {
+          "functionwhizpolicynodejsclientslambdaName": {
+            "Fn::GetAtt": [
+              "functionwhizpolicynodejsclientslambda",
+              "Outputs.Name"
             ]
-          }
-        },
-        "Handler": "index.handler",
-        "Runtime": "nodejs12.x",
-        "Timeout": 300,
-        "Role": {
-          "Fn::GetAtt": [
-            "UpdateRolesWithIDPFunctionRole",
-            "Arn"
-          ]
-        }
-      }
-    },
-    "UpdateRolesWithIDPFunctionOutputs": {
-      "Type": "Custom::LambdaCallout",
-      "Properties": {
-        "ServiceToken": {
-          "Fn::GetAtt": [
-            "UpdateRolesWithIDPFunction",
-            "Arn"
-          ]
-        },
-        "region": {
-          "Ref": "AWS::Region"
-        },
-        "idpId": {
-          "Fn::GetAtt": [
-            "authwhizpolicyamplify1a74d288",
-            "Outputs.IdentityPoolId"
-          ]
-        },
-        "authRoleName": {
-          "Ref": "AuthRoleName"
-        },
-        "unauthRoleName": {
-          "Ref": "UnauthRoleName"
-        }
-      }
-    },
-    "UpdateRolesWithIDPFunctionRole": {
-      "Type": "AWS::IAM::Role",
-      "Properties": {
-        "RoleName": {
-          "Fn::Join": [
-            "",
-            [
-              {
-                "Ref": "AuthRoleName"
-              },
-              "-idp"
+          },
+          "functionwhizpolicynodejsclientslambdaArn": {
+            "Fn::GetAtt": [
+              "functionwhizpolicynodejsclientslambda",
+              "Outputs.Arn"
             ]
-          ]
-        },
-        "AssumeRolePolicyDocument": {
-          "Version": "2012-10-17",
-          "Statement": [
-            {
-              "Effect": "Allow",
-              "Principal": {
-                "Service": [
-                  "lambda.amazonaws.com"
-                ]
-              },
-              "Action": [
-                "sts:AssumeRole"
-              ]
-            }
-          ]
-        },
-        "Policies": [
-          {
-            "PolicyName": "UpdateRolesWithIDPFunctionPolicy",
-            "PolicyDocument": {
-              "Version": "2012-10-17",
-              "Statement": [
-                {
-                  "Effect": "Allow",
-                  "Action": [
-                    "logs:CreateLogGroup",
-                    "logs:CreateLogStream",
-                    "logs:PutLogEvents"
-                  ],
-                  "Resource": "arn:aws:logs:*:*:*"
-                },
-                {
-                  "Effect": "Allow",
-                  "Action": "iam:UpdateAssumeRolePolicy",
-                  "Resource": {
-                    "Fn::GetAtt": [
-                      "AuthRole",
-                      "Arn"
-                    ]
-                  }
-                },
-                {
-                  "Effect": "Allow",
-                  "Action": "iam:UpdateAssumeRolePolicy",
-                  "Resource": {
-                    "Fn::GetAtt": [
-                      "UnauthRole",
-                      "Arn"
-                    ]
-                  }
-                }
-              ]
-            }
-          }
-        ]
+          },
+          "functionwhizpolicynodejspolicieslambdaName": {
+            "Fn::GetAtt": [
+              "functionwhizpolicynodejspolicieslambda",
+              "Outputs.Name"
+            ]
+          },
+          "functionwhizpolicynodejspolicieslambdaArn": {
+            "Fn::GetAtt": [
+              "functionwhizpolicynodejspolicieslambda",
+              "Outputs.Arn"
+            ]
+          },
+          "env": "dev"
+        }
       }
     }
   },

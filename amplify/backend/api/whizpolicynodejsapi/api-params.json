@@ -1,0 +1,54 @@
+{
+  "paths": [
+    {
+      "name": "/clients",
+      "lambdaFunction": "whizpolicynodejsclientslambda",
+      "privacy": {
+        "open": true
+      },
+      "policyResourceName": "/clients"
+    },
+    {
+      "name": "/policies",
+      "lambdaFunction": "whizpolicynodejspolicieslambda",
+      "privacy": {
+        "open": true
+      },
+      "policyResourceName": "/policies"
+    }
+  ],
+  "resourceName": "whizpolicynodejsapi",
+  "apiName": "whizpolicynodejsapi",
+  "functionArns": [
+    {
+      "lambdaFunction": "whizpolicynodejsclientslambda"
+    },
+    {
+      "lambdaFunction": "whizpolicynodejspolicieslambda"
+    }
+  ],
+  "privacy": {
+    "auth": 0,
+    "unauth": 0,
+    "authRoleName": "amplify-whizpolicynodejs-dev-130704-authRole",
+    "unAuthRoleName": "amplify-whizpolicynodejs-dev-130704-unauthRole"
+  },
+  "dependsOn": [
+    {
+      "category": "function",
+      "resourceName": "whizpolicynodejsclientslambda",
+      "attributes": [
+        "Name",
+        "Arn"
+      ]
+    },
+    {
+      "category": "function",
+      "resourceName": "whizpolicynodejspolicieslambda",
+      "attributes": [
+        "Name",
+        "Arn"
+      ]
+    }
+  ]
+}
