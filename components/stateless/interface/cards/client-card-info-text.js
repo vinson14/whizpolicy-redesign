@@ -1,6 +1,8 @@
 import { Box, Grid, IconButton, ListItemIcon, Typography } from "@mui/material";
+import { format } from "date-fns";
 import {
   FIELD_TYPE_CURRENCY,
+  FIELD_TYPE_DATE,
   FIELD_TYPE_INTEGER,
   FIELD_TYPE_TEXT,
 } from "../../../../data/ui";
@@ -21,6 +23,7 @@ const ClientCardInfoText = ({
     if (value == null) return "N.A.";
     if (type === FIELD_TYPE_CURRENCY) return `$${formatNumber(value)}`;
     if (type === FIELD_TYPE_INTEGER) return value;
+    if (type === FIELD_TYPE_DATE) return format(new Date(value), "d MMM yyyy");
     if (type === FIELD_TYPE_TEXT) {
       return formatString(value);
     }

@@ -52,6 +52,7 @@ export const INPUT_TYPE_YEAR = "yearInput";
 export const FIELD_TYPE_TEXT = "text";
 export const FIELD_TYPE_CURRENCY = "currency";
 export const FIELD_TYPE_INTEGER = "integer";
+export const FIELD_TYPE_DATE = "date";
 
 // Policy Categories
 export const POLICY_CATEGORY_WHOLE_LIFE_KEY = "wholeLife";
@@ -277,18 +278,22 @@ export const clientDetailsAboutFields = [
   {
     label: CLIENT_GENDER_LABEL,
     key: CLIENT_GENDER_KEY,
+    type: FIELD_TYPE_TEXT,
   },
   {
     label: CLIENT_BIRTHDAY_LABEL,
     key: CLIENT_BIRTHDAY_KEY,
+    type: FIELD_TYPE_DATE,
   },
   {
     label: CLIENT_MARITAL_STATUS_LABEL,
     key: CLIENT_MARITAL_STATUS_KEY,
+    type: FIELD_TYPE_TEXT,
   },
   {
     label: CLIENT_SMOKER_LABEL,
     key: CLIENT_SMOKER_KEY,
+    type: FIELD_TYPE_TEXT,
   },
 ];
 
