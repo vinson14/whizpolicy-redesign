@@ -6,7 +6,11 @@ import {
   Grid,
 } from "@mui/material";
 import { useForm } from "react-hook-form";
-import { addClientFormFields, inputTypeMapping } from "../../../data/ui";
+import {
+  addClientFormFields,
+  inputTypeMapping,
+  newClientDefaultValues,
+} from "../../../data/ui";
 import { postClient, putClient, deleteClient } from "../../../utils/api";
 import AddButton from "../../stateless/interface/buttons/add-button";
 import CancelButton from "../../stateless/interface/buttons/cancel-button";
@@ -18,7 +22,7 @@ import ModalContainer from "../../stateless/interface/modal/modal-container";
 const ClientFormModal = ({
   open,
   handleClose,
-  defaultValues,
+  defaultValues = newClientDefaultValues,
   setUpdateClients,
   edit,
 }) => {
@@ -27,7 +31,9 @@ const ClientFormModal = ({
     handleSubmit,
     formState: { errors },
   } = useForm({
-    defaultValues: defaultValues,
+    defaultValues: {
+      maritalStatus: "single",
+    },
   });
   const onSubmit = (formData) => {
     // if (edit) putClient(formData);

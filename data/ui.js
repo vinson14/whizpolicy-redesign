@@ -22,6 +22,7 @@ import NameCard from "../components/dashboard/client-details/name-card";
 import AboutCard from "../components/dashboard/client-details/about-card";
 import DependantsCard from "../components/dashboard/client-details/dependants-card";
 import CoverageCard from "../components/dashboard/client-details/coverage-card";
+import { FileDownload } from "@mui/icons-material";
 
 // Dimensions
 export const FLOATING_ACTION_BUTTON_WIDTH = 160;
@@ -176,6 +177,20 @@ export const MARITAL_STATUS_MARRIED_LABEL = "Married";
 export const MARITAL_STATUS_DIVORCED_LABEL = "Divorced";
 export const MARITAL_STATUS_SEPARATED_LABEL = "Separated";
 export const MARITAL_STATUS_WIDOWED_LABEL = "Widowed";
+
+// Gender Keys and Values
+export const GENDER_MALE_VALUE = "male";
+export const GENDER_MALE_LABEL = "Male";
+export const GENDER_FEMALE_VALUE = "female";
+export const GENDER_FEMALE_LABEL = "Female";
+export const GENDER_OTHERS_VALUE = "others";
+export const GENDER_OTHERS_LABEL = "Others";
+
+// Smoker Status values and labels
+export const SMOKER_YES_VALUE = "yes";
+export const SMOKER_YES_LABEL = "Yes";
+export const SMOKER_NO_VALUE = "no";
+export const SMOKER_NO_LABEL = "No";
 
 export const sidebarItems = [
   {
@@ -370,6 +385,20 @@ export const coverageInfoPopoverContent = {
   ],
 };
 
+export const newClientDefaultValues = {
+  [CLIENT_NAME_KEY]: "John Doe",
+  [CLIENT_OCCUPATION_KEY]: "",
+  [CLIENT_MOBILE_KEY]: "",
+  [CLIENT_EMAIL_KEY]: "",
+  [CLIENT_GENDER_KEY]: GENDER_MALE_VALUE,
+  [CLIENT_BIRTHDAY_KEY]: "",
+  [CLIENT_MARITAL_STATUS_KEY]: "single",
+  [CLIENT_SMOKER_KEY]: SMOKER_NO_VALUE,
+  [CLIENT_SALUTATION_KEY]: "mr",
+  [CLIENT_NATIONALITY_KEY]: "Singapore",
+  [CLIENT_ANNUAL_INCOME_KEY]: 1000000,
+};
+
 export const addClientFormFields = [
   {
     name: CLIENT_NAME_KEY,
@@ -395,67 +424,66 @@ export const addClientFormFields = [
       lg: 5,
     },
   },
-  {
-    name: CLIENT_SALUTATION_KEY,
-    label: CLIENT_SALUTATION_LABEL,
-    defaultValue: "mr",
-    type: INPUT_TYPE_SELECT,
-    options: [
-      { label: "Mr", value: "mr" },
-      { label: "Ms", value: "ms" },
-      { label: "Mrs", value: "mrs" },
-      { label: "Dr", value: "dr" },
-    ],
-    col: {
-      xs: 12,
-      md: 6,
-      lg: 5,
-    },
-  },
-  {
-    name: CLIENT_GENDER_KEY,
-    label: CLIENT_GENDER_LABEL,
-    defaultValue: "male",
-    type: INPUT_TYPE_SELECT,
-    options: [
-      { label: "Male", value: "male" },
-      { label: "Female", value: "female" },
-      { label: "Others", value: "Others" },
-    ],
-    col: {
-      xs: 12,
-      md: 6,
-      lg: 5,
-    },
-  },
-  {
-    name: CLIENT_EMAIL_KEY,
-    label: CLIENT_EMAIL_LABEL,
-    defaultValue: "",
-    placeholder: "johndoe@gmail.com",
-    type: INPUT_TYPE_TEXT,
-    col: {
-      xs: 12,
-      md: 6,
-      lg: 5,
-    },
-  },
-  {
-    name: CLIENT_MOBILE_KEY,
-    label: CLIENT_MOBILE_LABEL,
-    defaultValue: "",
-    placeholder: "+65",
-    type: INPUT_TYPE_TEXT,
-    col: {
-      xs: 12,
-      md: 6,
-      lg: 5,
-    },
-  },
+  // {
+  //   name: CLIENT_SALUTATION_KEY,
+  //   label: CLIENT_SALUTATION_LABEL,
+  //   defaultValue: "mr",
+  //   type: INPUT_TYPE_SELECT,
+  //   options: [
+  //     { label: "Mr", value: "mr" },
+  //     { label: "Ms", value: "ms" },
+  //     { label: "Mrs", value: "mrs" },
+  //     { label: "Dr", value: "dr" },
+  //   ],
+  //   col: {
+  //     xs: 12,
+  //     md: 6,
+  //     lg: 5,
+  //   },
+  // },
+  // {
+  //   name: CLIENT_GENDER_KEY,
+  //   label: CLIENT_GENDER_LABEL,
+  //   defaultValue: "male",
+  //   type: INPUT_TYPE_SELECT,
+  //   options: [
+  //     { label: "Male", value: "male" },
+  //     { label: "Female", value: "female" },
+  //     { label: "Others", value: "Others" },
+  //   ],
+  //   col: {
+  //     xs: 12,
+  //     md: 6,
+  //     lg: 5,
+  //   },
+  // },
+  // {
+  //   name: CLIENT_EMAIL_KEY,
+  //   label: CLIENT_EMAIL_LABEL,
+  //   defaultValue: "",
+  //   placeholder: "johndoe@gmail.com",
+  //   type: INPUT_TYPE_TEXT,
+  //   col: {
+  //     xs: 12,
+  //     md: 6,
+  //     lg: 5,
+  //   },
+  // },
+  // {
+  //   name: CLIENT_MOBILE_KEY,
+  //   label: CLIENT_MOBILE_LABEL,
+  //   defaultValue: "",
+  //   placeholder: "+65",
+  //   type: INPUT_TYPE_TEXT,
+  //   col: {
+  //     xs: 12,
+  //     md: 6,
+  //     lg: 5,
+  //   },
+  // },
   {
     name: CLIENT_MARITAL_STATUS_KEY,
-    label: CLIENT_MARITAL_STATUS_KEY,
-    defaultValue: MARITAL_STATUS_SINGLE_KEY,
+    label: CLIENT_MARITAL_STATUS_LABEL,
     type: INPUT_TYPE_SELECT,
     options: [
       { label: MARITAL_STATUS_SINGLE_LABEL, value: MARITAL_STATUS_SINGLE_KEY },
@@ -495,21 +523,21 @@ export const addClientFormFields = [
   //     lg: 5,
   //   },
   // },
-  {
-    name: CLIENT_SMOKER_KEY,
-    label: CLIENT_SMOKER_LABEL,
-    defaultValue: "no",
-    type: INPUT_TYPE_SELECT,
-    options: [
-      { label: "No", value: "no" },
-      { label: "Yes", value: "yes" },
-    ],
-    col: {
-      xs: 12,
-      md: 6,
-      lg: 5,
-    },
-  },
+  // {
+  //   name: CLIENT_SMOKER_KEY,
+  //   label: CLIENT_SMOKER_LABEL,
+  //   defaultValue: "no",
+  //   type: INPUT_TYPE_SELECT,
+  //   options: [
+  //     { label: "No", value: "no" },
+  //     { label: "Yes", value: "yes" },
+  //   ],
+  //   col: {
+  //     xs: 12,
+  //     md: 6,
+  //     lg: 5,
+  //   },
+  // },
   // {
   //   name: CLIENT_BIRTHDAY_KEY,
   //   label: CLIENT_BIRTHDAY_LABEL,
@@ -521,30 +549,42 @@ export const addClientFormFields = [
   //     lg: 5,
   //   },
   // },
-  {
-    name: CLIENT_OCCUPATION_KEY,
-    label: CLIENT_OCCUPATION_LABEL,
-    placeholder: "Occupation",
-    type: INPUT_TYPE_TEXT,
-    col: {
-      xs: 12,
-      md: 6,
-      lg: 5,
-    },
-  },
   // {
-  //   name: CLIENT_ANNUAL_INCOME_KEY,
-  //   label: CLIENT_ANNUAL_INCOME_LABEL,
-  //   defaultValue: "",
-  //   placeholder: "1,000,000",
-  //   startAdornment: "$",
-  //   type: INPUT_TYPE_CURRENCY,
+  //   name: CLIENT_OCCUPATION_KEY,
+  //   label: CLIENT_OCCUPATION_LABEL,
+  //   placeholder: "Occupation",
+  //   type: INPUT_TYPE_TEXT,
   //   col: {
   //     xs: 12,
   //     md: 6,
   //     lg: 5,
   //   },
   // },
+  {
+    name: CLIENT_ANNUAL_INCOME_KEY,
+    label: CLIENT_ANNUAL_INCOME_LABEL,
+    defaultValue: "",
+    required: {
+      value: true,
+      message: "This is a required field",
+    },
+    min: {
+      value: 1,
+      message: "Annual income should be at least 1",
+    },
+    max: {
+      value: 10000000,
+      message: "The max value is ",
+    },
+    placeholder: "1,000,000",
+    startAdornment: "$",
+    type: INPUT_TYPE_CURRENCY,
+    col: {
+      xs: 12,
+      md: 6,
+      lg: 5,
+    },
+  },
 ];
 
 export const addPolicyFormFields = {

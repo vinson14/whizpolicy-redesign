@@ -1,33 +1,35 @@
 import { InputAdornment, TextField } from "@mui/material";
-import { Controller } from "react-hook-form";
 
 const CurrencyInput = ({
   name,
-  control,
-  defaultValue,
+  register,
+  error,
+  required,
+  min,
+  max,
   label,
   placeholder,
   shrink = true,
   variant = "outlined",
 }) => {
   return (
-    <Controller
-      name={name}
-      control={control}
-      defaultValue={defaultValue}
-      render={({ field }) => (
-        <TextField
-          {...field}
-          label={label}
-          variant={variant}
-          placeholder={placeholder}
-          InputProps={{
-            startAdornment: <InputAdornment position="start">$</InputAdornment>,
-          }}
-          InputLabelProps={{ shrink }}
-          inputProps={{ type: "number", step: 0.01 }}
-        />
-      )}
+    <TextField
+      {...register(name, {
+        required,
+        min,
+        max,
+        valueAsNumber: true,
+      })}
+      error={error}
+      helperText={error ? error.message : ""}
+      label={label}
+      variant={variant}
+      placeholder={placeholder}
+      InputProps={{
+        startAdornment: <InputAdornment position="start">$</InputAdornment>,
+      }}
+      InputLabelProps={{ shrink }}
+      inputProps={{ type: "number", step: 0.01 }}
     />
   );
 };

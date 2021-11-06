@@ -2,6 +2,7 @@ import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { Controller } from "react-hook-form";
 
 const SelectInput = ({ name, label, options, shrink = true, register }) => {
+  console.log(register(name));
   return (
     <FormControl fullWidth>
       <InputLabel>{label}</InputLabel>

@@ -1,5 +1,4 @@
 import { InputAdornment, TextField } from "@mui/material";
-import { Controller } from "react-hook-form";
 
 const TextInput = ({
   name,
@@ -21,7 +20,7 @@ const TextInput = ({
         minLength,
         maxLength,
       })}
-      error={error}
+      error={error ? true : false}
       helperText={error ? error.message : ""}
       label={label}
       variant={variant}
