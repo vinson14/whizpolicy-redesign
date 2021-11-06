@@ -589,9 +589,8 @@ export const addClientFormFields = [
   {
     name: CLIENT_ANNUAL_INCOME_KEY,
     label: CLIENT_ANNUAL_INCOME_LABEL,
-    defaultValue: "",
     min: {
-      value: 1,
+      value: 0,
       message: "Annual income should be at least 1",
     },
     max: {

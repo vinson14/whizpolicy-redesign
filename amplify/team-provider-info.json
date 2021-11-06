@@ -15,11 +15,11 @@
       "function": {
         "whizpolicynodejspolicieslambda": {
           "deploymentBucketName": "amplify-whizpolicynodejs-dev-130704-deployment",
-          "s3Key": "amplify-builds/whizpolicynodejspolicieslambda-394c6f59556e5842544a-build.zip"
+          "s3Key": "amplify-builds/whizpolicynodejspolicieslambda-727a454a445341684a52-build.zip"
         },
         "whizpolicynodejsclientslambda": {
           "deploymentBucketName": "amplify-whizpolicynodejs-dev-130704-deployment",
-          "s3Key": "amplify-builds/whizpolicynodejsclientslambda-72315167664330757852-build.zip"
+          "s3Key": "amplify-builds/whizpolicynodejsclientslambda-6e745a4938564e395456-build.zip"
         }
       },
       "auth": {

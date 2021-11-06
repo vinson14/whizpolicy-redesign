@@ -54,6 +54,10 @@ const ClientFormModal = ({
     reset({}, { keepDefaultValues: true });
   };
 
+  const cancelForm = () => {
+    handleClose();
+  };
+
   return (
     <ModalContainer open={open} onClose={handleClose} title="Add Client">
       <DialogContent>
@@ -84,7 +88,7 @@ const ClientFormModal = ({
                   <ResetButton onClick={resetClient}>Reset</ResetButton>
                 </>
               )}
-              <CancelButton onClick={handleClose}>Cancel</CancelButton>
+              <CancelButton onClick={cancelForm}>Cancel</CancelButton>
             </Grid>
           </Grid>
         </FormContainer>

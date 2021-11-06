@@ -1,4 +1,5 @@
 import { Amplify, API, Auth } from "aws-amplify";
+import differenceInYears from "date-fns/differenceInYears";
 import awsmobile from "../src/aws-exports";
 const endpoint = "https://a3dk3p85vd.execute-api.us-east-1.amazonaws.com/dev";
 const apiName = "whizpolicynodejsapi";
@@ -18,12 +19,16 @@ export const getPolicies = async () => {
 export const getClients = async () => {
   console.log("getClients Ran");
   const jwtToken = (await Auth.currentSession()).getIdToken().getJwtToken();
-  const response = await API.get(apiName, "/clients", {
-    headers: {
-      Authorization: `${jwtToken}`,
-    },
-  });
-  return response;
+  try {
+    const response = await API.get(apiName, "/clients", {
+      headers: {
+        Authorization: `${jwtToken}`,
+      },
+    });
+    return response;
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export const postClient = async (client) => {
@@ -38,8 +43,12 @@ export const postClient = async (client) => {
       Authorization: `${jwtToken}`,
     },
   };
-  const response = await API.post(apiName, path, init);
-  return response;
+  try {
+    const response = await API.post(apiName, path, init);
+    return response;
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export const putClient = async (client) => {
