@@ -25,6 +25,9 @@ const theme = createTheme({
     info: {
       main: "#073B4C",
     },
+    warning: {
+      main: "#ffd166",
+    },
   },
   typography: {
     fontFamily: "Public Sans, sans-serif",

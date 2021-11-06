@@ -28,8 +28,6 @@ export const getClients = async () => {
 
 export const postClient = async (client) => {
   const jwtToken = (await Auth.currentSession()).getIdToken().getJwtToken();
-  console.log(client);
-  console.log(JSON.stringify(client));
   const path = "/clients";
   const init = {
     body: {
@@ -41,5 +39,36 @@ export const postClient = async (client) => {
     },
   };
   const response = await API.post(apiName, path, init);
+  return response;
+};
+
+export const putClient = async (client) => {
+  const jwtToken = (await Auth.currentSession()).getIdToken().getJwtToken();
+  const path = "/clients";
+  const init = {
+    body: {
+      ...client,
+    },
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `${jwtToken}`,
+    },
+  };
+  const response = await API.put(apiName, path, init);
+  return response;
+};
+
+export const deleteClient = async (clientId) => {
+  const jwtToken = (await Auth.currentSession()).getIdToken().getJwtToken();
+  const path = `/clients/${clientId}`;
+  const init = {
+    body: {},
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `${jwtToken}`,
+    },
+  };
+
+  const response = await API.del(apiName, path, init);
   return response;
 };

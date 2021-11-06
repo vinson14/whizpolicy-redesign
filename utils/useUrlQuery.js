@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   defaultDashboardClientBreadcrumbs,
   defaultDashboardPortfolioBreadcrumbs,
@@ -6,8 +6,9 @@ import {
   SIDEBAR_CLIENTS_VALUE,
   SIDEBAR_PORTFOLIO_VALUE,
 } from "../data/ui";
+import { findClientById } from "./utils";
 
-const useDashboardState = () => {
+const useDashboardState = (clients, policies) => {
   const [selectedSidebarOption, setSelectedSidebarOption] = useState(
     SIDEBAR_CLIENTS_VALUE
   );
@@ -22,6 +23,11 @@ const useDashboardState = () => {
     setSelectedPolicy(null);
     setBreadcrumbLinks(defaultBreadcrumbs[value]);
   };
+
+  useEffect(() => {
+    if (selectedClient)
+      setSelectedClient(findClientById(clients, selectedClient.clientId));
+  }, [clients]);
 
   const defaultBreadcrumbs = {
     [SIDEBAR_CLIENTS_VALUE]: defaultDashboardClientBreadcrumbs,

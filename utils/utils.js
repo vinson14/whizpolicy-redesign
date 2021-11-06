@@ -1,11 +1,11 @@
 export const getInitials = (name) => {
+  if (!name) return "AB";
   const words = name.split(" ");
-
   return words[0].charAt(0) + words[1].charAt(0);
 };
 
 export const findClientById = (clients, id) => {
-  return clients.find((client) => client.client_id == id);
+  return clients.find((client) => client.clientId == id);
 };
 
 export const findPolicyByPolicyNumber = (policies, policyNumber) => {

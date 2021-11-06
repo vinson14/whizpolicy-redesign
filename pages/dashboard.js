@@ -42,7 +42,7 @@ const Dashboard = () => {
     sidebarOptionOnClick,
     clientOnClick,
     policyOnClick,
-  ] = useDashboardState();
+  ] = useDashboardState(clients, policies);
 
   const handleLogout = () => {
     setLoading(true);
@@ -52,7 +52,7 @@ const Dashboard = () => {
   useEffect(() => {
     console.log("this ran");
     getClients().then((data) => setClients(data));
-    getPolicies().then((policies) => setPolicies(policies));
+    // getPolicies().then((policies) => setPolicies(policies));
     setUpdateClients(false);
   }, [updateClients]);
 

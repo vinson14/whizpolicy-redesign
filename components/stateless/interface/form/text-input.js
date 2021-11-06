@@ -3,38 +3,38 @@ import { Controller } from "react-hook-form";
 
 const TextInput = ({
   name,
-  control,
   label,
-  defaultValue,
+  error,
   placeholder,
   startAdornment,
   shrink = true,
   variant = "outlined",
+  register,
+  required,
+  minLength,
+  maxLength,
 }) => {
   return (
-    <Controller
-      name={name}
-      control={control}
-      defaultValue={defaultValue}
-      render={({ field }) => (
-        <TextField
-          {...field}
-          label={label}
-          variant={variant}
-          InputProps={
-            startAdornment && {
-              startAdornment: (
-                <InputAdornment position="start">
-                  {startAdornment}
-                </InputAdornment>
-              ),
-            }
-          }
-          placeholder={placeholder}
-          fullWidth
-          InputLabelProps={{ shrink }}
-        />
-      )}
+    <TextField
+      {...register(name, {
+        required,
+        minLength,
+        maxLength,
+      })}
+      error={error}
+      helperText={error ? error.message : ""}
+      label={label}
+      variant={variant}
+      InputProps={
+        startAdornment && {
+          startAdornment: (
+            <InputAdornment position="start">{startAdornment}</InputAdornment>
+          ),
+        }
+      }
+      placeholder={placeholder}
+      fullWidth
+      InputLabelProps={{ shrink }}
     />
   );
 };

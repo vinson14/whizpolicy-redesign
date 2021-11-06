@@ -61,13 +61,18 @@ const generateUuid = () => {
  ********************************/
 
 app.get(path, function (req, res) {
+  console.log(req.apiGateway.event.requestContext);
+  console.log(res);
   var condition = {};
   condition[partitionKeyName] = {
     ComparisonOperator: "EQ",
   };
 
   condition[partitionKeyName]["AttributeValueList"] = [
-    convertUrlType(req.requestContext.claims.sub, partitionKeyType),
+    convertUrlType(
+      req.apiGateway.event.requestContext.authorizer.claims.sub,
+      partitionKeyType
+    ),
   ];
 
   // if (userIdPresent && req.apiGateway) {
@@ -163,7 +168,7 @@ app.put(path, function (req, res) {
   // }
 
   req.body.agentId = convertUrlType(
-    req.requestContext.claims.sub,
+    req.apiGateway.event.requestContext.authorizer.claims.sub,
     partitionKeyType
   );
 
@@ -186,13 +191,8 @@ app.put(path, function (req, res) {
  *************************************/
 
 app.post(path, function (req, res) {
-  // if (userIdPresent) {
-  //   req.body["userId"] =
-  //     req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH;
-  // }
-
   req.body.agentId = convertUrlType(
-    req.requestContext.claims.sub,
+    req.apiGateway.event.requestContext.authorizer.claims.sub,
     partitionKeyType
   );
 
@@ -216,33 +216,18 @@ app.post(path, function (req, res) {
  * HTTP remove method to delete object *
  ***************************************/
 
-app.delete(path + "/object" + hashKeyPath + sortKeyPath, function (req, res) {
+app.delete(path + sortKeyPath, function (req, res) {
   var params = {};
-  if (userIdPresent && req.apiGateway) {
-    params[partitionKeyName] =
-      req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH;
-  } else {
-    params[partitionKeyName] = req.params[partitionKeyName];
-    try {
-      params[partitionKeyName] = convertUrlType(
-        req.params[partitionKeyName],
-        partitionKeyType
-      );
-    } catch (err) {
-      res.statusCode = 500;
-      res.json({ error: "Wrong column type " + err });
-    }
-  }
-  if (hasSortKey) {
-    try {
-      params[sortKeyName] = convertUrlType(
-        req.params[sortKeyName],
-        sortKeyType
-      );
-    } catch (err) {
-      res.statusCode = 500;
-      res.json({ error: "Wrong column type " + err });
-    }
+  params[partitionKeyName] = convertUrlType(
+    req.apiGateway.event.requestContext.authorizer.claims.sub,
+    partitionKeyType
+  );
+
+  try {
+    params[sortKeyName] = convertUrlType(req.params[sortKeyName], sortKeyType);
+  } catch (err) {
+    res.statusCode = 500;
+    res.json({ error: "Wrong column type " + err });
   }
 
   let removeItemParams = {
@@ -258,6 +243,7 @@ app.delete(path + "/object" + hashKeyPath + sortKeyPath, function (req, res) {
     }
   });
 });
+
 app.listen(3000, function () {
   console.log("App started");
 });

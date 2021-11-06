@@ -377,6 +377,18 @@ export const addClientFormFields = [
     defaultValue: "",
     type: INPUT_TYPE_TEXT,
     placeholder: "John Doe",
+    required: {
+      value: true,
+      message: "Please provide a name",
+    },
+    minLength: {
+      value: 2,
+      message: "The name should have at least 2 characters",
+    },
+    maxLength: {
+      value: 70,
+      message: "The name should not have more than 70 characters",
+    },
     col: {
       xs: 12,
       md: 6,
@@ -470,19 +482,19 @@ export const addClientFormFields = [
       lg: 5,
     },
   },
-  {
-    name: CLIENT_NATIONALITY_KEY,
-    label: CLIENT_NATIONALITY_LABEL,
-    defaultValue: "Singapore",
-    placeholder: "Singapore",
-    type: INPUT_TYPE_AUTOCOMPLETE,
-    options: countryList().getLabels(),
-    col: {
-      xs: 12,
-      md: 6,
-      lg: 5,
-    },
-  },
+  // {
+  //   name: CLIENT_NATIONALITY_KEY,
+  //   label: CLIENT_NATIONALITY_LABEL,
+  //   defaultValue: "Singapore",
+  //   placeholder: "Singapore",
+  //   type: INPUT_TYPE_AUTOCOMPLETE,
+  //   options: countryList().getLabels(),
+  //   col: {
+  //     xs: 12,
+  //     md: 6,
+  //     lg: 5,
+  //   },
+  // },
   {
     name: CLIENT_SMOKER_KEY,
     label: CLIENT_SMOKER_LABEL,
@@ -498,17 +510,17 @@ export const addClientFormFields = [
       lg: 5,
     },
   },
-  {
-    name: CLIENT_BIRTHDAY_KEY,
-    label: CLIENT_BIRTHDAY_LABEL,
-    defaultValue: new Date("Jan 01, 2000"),
-    type: INPUT_TYPE_DATEPICKER,
-    col: {
-      xs: 12,
-      md: 6,
-      lg: 5,
-    },
-  },
+  // {
+  //   name: CLIENT_BIRTHDAY_KEY,
+  //   label: CLIENT_BIRTHDAY_LABEL,
+  //   defaultValue: new Date("Jan 01, 2000"),
+  //   type: INPUT_TYPE_DATEPICKER,
+  //   col: {
+  //     xs: 12,
+  //     md: 6,
+  //     lg: 5,
+  //   },
+  // },
   {
     name: CLIENT_OCCUPATION_KEY,
     label: CLIENT_OCCUPATION_LABEL,
@@ -520,19 +532,19 @@ export const addClientFormFields = [
       lg: 5,
     },
   },
-  {
-    name: CLIENT_ANNUAL_INCOME_KEY,
-    label: CLIENT_ANNUAL_INCOME_LABEL,
-    defaultValue: "",
-    placeholder: "1,000,000",
-    startAdornment: "$",
-    type: INPUT_TYPE_CURRENCY,
-    col: {
-      xs: 12,
-      md: 6,
-      lg: 5,
-    },
-  },
+  // {
+  //   name: CLIENT_ANNUAL_INCOME_KEY,
+  //   label: CLIENT_ANNUAL_INCOME_LABEL,
+  //   defaultValue: "",
+  //   placeholder: "1,000,000",
+  //   startAdornment: "$",
+  //   type: INPUT_TYPE_CURRENCY,
+  //   col: {
+  //     xs: 12,
+  //     md: 6,
+  //     lg: 5,
+  //   },
+  // },
 ];
 
 export const addPolicyFormFields = {
