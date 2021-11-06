@@ -12,6 +12,7 @@ const TextInput = ({
   required,
   minLength,
   maxLength,
+  pattern,
 }) => {
   return (
     <TextField
@@ -19,6 +20,7 @@ const TextInput = ({
         required,
         minLength,
         maxLength,
+        pattern,
       })}
       error={error ? true : false}
       helperText={error ? error.message : ""}

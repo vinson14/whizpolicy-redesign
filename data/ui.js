@@ -167,11 +167,11 @@ export const PREMIUM_MODE_QUARTERLY_LABEL = "Quarterly";
 export const PREMIUM_MODE_SEMI_ANNUALLY_LABEL = "Semi-annually";
 
 // Marital Status Keys and Labels
-export const MARITAL_STATUS_SINGLE_KEY = "single";
-export const MARITAL_STATUS_MARRIED_KEY = "married";
-export const MARITAL_STATUS_DIVORCED_KEY = "divorced";
-export const MARITAL_STATUS_SEPARATED_KEY = "separated";
-export const MARITAL_STATUS_WIDOWED_KEY = "widowed";
+export const MARITAL_STATUS_SINGLE_VALUE = "single";
+export const MARITAL_STATUS_MARRIED_VALUE = "married";
+export const MARITAL_STATUS_DIVORCED_VALUE = "divorced";
+export const MARITAL_STATUS_SEPARATED_VALUE = "separated";
+export const MARITAL_STATUS_WIDOWED_VALUE = "widowed";
 export const MARITAL_STATUS_SINGLE_LABEL = "Single";
 export const MARITAL_STATUS_MARRIED_LABEL = "Married";
 export const MARITAL_STATUS_DIVORCED_LABEL = "Divorced";
@@ -191,6 +191,16 @@ export const SMOKER_YES_VALUE = "yes";
 export const SMOKER_YES_LABEL = "Yes";
 export const SMOKER_NO_VALUE = "no";
 export const SMOKER_NO_LABEL = "No";
+
+// Salutation values and labels
+export const SALUTATION_MR_VALUE = "mr";
+export const SALUTATION_MR_LABEL = "Mr";
+export const SALUTATION_MRS_VALUE = "mrs";
+export const SALUTATION_MRS_LABEL = "Mrs";
+export const SALUTATION_MS_VALUE = "ms";
+export const SALUTATION_MS_LABEL = "Ms";
+export const SALUTATION_DR_VALUE = "dr";
+export const SALUTATION_DR_LABEL = "Dr";
 
 export const sidebarItems = [
   {
@@ -386,17 +396,17 @@ export const coverageInfoPopoverContent = {
 };
 
 export const newClientDefaultValues = {
-  [CLIENT_NAME_KEY]: "John Doe",
+  [CLIENT_NAME_KEY]: "",
   [CLIENT_OCCUPATION_KEY]: "",
   [CLIENT_MOBILE_KEY]: "",
   [CLIENT_EMAIL_KEY]: "",
   [CLIENT_GENDER_KEY]: GENDER_MALE_VALUE,
-  [CLIENT_BIRTHDAY_KEY]: "",
-  [CLIENT_MARITAL_STATUS_KEY]: "single",
+  [CLIENT_BIRTHDAY_KEY]: new Date("1 Jan 2000"),
+  [CLIENT_MARITAL_STATUS_KEY]: MARITAL_STATUS_SINGLE_VALUE,
   [CLIENT_SMOKER_KEY]: SMOKER_NO_VALUE,
-  [CLIENT_SALUTATION_KEY]: "mr",
+  [CLIENT_SALUTATION_KEY]: SALUTATION_MR_VALUE,
   [CLIENT_NATIONALITY_KEY]: "Singapore",
-  [CLIENT_ANNUAL_INCOME_KEY]: 1000000,
+  [CLIENT_ANNUAL_INCOME_KEY]: 0,
 };
 
 export const addClientFormFields = [
@@ -424,84 +434,92 @@ export const addClientFormFields = [
       lg: 5,
     },
   },
-  // {
-  //   name: CLIENT_SALUTATION_KEY,
-  //   label: CLIENT_SALUTATION_LABEL,
-  //   defaultValue: "mr",
-  //   type: INPUT_TYPE_SELECT,
-  //   options: [
-  //     { label: "Mr", value: "mr" },
-  //     { label: "Ms", value: "ms" },
-  //     { label: "Mrs", value: "mrs" },
-  //     { label: "Dr", value: "dr" },
-  //   ],
-  //   col: {
-  //     xs: 12,
-  //     md: 6,
-  //     lg: 5,
-  //   },
-  // },
-  // {
-  //   name: CLIENT_GENDER_KEY,
-  //   label: CLIENT_GENDER_LABEL,
-  //   defaultValue: "male",
-  //   type: INPUT_TYPE_SELECT,
-  //   options: [
-  //     { label: "Male", value: "male" },
-  //     { label: "Female", value: "female" },
-  //     { label: "Others", value: "Others" },
-  //   ],
-  //   col: {
-  //     xs: 12,
-  //     md: 6,
-  //     lg: 5,
-  //   },
-  // },
-  // {
-  //   name: CLIENT_EMAIL_KEY,
-  //   label: CLIENT_EMAIL_LABEL,
-  //   defaultValue: "",
-  //   placeholder: "johndoe@gmail.com",
-  //   type: INPUT_TYPE_TEXT,
-  //   col: {
-  //     xs: 12,
-  //     md: 6,
-  //     lg: 5,
-  //   },
-  // },
-  // {
-  //   name: CLIENT_MOBILE_KEY,
-  //   label: CLIENT_MOBILE_LABEL,
-  //   defaultValue: "",
-  //   placeholder: "+65",
-  //   type: INPUT_TYPE_TEXT,
-  //   col: {
-  //     xs: 12,
-  //     md: 6,
-  //     lg: 5,
-  //   },
-  // },
+  {
+    name: CLIENT_SALUTATION_KEY,
+    label: CLIENT_SALUTATION_LABEL,
+    type: INPUT_TYPE_SELECT,
+    options: [
+      { label: SALUTATION_MR_LABEL, value: SALUTATION_MR_VALUE },
+      { label: SALUTATION_MS_LABEL, value: SALUTATION_MS_VALUE },
+      { label: SALUTATION_MRS_LABEL, value: SALUTATION_MRS_VALUE },
+      { label: SALUTATION_DR_LABEL, value: SALUTATION_DR_VALUE },
+    ],
+    col: {
+      xs: 12,
+      md: 6,
+      lg: 5,
+    },
+  },
+  {
+    name: CLIENT_GENDER_KEY,
+    label: CLIENT_GENDER_LABEL,
+    type: INPUT_TYPE_SELECT,
+    options: [
+      { label: GENDER_MALE_LABEL, value: GENDER_MALE_VALUE },
+      { label: GENDER_FEMALE_LABEL, value: GENDER_FEMALE_VALUE },
+      { label: GENDER_OTHERS_LABEL, value: GENDER_OTHERS_VALUE },
+    ],
+    col: {
+      xs: 12,
+      md: 6,
+      lg: 5,
+    },
+  },
+  {
+    name: CLIENT_EMAIL_KEY,
+    label: CLIENT_EMAIL_LABEL,
+    placeholder: "johndoe@gmail.com",
+    required: {
+      value: true,
+      message: "Please provide the client's email",
+    },
+    pattern: {
+      value:
+        /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/,
+      message: "Please provide a valid email",
+    },
+    type: INPUT_TYPE_TEXT,
+    col: {
+      xs: 12,
+      md: 6,
+      lg: 5,
+    },
+  },
+  {
+    name: CLIENT_MOBILE_KEY,
+    label: CLIENT_MOBILE_LABEL,
+    placeholder: "+65",
+    type: INPUT_TYPE_TEXT,
+    col: {
+      xs: 12,
+      md: 6,
+      lg: 5,
+    },
+  },
   {
     name: CLIENT_MARITAL_STATUS_KEY,
     label: CLIENT_MARITAL_STATUS_LABEL,
     type: INPUT_TYPE_SELECT,
     options: [
-      { label: MARITAL_STATUS_SINGLE_LABEL, value: MARITAL_STATUS_SINGLE_KEY },
+      {
+        label: MARITAL_STATUS_SINGLE_LABEL,
+        value: MARITAL_STATUS_SINGLE_VALUE,
+      },
       {
         label: MARITAL_STATUS_MARRIED_LABEL,
-        value: MARITAL_STATUS_MARRIED_KEY,
+        value: MARITAL_STATUS_MARRIED_VALUE,
       },
       {
         label: MARITAL_STATUS_DIVORCED_LABEL,
-        value: MARITAL_STATUS_DIVORCED_KEY,
+        value: MARITAL_STATUS_DIVORCED_VALUE,
       },
       {
         label: MARITAL_STATUS_SEPARATED_LABEL,
-        value: MARITAL_STATUS_SEPARATED_KEY,
+        value: MARITAL_STATUS_SEPARATED_VALUE,
       },
       {
         label: MARITAL_STATUS_WIDOWED_LABEL,
-        value: MARITAL_STATUS_WIDOWED_KEY,
+        value: MARITAL_STATUS_WIDOWED_VALUE,
       },
     ],
     col: {
@@ -510,64 +528,63 @@ export const addClientFormFields = [
       lg: 5,
     },
   },
-  // {
-  //   name: CLIENT_NATIONALITY_KEY,
-  //   label: CLIENT_NATIONALITY_LABEL,
-  //   defaultValue: "Singapore",
-  //   placeholder: "Singapore",
-  //   type: INPUT_TYPE_AUTOCOMPLETE,
-  //   options: countryList().getLabels(),
-  //   col: {
-  //     xs: 12,
-  //     md: 6,
-  //     lg: 5,
-  //   },
-  // },
-  // {
-  //   name: CLIENT_SMOKER_KEY,
-  //   label: CLIENT_SMOKER_LABEL,
-  //   defaultValue: "no",
-  //   type: INPUT_TYPE_SELECT,
-  //   options: [
-  //     { label: "No", value: "no" },
-  //     { label: "Yes", value: "yes" },
-  //   ],
-  //   col: {
-  //     xs: 12,
-  //     md: 6,
-  //     lg: 5,
-  //   },
-  // },
-  // {
-  //   name: CLIENT_BIRTHDAY_KEY,
-  //   label: CLIENT_BIRTHDAY_LABEL,
-  //   defaultValue: new Date("Jan 01, 2000"),
-  //   type: INPUT_TYPE_DATEPICKER,
-  //   col: {
-  //     xs: 12,
-  //     md: 6,
-  //     lg: 5,
-  //   },
-  // },
-  // {
-  //   name: CLIENT_OCCUPATION_KEY,
-  //   label: CLIENT_OCCUPATION_LABEL,
-  //   placeholder: "Occupation",
-  //   type: INPUT_TYPE_TEXT,
-  //   col: {
-  //     xs: 12,
-  //     md: 6,
-  //     lg: 5,
-  //   },
-  // },
+  {
+    name: CLIENT_NATIONALITY_KEY,
+    label: CLIENT_NATIONALITY_LABEL,
+    defaultValue: "Singapore",
+    placeholder: "Singapore",
+    required: {
+      value: true,
+      message: "Please select a nationality from the list",
+    },
+    type: INPUT_TYPE_AUTOCOMPLETE,
+    options: countryList().getLabels(),
+    col: {
+      xs: 12,
+      md: 6,
+      lg: 5,
+    },
+  },
+  {
+    name: CLIENT_SMOKER_KEY,
+    label: CLIENT_SMOKER_LABEL,
+    type: INPUT_TYPE_SELECT,
+    options: [
+      { label: SMOKER_NO_LABEL, value: SMOKER_NO_VALUE },
+      { label: SMOKER_YES_LABEL, value: SMOKER_YES_VALUE },
+    ],
+    col: {
+      xs: 12,
+      md: 6,
+      lg: 5,
+    },
+  },
+  {
+    name: CLIENT_BIRTHDAY_KEY,
+    label: CLIENT_BIRTHDAY_LABEL,
+    defaultValue: new Date("Jan 01, 2000"),
+    type: INPUT_TYPE_DATEPICKER,
+    col: {
+      xs: 12,
+      md: 6,
+      lg: 5,
+    },
+  },
+  {
+    name: CLIENT_OCCUPATION_KEY,
+    label: CLIENT_OCCUPATION_LABEL,
+    placeholder: "Occupation",
+    type: INPUT_TYPE_TEXT,
+    col: {
+      xs: 12,
+      md: 6,
+      lg: 5,
+    },
+  },
   {
     name: CLIENT_ANNUAL_INCOME_KEY,
     label: CLIENT_ANNUAL_INCOME_LABEL,
     defaultValue: "",
-    required: {
-      value: true,
-      message: "This is a required field",
-    },
     min: {
       value: 1,
       message: "Annual income should be at least 1",

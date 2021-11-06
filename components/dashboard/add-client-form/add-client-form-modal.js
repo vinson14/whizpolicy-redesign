@@ -16,6 +16,7 @@ import AddButton from "../../stateless/interface/buttons/add-button";
 import CancelButton from "../../stateless/interface/buttons/cancel-button";
 import DeleteButton from "../../stateless/interface/buttons/delete-button";
 import EditButton from "../../stateless/interface/buttons/edit-button";
+import ResetButton from "../../stateless/interface/buttons/reset-button";
 import FormContainer from "../../stateless/interface/form/form-container";
 import ModalContainer from "../../stateless/interface/modal/modal-container";
 
@@ -28,24 +29,29 @@ const ClientFormModal = ({
 }) => {
   const {
     register,
+    control,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
-    defaultValues: {
-      maritalStatus: "single",
-    },
+    mode: "onBlur",
+    defaultValues,
   });
   const onSubmit = (formData) => {
-    // if (edit) putClient(formData);
-    // else postClient(formData);
+    if (edit) putClient(formData);
+    else postClient(formData);
     console.log(formData);
 
-    // setUpdateClients(true);
+    setUpdateClients(true);
     handleClose();
   };
 
   const onDelete = () => {
     deleteClient(defaultValues.clientId);
+  };
+
+  const resetClient = () => {
+    reset({}, { keepDefaultValues: true });
   };
 
   return (
@@ -59,6 +65,7 @@ const ClientFormModal = ({
                 <Grid key={field.name} item {...field.col} p={2}>
                   <InputComponent
                     register={register}
+                    control={control}
                     error={errors[field.name]}
                     {...field}
                   />
@@ -71,7 +78,12 @@ const ClientFormModal = ({
                   <EditButton type="submit">Submit</EditButton>
                   <DeleteButton onClick={onDelete}>Delete</DeleteButton>
                 </>
-              )) || <AddButton type="submit">Add Client</AddButton>}
+              )) || (
+                <>
+                  <AddButton type="submit">Add</AddButton>
+                  <ResetButton onClick={resetClient}>Reset</ResetButton>
+                </>
+              )}
               <CancelButton onClick={handleClose}>Cancel</CancelButton>
             </Grid>
           </Grid>
