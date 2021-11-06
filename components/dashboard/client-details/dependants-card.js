@@ -1,5 +1,5 @@
-import { FileDownload } from "@mui/icons-material";
-import { Grid, ListItem, ListItemText, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
+import AddButton from "../../stateless/interface/buttons/add-button";
 import ClientCardHeader from "../../stateless/interface/cards/client-card-header";
 import ClientCardInfoText from "../../stateless/interface/cards/client-card-info-text";
 import ClientDetailCard from "../../stateless/interface/cards/client-detail-card";
@@ -17,6 +17,16 @@ const DependantsCard = ({ client }) => {
               value={dependant.name}
             />
           ))}
+        {!client.dependants && (
+          <Grid item xs={12}>
+            <Box py={3}>
+              <Typography>No dependants have been added</Typography>
+            </Box>
+            <Box>
+              <AddButton>Add Dependant</AddButton>
+            </Box>
+          </Grid>
+        )}
       </Grid>
     </ClientDetailCard>
   );

@@ -9,6 +9,7 @@ import ClientDetailCard from "../../stateless/interface/cards/client-detail-card
 import MainHeader from "../../stateless/interface/text/main-header";
 import AddPolicyForm from "../add-policy-form/add-policy-form";
 import { useRouter } from "next/router";
+import AddButton from "../../stateless/interface/buttons/add-button";
 
 const PolicyCards = ({ client, policyOnClick }) => {
   return (
@@ -27,6 +28,13 @@ const PolicyCards = ({ client, policyOnClick }) => {
               />
             </Grid>
           ))}
+        {!client.policies && (
+          <Grid item xs={12}>
+            <Box py={3}>
+              <Typography>No policies have been added yet</Typography>
+            </Box>
+          </Grid>
+        )}
       </Grid>
     </>
   );
