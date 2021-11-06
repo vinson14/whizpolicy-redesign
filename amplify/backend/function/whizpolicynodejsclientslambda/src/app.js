@@ -8,8 +8,11 @@ See the License for the specific language governing permissions and limitations 
 
 const AWS = require("aws-sdk");
 const { v4: uuidv4 } = require("uuid");
+const { checkSchema, validationResult } = require("express-validator");
 var awsServerlessExpressMiddleware = require("aws-serverless-express/middleware");
 var express = require("express");
+const clientSchema = require("./validation-schema");
+const { calculateAge } = require("./utils");
 
 AWS.config.update({ region: process.env.TABLE_REGION });
 
@@ -100,6 +103,8 @@ app.get(path, function (req, res) {
       res.statusCode = 500;
       res.json({ error: "Could not load items: " + err });
     } else {
+      data.Items.forEach((item) => (item.age = calculateAge(item.birthday)));
+      console.log(data.Items);
       res.json(data.Items);
     }
   });
@@ -190,7 +195,14 @@ app.put(path, function (req, res) {
  * HTTP post method for insert object *
  *************************************/
 
-app.post(path, function (req, res) {
+app.post(path, checkSchema(clientSchema), function (req, res) {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    res.statusCode = 400;
+    res.json({ errors: errors.array() });
+    return;
+  }
+
   req.body.agentId = convertUrlType(
     req.apiGateway.event.requestContext.authorizer.claims.sub,
     partitionKeyType
