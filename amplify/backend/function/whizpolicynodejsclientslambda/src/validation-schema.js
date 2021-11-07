@@ -28,12 +28,14 @@ const clientSchema = {
   gender: {
     in: ["body"],
     notEmpty: true,
-    isIn: ["male", "female", "others"],
+    isIn: { options: ["male", "female", "others"] },
   },
   maritalStatus: {
     in: ["body"],
     notEmpty: true,
-    isIn: ["single", "divorced", "married", "widowed", "separated"],
+    isIn: {
+      options: ["single", "divorced", "married", "widowed", "separated"],
+    },
   },
   mobile: {
     in: ["body"],
@@ -55,12 +57,12 @@ const clientSchema = {
   salutation: {
     in: ["body"],
     notEmpty: true,
-    isIn: ["mr", "ms", "mrs", "dr"],
+    isIn: { options: ["mr", "ms", "mrs", "dr"] },
   },
   smoker: {
     in: ["body"],
     notEmpty: true,
-    isIn: ["yes", "no"],
+    isIn: { options: ["yes", "no"] },
   },
 };
 
