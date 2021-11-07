@@ -1,15 +1,6 @@
+const VALUE_NOT_IN_OPTIONS_MESSAGE = "The value provided is not permissible";
+const INVALID_DATE_MESSAGE = "The value provided is not a valid date";
 const clientSchema = {
-  //   annualIncome: 1
-  // birthday: Sat Jan 01 2000 00:00:00 GMT+0800 (Singapore Standard Time) {}
-  // email: "adf@gmail.com"
-  // gender: "male"
-  // maritalStatus: "single"
-  // mobile: ""
-  // name: "asdfas"
-  // nationality: "Singapore"
-  // occupation: ""
-  // salutation: "mr"
-  // smoker: "no"
   annualIncome: {
     in: ["body"],
     isInt: true,
@@ -17,7 +8,6 @@ const clientSchema = {
   birthday: {
     in: ["body"],
     notEmpty: true,
-    // isDate: true,
   },
   email: {
     in: ["body"],
@@ -28,13 +18,15 @@ const clientSchema = {
   gender: {
     in: ["body"],
     notEmpty: true,
-    isIn: { options: ["male", "female", "others"] },
+    isIn: { options: [["male", "female", "others"]] },
+    errorMessage: VALUE_NOT_IN_OPTIONS_MESSAGE,
   },
   maritalStatus: {
     in: ["body"],
     notEmpty: true,
     isIn: {
-      options: ["single", "divorced", "married", "widowed", "separated"],
+      options: [["single", "divorced", "married", "widowed", "separated"]],
+      errorMessage: VALUE_NOT_IN_OPTIONS_MESSAGE,
     },
   },
   mobile: {
@@ -57,12 +49,17 @@ const clientSchema = {
   salutation: {
     in: ["body"],
     notEmpty: true,
-    isIn: { options: ["mr", "ms", "mrs", "dr"] },
+    isIn: {
+      options: [["mr", "ms", "mrs", "dr"]],
+      errorMessage: VALUE_NOT_IN_OPTIONS_MESSAGE,
+    },
   },
   smoker: {
     in: ["body"],
-    notEmpty: true,
-    isIn: { options: ["yes", "no"] },
+    isIn: {
+      options: [["yes", "no"]],
+      errorMessage: VALUE_NOT_IN_OPTIONS_MESSAGE,
+    },
   },
 };
 

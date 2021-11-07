@@ -1,7 +1,10 @@
 export const getInitials = (name) => {
-  if (!name) return "AB";
-  const words = name.split(" ");
-  return words[0].charAt(0) + words[1].charAt(0);
+  try {
+    const words = name.split(" ");
+    return words[0].charAt(0) + words[1].charAt(0);
+  } catch (err) {
+    return "AB";
+  }
 };
 
 export const findClientById = (clients, id) => {
@@ -21,6 +24,10 @@ export function formatNumber(num, decPlaces = 0) {
 }
 
 export function formatString(string) {
-  const properCase = string.replace(/([A-Z])/g, " $1");
-  return properCase.charAt(0).toUpperCase() + properCase.slice(1);
+  try {
+    const properCase = string.replace(/([A-Z])/g, " $1");
+    return properCase.charAt(0).toUpperCase() + properCase.slice(1);
+  } catch (err) {
+    return string;
+  }
 }
