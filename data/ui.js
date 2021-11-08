@@ -658,6 +658,30 @@ export const addClientFormFields = [
 ];
 
 export const addPolicyFormFields = {
+  [POLICY_CATEGORY_KEY]: {
+    name: POLICY_CATEGORY_KEY,
+    label: POLICY_CATEGORY_LABEL,
+    type: INPUT_TYPE_SELECT,
+    options: [
+      {
+        label: POLICY_CATEGORY_WHOLE_LIFE_LABEL,
+        value: POLICY_CATEGORY_WHOLE_LIFE_KEY,
+      },
+      {
+        label: POLICY_CATEGORY_TERM_LIFE_LABEL,
+        value: POLICY_CATEGORY_TERM_LIFE_KEY,
+      },
+      {
+        label: POLICY_CATEGORY_ENDOWMENT_LABEL,
+        value: POLICY_CATEGORY_ENDOWMENT_KEY,
+      },
+    ],
+    col: {
+      xs: 12,
+      md: 6,
+      lg: 5,
+    },
+  },
   [POLICY_NAME_KEY]: {
     name: POLICY_NAME_KEY,
     label: POLICY_NAME_LABEL,
@@ -870,7 +894,6 @@ export const addPolicyFormFields = {
 export const policyCategorySelect = {
   name: POLICY_CATEGORY_KEY,
   label: POLICY_CATEGORY_LABEL,
-  defaultValue: POLICY_CATEGORY_WHOLE_LIFE_KEY,
   type: INPUT_TYPE_SELECT,
   options: [
     {
@@ -910,6 +933,7 @@ export const defaultPolicyFormValues = {
 };
 
 export const defaultPolicyFields = [
+  POLICY_CATEGORY_KEY,
   POLICY_NAME_KEY,
   POLICY_NUMBER_KEY,
   POLICY_INSURER_KEY,
