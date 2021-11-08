@@ -25,6 +25,7 @@ const useDashboardState = (clients, policies) => {
   };
 
   useEffect(() => {
+    console.log("update selectedClient");
     if (selectedClient)
       setSelectedClient(findClientById(clients, selectedClient.clientId));
   }, [clients]);

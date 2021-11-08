@@ -60,6 +60,7 @@ const DashboardClients = ({
             open={addPolicyFormModalState}
             handleClose={closeAddPolicyFormModal}
             client={selectedClient}
+            setUpdateClients={setUpdateClients}
           />
         </>
       );

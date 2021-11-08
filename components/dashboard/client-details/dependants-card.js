@@ -17,7 +17,7 @@ const DependantsCard = ({ client }) => {
               value={dependant.name}
             />
           ))}
-        {!client.dependants && (
+        {(!client.dependants || client.dependants.length === 0) && (
           <Grid item xs={12}>
             <Box py={3}>
               <Typography>No dependants have been added</Typography>

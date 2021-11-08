@@ -28,7 +28,7 @@ const PolicyCards = ({ client, policyOnClick }) => {
               />
             </Grid>
           ))}
-        {!client.policies && (
+        {(!client.policies || client.policies.length == 0) && (
           <Grid item xs={12}>
             <Box py={3}>
               <Typography>No policies have been added yet</Typography>

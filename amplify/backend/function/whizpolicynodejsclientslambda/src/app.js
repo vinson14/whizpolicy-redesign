@@ -34,6 +34,7 @@ const UNAUTH = "UNAUTH";
 const hashKeyPath = "/:" + partitionKeyName;
 const sortKeyPath = hasSortKey ? "/:" + sortKeyName : "";
 const dependantsPath = "/dependants";
+const policiesPath = "/policies";
 // declare a new express app
 var app = express();
 app.use(express.json());
@@ -200,13 +201,15 @@ app.post(path, checkSchema(clientSchema), function (req, res) {
     res.json({ errors: errors.array() });
     return;
   }
-
+  // Populating primary and secondary key
   req.body.agentId = convertUrlType(
     req.apiGateway.event.requestContext.authorizer.claims.sub,
     partitionKeyType
   );
-
   req.body.clientId = convertUrlType(generateUuid(), sortKeyType);
+  // Adding empty policies and dependants array
+  req.body.dependants = [];
+  req.body.policies = [];
 
   let putItemParams = {
     TableName: tableName,
@@ -254,7 +257,9 @@ app.delete(path + sortKeyPath, function (req, res) {
   });
 });
 
-// Add dependants
+/**************************************
+ * HTTP POST method to add dependant *
+ ***************************************/
 app.post(path + sortKeyPath + dependantsPath, function (req, res) {
   // const errors = validationResult(req);
   // if (!errors.isEmpty()) {
@@ -263,36 +268,106 @@ app.post(path + sortKeyPath + dependantsPath, function (req, res) {
   //   return;
   // }
 
-  req.body.agentId = convertUrlType(
+  keyParams = {};
+  keyParams[partitionKeyName] = convertUrlType(
     req.apiGateway.event.requestContext.authorizer.claims.sub,
     partitionKeyType
   );
+  keyParams[sortKeyName] = convertUrlType(req.params[sortKeyName], sortKeyType);
 
-  params[sortKeyName] = convertUrlType(req.params[sortKeyName], sortKeyType);
-
-  let updateItemParms = {
+  const getItemParams = {
     TableName: tableName,
-    AttributeUpdates: {
-      dependants: {
-        Action: "ADD",
-        Value: {
-          name: "Boy Boy",
-          relationship: "Son",
-        },
-      },
-    },
+    Key: keyParams,
   };
 
-  dynamodb.update(updateItemParms, (err, data) => {
+  dynamodb.get(getItemParams, (err, data) => {
     if (err) {
       res.statusCode = 500;
       res.json({ error: err, url: req.url, body: req.body });
     } else {
-      res.json({ success: "post call succeed!", url: req.url, data: data });
+      const client = data.Item;
+
+      const dependants = client.dependants;
+      dependants.push(req.body);
+
+      let updateItemParms = {
+        TableName: tableName,
+        Key: keyParams,
+        AttributeUpdates: {
+          dependants: {
+            Action: "PUT",
+            Value: dependants,
+          },
+        },
+      };
+
+      dynamodb.update(updateItemParms, (err, data) => {
+        if (err) {
+          res.statusCode = 500;
+          res.json({ error: err, url: req.url, body: req.body });
+        } else {
+          res.json({ success: "post call succeed!", url: req.url, data: data });
+        }
+      });
     }
   });
 });
 
+/**************************************
+ * HTTP POST method to add dependant *
+ ***************************************/
+app.post(path + sortKeyPath + policiesPath, function (req, res) {
+  // const errors = validationResult(req);
+  // if (!errors.isEmpty()) {
+  //   res.statusCode = 400;
+  //   res.json({ errors: errors.array() });
+  //   return;
+  // }
+
+  keyParams = {};
+  keyParams[partitionKeyName] = convertUrlType(
+    req.apiGateway.event.requestContext.authorizer.claims.sub,
+    partitionKeyType
+  );
+  keyParams[sortKeyName] = convertUrlType(req.params[sortKeyName], sortKeyType);
+
+  const getItemParams = {
+    TableName: tableName,
+    Key: keyParams,
+  };
+
+  dynamodb.get(getItemParams, (err, data) => {
+    if (err) {
+      res.statusCode = 500;
+      res.json({ error: err, url: req.url, body: req.body });
+    } else {
+      const client = data.Item;
+
+      const policies = client.policies;
+      policies.push(req.body);
+
+      let updateItemParms = {
+        TableName: tableName,
+        Key: keyParams,
+        AttributeUpdates: {
+          policies: {
+            Action: "PUT",
+            Value: policies,
+          },
+        },
+      };
+
+      dynamodb.update(updateItemParms, (err, data) => {
+        if (err) {
+          res.statusCode = 500;
+          res.json({ error: err, url: req.url, body: req.body });
+        } else {
+          res.json({ success: "post call succeed!", url: req.url, data: data });
+        }
+      });
+    }
+  });
+});
 app.listen(3000, function () {
   console.log("App started");
 });

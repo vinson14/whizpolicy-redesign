@@ -811,6 +811,22 @@ export const policyCategorySelect = {
   },
 };
 
+export const defaultPolicyFormValues = {
+  [POLICY_NUMBER_KEY]: "",
+  [POLICY_NAME_KEY]: "",
+  [POLICY_INSURER_KEY]: INSURER_AIA_KEY,
+  [POLICY_CATEGORY_KEY]: POLICY_CATEGORY_WHOLE_LIFE_KEY,
+  [POLICY_PREMIUM_KEY]: 0,
+  [POLICY_PREMIUM_MODE_KEY]: PREMIUM_MODE_ANNUALLY_KEY,
+  [POLICY_DEATH_BENEFIT_KEY]: 0,
+  [POLICY_TPD_BENEFIT_KEY]: 0,
+  [POLICY_MAJOR_CI_BENEFIT_KEY]: 0,
+  [POLICY_EARLY_CI_BENEFIT_KEY]: 0,
+  [POLICY_TERM_KEY]: 0,
+  [POLICY_PREMIUM_TERM_KEY]: 0,
+  [POLICY_INCEPTION_DATE_KEY]: new Date(),
+};
+
 export const defaultPolicyFields = [
   POLICY_NAME_KEY,
   POLICY_NUMBER_KEY,
@@ -824,6 +840,7 @@ export const defaultPolicyFields = [
 
 export const defaultLifePolicyFields = [
   ...defaultPolicyFields,
+  POLICY_MATURITY_DATE_KEY,
   POLICY_DEATH_BENEFIT_KEY,
   POLICY_TPD_BENEFIT_KEY,
   POLICY_MAJOR_CI_BENEFIT_KEY,
@@ -890,7 +907,7 @@ export const policyDetailsAboutCardFields = [
   {
     label: POLICY_INCEPTION_DATE_LABEL,
     key: POLICY_INCEPTION_DATE_KEY,
-    type: FIELD_TYPE_TEXT,
+    type: FIELD_TYPE_DATE,
   },
   {
     label: POLICY_TERM_LABEL,
