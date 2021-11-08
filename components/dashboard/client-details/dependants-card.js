@@ -19,14 +19,18 @@ const DependantsCard = ({ client }) => {
           ))}
         {(!client.dependants || client.dependants.length === 0) && (
           <Grid item xs={12}>
-            <Box py={3}>
-              <Typography>No dependants have been added</Typography>
-            </Box>
-            <Box>
-              <AddButton>Add Dependant</AddButton>
-            </Box>
+            <Typography>No dependants have been added</Typography>
           </Grid>
         )}
+        <Grid
+          xs={12}
+          display="flex"
+          justifyContent="end"
+          alignItems="center"
+          item
+        >
+          <AddButton mb={0}>Add Dependant</AddButton>
+        </Grid>
       </Grid>
     </ClientDetailCard>
   );
