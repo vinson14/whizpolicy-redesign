@@ -131,12 +131,12 @@ export const CLIENT_NATIONALITY_LABEL = "Nationality";
 export const CLIENT_ANNUAL_INCOME_LABEL = "Annual Income";
 
 // Client financial overview keys and labels
-export const CLIENT_FINANCIAL_OVERVIEW_DEATH_KEY = "death";
-export const CLIENT_FINANCIAL_OVERVIEW_TPD_KEY = "tpd";
-export const CLIENT_FINANCIAL_OVERVIEW_MAJOR_CI_KEY = "majorCi";
-export const CLIENT_FINANCIAL_OVERVIEW_EARLY_CI_KEY = "earlyCi";
-export const CLIENT_FINANCIAL_OVERVIEW_ACC_DEATH_KEY = "accidentalDeath";
-export const CLIENT_FINANCIAL_OVERVIEW_ACC_MED_KEY = "accidentalMedical";
+export const CLIENT_FINANCIAL_OVERVIEW_DEATH_KEY = "deathBenefit";
+export const CLIENT_FINANCIAL_OVERVIEW_TPD_KEY = "tpdBenefit";
+export const CLIENT_FINANCIAL_OVERVIEW_MAJOR_CI_KEY = "majorCiBenefit";
+export const CLIENT_FINANCIAL_OVERVIEW_EARLY_CI_KEY = "earlyCiBenefit";
+export const CLIENT_FINANCIAL_OVERVIEW_ACC_DEATH_KEY = "accidentalDeathBenefit";
+export const CLIENT_FINANCIAL_OVERVIEW_ACC_MED_KEY = "accidentalMedicalBenefit";
 export const CLIENT_FINANCIAL_OVERVIEW_DEATH_LABEL = "Death";
 export const CLIENT_FINANCIAL_OVERVIEW_TPD_LABEL = "Total Permanent Disability";
 export const CLIENT_FINANCIAL_OVERVIEW_MAJOR_CI_LABEL =
@@ -349,18 +349,18 @@ export const clientDetailsFinancialOverviewFields = [
     type: FIELD_TYPE_CURRENCY,
     icon: <HotelIcon />,
   },
-  {
-    label: CLIENT_FINANCIAL_OVERVIEW_ACC_DEATH_LABEL,
-    key: CLIENT_FINANCIAL_OVERVIEW_ACC_DEATH_KEY,
-    type: FIELD_TYPE_CURRENCY,
-    icon: <PersonOffIcon />,
-  },
-  {
-    label: CLIENT_FINANCIAL_OVERVIEW_ACC_MED_LABEL,
-    key: CLIENT_FINANCIAL_OVERVIEW_ACC_MED_KEY,
-    type: FIELD_TYPE_CURRENCY,
-    icon: <LocalHospitalIcon />,
-  },
+  // {
+  //   label: CLIENT_FINANCIAL_OVERVIEW_ACC_DEATH_LABEL,
+  //   key: CLIENT_FINANCIAL_OVERVIEW_ACC_DEATH_KEY,
+  //   type: FIELD_TYPE_CURRENCY,
+  //   icon: <PersonOffIcon />,
+  // },
+  // {
+  //   label: CLIENT_FINANCIAL_OVERVIEW_ACC_MED_LABEL,
+  //   key: CLIENT_FINANCIAL_OVERVIEW_ACC_MED_KEY,
+  //   type: FIELD_TYPE_CURRENCY,
+  //   icon: <LocalHospitalIcon />,
+  // },
 ];
 
 export const clientDetailsCards = [
@@ -391,36 +391,36 @@ export const policyCardFields = [
 ];
 
 export const coverageInfoPopoverContent = {
-  death: [
+  [CLIENT_FINANCIAL_OVERVIEW_DEATH_KEY]: [
     {
       qns: "How much Death Coverage does the client need?",
       ans: "A quick rule of thumb for measuring death coverage is to multiply the client’s current annual income by a factor between 10 and 15.",
     },
   ],
-  tpd: [
+  [CLIENT_FINANCIAL_OVERVIEW_TPD_KEY]: [
     {
       qns: "How much TPD Coverage does the client need?",
       ans: "A quick guide to calculate Total Permanent Disability coverage is to multiply your current annual income by a factor between 10 and 15.",
     },
   ],
-  majorCi: [
+  [CLIENT_FINANCIAL_OVERVIEW_MAJOR_CI_KEY]: [
     {
       qns: "How much Major Critical Illness Coverage does the client need?",
       ans: "A quick rule of thumb for measuring Critical Illness coverage is to multiply 70% of your current annual income by 5 years, assuming a recovery period of 5 years.",
     },
   ],
-  earlyCi: [
+  [CLIENT_FINANCIAL_OVERVIEW_EARLY_CI_KEY]: [
     {
       qns: "How much Early Critical Illness Coverage does the client need?",
       ans: "A quick rule of thumb for measuring Early Critical Illness coverage is to multiply your current annual income by a factor between 1 or 2.",
     },
   ],
-  accidentalDeath: [
+  [CLIENT_FINANCIAL_OVERVIEW_ACC_DEATH_KEY]: [
     { qns: "Why do you need accDeath1", ans: "because thats why" },
     { qns: "Why do you need accdaeth2", ans: "because thats why" },
     { qns: "Why do you need accdeath3", ans: "because thats why" },
   ],
-  accidentalMedical: [
+  [CLIENT_FINANCIAL_OVERVIEW_ACC_MED_KEY]: [
     { qns: "Why do you need accMed1", ans: "because thats why" },
     { qns: "Why do you need accMed2", ans: "because thats why" },
     { qns: "Why do you need accMed3", ans: "because thats why" },

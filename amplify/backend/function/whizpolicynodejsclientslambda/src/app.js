@@ -12,7 +12,7 @@ const { checkSchema, validationResult } = require("express-validator");
 var awsServerlessExpressMiddleware = require("aws-serverless-express/middleware");
 var express = require("express");
 const clientSchema = require("./validation-schema");
-const { calculateAge } = require("./utils");
+const { modifyClient } = require("./utils");
 
 AWS.config.update({ region: process.env.TABLE_REGION });
 
@@ -93,7 +93,7 @@ app.get(path, function (req, res) {
       res.statusCode = 500;
       res.json({ error: "Could not load items: " + err });
     } else {
-      data.Items.forEach((item) => (item.age = calculateAge(item.birthday)));
+      data.Items.forEach((client) => modifyClient(client));
       console.log(data.Items);
       res.json(data.Items);
     }

@@ -23,6 +23,7 @@ const CoverageCard = ({ client }) => {
     setAnchorEl(null);
     setSelectedKey(null);
   };
+
   return (
     <ClientDetailCard>
       <ClientCardHeader>Coverage Overview</ClientCardHeader>
