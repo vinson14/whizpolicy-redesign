@@ -6,7 +6,7 @@ import {
   SIDEBAR_CLIENTS_VALUE,
   SIDEBAR_PORTFOLIO_VALUE,
 } from "../data/ui";
-import { findClientById } from "./utils";
+import { findClientById, findPolicyByPolicyId } from "./utils";
 
 const useDashboardState = (clients, policies) => {
   const [selectedSidebarOption, setSelectedSidebarOption] = useState(
@@ -28,6 +28,10 @@ const useDashboardState = (clients, policies) => {
     console.log("update selectedClient");
     if (selectedClient)
       setSelectedClient(findClientById(clients, selectedClient.clientId));
+    if (selectedPolicy && selectedClient)
+      setSelectedPolicy(
+        findPolicyByPolicyId(selectedClient.policies, selectedPolicy.policyId)
+      );
   }, [clients]);
 
   const defaultBreadcrumbs = {

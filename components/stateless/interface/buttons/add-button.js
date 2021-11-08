@@ -1,7 +1,13 @@
 import { Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 
-const AddButton = ({ children, mr = 2, color = "primary", ...props }) => {
+const AddButton = ({
+  children,
+  mr = 2,
+  mb = 2,
+  color = "primary",
+  ...props
+}) => {
   return (
     <Button
       {...props}
@@ -9,7 +15,7 @@ const AddButton = ({ children, mr = 2, color = "primary", ...props }) => {
       variant="contained"
       aria-label={children}
       startIcon={<AddIcon />}
-      sx={{ mr: mr }}
+      sx={{ mr: mr, mb: mb }}
     >
       {children}
     </Button>

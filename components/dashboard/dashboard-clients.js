@@ -1,19 +1,14 @@
 import { Box, Grid } from "@mui/material";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { getClients } from "../../utils/api";
-import { findClientById, findPolicyByPolicyNumber } from "../../utils/utils";
+
 import FloatingAddButton from "../stateless/interface/buttons/floating-add-button";
 import FloatingEditButton from "../stateless/interface/buttons/floating-edit-button";
 import ClientCards from "../stateless/interface/cards/client-cards";
 import CustomBreadcrumbs from "../stateless/interface/navigation/breadcrumbs";
 import MainHeader from "../stateless/interface/text/main-header";
 import ClientDetails from "./client-details/dashboard-client-details";
-import { defaultDashboardClientBreadcrumbs } from "../../data/ui";
 import ClientFormModal from "./add-client-form/add-client-form-modal";
 import useModal from "../../utils/useModal";
 import PolicyDetails from "./policy-details/policy-details";
-import SidebarButton from "../stateless/interface/buttons/sidebar-button";
 import DashboardHeaderContainer from "../stateless/layout/dashboard-header-container";
 import AddPolicyForm from "./add-policy-form/add-policy-form";
 
@@ -104,7 +99,11 @@ const DashboardClients = ({
             />
           )}
           {selectedClient != null && selectedPolicy != null && (
-            <PolicyDetails policy={selectedPolicy} />
+            <PolicyDetails
+              client={selectedClient}
+              policy={selectedPolicy}
+              setUpdateClients={setUpdateClients}
+            />
           )}
           <ClientFormModal
             open={clientFormModalState}

@@ -1,6 +1,12 @@
 import { Button } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
-const EditButton = ({ children, mr = 2, color = "secondary", ...props }) => {
+const EditButton = ({
+  children,
+  mr = 2,
+  mb = 2,
+  color = "secondary",
+  ...props
+}) => {
   return (
     <Button
       {...props}
@@ -8,7 +14,7 @@ const EditButton = ({ children, mr = 2, color = "secondary", ...props }) => {
       variant="contained"
       aria-label={children}
       startIcon={<EditIcon />}
-      sx={{ mr: mr }}
+      sx={{ mr: mr, mb: mb }}
     >
       {children}
     </Button>

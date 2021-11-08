@@ -21,7 +21,7 @@ const CurrencyInput = ({
         max,
         setValueAs: (v) => formatFormInt(v),
       })}
-      error={error}
+      error={error ? true : false}
       helperText={error ? error.message : ""}
       label={label}
       variant={variant}

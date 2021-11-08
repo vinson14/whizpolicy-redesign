@@ -1,7 +1,7 @@
 import { Amplify, API, Auth } from "aws-amplify";
 import differenceInYears from "date-fns/differenceInYears";
 import awsmobile from "../src/aws-exports";
-import { findPolicyByPolicyNumber } from "./utils";
+import { findPolicyByPolicyId } from "./utils";
 const endpoint = "https://a3dk3p85vd.execute-api.us-east-1.amazonaws.com/dev";
 const apiName = "whizpolicynodejsapi";
 
@@ -83,7 +83,7 @@ export const deleteClient = async (clientId) => {
 
 export const postPolicyToClient = async (client, policy) => {
   const jwtToken = (await Auth.currentSession()).getIdToken().getJwtToken();
-  if (findPolicyByPolicyNumber(client.policies, policy.policyNumber)) {
+  if (findPolicyByPolicyId(client.policies, policy.policyId)) {
     console.log("policy already exists");
     return;
   }
@@ -98,6 +98,42 @@ export const postPolicyToClient = async (client, policy) => {
 
   try {
     const response = await API.post(apiName, path, init);
+    return response;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const putPolicyToClient = async (client, policy) => {
+  const jwtToken = (await Auth.currentSession()).getIdToken().getJwtToken();
+  const path = `/clients/${client.clientId}/policies/${policy.policyId}`;
+  const init = {
+    body: { ...policy },
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `${jwtToken}`,
+    },
+  };
+  try {
+    const response = await API.put(apiName, path, init);
+    return response;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const deletePolicyToClient = async (client, policy) => {
+  const jwtToken = (await Auth.currentSession()).getIdToken().getJwtToken();
+  const path = `/clients/${client.clientId}/policies/${policy.policyId}`;
+  const init = {
+    body: {},
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `${jwtToken}`,
+    },
+  };
+  try {
+    const response = await API.del(apiName, path, init);
     return response;
   } catch (err) {
     console.log(err);

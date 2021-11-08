@@ -11,8 +11,8 @@ export const findClientById = (clients, id) => {
   return clients.find((client) => client.clientId == id);
 };
 
-export const findPolicyByPolicyNumber = (policies, policyNumber) => {
-  return policies.find((policy) => policy.policyNumber == policyNumber);
+export const findPolicyByPolicyId = (policies, policyId) => {
+  return policies.find((policy) => policy.policyId == policyId);
 };
 
 export function formatNumber(num, decPlaces = 0) {

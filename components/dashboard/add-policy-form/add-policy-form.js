@@ -15,7 +15,12 @@ import CancelButton from "../../stateless/interface/buttons/cancel-button";
 import ModalContainer from "../../stateless/interface/modal/modal-container";
 import AddButton from "../../stateless/interface/buttons/add-button";
 import EditButton from "../../stateless/interface/buttons/edit-button";
-import { postPolicyToClient } from "../../../utils/api";
+import {
+  deletePolicyToClient,
+  postPolicyToClient,
+  putPolicyToClient,
+} from "../../../utils/api";
+import DeleteButton from "../../stateless/interface/buttons/delete-button";
 
 const AddPolicyForm = ({
   client,
@@ -39,10 +44,22 @@ const AddPolicyForm = ({
   });
   const onSubmit = (formData) => {
     console.log(formData);
-    postPolicyToClient(client, formData);
-    setUpdateClients(true);
+    handleClose();
+
+    if (edit) {
+      putPolicyToClient(client, formData).then(() => setUpdateClients(true));
+    } else {
+      postPolicyToClient(client, formData).then(() => setUpdateClients(true));
+    }
+  };
+
+  const handleDelete = () => {
+    deletePolicyToClient(client, defaultValues).then(() =>
+      setUpdateClients(true)
+    );
     handleClose();
   };
+
   const SelectCategoryComponent = inputTypeMapping[policyCategorySelect.type];
 
   return (
@@ -71,9 +88,12 @@ const AddPolicyForm = ({
               );
             })}
             <Grid item xs={12}>
-              {(edit && <EditButton type="submit">Edit Policy</EditButton>) || (
-                <AddButton type="submit">Add Policy</AddButton>
-              )}
+              {(edit && (
+                <>
+                  <EditButton type="submit">Edit Policy</EditButton>{" "}
+                  <DeleteButton onClick={handleDelete}>Delete</DeleteButton>
+                </>
+              )) || <AddButton type="submit">Add Policy</AddButton>}
               <CancelButton onClick={handleClose}>Cancel</CancelButton>
             </Grid>
           </Grid>

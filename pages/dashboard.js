@@ -1,4 +1,5 @@
 import {
+  CircularProgress,
   Container,
   List,
   ListItem,
@@ -26,6 +27,7 @@ import { AmplifyAuthenticator } from "@aws-amplify/ui-react";
 import SidebarLogoutButton from "../components/stateless/interface/buttons/sidebar-logout-button";
 import { AuthState, onAuthUIStateChange } from "@aws-amplify/ui-components";
 import useDashboardState from "../utils/useUrlQuery";
+import LoadingIcon from "../components/stateless/interface/misc/loading-icon";
 Amplify.configure(awsConfig);
 
 const Dashboard = () => {
@@ -53,7 +55,10 @@ const Dashboard = () => {
   useEffect(() => {
     console.log("this ran");
     if (authState === AuthState.SignedIn) {
-      getClients().then((data) => setClients(data));
+      setLoading(true);
+      getClients()
+        .then((data) => setClients(data))
+        .then(() => setLoading(false));
       // getPolicies().then((policies) => setPolicies(policies));
     }
     setUpdateClients(false);
@@ -113,7 +118,8 @@ const Dashboard = () => {
           </List>
         </Sidebar>
         <Container sx={{ pb: 3 }}>
-          {mainComponent[selectedSidebarOption]}
+          {loading && <LoadingIcon />}
+          {!loading && mainComponent[selectedSidebarOption]}
         </Container>
       </DashboardContainer>
     </AmplifyAuthenticator>

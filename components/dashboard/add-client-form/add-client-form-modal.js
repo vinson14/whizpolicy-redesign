@@ -37,11 +37,12 @@ const ClientFormModal = ({
   } = useForm({ mode: "onBlur", defaultValues });
 
   const onSubmit = (formData) => {
-    if (edit) putClient(formData);
-    else postClient(formData);
+    handleClose();
+
+    if (edit) putClient(formData).then(() => setUpdateClients(true));
+    else postClient(formData).then(() => setUpdateClients(true));
     console.log(formData);
 
-    setUpdateClients(true);
     handleClose();
   };
 

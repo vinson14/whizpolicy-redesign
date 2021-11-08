@@ -216,6 +216,7 @@ export const MIN_SUM_ASSURED = 0;
 export const MAX_SUM_ASSURED = 99999999999;
 export const MIN_CLIENT_NAME_LENGTH = 2;
 export const MAX_CLIENT_NAME_LENGTH = 70;
+export const MAX_ANNUAL_INCOME = 99999999999;
 
 // Form error messages
 export const MIN_CHAR_MSG_PLACEHOLDER = "CHAR";
@@ -466,7 +467,7 @@ export const addClientFormFields = [
       ),
     },
     pattern: {
-      value: /^[A-Za-z]+$/,
+      value: /\b([A-ZÀ-ÿ][-,a-z. ']+[ ]*)+/,
       message: ALPHA_ONLY_MSG,
     },
     col: {
@@ -630,7 +631,7 @@ export const addClientFormFields = [
       message: NON_NEG_MSG,
     },
     max: {
-      value: 10000000,
+      value: MAX_ANNUAL_INCOME,
       message: "The max value is ",
     },
     placeholder: "1,000,000",

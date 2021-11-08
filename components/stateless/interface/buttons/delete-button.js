@@ -1,6 +1,12 @@
 import { Button } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-const DeleteButton = ({ children, mr = 2, color = "warning", ...props }) => {
+const DeleteButton = ({
+  children,
+  mr = 2,
+  mb = 2,
+  color = "warning",
+  ...props
+}) => {
   return (
     <Button
       {...props}
@@ -8,7 +14,7 @@ const DeleteButton = ({ children, mr = 2, color = "warning", ...props }) => {
       variant="contained"
       aria-label={children}
       startIcon={<DeleteIcon />}
-      sx={{ mr: mr }}
+      sx={{ mr: mr, mb: mb }}
     >
       {children}
     </Button>
