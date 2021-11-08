@@ -1,4 +1,5 @@
 import { InputAdornment, TextField } from "@mui/material";
+import { formatFormInt } from "../../../../utils/utils";
 
 const CurrencyInput = ({
   name,
@@ -18,7 +19,7 @@ const CurrencyInput = ({
         required,
         min,
         max,
-        valueAsNumber: true,
+        setValueAs: (v) => formatFormInt(v),
       })}
       error={error}
       helperText={error ? error.message : ""}

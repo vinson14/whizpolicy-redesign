@@ -203,6 +203,32 @@ export const SALUTATION_MS_LABEL = "Ms";
 export const SALUTATION_DR_VALUE = "dr";
 export const SALUTATION_DR_LABEL = "Dr";
 
+// Validation values
+export const MIN_POLICY_NAME_LENGTH = 2;
+export const MAX_POLICY_NAME_LENGTH = 70;
+export const MIN_POLICY_NUM_LENGTH = 3;
+export const MAX_POLICY_NUM_LENGTH = 70;
+export const MIN_PREMIUM_TERM = 0;
+export const MAX_PREMIUM_TERM = 200;
+export const MIN_POLICY_TERM = 0;
+export const MAX_POLICY_TERM = 200;
+export const MIN_SUM_ASSURED = 0;
+export const MAX_SUM_ASSURED = 99999999999;
+export const MIN_CLIENT_NAME_LENGTH = 2;
+export const MAX_CLIENT_NAME_LENGTH = 70;
+
+// Form error messages
+export const MIN_CHAR_MSG_PLACEHOLDER = "CHAR";
+export const MIN_CHAR_MSG = "This field should have at least CHAR characters";
+export const MAX_CHAR_MSG_PLACEHOLDER = "CHAR";
+export const MAX_CHAR_MSG = "This field should have at most CHAR characters";
+export const REQUIRED_MSG_PLACEHOLDER = "KEY";
+export const REQUIRED_MSG = "Please provide a KEY";
+export const REQUIRED_MSG_SPECIAL = "Please provide an KEY";
+export const INVALID_EMAIL_MSG = "Please provide a valid email";
+export const NON_NEG_MSG = "This value cannot be less than 0";
+export const ALPHA_ONLY_MSG = "Only alphabets are allowed";
+
 export const sidebarItems = [
   {
     label: SIDEBAR_CLIENTS_LABEL,
@@ -423,15 +449,25 @@ export const addClientFormFields = [
     placeholder: "John Doe",
     required: {
       value: true,
-      message: "Please provide a name",
+      message: REQUIRED_MSG.replace(REQUIRED_MSG_PLACEHOLDER, "name"),
     },
     minLength: {
-      value: 2,
-      message: "The name should have at least 2 characters",
+      value: MIN_CLIENT_NAME_LENGTH,
+      message: MIN_CHAR_MSG.replace(
+        MIN_CHAR_MSG_PLACEHOLDER,
+        MIN_CLIENT_NAME_LENGTH
+      ),
     },
     maxLength: {
-      value: 70,
-      message: "The name should not have more than 70 characters",
+      value: MAX_CLIENT_NAME_LENGTH,
+      message: MAX_CHAR_MSG.replace(
+        MAX_CHAR_MSG_PLACEHOLDER,
+        MAX_CLIENT_NAME_LENGTH
+      ),
+    },
+    pattern: {
+      value: /^[A-Za-z]+$/,
+      message: ALPHA_ONLY_MSG,
     },
     col: {
       xs: 12,
@@ -476,12 +512,12 @@ export const addClientFormFields = [
     placeholder: "johndoe@gmail.com",
     required: {
       value: true,
-      message: "Please provide the client's email",
+      message: REQUIRED_MSG_SPECIAL.replace(REQUIRED_MSG_PLACEHOLDER, "email"),
     },
     pattern: {
       value:
         /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/,
-      message: "Please provide a valid email",
+      message: INVALID_EMAIL_MSG,
     },
     type: INPUT_TYPE_TEXT,
     col: {
@@ -591,7 +627,7 @@ export const addClientFormFields = [
     label: CLIENT_ANNUAL_INCOME_LABEL,
     min: {
       value: 0,
-      message: "Annual income should be at least 1",
+      message: NON_NEG_MSG,
     },
     max: {
       value: 10000000,
@@ -612,9 +648,26 @@ export const addPolicyFormFields = {
   [POLICY_NAME_KEY]: {
     name: POLICY_NAME_KEY,
     label: POLICY_NAME_LABEL,
-    defaultValue: "",
     type: INPUT_TYPE_TEXT,
     placeholder: POLICY_NAME_LABEL,
+    required: {
+      value: true,
+      message: REQUIRED_MSG.replace(REQUIRED_MSG_PLACEHOLDER, "policy name"),
+    },
+    minLength: {
+      value: MIN_POLICY_NAME_LENGTH,
+      message: MIN_CHAR_MSG.replace(
+        MIN_CHAR_MSG_PLACEHOLDER,
+        MIN_POLICY_NAME_LENGTH
+      ),
+    },
+    maxLength: {
+      value: MAX_POLICY_NAME_LENGTH,
+      message: MAX_CHAR_MSG.replace(
+        MAX_CHAR_MSG_PLACEHOLDER,
+        MAX_POLICY_NAME_LENGTH
+      ),
+    },
     col: {
       xs: 12,
       md: 6,
@@ -624,9 +677,25 @@ export const addPolicyFormFields = {
   [POLICY_NUMBER_KEY]: {
     name: POLICY_NUMBER_KEY,
     label: POLICY_NUMBER_LABEL,
-    defaultValue: "",
     type: INPUT_TYPE_TEXT,
-    placeholder: POLICY_NUMBER_LABEL,
+    required: {
+      value: true,
+      message: REQUIRED_MSG.replace(REQUIRED_MSG_PLACEHOLDER, "policy number"),
+    },
+    minLength: {
+      value: MIN_POLICY_NUM_LENGTH,
+      message: MIN_CHAR_MSG.replace(
+        MIN_CHAR_MSG_PLACEHOLDER,
+        MIN_POLICY_NUM_LENGTH
+      ),
+    },
+    maxLength: {
+      value: MAX_POLICY_NUM_LENGTH,
+      message: MAX_CHAR_MSG.replace(
+        MAX_CHAR_MSG_PLACEHOLDER,
+        MAX_POLICY_NUM_LENGTH
+      ),
+    },
     col: {
       xs: 12,
       md: 6,
@@ -816,14 +885,14 @@ export const defaultPolicyFormValues = {
   [POLICY_NAME_KEY]: "",
   [POLICY_INSURER_KEY]: INSURER_AIA_KEY,
   [POLICY_CATEGORY_KEY]: POLICY_CATEGORY_WHOLE_LIFE_KEY,
-  [POLICY_PREMIUM_KEY]: 0,
+  [POLICY_PREMIUM_KEY]: "",
   [POLICY_PREMIUM_MODE_KEY]: PREMIUM_MODE_ANNUALLY_KEY,
-  [POLICY_DEATH_BENEFIT_KEY]: 0,
-  [POLICY_TPD_BENEFIT_KEY]: 0,
-  [POLICY_MAJOR_CI_BENEFIT_KEY]: 0,
-  [POLICY_EARLY_CI_BENEFIT_KEY]: 0,
-  [POLICY_TERM_KEY]: 0,
-  [POLICY_PREMIUM_TERM_KEY]: 0,
+  [POLICY_DEATH_BENEFIT_KEY]: "",
+  [POLICY_TPD_BENEFIT_KEY]: "",
+  [POLICY_MAJOR_CI_BENEFIT_KEY]: "",
+  [POLICY_EARLY_CI_BENEFIT_KEY]: "",
+  [POLICY_TERM_KEY]: "",
+  [POLICY_PREMIUM_TERM_KEY]: "",
   [POLICY_INCEPTION_DATE_KEY]: new Date(),
 };
 
@@ -917,7 +986,7 @@ export const policyDetailsAboutCardFields = [
   {
     label: POLICY_MATURITY_DATE_LABEL,
     key: POLICY_MATURITY_DATE_KEY,
-    type: FIELD_TYPE_TEXT,
+    type: FIELD_TYPE_DATE,
   },
   {
     label: POLICY_PREMIUM_TERM_LABEL,

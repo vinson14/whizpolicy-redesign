@@ -34,10 +34,8 @@ const ClientFormModal = ({
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm({
-    mode: "onBlur",
-    defaultValues,
-  });
+  } = useForm({ mode: "onBlur", defaultValues });
+
   const onSubmit = (formData) => {
     if (edit) putClient(formData);
     else postClient(formData);

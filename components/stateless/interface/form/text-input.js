@@ -24,7 +24,7 @@ const TextInput = ({
       })}
       error={error ? true : false}
       helperText={error ? error.message : ""}
-      label={label}
+      label={label + (required && required.value ? "*" : "")}
       variant={variant}
       InputProps={
         startAdornment && {

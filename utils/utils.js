@@ -31,3 +31,8 @@ export function formatString(string) {
     return string;
   }
 }
+
+export const formatFormInt = (string) => {
+  if (string === "") return 0;
+  return parseInt(string);
+};

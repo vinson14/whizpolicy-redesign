@@ -31,7 +31,7 @@ const AddPolicyForm = ({
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm({ defaultValues });
+  } = useForm({ mode: "onBlur", defaultValues });
   const policyFormCategory = useWatch({
     control,
     name: POLICY_CATEGORY_KEY,
