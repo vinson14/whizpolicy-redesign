@@ -33,6 +33,7 @@ const path = "/clients";
 const UNAUTH = "UNAUTH";
 const hashKeyPath = "/:" + partitionKeyName;
 const sortKeyPath = hasSortKey ? "/:" + sortKeyName : "";
+const dependantsPath = "/dependants";
 // declare a new express app
 var app = express();
 app.use(express.json());
@@ -166,16 +167,13 @@ app.get(path + "/object" + hashKeyPath + sortKeyPath, function (req, res) {
  * HTTP put method for insert object *
  *************************************/
 
-app.put(path, function (req, res) {
-  // if (userIdPresent) {
-  //   req.body["userId"] =
-  //     req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH;
-  // }
-
+app.put(path + sortKeyPath, function (req, res) {
   req.body.agentId = convertUrlType(
     req.apiGateway.event.requestContext.authorizer.claims.sub,
     partitionKeyType
   );
+
+  req.body.clientId = convertUrlType(req.params[sortKeyName], sortKeyType);
 
   let putItemParams = {
     TableName: tableName,
@@ -252,6 +250,45 @@ app.delete(path + sortKeyPath, function (req, res) {
       res.json({ error: err, url: req.url });
     } else {
       res.json({ url: req.url, data: data });
+    }
+  });
+});
+
+// Add dependants
+app.post(path + sortKeyPath + dependantsPath, function (req, res) {
+  // const errors = validationResult(req);
+  // if (!errors.isEmpty()) {
+  //   res.statusCode = 400;
+  //   res.json({ errors: errors.array() });
+  //   return;
+  // }
+
+  req.body.agentId = convertUrlType(
+    req.apiGateway.event.requestContext.authorizer.claims.sub,
+    partitionKeyType
+  );
+
+  params[sortKeyName] = convertUrlType(req.params[sortKeyName], sortKeyType);
+
+  let updateItemParms = {
+    TableName: tableName,
+    AttributeUpdates: {
+      dependants: {
+        Action: "ADD",
+        Value: {
+          name: "Boy Boy",
+          relationship: "Son",
+        },
+      },
+    },
+  };
+
+  dynamodb.update(updateItemParms, (err, data) => {
+    if (err) {
+      res.statusCode = 500;
+      res.json({ error: err, url: req.url, body: req.body });
+    } else {
+      res.json({ success: "post call succeed!", url: req.url, data: data });
     }
   });
 });

@@ -5,6 +5,7 @@ import {
   DialogTitle,
   Grid,
 } from "@mui/material";
+import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import {
   addClientFormFields,
@@ -48,6 +49,7 @@ const ClientFormModal = ({
 
   const onDelete = () => {
     deleteClient(defaultValues.clientId);
+    setUpdateClients(true);
   };
 
   const resetClient = () => {

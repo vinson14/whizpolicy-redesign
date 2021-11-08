@@ -97,7 +97,7 @@
         "TemplateURL": "https://s3.amazonaws.com/amplify-whizpolicynodejs-dev-130704-deployment/amplify-cfn-templates/function/whizpolicynodejsclientslambda-cloudformation-template.json",
         "Parameters": {
           "deploymentBucketName": "amplify-whizpolicynodejs-dev-130704-deployment",
-          "s3Key": "amplify-builds/whizpolicynodejsclientslambda-4a75656a5845356f4d6f-build.zip",
+          "s3Key": "amplify-builds/whizpolicynodejsclientslambda-767836474d3963624452-build.zip",
           "storagewhizpolicynodejsdynamodbName": {
             "Fn::GetAtt": [
               "storagewhizpolicynodejsdynamodb",
