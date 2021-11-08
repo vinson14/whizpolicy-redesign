@@ -3,8 +3,12 @@ import AddButton from "../../stateless/interface/buttons/add-button";
 import ClientCardHeader from "../../stateless/interface/cards/client-card-header";
 import ClientCardInfoText from "../../stateless/interface/cards/client-card-info-text";
 import ClientDetailCard from "../../stateless/interface/cards/client-detail-card";
-
+import useModal from "../../../utils/useModal";
+import DependantForm from "../add-dependant-form/dependant-form";
 const DependantsCard = ({ client }) => {
+  const [dependantFormState, openDependantForm, closeDependantForm] =
+    useModal();
+
   return (
     <ClientDetailCard>
       <ClientCardHeader>Dependants</ClientCardHeader>
@@ -29,7 +33,14 @@ const DependantsCard = ({ client }) => {
           alignItems="center"
           item
         >
-          <AddButton mb={0}>Add Dependant</AddButton>
+          <AddButton onClick={openDependantForm} mb={0}>
+            Add Dependant
+          </AddButton>
+          <DependantForm
+            open={dependantFormState}
+            handleClose={closeDependantForm}
+            client={client}
+          />
         </Grid>
       </Grid>
     </ClientDetailCard>

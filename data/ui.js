@@ -147,6 +147,18 @@ export const CLIENT_FINANCIAL_OVERVIEW_ACC_DEATH_LABEL = "Accidental Death";
 export const CLIENT_FINANCIAL_OVERVIEW_ACC_MED_LABEL =
   "Accidental Medical Reimbursement";
 
+// Client Dependant Field key and value
+export const CLIENT_DEPENDANT_NAME_KEY = "name";
+export const CLIENT_DEPENDANT_RELATIONSHIP_KEY = "relationship";
+export const CLIENT_DEPENDANT_NAME_LABEL = "Name";
+export const CLIENT_DEPENDANT_RELATIONSHIP_LABEL = "Relationship";
+
+// Client Dependant Relationship Values and Label
+export const CLIENT_DEPENDANT_SON_VALUE = "son";
+export const CLIENT_DEPENDANT_SON_LABEL = "Son";
+export const CLIENT_DEPENDANT_SPOUSE_VALUE = "spouse";
+export const CLIENT_DEPENDANT_SPOUSE_LABEL = "Spouse";
+
 // Insurer Keys and Labels
 export const INSURER_AIA_KEY = "aia";
 export const INSURER_AIA_LABEL = "AIA";
@@ -1020,5 +1032,62 @@ export const policyDetailsCoverageCardFields = [
     key: POLICY_EARLY_CI_BENEFIT_KEY,
     type: FIELD_TYPE_CURRENCY,
     icon: <HotelIcon />,
+  },
+];
+
+export const defaultDependantFormValues = {
+  [CLIENT_DEPENDANT_NAME_KEY]: "",
+  [CLIENT_DEPENDANT_RELATIONSHIP_KEY]: CLIENT_DEPENDANT_SON_VALUE,
+};
+
+export const addDependantFormFields = [
+  {
+    name: CLIENT_DEPENDANT_NAME_KEY,
+    label: CLIENT_DEPENDANT_NAME_LABEL,
+    type: INPUT_TYPE_TEXT,
+    required: {
+      value: true,
+      message: REQUIRED_MSG.replace(REQUIRED_MSG_PLACEHOLDER, "name"),
+    },
+    minLength: {
+      value: MIN_CLIENT_NAME_LENGTH,
+      message: MIN_CHAR_MSG.replace(
+        MIN_CHAR_MSG_PLACEHOLDER,
+        MIN_CLIENT_NAME_LENGTH
+      ),
+    },
+    maxLength: {
+      value: MAX_CLIENT_NAME_LENGTH,
+      message: MAX_CHAR_MSG.replace(
+        MAX_CHAR_MSG_PLACEHOLDER,
+        MAX_CLIENT_NAME_LENGTH
+      ),
+    },
+    pattern: {
+      value: /\b([A-ZÀ-ÿ][-,a-z. ']+[ ]*)+/,
+      message: ALPHA_ONLY_MSG,
+    },
+    col: {
+      xs: 12,
+      md: 6,
+      lg: 5,
+    },
+  },
+  {
+    name: CLIENT_DEPENDANT_RELATIONSHIP_KEY,
+    label: CLIENT_DEPENDANT_RELATIONSHIP_LABEL,
+    type: INPUT_TYPE_SELECT,
+    options: [
+      { label: CLIENT_DEPENDANT_SON_LABEL, value: CLIENT_DEPENDANT_SON_VALUE },
+      {
+        label: CLIENT_DEPENDANT_SPOUSE_LABEL,
+        value: CLIENT_DEPENDANT_SPOUSE_VALUE,
+      },
+    ],
+    col: {
+      xs: 12,
+      md: 6,
+      lg: 5,
+    },
   },
 ];

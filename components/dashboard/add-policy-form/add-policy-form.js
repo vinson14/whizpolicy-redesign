@@ -53,10 +53,18 @@ const AddPolicyForm = ({
     }
   };
 
+  const resetForm = () => {
+    reset({}, { keepDefaultValues: true });
+  };
+
   const handleDelete = () => {
     deletePolicyToClient(client, defaultValues).then(() =>
       setUpdateClients(true)
     );
+    handleClose();
+  };
+
+  const cancelForm = () => {
     handleClose();
   };
 
@@ -94,7 +102,7 @@ const AddPolicyForm = ({
                   <DeleteButton onClick={handleDelete}>Delete</DeleteButton>
                 </>
               )) || <AddButton type="submit">Add Policy</AddButton>}
-              <CancelButton onClick={handleClose}>Cancel</CancelButton>
+              <CancelButton onClick={cancelForm}>Cancel</CancelButton>
             </Grid>
           </Grid>
         </FormContainer>

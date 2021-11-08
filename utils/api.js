@@ -139,3 +139,22 @@ export const deletePolicyToClient = async (client, policy) => {
     console.log(err);
   }
 };
+
+export const postDependantToClient = async (client, dependant) => {
+  const jwtToken = (await Auth.currentSession()).getIdToken().getJwtToken();
+  const path = `/clients/${client.clientId}/dependants`;
+  const init = {
+    body: { ...dependant },
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `${jwtToken}`,
+    },
+  };
+
+  try {
+    const response = await API.post(apiName, path, init);
+    return response;
+  } catch (err) {
+    console.log(err);
+  }
+};
