@@ -201,6 +201,32 @@ export const INSURER_GREAT_EASTERN_KEY = "greatEastern";
 export const INSURER_GREAT_EASTERN_LABEL = "Great Eastern";
 export const INSURER_NTUC_KEY = "ntucIncome";
 export const INSURER_NTUC_LABEL = "NTUC Income";
+export const INSURER_AVIVA_KEY = "aviva";
+export const INSURER_AVIVA_LABEL = "Aviva";
+export const INSURER_AXA_KEY = "axa";
+export const INSURER_AXA_LABEL = "AXA";
+export const INSURER_ALLIANZ_KEY = "allianz";
+export const INSURER_ALLIANZ_LABEL = "Allianz";
+export const INSURER_CHINA_LIFE_KEY = "chinaLife";
+export const INSURER_CHINA_LIFE_LABEL = "China Life";
+export const INSURER_CHINA_TAIPING_KEY = "chinaTaiping";
+export const INSURER_CHINA_TAIPING_LABEL = "China Taiping";
+export const INSURER_ETIQA_KEY = "etiqa";
+export const INSURER_ETIQA_LABEL = "Etiqa";
+export const INSURER_FWD_KEY = "fwd";
+export const INSURER_FWD_LABEL = "FWD";
+export const INSURER_HSBC_KEY = "hsbc";
+export const INSURER_HSBC_LABEL = "HSBC";
+export const INSURER_MANULIFE_KEY = "manulife";
+export const INSURER_MANULIFE_LABEL = "Manulife";
+export const INSURER_RAFFLES_KEY = "raffles";
+export const INSURER_RAFFLES_LABEL = "Raffles Health";
+export const INSURER_SING_LIFE_KEY = "singLife";
+export const INSURER_SING_LIFE_LABEL = "Sing Life";
+export const INSURER_TOKIO_MARINE_KEY = "tokioMarine";
+export const INSURER_TOKIO_MARINE_LABEL = "Tokio Marine";
+export const INSURER_ZURICH_KEY = "zurich";
+export const INSURER_ZURICH_LABEL = "Zurich International";
 
 // Premium Mode Keys and Labels
 export const PREMIUM_MODE_ANNUALLY_KEY = "annually";
@@ -824,6 +850,19 @@ export const addPolicyFormFields = {
       { label: INSURER_GREAT_EASTERN_LABEL, value: INSURER_GREAT_EASTERN_KEY },
       { label: INSURER_PRU_LABEL, value: INSURER_PRU_KEY },
       { label: INSURER_NTUC_LABEL, value: INSURER_NTUC_KEY },
+      { label: INSURER_AVIVA_LABEL, value: INSURER_AVIVA_KEY },
+      { label: INSURER_AXA_LABEL, value: INSURER_AXA_KEY },
+      { label: INSURER_ALLIANZ_LABEL, value: INSURER_ALLIANZ_KEY },
+      { label: INSURER_CHINA_LIFE_LABEL, value: INSURER_CHINA_LIFE_KEY },
+      { label: INSURER_CHINA_TAIPING_LABEL, value: INSURER_CHINA_TAIPING_KEY },
+      { label: INSURER_ETIQA_LABEL, value: INSURER_ETIQA_KEY },
+      { label: INSURER_FWD_LABEL, value: INSURER_FWD_KEY },
+      { label: INSURER_HSBC_LABEL, value: INSURER_HSBC_KEY },
+      { label: INSURER_MANULIFE_LABEL, value: INSURER_MANULIFE_KEY },
+      { label: INSURER_RAFFLES_LABEL, value: INSURER_RAFFLES_KEY },
+      { label: INSURER_SING_LIFE_LABEL, value: INSURER_SING_LIFE_KEY },
+      { label: INSURER_TOKIO_MARINE_LABEL, value: INSURER_TOKIO_MARINE_KEY },
+      { label: INSURER_ZURICH_LABEL, value: INSURER_ZURICH_KEY },
     ],
   },
   [POLICY_PREMIUM_MODE_KEY]: {
