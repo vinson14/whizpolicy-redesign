@@ -51,6 +51,7 @@ const avatarSx = {
   height: 120,
   border: 3,
   borderColor: "primary.contrastText",
+  bgcolor: "primary.main",
 };
 
 const nameBoxSx = {

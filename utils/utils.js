@@ -3,7 +3,7 @@ export const getInitials = (name) => {
     const words = name.split(" ");
     return words[0].charAt(0) + words[1].charAt(0);
   } catch (err) {
-    return "AB";
+    return name.substring(0, 2);
   }
 };
 
@@ -35,4 +35,20 @@ export function formatString(string) {
 export const formatFormInt = (string) => {
   if (string === "") return 0;
   return parseInt(string);
+};
+
+export const getRandomAvatarColor = () => {
+  const colors = [
+    "primary",
+    "secondary",
+    "error",
+    "warning",
+    "info",
+    "success",
+  ];
+  const shades = ["main", "light", "dark"];
+  const randomColor = colors[Math.floor(Math.random() * colors.length)];
+  const randomShade = shades[Math.floor(Math.random() * shades.length)];
+  console.log("this runs");
+  return `${randomColor}.${randomShade}`;
 };
