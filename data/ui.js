@@ -58,11 +58,15 @@ export const FIELD_TYPE_DATE = "date";
 export const POLICY_CATEGORY_WHOLE_LIFE_KEY = "wholeLife";
 export const POLICY_CATEGORY_TERM_LIFE_KEY = "termLife";
 export const POLICY_CATEGORY_ENDOWMENT_KEY = "endowment";
+export const POLICY_CATEGORY_ILP_KEY = "ilp";
+export const POLICY_CATEGORY_ACCIDENT_KEY = "accident";
 
 // Policy Categories Labels
 export const POLICY_CATEGORY_WHOLE_LIFE_LABEL = "Whole Life";
 export const POLICY_CATEGORY_TERM_LIFE_LABEL = "Term Life";
 export const POLICY_CATEGORY_ENDOWMENT_LABEL = "Endowment";
+export const POLICY_CATEGORY_ILP_LABEL = "Investment Linked";
+export const POLICY_CATEGORY_ACCIDENT_LABEL = "Accident";
 
 // Policy Object Keys
 export const POLICY_NUMBER_KEY = "policyNumber";
@@ -82,6 +86,17 @@ export const POLICY_PREMIUM_TERM_KEY = "premiumTerm";
 export const POLICY_GUARANTEED_MATURITY_BENEFIT_KEY =
   "guaranteedMaturityBenefit";
 export const POLICY_INCEPTION_DATE_KEY = "inceptionDate";
+export const POLICY_ACC_DEATH_BENEFIT_KEY = "accidentalDeath";
+export const POLICY_ACC_TPD_BENEFIT_KEY = "accidentalTpd";
+export const POLICY_ACC_PARTIAL_DISABILITY_BENEFIT_KEY =
+  "accidentalPartialDisability";
+export const POLICY_ACC_MEDICAL_KEY = "accidentalMedical";
+export const POLICY_ACC_ALT_MEDICAL_KEY = "accidentalTCM";
+export const POLICY_ACC_DAILY_HOSP_KEY = "accidentalDailyHospitalIncome";
+export const POLICY_ACC_WEEKLY_DIS_KEY = "accidentalWeeklyDisabilityIncome";
+export const POLICY_ACC_MOBILITY_AID_KEY = "accidentalMobilityAids";
+export const POLICY_ACC_HOME_MOD_KEY = "accidentalHomeModification";
+export const POLICY_ILP_FUND_RISK_KEY = "ilpFundRisk";
 
 // Policy Object Labels
 export const POLICY_NUMBER_LABEL = "Policy Number";
@@ -93,6 +108,8 @@ export const POLICY_PREMIUM_LABEL = "Premium";
 export const POLICY_PREMIUM_MODE_LABEL = "Premium Mode";
 export const POLICY_DEATH_BENEFIT_LABEL = "Death Benefit";
 export const POLICY_TPD_BENEFIT_LABEL = "Total Permanent Disability";
+export const POLICY_ACC_PARTIAL_DISABILITY_BENEFIT_LABEL =
+  "Partial Permanent Disability";
 export const POLICY_MAJOR_CI_BENEFIT_LABEL = "Major Critical Illness";
 export const POLICY_EARLY_CI_BENEFIT_LABEL = "Early Critical Illness";
 export const POLICY_MATURITY_DATE_LABEL = "Maturity Date";
@@ -101,6 +118,16 @@ export const POLICY_PREMIUM_TERM_LABEL = "Premium Term";
 export const POLICY_GUARANTEED_MATURITY_BENEFIT_LABEL =
   "Guaranteed Maturity Benefit";
 export const POLICY_INCEPTION_DATE_LABEL = "Inception Date";
+export const POLICY_ACC_DEATH_BENEFIT_LABEL = "Death Benefit";
+export const POLICY_ACC_TPD_BENEFIT_LABEL =
+  "Total Permanent Disability Benefit";
+export const POLICY_ACC_MEDICAL_LABEL = "Medical Reimbursement Benefit";
+export const POLICY_ACC_ALT_MEDICAL_LABEL = "TCM / Chiropractic Benefit";
+export const POLICY_ACC_DAILY_HOSP_LABEL = "Daily Hospital Benefit";
+export const POLICY_ACC_WEEKLY_DIS_LABEL = "Weekly Disability Income";
+export const POLICY_ACC_MOBILITY_AID_LABEL = "Mobility & Prosthesis Aids";
+export const POLICY_ACC_HOME_MOD_LABEL = "Home Modifications Allowance";
+export const POLICY_ILP_FUND_RISK_LABEL = "Fund Risk Level";
 
 // Client Object Keys
 export const CLIENT_NAME_KEY = "name";
@@ -214,6 +241,14 @@ export const SALUTATION_MS_VALUE = "ms";
 export const SALUTATION_MS_LABEL = "Ms";
 export const SALUTATION_DR_VALUE = "dr";
 export const SALUTATION_DR_LABEL = "Dr";
+
+// Policy fund risk levels
+export const POLICY_ILP_FUND_RISK_HIGH_KEY = "high";
+export const POLICY_ILP_FUND_RISK_BALANCED_KEY = "balanced";
+export const POLICY_ILP_FUND_RISK_LOW_KEY = "low";
+export const POLICY_ILP_FUND_RISK_HIGH_LABEL = "High";
+export const POLICY_ILP_FUND_RISK_BALANCED_LABEL = "Balanced";
+export const POLICY_ILP_FUND_RISK_LOW_LABEL = "Low";
 
 // Validation values
 export const MIN_POLICY_NAME_LENGTH = 2;
@@ -674,8 +709,16 @@ export const addPolicyFormFields = {
         value: POLICY_CATEGORY_TERM_LIFE_KEY,
       },
       {
+        label: POLICY_CATEGORY_ILP_LABEL,
+        value: POLICY_CATEGORY_ILP_KEY,
+      },
+      {
         label: POLICY_CATEGORY_ENDOWMENT_LABEL,
         value: POLICY_CATEGORY_ENDOWMENT_KEY,
+      },
+      {
+        label: POLICY_CATEGORY_ACCIDENT_LABEL,
+        value: POLICY_CATEGORY_ACCIDENT_KEY,
       },
     ],
     col: {
@@ -891,6 +934,120 @@ export const addPolicyFormFields = {
       lg: 5,
     },
   },
+  [POLICY_ACC_DEATH_BENEFIT_KEY]: {
+    name: POLICY_ACC_DEATH_BENEFIT_KEY,
+    label: POLICY_ACC_DEATH_BENEFIT_LABEL,
+    type: INPUT_TYPE_CURRENCY,
+    col: {
+      xs: 12,
+      md: 6,
+      lg: 5,
+    },
+  },
+  [POLICY_ACC_MEDICAL_KEY]: {
+    name: POLICY_ACC_MEDICAL_KEY,
+    label: POLICY_ACC_MEDICAL_LABEL,
+    type: INPUT_TYPE_CURRENCY,
+    col: {
+      xs: 12,
+      md: 6,
+      lg: 5,
+    },
+  },
+  [POLICY_ACC_DAILY_HOSP_KEY]: {
+    name: POLICY_ACC_DAILY_HOSP_KEY,
+    label: POLICY_ACC_DAILY_HOSP_LABEL,
+    type: INPUT_TYPE_CURRENCY,
+    col: {
+      xs: 12,
+      md: 6,
+      lg: 5,
+    },
+  },
+  [POLICY_ACC_ALT_MEDICAL_KEY]: {
+    name: POLICY_ACC_ALT_MEDICAL_KEY,
+    label: POLICY_ACC_ALT_MEDICAL_LABEL,
+    type: INPUT_TYPE_CURRENCY,
+    col: {
+      xs: 12,
+      md: 6,
+      lg: 5,
+    },
+  },
+  [POLICY_ACC_WEEKLY_DIS_KEY]: {
+    name: POLICY_ACC_WEEKLY_DIS_KEY,
+    label: POLICY_ACC_WEEKLY_DIS_LABEL,
+    type: INPUT_TYPE_CURRENCY,
+    col: {
+      xs: 12,
+      md: 6,
+      lg: 5,
+    },
+  },
+  [POLICY_ACC_TPD_BENEFIT_KEY]: {
+    name: POLICY_ACC_TPD_BENEFIT_KEY,
+    label: POLICY_ACC_TPD_BENEFIT_LABEL,
+    type: INPUT_TYPE_CURRENCY,
+    col: {
+      xs: 12,
+      md: 6,
+      lg: 5,
+    },
+  },
+  [POLICY_ACC_PARTIAL_DISABILITY_BENEFIT_KEY]: {
+    name: POLICY_ACC_PARTIAL_DISABILITY_BENEFIT_KEY,
+    label: POLICY_ACC_PARTIAL_DISABILITY_BENEFIT_LABEL,
+    type: INPUT_TYPE_CURRENCY,
+    col: {
+      xs: 12,
+      md: 6,
+      lg: 5,
+    },
+  },
+  [POLICY_ACC_MOBILITY_AID_KEY]: {
+    name: POLICY_ACC_MOBILITY_AID_KEY,
+    label: POLICY_ACC_MOBILITY_AID_LABEL,
+    type: INPUT_TYPE_CURRENCY,
+    col: {
+      xs: 12,
+      md: 6,
+      lg: 5,
+    },
+  },
+  [POLICY_ACC_HOME_MOD_KEY]: {
+    name: POLICY_ACC_HOME_MOD_KEY,
+    label: POLICY_ACC_HOME_MOD_LABEL,
+    type: INPUT_TYPE_CURRENCY,
+    col: {
+      xs: 12,
+      md: 6,
+      lg: 5,
+    },
+  },
+  [POLICY_ILP_FUND_RISK_KEY]: {
+    name: POLICY_ILP_FUND_RISK_KEY,
+    label: POLICY_ILP_FUND_RISK_LABEL,
+    type: INPUT_TYPE_SELECT,
+    options: [
+      {
+        label: POLICY_ILP_FUND_RISK_HIGH_LABEL,
+        value: POLICY_ILP_FUND_RISK_HIGH_KEY,
+      },
+      {
+        label: POLICY_ILP_FUND_RISK_BALANCED_LABEL,
+        value: POLICY_ILP_FUND_RISK_BALANCED_KEY,
+      },
+      {
+        label: POLICY_ILP_FUND_RISK_LOW_LABEL,
+        value: POLICY_ILP_FUND_RISK_LOW_KEY,
+      },
+    ],
+    col: {
+      xs: 12,
+      md: 6,
+      lg: 5,
+    },
+  },
 };
 
 export const policyCategorySelect = {
@@ -955,6 +1112,19 @@ export const defaultLifePolicyFields = [
   POLICY_EARLY_CI_BENEFIT_KEY,
 ];
 
+export const defaultAccPolicyFields = [
+  ...defaultPolicyFields,
+  POLICY_ACC_DEATH_BENEFIT_KEY,
+  POLICY_ACC_TPD_BENEFIT_KEY,
+  POLICY_ACC_PARTIAL_DISABILITY_BENEFIT_KEY,
+  POLICY_ACC_MEDICAL_KEY,
+  POLICY_ACC_ALT_MEDICAL_KEY,
+  POLICY_ACC_DAILY_HOSP_KEY,
+  POLICY_ACC_WEEKLY_DIS_KEY,
+  POLICY_ACC_MOBILITY_AID_KEY,
+  POLICY_ACC_HOME_MOD_KEY,
+];
+
 export const policyCategoryFields = {
   [POLICY_CATEGORY_WHOLE_LIFE_KEY]: [...defaultLifePolicyFields],
   [POLICY_CATEGORY_TERM_LIFE_KEY]: [...defaultLifePolicyFields],
@@ -964,6 +1134,11 @@ export const policyCategoryFields = {
     POLICY_MATURITY_DATE_KEY,
     POLICY_GUARANTEED_MATURITY_BENEFIT_KEY,
   ],
+  [POLICY_CATEGORY_ILP_KEY]: [
+    ...defaultLifePolicyFields,
+    POLICY_ILP_FUND_RISK_KEY,
+  ],
+  [POLICY_CATEGORY_ACCIDENT_KEY]: [...defaultAccPolicyFields],
 };
 
 export const inputTypeMapping = {
