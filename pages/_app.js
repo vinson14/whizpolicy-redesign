@@ -17,16 +17,20 @@ const theme = createTheme({
       disabled: "#919EAB",
     },
     primary: {
-      main: "#118ab2",
+      main: "#5569ff",
     },
     secondary: {
-      main: "#049F76",
+      main: "#44d600",
+      contrastText: "#ffffff",
     },
     info: {
       main: "#073B4C",
     },
     warning: {
-      main: "#ffd166",
+      main: "#ffa319",
+    },
+    error: {
+      main: "#ff1943",
     },
   },
   typography: {
