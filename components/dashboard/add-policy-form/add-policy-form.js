@@ -68,8 +68,6 @@ const AddPolicyForm = ({
     handleClose();
   };
 
-  const SelectCategoryComponent = inputTypeMapping[policyCategorySelect.type];
-
   return (
     <ModalContainer open={open} onClose={handleClose} title="Add Policy">
       <DialogContent>

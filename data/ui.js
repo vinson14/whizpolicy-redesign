@@ -60,6 +60,7 @@ export const POLICY_CATEGORY_TERM_LIFE_KEY = "termLife";
 export const POLICY_CATEGORY_ENDOWMENT_KEY = "endowment";
 export const POLICY_CATEGORY_ILP_KEY = "ilp";
 export const POLICY_CATEGORY_ACCIDENT_KEY = "accident";
+export const POLICY_CATEGORY_HOSPITAL_KEY = "hospital";
 
 // Policy Categories Labels
 export const POLICY_CATEGORY_WHOLE_LIFE_LABEL = "Whole Life";
@@ -67,6 +68,7 @@ export const POLICY_CATEGORY_TERM_LIFE_LABEL = "Term Life";
 export const POLICY_CATEGORY_ENDOWMENT_LABEL = "Endowment";
 export const POLICY_CATEGORY_ILP_LABEL = "Investment Linked";
 export const POLICY_CATEGORY_ACCIDENT_LABEL = "Accident";
+export const POLICY_CATEGORY_HOSPITAL_LABEL = "Integrated Shield Plan";
 
 // Policy Object Keys
 export const POLICY_NUMBER_KEY = "policyNumber";
@@ -97,6 +99,8 @@ export const POLICY_ACC_WEEKLY_DIS_KEY = "accidentalWeeklyDisabilityIncome";
 export const POLICY_ACC_MOBILITY_AID_KEY = "accidentalMobilityAids";
 export const POLICY_ACC_HOME_MOD_KEY = "accidentalHomeModification";
 export const POLICY_ILP_FUND_RISK_KEY = "ilpFundRisk";
+export const POLICY_HOSP_WARD_TYPE_KEY = "hospitalWardType";
+export const POLICY_HOSP_RIDER_TYPE_KEY = "hospitalRiderType";
 
 // Policy Object Labels
 export const POLICY_NUMBER_LABEL = "Policy Number";
@@ -128,6 +132,8 @@ export const POLICY_ACC_WEEKLY_DIS_LABEL = "Weekly Disability Income";
 export const POLICY_ACC_MOBILITY_AID_LABEL = "Mobility & Prosthesis Aids";
 export const POLICY_ACC_HOME_MOD_LABEL = "Home Modifications Allowance";
 export const POLICY_ILP_FUND_RISK_LABEL = "Fund Risk Level";
+export const POLICY_HOSP_WARD_TYPE_LABEL = "Ward Type";
+export const POLICY_HOSP_RIDER_TYPE_LABEL = "Rider Type";
 
 // Client Object Keys
 export const CLIENT_NAME_KEY = "name";
@@ -249,6 +255,21 @@ export const POLICY_ILP_FUND_RISK_LOW_KEY = "low";
 export const POLICY_ILP_FUND_RISK_HIGH_LABEL = "High";
 export const POLICY_ILP_FUND_RISK_BALANCED_LABEL = "Balanced";
 export const POLICY_ILP_FUND_RISK_LOW_LABEL = "Low";
+
+// Hospital Ward Types
+export const POLICY_HOSP_WARD_TYPE_PRIVATE_VALUE = "private";
+export const POLICY_HOSP_WARD_TYPE_PRIVATE_LABEL = "Private Hospital";
+export const POLICY_HOSP_WARD_TYPE_PUBLIC_A_VALUE = "publicA";
+export const POLICY_HOSP_WARD_TYPE_PUBLIC_A_LABEL = "Public A Ward";
+export const POLICY_HOSP_WARD_TYPE_PUBLIC_B1_VALUE = "publicB1";
+export const POLICY_HOSP_WARD_TYPE_PUBLIC_B1_LABEL = "Public B1 Ward";
+
+export const POLICY_HOSP_RIDER_TYPE_NO_VALUE = "noRider";
+export const POLICY_HOSP_RIDER_TYPE_NO_LABEL = "No Rider";
+export const POLICY_HOSP_RIDER_TYPE_FULL_VALUE = "full";
+export const POLICY_HOSP_RIDER_TYPE_FULL_LABEL = "Full";
+export const POLICY_HOSP_RIDER_TYPE_PARTIAL_VALUE = "partial";
+export const POLICY_HOSP_RIDER_TYPE_PARTIAL_LABEL = "Partial";
 
 // Validation values
 export const MIN_POLICY_NAME_LENGTH = 2;
@@ -720,6 +741,10 @@ export const addPolicyFormFields = {
         label: POLICY_CATEGORY_ACCIDENT_LABEL,
         value: POLICY_CATEGORY_ACCIDENT_KEY,
       },
+      {
+        label: POLICY_CATEGORY_HOSPITAL_LABEL,
+        value: POLICY_CATEGORY_HOSPITAL_KEY,
+      },
     ],
     col: {
       xs: 12,
@@ -1048,30 +1073,53 @@ export const addPolicyFormFields = {
       lg: 5,
     },
   },
-};
-
-export const policyCategorySelect = {
-  name: POLICY_CATEGORY_KEY,
-  label: POLICY_CATEGORY_LABEL,
-  type: INPUT_TYPE_SELECT,
-  options: [
-    {
-      label: POLICY_CATEGORY_WHOLE_LIFE_LABEL,
-      value: POLICY_CATEGORY_WHOLE_LIFE_KEY,
+  [POLICY_HOSP_WARD_TYPE_KEY]: {
+    name: POLICY_HOSP_WARD_TYPE_KEY,
+    label: POLICY_HOSP_WARD_TYPE_LABEL,
+    type: INPUT_TYPE_SELECT,
+    options: [
+      {
+        label: POLICY_HOSP_WARD_TYPE_PRIVATE_LABEL,
+        value: POLICY_HOSP_WARD_TYPE_PRIVATE_VALUE,
+      },
+      {
+        label: POLICY_HOSP_WARD_TYPE_PUBLIC_A_LABEL,
+        value: POLICY_HOSP_WARD_TYPE_PUBLIC_A_VALUE,
+      },
+      {
+        label: POLICY_HOSP_WARD_TYPE_PUBLIC_B1_LABEL,
+        value: POLICY_HOSP_WARD_TYPE_PUBLIC_B1_VALUE,
+      },
+    ],
+    col: {
+      xs: 12,
+      md: 6,
+      lg: 5,
     },
-    {
-      label: POLICY_CATEGORY_TERM_LIFE_LABEL,
-      value: POLICY_CATEGORY_TERM_LIFE_KEY,
+  },
+  [POLICY_HOSP_RIDER_TYPE_KEY]: {
+    name: POLICY_HOSP_RIDER_TYPE_KEY,
+    label: POLICY_HOSP_RIDER_TYPE_LABEL,
+    type: INPUT_TYPE_SELECT,
+    options: [
+      {
+        label: POLICY_HOSP_RIDER_TYPE_NO_LABEL,
+        value: POLICY_HOSP_RIDER_TYPE_NO_VALUE,
+      },
+      {
+        label: POLICY_HOSP_RIDER_TYPE_FULL_LABEL,
+        value: POLICY_HOSP_RIDER_TYPE_FULL_VALUE,
+      },
+      {
+        label: POLICY_HOSP_RIDER_TYPE_PARTIAL_LABEL,
+        value: POLICY_HOSP_RIDER_TYPE_PARTIAL_VALUE,
+      },
+    ],
+    col: {
+      xs: 12,
+      md: 6,
+      lg: 5,
     },
-    {
-      label: POLICY_CATEGORY_ENDOWMENT_LABEL,
-      value: POLICY_CATEGORY_ENDOWMENT_KEY,
-    },
-  ],
-  col: {
-    xs: 12,
-    md: 6,
-    lg: 5,
   },
 };
 
@@ -1086,16 +1134,30 @@ export const defaultPolicyFormValues = {
   [POLICY_TPD_BENEFIT_KEY]: "",
   [POLICY_MAJOR_CI_BENEFIT_KEY]: "",
   [POLICY_EARLY_CI_BENEFIT_KEY]: "",
+  [POLICY_ACC_DEATH_BENEFIT_KEY]: "",
+  [POLICY_ACC_TPD_BENEFIT_KEY]: "",
+  [POLICY_ACC_PARTIAL_DISABILITY_BENEFIT_KEY]: "",
+  [POLICY_ACC_MEDICAL_KEY]: "",
+  [POLICY_ACC_ALT_MEDICAL_KEY]: "",
+  [POLICY_ACC_DAILY_HOSP_KEY]: "",
+  [POLICY_ACC_WEEKLY_DIS_KEY]: "",
+  [POLICY_ACC_MOBILITY_AID_KEY]: "",
+  [POLICY_ACC_HOME_MOD_KEY]: "",
+  [POLICY_ILP_FUND_RISK_KEY]: POLICY_ILP_FUND_RISK_BALANCED_KEY,
+  [POLICY_HOSP_WARD_TYPE_KEY]: POLICY_HOSP_WARD_TYPE_PRIVATE_VALUE,
+  [POLICY_HOSP_RIDER_TYPE_KEY]: POLICY_HOSP_RIDER_TYPE_FULL_VALUE,
+  [POLICY_GUARANTEED_MATURITY_BENEFIT_KEY]: "",
   [POLICY_TERM_KEY]: "",
   [POLICY_PREMIUM_TERM_KEY]: "",
   [POLICY_INCEPTION_DATE_KEY]: new Date(),
+  [POLICY_MATURITY_DATE_KEY]: new Date(),
 };
 
 export const defaultPolicyFields = [
   POLICY_CATEGORY_KEY,
+  POLICY_INSURER_KEY,
   POLICY_NAME_KEY,
   POLICY_NUMBER_KEY,
-  POLICY_INSURER_KEY,
   POLICY_PREMIUM_KEY,
   POLICY_PREMIUM_MODE_KEY,
   POLICY_PREMIUM_TERM_KEY,
@@ -1125,6 +1187,18 @@ export const defaultAccPolicyFields = [
   POLICY_ACC_HOME_MOD_KEY,
 ];
 
+export const defaultHospPolicyFields = [
+  POLICY_CATEGORY_KEY,
+  POLICY_INSURER_KEY,
+  POLICY_NAME_KEY,
+  POLICY_NUMBER_KEY,
+  POLICY_HOSP_WARD_TYPE_KEY,
+  POLICY_HOSP_RIDER_TYPE_KEY,
+  POLICY_PREMIUM_KEY,
+  POLICY_PREMIUM_MODE_KEY,
+  POLICY_INCEPTION_DATE_KEY,
+];
+
 export const policyCategoryFields = {
   [POLICY_CATEGORY_WHOLE_LIFE_KEY]: [...defaultLifePolicyFields],
   [POLICY_CATEGORY_TERM_LIFE_KEY]: [...defaultLifePolicyFields],
@@ -1139,6 +1213,7 @@ export const policyCategoryFields = {
     POLICY_ILP_FUND_RISK_KEY,
   ],
   [POLICY_CATEGORY_ACCIDENT_KEY]: [...defaultAccPolicyFields],
+  [POLICY_CATEGORY_HOSPITAL_KEY]: [...defaultHospPolicyFields],
 };
 
 export const inputTypeMapping = {
