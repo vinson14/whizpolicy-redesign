@@ -12,9 +12,9 @@ function MyApp({ Component, pageProps }) {
 const theme = createTheme({
   palette: {
     text: {
-      primary: "#212B36",
-      secondary: "#637381",
-      disabled: "#919EAB",
+      primary: "#223354",
+      secondary: "rgba(34, 51, 84, 0.7)",
+      disabled: "rgba(36, 46, 111, 0.6)",
     },
     primary: {
       main: "#5569ff",
