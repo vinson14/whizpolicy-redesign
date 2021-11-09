@@ -14,6 +14,17 @@ const useDashboardState = (clients, policies) => {
   );
   const [selectedClient, setSelectedClient] = useState();
   const [selectedPolicy, setSelectedPolicy] = useState();
+
+  const breadcrumbClientOnClick = () => {
+    setSelectedClient(null);
+    setSelectedPolicy(null);
+    setBreadcrumbLinks(defaultDashboardClientBreadcrumbs);
+  };
+  const defaultDashboardClientBreadcrumbs = [
+    { label: "Dashboard", onClick: null },
+    { label: "Clients", onClick: breadcrumbClientOnClick },
+  ];
+
   const [breadcrumbLinks, setBreadcrumbLinks] = useState(
     defaultDashboardClientBreadcrumbs
   );
@@ -34,16 +45,11 @@ const useDashboardState = (clients, policies) => {
       );
   }, [clients]);
 
-  const defaultBreadcrumbs = {
-    [SIDEBAR_CLIENTS_VALUE]: defaultDashboardClientBreadcrumbs,
-    [SIDEBAR_PORTFOLIO_VALUE]: defaultDashboardPortfolioBreadcrumbs,
-  };
-
   const clientOnClick = (client) => {
     setSelectedClient(client);
     setBreadcrumbLinks([
       ...breadcrumbLinks,
-      { label: client.name, route: "/dashboard" },
+      { label: client.name, onClick: () => setSelectedPolicy(null) },
     ]);
   };
 

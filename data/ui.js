@@ -271,14 +271,6 @@ export const insurerLabels = {
   [INSURER_GREAT_EASTERN_KEY]: INSURER_GREAT_EASTERN_LABEL,
 };
 
-export const defaultDashboardClientBreadcrumbs = [
-  { label: "Clients", route: "/dashboard" },
-];
-
-export const defaultDashboardPortfolioBreadcrumbs = [
-  { label: "Portfolio", route: "/dashboard" },
-];
-
 export const clientCardFields = [
   {
     label: CLIENT_OCCUPATION_LABEL,

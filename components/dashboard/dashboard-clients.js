@@ -76,7 +76,7 @@ const DashboardClients = ({
         <DashboardHeaderContainer openSidebar={openSidebar}>
           <Grid item>
             <MainHeader>Clients</MainHeader>
-            <CustomBreadcrumbs links={breadcrumbLinks} />
+            <CustomBreadcrumbs breadcrumbs={breadcrumbLinks} />
           </Grid>
           <Grid
             item
