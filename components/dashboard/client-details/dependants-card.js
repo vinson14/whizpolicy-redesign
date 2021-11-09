@@ -45,7 +45,7 @@ const DependantsCard = ({ client, setUpdateClients }) => {
           alignItems="center"
           item
         >
-          <AddButton onClick={openDependantForm} mb={0}>
+          <AddButton onClick={openDependantForm} variant="text" mb={0}>
             Add Dependant
           </AddButton>
           <DependantForm

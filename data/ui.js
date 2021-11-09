@@ -312,18 +312,28 @@ export const clientDetailsAboutFields = [
     type: FIELD_TYPE_TEXT,
   },
   {
-    label: CLIENT_BIRTHDAY_LABEL,
-    key: CLIENT_BIRTHDAY_KEY,
-    type: FIELD_TYPE_DATE,
-  },
-  {
     label: CLIENT_MARITAL_STATUS_LABEL,
     key: CLIENT_MARITAL_STATUS_KEY,
     type: FIELD_TYPE_TEXT,
   },
   {
+    label: CLIENT_BIRTHDAY_LABEL,
+    key: CLIENT_BIRTHDAY_KEY,
+    type: FIELD_TYPE_DATE,
+  },
+  {
+    label: CLIENT_AGE_LABEL,
+    key: CLIENT_AGE_KEY,
+    type: FIELD_TYPE_INTEGER,
+  },
+  {
     label: CLIENT_SMOKER_LABEL,
     key: CLIENT_SMOKER_KEY,
+    type: FIELD_TYPE_TEXT,
+  },
+  {
+    label: CLIENT_OCCUPATION_LABEL,
+    key: CLIENT_OCCUPATION_KEY,
     type: FIELD_TYPE_TEXT,
   },
 ];
