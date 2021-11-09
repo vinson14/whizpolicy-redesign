@@ -34,6 +34,9 @@ const UNAUTH = "UNAUTH";
 const hashKeyPath = "/:" + partitionKeyName;
 const sortKeyPath = hasSortKey ? "/:" + sortKeyName : "";
 const dependantsPath = "/dependants";
+const dependantKeyName = "name";
+const dependantKeyPath = `/:${dependantKeyName}`;
+const dependantKeyType = "S";
 const policiesPath = "/policies";
 const policyIdKeyName = "policyId";
 const policyIdKeyType = "S";
@@ -300,6 +303,72 @@ app.post(path + sortKeyPath + dependantsPath, function (req, res) {
     }
   });
 });
+
+/**************************************
+ * HTTP DELETE method to delete dependant *
+ ***************************************/
+app.delete(
+  path + sortKeyPath + dependantsPath + dependantKeyPath,
+  function (req, res) {
+    keyParams = {};
+    keyParams[partitionKeyName] = convertUrlType(
+      req.apiGateway.event.requestContext.authorizer.claims.sub,
+      partitionKeyType
+    );
+    keyParams[sortKeyName] = convertUrlType(
+      req.params[sortKeyName],
+      sortKeyType
+    );
+    const dependantId = convertUrlType(
+      req.params[dependantKeyName],
+      dependantKeyType
+    );
+    const getItemParams = {
+      TableName: tableName,
+      Key: keyParams,
+    };
+
+    dynamodb.get(getItemParams, (err, data) => {
+      if (err) {
+        res.statusCode = 500;
+        res.json({ error: err, url: req.url, body: req.body });
+      } else {
+        const client = data.Item;
+
+        const dependants = client.dependants.filter(
+          (dep) => dep[dependantKeyName] !== dependantId
+        );
+        console.log(dependantId);
+
+        console.log(dependants);
+
+        let updateItemParms = {
+          TableName: tableName,
+          Key: keyParams,
+          AttributeUpdates: {
+            dependants: {
+              Action: "PUT",
+              Value: dependants,
+            },
+          },
+        };
+
+        dynamodb.update(updateItemParms, (err, data) => {
+          if (err) {
+            res.statusCode = 500;
+            res.json({ error: err, url: req.url, body: req.body });
+          } else {
+            res.json({
+              success: "delete call succeed!",
+              url: req.url,
+              data: data,
+            });
+          }
+        });
+      }
+    });
+  }
+);
 
 /**************************************
  * HTTP POST method to add policy *

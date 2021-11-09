@@ -96,6 +96,7 @@ const DashboardClients = ({
             <ClientDetails
               client={selectedClient}
               policyOnClick={policyOnClick}
+              setUpdateClients={setUpdateClients}
             />
           )}
           {selectedClient != null && selectedPolicy != null && (

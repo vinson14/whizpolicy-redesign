@@ -5,9 +5,18 @@ import ClientCardInfoText from "../../stateless/interface/cards/client-card-info
 import ClientDetailCard from "../../stateless/interface/cards/client-detail-card";
 import useModal from "../../../utils/useModal";
 import DependantForm from "../add-dependant-form/dependant-form";
-const DependantsCard = ({ client }) => {
+import DeleteIcon from "@mui/icons-material/Delete";
+import { deleteDependantToClient } from "../../../utils/api";
+
+const DependantsCard = ({ client, setUpdateClients }) => {
   const [dependantFormState, openDependantForm, closeDependantForm] =
     useModal();
+
+  const deleteDependant = (dependant) => {
+    deleteDependantToClient(client, dependant).then(() =>
+      setUpdateClients(true)
+    );
+  };
 
   return (
     <ClientDetailCard>
@@ -18,7 +27,10 @@ const DependantsCard = ({ client }) => {
             <ClientCardInfoText
               key={dependant.name}
               label={dependant.relationship}
+              pr={2}
               value={dependant.name}
+              endIcon={<DeleteIcon />}
+              endIconOnClick={() => deleteDependant(dependant)}
             />
           ))}
         {(!client.dependants || client.dependants.length === 0) && (
@@ -40,6 +52,7 @@ const DependantsCard = ({ client }) => {
             open={dependantFormState}
             handleClose={closeDependantForm}
             client={client}
+            setUpdateClients={setUpdateClients}
           />
         </Grid>
       </Grid>

@@ -27,12 +27,15 @@ const DependantForm = ({
     formState: { errors },
     reset,
   } = useForm({ mode: "onBlur", defaultValues });
+
   const onSubmit = (dependant) => {
-    postDependantToClient(client, dependant);
+    handleClose();
+    postDependantToClient(client, dependant).then(() => setUpdateClients(true));
   };
   const resetForm = () => {
     reset({}, { keepDefaultValues: true });
   };
+
   const cancelForm = () => {
     resetForm();
     handleClose();
