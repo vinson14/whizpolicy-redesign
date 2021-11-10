@@ -18,15 +18,18 @@ const useDashboardState = (clients, policies) => {
   const breadcrumbClientOnClick = () => {
     setSelectedClient(null);
     setSelectedPolicy(null);
-    setBreadcrumbLinks(defaultDashboardClientBreadcrumbs);
+    setBreadcrumbLinks(defaultBreadcrumbs[SIDEBAR_CLIENTS_VALUE]);
   };
-  const defaultDashboardClientBreadcrumbs = [
-    { label: "Dashboard", onClick: null },
-    { label: "Clients", onClick: breadcrumbClientOnClick },
-  ];
+
+  const defaultBreadcrumbs = {
+    [SIDEBAR_CLIENTS_VALUE]: [
+      { label: "Dashboard", onClick: null },
+      { label: "Clients", onClick: breadcrumbClientOnClick },
+    ],
+  };
 
   const [breadcrumbLinks, setBreadcrumbLinks] = useState(
-    defaultDashboardClientBreadcrumbs
+    defaultBreadcrumbs[SIDEBAR_CLIENTS_VALUE]
   );
   const sidebarOptionOnClick = (value) => {
     setSelectedSidebarOption(value);
@@ -37,12 +40,18 @@ const useDashboardState = (clients, policies) => {
 
   useEffect(() => {
     console.log("update selectedClient");
-    if (selectedClient)
+    if (clients.length === 0) {
+      console.log(clients.length);
+      setSelectedClient(null);
+      setSelectedPolicy(null);
+    } else if (selectedClient)
       setSelectedClient(findClientById(clients, selectedClient.clientId));
-    if (selectedPolicy && selectedClient)
+    else if (selectedPolicy && selectedClient) {
+      setSelectedClient(findClientById(clients, selectedClient.clientId));
       setSelectedPolicy(
         findPolicyByPolicyId(selectedClient.policies, selectedPolicy.policyId)
       );
+    }
   }, [clients]);
 
   const clientOnClick = (client) => {

@@ -28,6 +28,7 @@ import SidebarLogoutButton from "../components/stateless/interface/buttons/sideb
 import { AuthState, onAuthUIStateChange } from "@aws-amplify/ui-components";
 import useDashboardState from "../utils/useUrlQuery";
 import LoadingIcon from "../components/stateless/interface/misc/loading-icon";
+import TopAppBar from "../components/stateless/interface/navigation/top-appbar";
 Amplify.configure(awsConfig);
 
 const Dashboard = () => {
@@ -60,6 +61,8 @@ const Dashboard = () => {
         .then((data) => setClients(data))
         .then(() => setLoading(false));
       // getPolicies().then((policies) => setPolicies(policies));
+    } else {
+      setClients([]);
     }
     setUpdateClients(false);
   }, [updateClients, authState]);
@@ -97,6 +100,7 @@ const Dashboard = () => {
 
   return (
     <AmplifyAuthenticator>
+      <TopAppBar menuOnClick={openSidebar} />
       <DashboardContainer>
         <Sidebar open={showSidebar} onClose={closeSidebar}>
           <List>
@@ -114,7 +118,12 @@ const Dashboard = () => {
                 </ListItemButton>
               </ListItem>
             ))}
-            <SidebarLogoutButton onClick={handleLogout} />
+            <SidebarLogoutButton
+              onClick={() => {
+                handleLogout();
+                closeSidebar();
+              }}
+            />
           </List>
         </Sidebar>
         <Container sx={{ pb: 3 }}>

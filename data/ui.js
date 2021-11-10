@@ -328,22 +328,22 @@ export const sidebarItems = [
   {
     label: SIDEBAR_CLIENTS_LABEL,
     value: SIDEBAR_CLIENTS_VALUE,
-    icon: <PeopleAltIcon />,
+    icon: <PeopleAltIcon color="primary" />,
   },
   {
     label: SIDEBAR_PORTFOLIO_LABEL,
     value: SIDEBAR_PORTFOLIO_VALUE,
-    icon: <ListAltIcon />,
+    icon: <ListAltIcon color="primary" />,
   },
   {
     label: SIDEBAR_SETTINGS_LABEL,
     value: SIDEBAR_SETTINGS_VALUE,
-    icon: <SettingsIcon />,
+    icon: <SettingsIcon color="primary" />,
   },
   {
     label: SIDEBAR_PROFILE_LABEL,
     value: SIDEBAR_PROFILE_VALUE,
-    icon: <AccountCircleIcon />,
+    icon: <AccountCircleIcon color="primary" />,
   },
 ];
 

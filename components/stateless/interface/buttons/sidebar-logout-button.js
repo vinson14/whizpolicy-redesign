@@ -11,7 +11,7 @@ const SidebarLogoutButton = ({ onClick }) => {
     <ListItem>
       <ListItemButton onClick={onClick}>
         <ListItemIcon>
-          <LogoutIcon />
+          <LogoutIcon color="primary" />
         </ListItemIcon>
         <ListItemText primary="Sign Out" />
       </ListItemButton>

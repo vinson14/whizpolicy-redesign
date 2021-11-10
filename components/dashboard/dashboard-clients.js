@@ -75,7 +75,6 @@ const DashboardClients = ({
       <Box sx={{ p: { md: 5, xs: 1 } }}>
         <DashboardHeaderContainer openSidebar={openSidebar}>
           <Grid item>
-            <MainHeader>Clients</MainHeader>
             <CustomBreadcrumbs breadcrumbs={breadcrumbLinks} />
           </Grid>
           <Grid
@@ -88,7 +87,7 @@ const DashboardClients = ({
             {renderButton()}
           </Grid>
         </DashboardHeaderContainer>
-        <Grid container mt={5} spacing={3} alignItems="stretch">
+        <Grid container mt={{ xs: 2, md: 5 }} spacing={3} alignItems="stretch">
           {selectedClient == null && (
             <ClientCards clients={clients} selectClient={clientOnClick} />
           )}
