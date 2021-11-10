@@ -191,6 +191,16 @@ export const signInUser = async (user) => {
   }
 };
 
+export const signUpUser = async (formData) => {
+  try {
+    const { user } = await Auth.signUp(formData);
+    console.log(user);
+    return user;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export const signOutUser = async () => {
   try {
     await Auth.signOut();
@@ -206,6 +216,16 @@ export const isUserAuthenticated = async () => {
     const user = await Auth.currentAuthenticatedUser();
     if (user) return true;
   } catch (error) {
+    return false;
+  }
+};
+
+export const confirmSignUp = async (username, code) => {
+  try {
+    await Auth.confirmSignUp(username, code);
+    return true;
+  } catch (err) {
+    console.log("error", err);
     return false;
   }
 };
