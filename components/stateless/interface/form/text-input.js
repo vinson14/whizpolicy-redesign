@@ -4,6 +4,7 @@ const TextInput = ({
   name,
   label,
   error,
+  type = "text",
   placeholder,
   startAdornment,
   shrink = true,
@@ -22,6 +23,7 @@ const TextInput = ({
         maxLength,
         pattern,
       })}
+      type={type}
       error={error ? true : false}
       helperText={error ? error.message : ""}
       label={label + (required && required.value ? "*" : "")}

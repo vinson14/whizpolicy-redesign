@@ -7,8 +7,13 @@ const apiName = "whizpolicynodejsapi";
 
 Amplify.configure(awsmobile);
 
+const getJwtToken = async () => {
+  const token = (await Auth.currentSession()).getIdToken().getJwtToken();
+  return token;
+};
+
 export const getPolicies = async () => {
-  const jwtToken = (await Auth.currentSession()).getIdToken().getJwtToken();
+  const jwtToken = await getJwtToken();
   const response = await API.get(apiName, "/policies", {
     headers: {
       Authorization: `Bearer ${jwtToken}`,
@@ -19,7 +24,7 @@ export const getPolicies = async () => {
 
 export const getClients = async () => {
   console.log("getClients Ran");
-  const jwtToken = (await Auth.currentSession()).getIdToken().getJwtToken();
+  const jwtToken = await getJwtToken();
   try {
     const response = await API.get(apiName, "/clients", {
       headers: {
@@ -33,7 +38,7 @@ export const getClients = async () => {
 };
 
 export const postClient = async (client) => {
-  const jwtToken = (await Auth.currentSession()).getIdToken().getJwtToken();
+  const jwtToken = await getJwtToken();
   const path = "/clients";
   const init = {
     body: { ...client },
@@ -51,7 +56,7 @@ export const postClient = async (client) => {
 };
 
 export const putClient = async (client) => {
-  const jwtToken = (await Auth.currentSession()).getIdToken().getJwtToken();
+  const jwtToken = await getJwtToken();
   const path = `/clients/${client.clientId}`;
   const init = {
     body: {
@@ -67,7 +72,7 @@ export const putClient = async (client) => {
 };
 
 export const deleteClient = async (clientId) => {
-  const jwtToken = (await Auth.currentSession()).getIdToken().getJwtToken();
+  const jwtToken = await getJwtToken();
   const path = `/clients/${clientId}`;
   const init = {
     body: {},
@@ -82,7 +87,7 @@ export const deleteClient = async (clientId) => {
 };
 
 export const postPolicyToClient = async (client, policy) => {
-  const jwtToken = (await Auth.currentSession()).getIdToken().getJwtToken();
+  const jwtToken = await getJwtToken();
   if (findPolicyByPolicyId(client.policies, policy.policyId)) {
     console.log("policy already exists");
     return;
@@ -105,7 +110,7 @@ export const postPolicyToClient = async (client, policy) => {
 };
 
 export const putPolicyToClient = async (client, policy) => {
-  const jwtToken = (await Auth.currentSession()).getIdToken().getJwtToken();
+  const jwtToken = await getJwtToken();
   const path = `/clients/${client.clientId}/policies/${policy.policyId}`;
   const init = {
     body: { ...policy },
@@ -123,7 +128,7 @@ export const putPolicyToClient = async (client, policy) => {
 };
 
 export const deletePolicyToClient = async (client, policy) => {
-  const jwtToken = (await Auth.currentSession()).getIdToken().getJwtToken();
+  const jwtToken = await getJwtToken();
   const path = `/clients/${client.clientId}/policies/${policy.policyId}`;
   const init = {
     body: {},
@@ -141,7 +146,7 @@ export const deletePolicyToClient = async (client, policy) => {
 };
 
 export const postDependantToClient = async (client, dependant) => {
-  const jwtToken = (await Auth.currentSession()).getIdToken().getJwtToken();
+  const jwtToken = await getJwtToken();
   const path = `/clients/${client.clientId}/dependants`;
   const init = {
     body: { ...dependant },
@@ -160,7 +165,7 @@ export const postDependantToClient = async (client, dependant) => {
 };
 
 export const deleteDependantToClient = async (client, dependant) => {
-  const jwtToken = (await Auth.currentSession()).getIdToken().getJwtToken();
+  const jwtToken = await getJwtToken();
   const path = `/clients/${client.clientId}/dependants/${dependant.name}`;
   const init = {
     body: {},
@@ -174,5 +179,33 @@ export const deleteDependantToClient = async (client, dependant) => {
     return response;
   } catch (err) {
     console.log(err);
+  }
+};
+
+export const signInUser = async (user) => {
+  try {
+    const loggedInUser = await Auth.signIn(user.username, user.password);
+    return loggedInUser;
+  } catch (error) {
+    console.log("error signing in", error);
+  }
+};
+
+export const signOutUser = async () => {
+  try {
+    await Auth.signOut();
+    return true;
+  } catch (err) {
+    console.log("error", err);
+    return false;
+  }
+};
+
+export const isUserAuthenticated = async () => {
+  try {
+    const user = await Auth.currentAuthenticatedUser();
+    if (user) return true;
+  } catch (error) {
+    return false;
   }
 };

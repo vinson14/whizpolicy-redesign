@@ -20,23 +20,40 @@ import DashboardContainer from "../components/dashboard/dashboard-container";
 import DashboardClients from "../components/dashboard/dashboard-clients";
 import DashboardPortfolio from "../components/dashboard/dashboard-portfolio";
 import useModal from "../utils/useModal";
-import { getClients, getClientsWithAuth, getPolicies } from "../utils/api";
+import {
+  getClients,
+  getClientsWithAuth,
+  getPolicies,
+  isUserAuthenticated,
+  signOutUser,
+} from "../utils/api";
 import { Amplify, Auth } from "aws-amplify";
 import awsConfig from "../src/aws-exports";
-import { AmplifyAuthenticator } from "@aws-amplify/ui-react";
+import {
+  AmplifyAuthContainer,
+  AmplifyAuthenticator,
+  AmplifySignUp,
+} from "@aws-amplify/ui-react";
 import SidebarLogoutButton from "../components/stateless/interface/buttons/sidebar-logout-button";
 import { AuthState, onAuthUIStateChange } from "@aws-amplify/ui-components";
 import useDashboardState from "../utils/useUrlQuery";
 import LoadingIcon from "../components/stateless/interface/misc/loading-icon";
 import TopAppBar from "../components/stateless/interface/navigation/top-appbar";
+import { useRouter } from "next/router";
 Amplify.configure(awsConfig);
 
 const Dashboard = () => {
+  const router = useRouter();
+  const [authState, setAuthState] = useState();
+  isUserAuthenticated().then((res) => {
+    if (!res) router.push("/login");
+    else setAuthState(true);
+  });
+
   const [clients, setClients] = useState([]);
   const [policies, setPolicies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [updateClients, setUpdateClients] = useState(false);
-  const [authState, setAuthState] = useState();
   const [showSidebar, openSidebar, closeSidebar] = useModal();
   const [
     selectedSidebarOption,
@@ -50,15 +67,24 @@ const Dashboard = () => {
 
   const handleLogout = () => {
     setLoading(true);
-    Auth.signOut().then(setLoading(false));
+    signOutUser().then((res) => {
+      if (res) {
+        setAuthState(false);
+        setLoading(false);
+        router.push("/login");
+      }
+    });
   };
 
   useEffect(() => {
-    console.log("this ran");
-    if (authState === AuthState.SignedIn) {
+    console.log("this ran", authState);
+    if (authState) {
       setLoading(true);
       getClients()
-        .then((data) => setClients(data))
+        .then((data) => {
+          console.log(data);
+          setClients(data);
+        })
         .then(() => setLoading(false));
       // getPolicies().then((policies) => setPolicies(policies));
     } else {
@@ -99,7 +125,7 @@ const Dashboard = () => {
   };
 
   return (
-    <AmplifyAuthenticator>
+    <>
       <TopAppBar menuOnClick={openSidebar} />
       <DashboardContainer>
         <Sidebar open={showSidebar} onClose={closeSidebar}>
@@ -131,7 +157,7 @@ const Dashboard = () => {
           {!loading && mainComponent[selectedSidebarOption]}
         </Container>
       </DashboardContainer>
-    </AmplifyAuthenticator>
+    </>
   );
 };
 
