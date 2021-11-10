@@ -269,6 +269,8 @@ export const SALUTATION_MR_VALUE = "mr";
 export const SALUTATION_MR_LABEL = "Mr";
 export const SALUTATION_MRS_VALUE = "mrs";
 export const SALUTATION_MRS_LABEL = "Mrs";
+export const SALUTATION_MDM_VALUE = "mdm";
+export const SALUTATION_MDM_LABEL = "Mdm";
 export const SALUTATION_MS_VALUE = "ms";
 export const SALUTATION_MS_LABEL = "Ms";
 export const SALUTATION_DR_VALUE = "dr";
@@ -580,6 +582,7 @@ export const addClientFormFields = [
       { label: SALUTATION_MR_LABEL, value: SALUTATION_MR_VALUE },
       { label: SALUTATION_MS_LABEL, value: SALUTATION_MS_VALUE },
       { label: SALUTATION_MRS_LABEL, value: SALUTATION_MRS_VALUE },
+      { label: SALUTATION_MDM_LABEL, value: SALUTATION_MDM_VALUE },
       { label: SALUTATION_DR_LABEL, value: SALUTATION_DR_VALUE },
     ],
     col: {

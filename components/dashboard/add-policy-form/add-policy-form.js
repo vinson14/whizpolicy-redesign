@@ -92,13 +92,13 @@ const AddPolicyForm = ({
             <Grid item xs={12}>
               {(edit && (
                 <>
-                  <EditButton type="submit">Edit Policy</EditButton>
+                  <EditButton type="submit">Confirm</EditButton>
                   <DeleteButton onClick={handleDelete}>Delete</DeleteButton>
                 </>
               )) || (
                 <>
-                  <AddButton type="submit">Add Policy</AddButton>
-                  <ResetButton onClick={resetForm}>Reset Form</ResetButton>
+                  <AddButton type="submit">Add</AddButton>
+                  <ResetButton onClick={resetForm}>Reset</ResetButton>
                 </>
               )}
               <CancelButton onClick={cancelForm}>Cancel</CancelButton>
