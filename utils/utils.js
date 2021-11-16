@@ -49,6 +49,5 @@ export const getRandomAvatarColor = () => {
   const shades = ["main", "light", "dark"];
   const randomColor = colors[Math.floor(Math.random() * colors.length)];
   const randomShade = shades[Math.floor(Math.random() * shades.length)];
-  console.log("this runs");
   return `${randomColor}.${randomShade}`;
 };

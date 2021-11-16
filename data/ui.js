@@ -466,7 +466,6 @@ export const clientDetailsCards = [
   ContactCard,
   AboutCard,
   DependantsCard,
-  CoverageCard,
 ];
 
 export const policyCardFields = [

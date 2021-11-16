@@ -7,10 +7,11 @@ import {
 import ClientCardHeader from "../../stateless/interface/cards/client-card-header";
 import ClientCardInfoText from "../../stateless/interface/cards/client-card-info-text";
 import ClientDetailCard from "../../stateless/interface/cards/client-detail-card";
-import InfoIcon from "@mui/icons-material/Info";
 import { Fragment, useState } from "react";
 import { formatNumber } from "../../../utils/utils";
 import CloseIcon from "@mui/icons-material/Close";
+import CoverageText from "../../stateless/interface/cards/coverage-text";
+import InfoIcon from "@mui/icons-material/Info";
 
 const CoverageCard = ({ client }) => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -24,23 +25,39 @@ const CoverageCard = ({ client }) => {
     setSelectedKey(null);
   };
 
+  const getColor = (coverages) => {
+    const currCoverage = coverages.currentCoverage;
+    const idealCoverage = coverages.idealCoverage;
+
+    if (currCoverage >= idealCoverage) return "secondary";
+    else if (currCoverage === 0) return "error";
+    else return "warning";
+  };
+
   return (
     <ClientDetailCard>
       <ClientCardHeader>Coverage Overview</ClientCardHeader>
       <Grid container>
         {client.financialOverview &&
           clientDetailsFinancialOverviewFields.map((field) => (
-            <Fragment key={field.key}>
-              <ClientCardInfoText
-                icon={field.icon}
-                endIcon={<InfoIcon />}
-                endIconOnClick={(event) => openPopover(event, field.key)}
-                pr={2}
-                label={field.label}
-                type={field.type}
-                value={client.financialOverview[field.key]["currentCoverage"]}
-              />
-            </Fragment>
+            // <ClientCardInfoText
+            //   icon={field.icon}
+            //   endIcon={<InfoIcon />}
+            //   endIconOnClick={(event) => openPopover(event, field.key)}
+            //   pr={2}
+            //   label={field.label}
+            //   type={field.type}
+            //   value={client.financialOverview[field.key]["currentCoverage"]}
+            //   color={getColor(client.financialOverview[field.key])}
+            // />
+            <CoverageText
+              icon={field.key}
+              key={field.key}
+              label={field.label}
+              value={client.financialOverview[field.key]["currentCoverage"]}
+              onClick={(event) => openPopover(event, field.key)}
+              color={getColor(client.financialOverview[field.key])}
+            />
           ))}
         {selectedKey && (
           <CoverageInfoPopover

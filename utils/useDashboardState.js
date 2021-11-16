@@ -15,16 +15,10 @@ const useDashboardState = (clients, policies) => {
   const [selectedClient, setSelectedClient] = useState();
   const [selectedPolicy, setSelectedPolicy] = useState();
 
-  const breadcrumbClientOnClick = () => {
-    setSelectedClient(null);
-    setSelectedPolicy(null);
-    setBreadcrumbLinks(defaultBreadcrumbs[SIDEBAR_CLIENTS_VALUE]);
-  };
-
   const defaultBreadcrumbs = {
     [SIDEBAR_CLIENTS_VALUE]: [
       { label: "Dashboard", onClick: null },
-      { label: "Clients", onClick: breadcrumbClientOnClick },
+      { label: "Clients", onClick: () => setSelectedClient(null) },
     ],
   };
 
@@ -54,20 +48,28 @@ const useDashboardState = (clients, policies) => {
     }
   }, [clients]);
 
+  useEffect(() => {
+    if (!selectedClient && !selectedPolicy)
+      setBreadcrumbLinks(defaultBreadcrumbs[SIDEBAR_CLIENTS_VALUE]);
+    else if (selectedClient && selectedPolicy)
+      setBreadcrumbLinks([
+        ...defaultBreadcrumbs[SIDEBAR_CLIENTS_VALUE],
+        { label: selectedClient.name, onClick: () => setSelectedPolicy(null) },
+        { label: selectedPolicy[POLICY_NUMBER_KEY], onClick: null },
+      ]);
+    else if (selectedClient)
+      setBreadcrumbLinks([
+        ...defaultBreadcrumbs[SIDEBAR_CLIENTS_VALUE],
+        { label: selectedClient.name, onClick: () => setSelectedPolicy(null) },
+      ]);
+  }, [selectedClient, selectedPolicy]);
+
   const clientOnClick = (client) => {
     setSelectedClient(client);
-    setBreadcrumbLinks([
-      ...breadcrumbLinks,
-      { label: client.name, onClick: () => setSelectedPolicy(null) },
-    ]);
   };
 
   const policyOnClick = (policy) => {
     setSelectedPolicy(policy);
-    setBreadcrumbLinks([
-      ...breadcrumbLinks,
-      { label: policy[POLICY_NUMBER_KEY], route: "/dashboard" },
-    ]);
   };
 
   return [

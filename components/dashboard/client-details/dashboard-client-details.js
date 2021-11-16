@@ -1,5 +1,6 @@
 import { Divider, Grid } from "@mui/material";
 import { clientDetailsCards } from "../../../data/ui";
+import CoverageCard from "./coverage-card";
 import PolicyCards from "./policy-cards";
 
 const ClientDetails = ({ client, policyOnClick, setUpdateClients }) => {
@@ -10,6 +11,9 @@ const ClientDetails = ({ client, policyOnClick, setUpdateClients }) => {
           <Component client={client} setUpdateClients={setUpdateClients} />
         </Grid>
       ))}
+      <Grid item xs={12}>
+        <CoverageCard client={client} setUpdateClients={setUpdateClients} />
+      </Grid>
       <Grid item xs={12}>
         <Divider variant="middle" />
       </Grid>

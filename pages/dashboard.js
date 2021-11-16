@@ -36,7 +36,7 @@ import {
 } from "@aws-amplify/ui-react";
 import SidebarLogoutButton from "../components/stateless/interface/buttons/sidebar-logout-button";
 import { AuthState, onAuthUIStateChange } from "@aws-amplify/ui-components";
-import useDashboardState from "../utils/useUrlQuery";
+import useDashboardState from "../utils/useDashboardState";
 import LoadingIcon from "../components/stateless/interface/misc/loading-icon";
 import TopAppBar from "../components/stateless/interface/navigation/top-appbar";
 import { useRouter } from "next/router";
@@ -45,10 +45,13 @@ Amplify.configure(awsConfig);
 const Dashboard = () => {
   const router = useRouter();
   const [authState, setAuthState] = useState();
-  isUserAuthenticated().then((res) => {
-    if (!res) router.push("/login");
-    else setAuthState(true);
-  });
+
+  useEffect(() => {
+    isUserAuthenticated().then((res) => {
+      if (!res) router.push("/login");
+      else setAuthState(true);
+    });
+  }, []);
 
   const [clients, setClients] = useState([]);
   const [policies, setPolicies] = useState([]);
