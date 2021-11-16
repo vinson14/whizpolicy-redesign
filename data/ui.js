@@ -23,6 +23,7 @@ import AboutCard from "../components/dashboard/client-details/about-card";
 import DependantsCard from "../components/dashboard/client-details/dependants-card";
 import CoverageCard from "../components/dashboard/client-details/coverage-card";
 import { FileDownload } from "@mui/icons-material";
+import CheckboxInput from "../components/stateless/interface/form/checkbox-input";
 
 // Dimensions
 export const FLOATING_ACTION_BUTTON_WIDTH = 160;
@@ -47,6 +48,7 @@ export const INPUT_TYPE_AUTOCOMPLETE = "autocomplete";
 export const INPUT_TYPE_DATEPICKER = "datepicker";
 export const INPUT_TYPE_CURRENCY = "currencyInput";
 export const INPUT_TYPE_YEAR = "yearInput";
+export const INPUT_TYPE_CHECKBOX = "checkboxInput";
 
 // Field Types
 export const FIELD_TYPE_TEXT = "text";
@@ -148,6 +150,7 @@ export const CLIENT_SMOKER_KEY = "smoker";
 export const CLIENT_SALUTATION_KEY = "salutation";
 export const CLIENT_NATIONALITY_KEY = "nationality";
 export const CLIENT_ANNUAL_INCOME_KEY = "annualIncome";
+export const CLIENT_AGREED_KEY = "clientAgreed";
 
 // Client Object Labels
 export const CLIENT_NAME_LABEL = "Name";
@@ -162,6 +165,8 @@ export const CLIENT_SMOKER_LABEL = "Smoker";
 export const CLIENT_SALUTATION_LABEL = "Salutation";
 export const CLIENT_NATIONALITY_LABEL = "Nationality";
 export const CLIENT_ANNUAL_INCOME_LABEL = "Annual Income";
+export const CLIENT_AGREED_LABEL =
+  "I confirm that I have obtained consent from my client to upload his/her personal data on this website.";
 
 // Client financial overview keys and labels
 export const CLIENT_FINANCIAL_OVERVIEW_DEATH_KEY = "deathBenefit";
@@ -189,8 +194,14 @@ export const CLIENT_DEPENDANT_RELATIONSHIP_LABEL = "Relationship";
 // Client Dependant Relationship Values and Label
 export const CLIENT_DEPENDANT_SON_VALUE = "son";
 export const CLIENT_DEPENDANT_SON_LABEL = "Son";
+export const CLIENT_DEPENDANT_DAUGHTER_VALUE = "daughter";
+export const CLIENT_DEPENDANT_DAUGHTER_LABEL = "Daughter";
 export const CLIENT_DEPENDANT_SPOUSE_VALUE = "spouse";
 export const CLIENT_DEPENDANT_SPOUSE_LABEL = "Spouse";
+export const CLIENT_DEPENDANT_FATHER_VALUE = "father";
+export const CLIENT_DEPENDANT_FATHER_LABEL = "Aged Father";
+export const CLIENT_DEPENDANT_MOTHER_VALUE = "mother";
+export const CLIENT_DEPENDANT_MOTHER_LABEL = "Aged Mother";
 
 // Insurer Keys and Labels
 export const INSURER_AIA_KEY = "aia";
@@ -325,6 +336,8 @@ export const REQUIRED_MSG_SPECIAL = "Please provide an KEY";
 export const INVALID_EMAIL_MSG = "Please provide a valid email";
 export const NON_NEG_MSG = "This value cannot be less than 0";
 export const ALPHA_ONLY_MSG = "Only alphabets are allowed";
+export const CONSENT_REQUIRE_MSG =
+  "Please confirm that consent has been obtained from client";
 
 export const sidebarItems = [
   {
@@ -536,6 +549,7 @@ export const newClientDefaultValues = {
   [CLIENT_SALUTATION_KEY]: SALUTATION_MR_VALUE,
   [CLIENT_NATIONALITY_KEY]: "Singapore",
   [CLIENT_ANNUAL_INCOME_KEY]: 0,
+  [CLIENT_AGREED_KEY]: false,
 };
 
 export const addClientFormFields = [
@@ -741,6 +755,19 @@ export const addClientFormFields = [
       lg: 5,
     },
   },
+  {
+    name: CLIENT_AGREED_KEY,
+    label: CLIENT_AGREED_LABEL,
+    type: INPUT_TYPE_CHECKBOX,
+    col: {
+      xs: 12,
+    },
+    required: {
+      value: true,
+      message: CONSENT_REQUIRE_MSG,
+    },
+    validate: (v) => v,
+  },
 ];
 
 export const addPolicyFormFields = {
@@ -849,9 +876,6 @@ export const addPolicyFormFields = {
     },
     options: [
       { label: INSURER_AIA_LABEL, value: INSURER_AIA_KEY },
-      { label: INSURER_GREAT_EASTERN_LABEL, value: INSURER_GREAT_EASTERN_KEY },
-      { label: INSURER_PRU_LABEL, value: INSURER_PRU_KEY },
-      { label: INSURER_NTUC_LABEL, value: INSURER_NTUC_KEY },
       { label: INSURER_AVIVA_LABEL, value: INSURER_AVIVA_KEY },
       { label: INSURER_AXA_LABEL, value: INSURER_AXA_KEY },
       { label: INSURER_ALLIANZ_LABEL, value: INSURER_ALLIANZ_KEY },
@@ -859,8 +883,11 @@ export const addPolicyFormFields = {
       { label: INSURER_CHINA_TAIPING_LABEL, value: INSURER_CHINA_TAIPING_KEY },
       { label: INSURER_ETIQA_LABEL, value: INSURER_ETIQA_KEY },
       { label: INSURER_FWD_LABEL, value: INSURER_FWD_KEY },
+      { label: INSURER_GREAT_EASTERN_LABEL, value: INSURER_GREAT_EASTERN_KEY },
       { label: INSURER_HSBC_LABEL, value: INSURER_HSBC_KEY },
       { label: INSURER_MANULIFE_LABEL, value: INSURER_MANULIFE_KEY },
+      { label: INSURER_NTUC_LABEL, value: INSURER_NTUC_KEY },
+      { label: INSURER_PRU_LABEL, value: INSURER_PRU_KEY },
       { label: INSURER_RAFFLES_LABEL, value: INSURER_RAFFLES_KEY },
       { label: INSURER_SING_LIFE_LABEL, value: INSURER_SING_LIFE_KEY },
       { label: INSURER_TOKIO_MARINE_LABEL, value: INSURER_TOKIO_MARINE_KEY },
@@ -1265,6 +1292,7 @@ export const inputTypeMapping = {
   [INPUT_TYPE_DATEPICKER]: DateInput,
   [INPUT_TYPE_CURRENCY]: CurrencyInput,
   [INPUT_TYPE_YEAR]: YearInput,
+  [INPUT_TYPE_CHECKBOX]: CheckboxInput,
 };
 
 export const policyDetailsAboutCardFields = [
@@ -1397,8 +1425,20 @@ export const addDependantFormFields = [
     options: [
       { label: CLIENT_DEPENDANT_SON_LABEL, value: CLIENT_DEPENDANT_SON_VALUE },
       {
+        label: CLIENT_DEPENDANT_DAUGHTER_LABEL,
+        value: CLIENT_DEPENDANT_DAUGHTER_VALUE,
+      },
+      {
         label: CLIENT_DEPENDANT_SPOUSE_LABEL,
         value: CLIENT_DEPENDANT_SPOUSE_VALUE,
+      },
+      {
+        label: CLIENT_DEPENDANT_FATHER_LABEL,
+        value: CLIENT_DEPENDANT_FATHER_VALUE,
+      },
+      {
+        label: CLIENT_DEPENDANT_MOTHER_LABEL,
+        value: CLIENT_DEPENDANT_MOTHER_VALUE,
       },
     ],
     col: {
