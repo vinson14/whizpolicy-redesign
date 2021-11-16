@@ -150,6 +150,8 @@ export const CLIENT_SMOKER_KEY = "smoker";
 export const CLIENT_SALUTATION_KEY = "salutation";
 export const CLIENT_NATIONALITY_KEY = "nationality";
 export const CLIENT_ANNUAL_INCOME_KEY = "annualIncome";
+export const CLIENT_ADDRESS_KEY = "address";
+export const CLIENT_REMARKS_KEY = "remarks";
 export const CLIENT_AGREED_KEY = "clientAgreed";
 
 // Client Object Labels
@@ -165,6 +167,8 @@ export const CLIENT_SMOKER_LABEL = "Smoker";
 export const CLIENT_SALUTATION_LABEL = "Salutation";
 export const CLIENT_NATIONALITY_LABEL = "Nationality";
 export const CLIENT_ANNUAL_INCOME_LABEL = "Annual Income";
+export const CLIENT_ADDRESS_LABEL = "Address";
+export const CLIENT_REMARKS_LABEL = "Remarks";
 export const CLIENT_AGREED_LABEL =
   "I confirm that I have obtained consent from my client to upload his/her personal data on this website.";
 
@@ -324,6 +328,8 @@ export const MAX_SUM_ASSURED = 99999999999;
 export const MIN_CLIENT_NAME_LENGTH = 2;
 export const MAX_CLIENT_NAME_LENGTH = 70;
 export const MAX_ANNUAL_INCOME = 99999999999;
+export const MAX_CLIENT_REMARKS_LENGTH = 10000;
+export const MAX_ADDRESS_LENGTH = 1000;
 
 // Form error messages
 export const MIN_CHAR_MSG_PLACEHOLDER = "CHAR";
@@ -753,6 +759,38 @@ export const addClientFormFields = [
       xs: 12,
       md: 6,
       lg: 5,
+    },
+  },
+  {
+    name: CLIENT_ADDRESS_KEY,
+    label: CLIENT_ADDRESS_LABEL,
+    type: INPUT_TYPE_TEXT,
+    multiline: true,
+    col: {
+      xs: 12,
+    },
+    maxLength: {
+      value: MAX_ADDRESS_LENGTH,
+      message: MAX_CHAR_MSG.replace(
+        MAX_CHAR_MSG_PLACEHOLDER,
+        MAX_ADDRESS_LENGTH
+      ),
+    },
+  },
+  {
+    name: CLIENT_REMARKS_KEY,
+    label: CLIENT_REMARKS_LABEL,
+    type: INPUT_TYPE_TEXT,
+    multiline: true,
+    col: {
+      xs: 12,
+    },
+    maxLength: {
+      value: MAX_CLIENT_REMARKS_LENGTH,
+      message: MAX_CHAR_MSG.replace(
+        MAX_CHAR_MSG_PLACEHOLDER,
+        MAX_CLIENT_REMARKS_LENGTH
+      ),
     },
   },
   {

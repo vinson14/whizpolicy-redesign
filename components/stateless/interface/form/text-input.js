@@ -11,6 +11,7 @@ const TextInput = ({
   variant = "outlined",
   register,
   required,
+  multiline,
   minLength,
   maxLength,
   pattern,
@@ -23,6 +24,7 @@ const TextInput = ({
         maxLength,
         pattern,
       })}
+      multiline={multiline}
       type={type}
       error={error ? true : false}
       helperText={error ? error.message : ""}
