@@ -1,7 +1,11 @@
 import { Amplify, API, Auth } from "aws-amplify";
 import differenceInYears from "date-fns/differenceInYears";
 import awsmobile from "../src/aws-exports";
-import { findPolicyByPolicyId, formatPolicyFormValues } from "./utils";
+import {
+  findPolicyByPolicyId,
+  formatClientFormValues,
+  formatPolicyFormValues,
+} from "./utils";
 const endpoint = "https://a3dk3p85vd.execute-api.us-east-1.amazonaws.com/dev";
 const apiName = "whizpolicynodejsapi";
 
@@ -38,6 +42,7 @@ export const getClients = async () => {
 };
 
 export const postClient = async (client) => {
+  formatClientFormValues(client);
   const jwtToken = await getJwtToken();
   const path = "/clients";
   const init = {
@@ -56,6 +61,7 @@ export const postClient = async (client) => {
 };
 
 export const putClient = async (client) => {
+  formatClientFormValues(client);
   const jwtToken = await getJwtToken();
   const path = `/clients/${client.clientId}`;
   const init = {
@@ -111,6 +117,7 @@ export const postPolicyToClient = async (client, policy) => {
 };
 
 export const putPolicyToClient = async (client, policy) => {
+  formatPolicyFormValues(policy);
   const jwtToken = await getJwtToken();
   const path = `/clients/${client.clientId}/policies/${policy.policyId}`;
   const init = {

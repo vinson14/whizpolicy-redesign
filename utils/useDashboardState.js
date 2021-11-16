@@ -38,13 +38,13 @@ const useDashboardState = (clients, policies) => {
       console.log(clients.length);
       setSelectedClient(null);
       setSelectedPolicy(null);
-    } else if (selectedClient)
-      setSelectedClient(findClientById(clients, selectedClient.clientId));
-    else if (selectedPolicy && selectedClient) {
+    } else if (selectedPolicy && selectedClient) {
       setSelectedClient(findClientById(clients, selectedClient.clientId));
       setSelectedPolicy(
         findPolicyByPolicyId(selectedClient.policies, selectedPolicy.policyId)
       );
+    } else if (selectedClient) {
+      setSelectedClient(findClientById(clients, selectedClient.clientId));
     }
   }, [clients]);
 

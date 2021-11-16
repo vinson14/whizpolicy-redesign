@@ -1,4 +1,5 @@
 import {
+  addClientFormFields,
   addPolicyFormFields,
   INPUT_TYPE_CURRENCY,
   INPUT_TYPE_YEAR,
@@ -63,6 +64,17 @@ export const formatPolicyFormValues = (formData) => {
     (field) =>
       addPolicyFormFields[field].type === INPUT_TYPE_CURRENCY ||
       addPolicyFormFields[field].type === INPUT_TYPE_YEAR
+  );
+  fieldsToFormat.forEach(
+    (field) => (formData[field] = formatFormInt(formData[field]))
+  );
+};
+
+export const formatClientFormValues = (formData) => {
+  const fieldsToFormat = Object.keys(addClientFormFields).filter(
+    (field) =>
+      addClientFormFields[field].type === INPUT_TYPE_CURRENCY ||
+      addClientFormFields[field].type === INPUT_TYPE_YEAR
   );
   fieldsToFormat.forEach(
     (field) => (formData[field] = formatFormInt(formData[field]))
