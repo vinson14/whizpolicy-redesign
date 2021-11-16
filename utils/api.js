@@ -1,7 +1,7 @@
 import { Amplify, API, Auth } from "aws-amplify";
 import differenceInYears from "date-fns/differenceInYears";
 import awsmobile from "../src/aws-exports";
-import { findPolicyByPolicyId } from "./utils";
+import { findPolicyByPolicyId, formatPolicyFormValues } from "./utils";
 const endpoint = "https://a3dk3p85vd.execute-api.us-east-1.amazonaws.com/dev";
 const apiName = "whizpolicynodejsapi";
 
@@ -92,6 +92,7 @@ export const postPolicyToClient = async (client, policy) => {
     console.log("policy already exists");
     return;
   }
+  formatPolicyFormValues(policy);
   const path = `/clients/${client.clientId}/policies`;
   const init = {
     body: { ...policy },

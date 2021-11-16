@@ -1,3 +1,9 @@
+import {
+  addPolicyFormFields,
+  INPUT_TYPE_CURRENCY,
+  INPUT_TYPE_YEAR,
+} from "../data/ui";
+
 export const getInitials = (name) => {
   try {
     const words = name.split(" ");
@@ -50,4 +56,15 @@ export const getRandomAvatarColor = () => {
   const randomColor = colors[Math.floor(Math.random() * colors.length)];
   const randomShade = shades[Math.floor(Math.random() * shades.length)];
   return `${randomColor}.${randomShade}`;
+};
+
+export const formatPolicyFormValues = (formData) => {
+  const fieldsToFormat = Object.keys(addPolicyFormFields).filter(
+    (field) =>
+      addPolicyFormFields[field].type === INPUT_TYPE_CURRENCY ||
+      addPolicyFormFields[field].type === INPUT_TYPE_YEAR
+  );
+  fieldsToFormat.forEach(
+    (field) => (formData[field] = formatFormInt(formData[field]))
+  );
 };

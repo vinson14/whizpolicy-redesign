@@ -20,7 +20,7 @@ const YearInput = ({
         required,
         min,
         max,
-        setValueAs: (v) => formatFormInt(v),
+        // setValueAs: (v) => formatFormInt(v),
       })}
       error={error}
       helperText={error ? error.message : ""}

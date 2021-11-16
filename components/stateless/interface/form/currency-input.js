@@ -19,7 +19,7 @@ const CurrencyInput = ({
         required,
         min,
         max,
-        setValueAs: (v) => formatFormInt(v),
+        // setValueAs: (v) => formatFormInt(v),
       })}
       error={error ? true : false}
       helperText={error ? error.message : ""}
