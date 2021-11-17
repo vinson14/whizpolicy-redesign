@@ -3,6 +3,7 @@ import {
   clientDetailsFinancialOverviewFields,
   CLIENT_ANNUAL_INCOME_KEY,
   coverageInfoPopoverContent,
+  coverageOverviewLegend,
 } from "../../../data/ui";
 import ClientCardHeader from "../../stateless/interface/cards/client-card-header";
 import ClientCardInfoText from "../../stateless/interface/cards/client-card-info-text";
@@ -12,6 +13,7 @@ import { formatNumber } from "../../../utils/utils";
 import CloseIcon from "@mui/icons-material/Close";
 import CoverageText from "../../stateless/interface/cards/coverage-text";
 import InfoIcon from "@mui/icons-material/Info";
+import Legend from "../../stateless/interface/misc/legend";
 
 const CoverageCard = ({ client }) => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -49,6 +51,9 @@ const CoverageCard = ({ client }) => {
               color={getColor(client.financialOverview[field.key])}
             />
           ))}
+        <Grid item xs={12}>
+          <Legend legend={coverageOverviewLegend} />
+        </Grid>
         {selectedKey && (
           <CoverageInfoPopover
             client={client}

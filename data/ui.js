@@ -1496,3 +1496,9 @@ export const addDependantFormFields = [
     },
   },
 ];
+
+export const coverageOverviewLegend = [
+  { label: "Sufficient coverage", color: "secondary.main" },
+  { label: "Insufficient coverage", color: "warning.main" },
+  { label: "No coverage", color: "error.main" },
+];
