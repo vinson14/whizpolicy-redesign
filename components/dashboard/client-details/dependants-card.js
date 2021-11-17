@@ -7,12 +7,17 @@ import useModal from "../../../utils/useModal";
 import DependantForm from "../add-dependant-form/dependant-form";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { deleteDependantToClient } from "../../../utils/api";
+import { useContext } from "react";
+import DashboardContext from "../../../context/dashboard-context";
 
-const DependantsCard = ({ client, setUpdateClients }) => {
+const DependantsCard = ({ client }) => {
   const [dependantFormState, openDependantForm, closeDependantForm] =
     useModal();
 
+  const { setLoading, setUpdateClients } = useContext(DashboardContext);
+
   const deleteDependant = (dependant) => {
+    setLoading(true);
     deleteDependantToClient(client, dependant).then(() =>
       setUpdateClients(true)
     );
@@ -52,7 +57,6 @@ const DependantsCard = ({ client, setUpdateClients }) => {
             open={dependantFormState}
             handleClose={closeDependantForm}
             client={client}
-            setUpdateClients={setUpdateClients}
           />
         </Grid>
       </Grid>

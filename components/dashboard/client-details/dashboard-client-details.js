@@ -3,16 +3,16 @@ import { clientDetailsCards } from "../../../data/ui";
 import CoverageCard from "./coverage-card";
 import PolicyCards from "./policy-cards";
 
-const ClientDetails = ({ client, policyOnClick, setUpdateClients }) => {
+const ClientDetails = ({ client, policyOnClick }) => {
   return (
     <>
       {clientDetailsCards.map((Component, index) => (
         <Grid key={index} item xs={12} lg={6}>
-          <Component client={client} setUpdateClients={setUpdateClients} />
+          <Component client={client} />
         </Grid>
       ))}
       <Grid item xs={12}>
-        <CoverageCard client={client} setUpdateClients={setUpdateClients} />
+        <CoverageCard client={client} />
       </Grid>
       <Grid item xs={12}>
         <Divider variant="middle" />

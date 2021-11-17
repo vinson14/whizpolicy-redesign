@@ -62,10 +62,11 @@ const AddPolicyForm = ({
   };
 
   const handleDelete = () => {
+    handleClose();
+    setLoading(true);
     deletePolicyToClient(client, defaultValues).then(() =>
       setUpdateClients(true)
     );
-    handleClose();
   };
 
   const cancelForm = () => {
