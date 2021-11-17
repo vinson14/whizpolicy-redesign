@@ -19,7 +19,6 @@ const SelectInput = ({
     <Controller
       name={name}
       control={control}
-      defaultValue={defaultValue}
       render={({ field }) => (
         <FormControl fullWidth>
           <InputLabel>{label}</InputLabel>

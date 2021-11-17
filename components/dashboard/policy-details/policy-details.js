@@ -5,7 +5,7 @@ import AddPolicyForm from "../add-policy-form/add-policy-form";
 import PolicyAboutCard from "./policy-about-card";
 import PolicyCoverageCard from "./policy-coverage-card";
 
-const PolicyDetails = ({ policy }) => {
+const PolicyDetails = ({ client, policy, setLoading }) => {
   const [editPolicyModalState, openPolicyModal, closePolicyModal] = useModal();
 
   return (
@@ -21,8 +21,10 @@ const PolicyDetails = ({ policy }) => {
       </FloatingEditButton>
       <AddPolicyForm
         open={editPolicyModalState}
+        client={client}
         handleClose={closePolicyModal}
         defaultValues={policy}
+        setLoading={setLoading}
         edit
       />
     </>

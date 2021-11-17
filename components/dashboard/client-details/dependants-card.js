@@ -1,12 +1,37 @@
-import { FileDownload } from "@mui/icons-material";
-import { Grid, ListItem, ListItemText, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
+import AddButton from "../../stateless/interface/buttons/add-button";
 import ClientCardHeader from "../../stateless/interface/cards/client-card-header";
 import ClientCardInfoText from "../../stateless/interface/cards/client-card-info-text";
 import ClientDetailCard from "../../stateless/interface/cards/client-detail-card";
+import useModal from "../../../utils/useModal";
+import DependantForm from "../add-dependant-form/dependant-form";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { deleteDependantToClient } from "../../../utils/api";
+import { useContext } from "react";
+import DashboardContext from "../../../context/dashboard-context";
+import DeleteConfirmation from "../../stateless/interface/modal/delete-confirmation";
 
 const DependantsCard = ({ client }) => {
+  const [dependantFormState, openDependantForm, closeDependantForm] =
+    useModal();
+
+  const { setLoading, setUpdateClients } = useContext(DashboardContext);
+  const [deleteModalState, openDeleteModal, closeDeleteModal] = useModal();
+
+  const deleteDependant = (dependant) => {
+    setLoading(true);
+    deleteDependantToClient(client, dependant).then(() =>
+      setUpdateClients(true)
+    );
+  };
+
   return (
     <ClientDetailCard>
+      <DeleteConfirmation
+        deleteFunction={deleteDependant}
+        open={deleteModalState}
+        handleClose={closeDeleteModal}
+      />
       <ClientCardHeader>Dependants</ClientCardHeader>
       <Grid container>
         {client.dependants &&
@@ -14,9 +39,33 @@ const DependantsCard = ({ client }) => {
             <ClientCardInfoText
               key={dependant.name}
               label={dependant.relationship}
+              pr={2}
               value={dependant.name}
+              endIcon={<DeleteIcon />}
+              endIconOnClick={() => deleteDependant(dependant)}
             />
           ))}
+        {(!client.dependants || client.dependants.length === 0) && (
+          <Grid item xs={12}>
+            <Typography>No dependants have been added</Typography>
+          </Grid>
+        )}
+        <Grid
+          xs={12}
+          display="flex"
+          justifyContent="end"
+          alignItems="center"
+          item
+        >
+          <AddButton onClick={openDependantForm} variant="text" mb={0}>
+            Add Dependant
+          </AddButton>
+          <DependantForm
+            open={dependantFormState}
+            handleClose={closeDependantForm}
+            client={client}
+          />
+        </Grid>
       </Grid>
     </ClientDetailCard>
   );

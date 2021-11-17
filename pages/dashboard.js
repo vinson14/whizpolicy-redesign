@@ -1,4 +1,5 @@
 import {
+  CircularProgress,
   Container,
   List,
   ListItem,
@@ -19,16 +20,42 @@ import DashboardContainer from "../components/dashboard/dashboard-container";
 import DashboardClients from "../components/dashboard/dashboard-clients";
 import DashboardPortfolio from "../components/dashboard/dashboard-portfolio";
 import useModal from "../utils/useModal";
-import { getClients, getClientsWithAuth, getPolicies } from "../utils/api";
+import {
+  getClients,
+  getClientsWithAuth,
+  getPolicies,
+  isUserAuthenticated,
+  signOutUser,
+} from "../utils/api";
 import { Amplify, Auth } from "aws-amplify";
-import awsmobile from "../src/aws-exports";
-import { AmplifyAuthenticator } from "@aws-amplify/ui-react";
+import awsConfig from "../src/aws-exports";
+import {
+  AmplifyAuthContainer,
+  AmplifyAuthenticator,
+  AmplifySignUp,
+} from "@aws-amplify/ui-react";
 import SidebarLogoutButton from "../components/stateless/interface/buttons/sidebar-logout-button";
 import { AuthState, onAuthUIStateChange } from "@aws-amplify/ui-components";
-import useDashboardState from "../utils/useUrlQuery";
-Amplify.configure(awsmobile);
+import useDashboardState from "../utils/useDashboardState";
+import LoadingIcon from "../components/stateless/interface/misc/loading-icon";
+import TopAppBar from "../components/stateless/interface/navigation/top-appbar";
+import { useRouter } from "next/router";
+import DashboardContext from "../context/dashboard-context";
+
+Amplify.configure(awsConfig);
+
 
 const Dashboard = () => {
+  const router = useRouter();
+  const [authState, setAuthState] = useState();
+
+  useEffect(() => {
+    isUserAuthenticated().then((res) => {
+      if (!res) router.push("/login");
+      else setAuthState(true);
+    });
+  }, []);
+
   const [clients, setClients] = useState([]);
   const [policies, setPolicies] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -43,29 +70,39 @@ const Dashboard = () => {
     sidebarOptionOnClick,
     clientOnClick,
     policyOnClick,
-  ] = useDashboardState();
+    goBackOneLevel,
+  ] = useDashboardState(clients, policies);
 
   const handleLogout = () => {
     setLoading(true);
-    Auth.signOut().then(setLoading(false));
+    signOutUser().then((res) => {
+      if (res) {
+        setAuthState(false);
+        setLoading(false);
+        router.push("/login");
+      }
+    });
   };
 
   useEffect(() => {
-    if (authState === AuthState.SignedIn) {
-      getClients().then((data) => setClients(data));
-      getPolicies().then((policies) => setPolicies(policies));
+    console.log("useEffect updateClients", authState);
+    if (authState) {
+      setLoading(true);
+      getClients()
+        .then((data) => {
+          console.log(data);
+          setClients(data);
+        })
+        .then(() => setLoading(false));
+      // getPolicies().then((policies) => setPolicies(policies));
     } else {
       setClients([]);
-      setPolicies([]);
     }
-
     setUpdateClients(false);
   }, [updateClients, authState]);
 
   onAuthUIStateChange((nextAuthState, authData) => {
-    console.log("onAuthUIStateChange ran");
-    console.log(nextAuthState);
-    console.log(authData);
+
     setAuthState(nextAuthState);
   });
 
@@ -93,8 +130,14 @@ const Dashboard = () => {
     ),
   };
 
+  const context = {
+    setLoading,
+    setUpdateClients,
+  };
+
   return (
-    <AmplifyAuthenticator>
+    <DashboardContext.Provider value={context}>
+      <TopAppBar menuOnClick={openSidebar} goBackOneLevel={goBackOneLevel} />
       <DashboardContainer>
         <Sidebar open={showSidebar} onClose={closeSidebar}>
           <List>
@@ -112,14 +155,20 @@ const Dashboard = () => {
                 </ListItemButton>
               </ListItem>
             ))}
-            <SidebarLogoutButton onClick={handleLogout} />
+            <SidebarLogoutButton
+              onClick={() => {
+                handleLogout();
+                closeSidebar();
+              }}
+            />
           </List>
         </Sidebar>
         <Container sx={{ pb: 3 }}>
-          {mainComponent[selectedSidebarOption]}
+          {loading && <LoadingIcon />}
+          {!loading && mainComponent[selectedSidebarOption]}
         </Container>
       </DashboardContainer>
-    </AmplifyAuthenticator>
+    </DashboardContext.Provider>
   );
 };
 

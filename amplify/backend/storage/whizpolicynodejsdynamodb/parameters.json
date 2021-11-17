@@ -1,0 +1,7 @@
+{
+    "tableName": "whizpolicy_nodejs_clients",
+    "partitionKeyName": "agentId",
+    "partitionKeyType": "S",
+    "sortKeyName": "clientId",
+    "sortKeyType": "S"
+}

@@ -3,8 +3,7 @@ import SidebarButton from "../interface/buttons/sidebar-button";
 
 const DashboardHeaderContainer = ({ openSidebar, children }) => {
   return (
-    <Grid container spacing={{ xs: 8 }} alignItems="center">
-      <SidebarButton openSidebar={openSidebar} />
+    <Grid container spacing={{ xs: 8 }} sx={{ pt: 2 }} alignItems="center">
       {children}
     </Grid>
   );

@@ -1,7 +1,17 @@
 import { Avatar, Card, Box, Typography } from "@mui/material";
+import { getInitials, getRandomAvatarColor } from "../../../utils/utils";
 import ClientDetailCard from "../../stateless/interface/cards/client-detail-card";
 
 const NameCard = ({ client }) => {
+  const avatarSx = {
+    width: 120,
+    height: 120,
+    border: 3,
+    borderColor: "primary.contrastText",
+    bgcolor: getRandomAvatarColor(),
+    typography: "h4",
+  };
+
   return (
     <ClientDetailCard>
       <Box
@@ -11,7 +21,7 @@ const NameCard = ({ client }) => {
         display={{ xs: "none", sm: "block" }}
       >
         <Box sx={avatarBoxSx}>
-          <Avatar src="/vinson.jpg" alt="Vinson Ong" sx={avatarSx} />
+          <Avatar sx={avatarSx}>{getInitials(client.name)}</Avatar>{" "}
         </Box>
         <Box height={0.7} sx={nameBoxSx} p={3}>
           <Typography variant="h5" align="right" sx={{ fontWeight: 700 }}>
@@ -31,7 +41,7 @@ const NameCard = ({ client }) => {
           top={(theme) => theme.spacing(-8)}
           width={1}
         >
-          <Avatar src="/vinson.jpg" alt="Vinson Ong" sx={avatarSx} />
+          <Avatar sx={avatarSx}>{getInitials(client.name)}</Avatar>{" "}
         </Box>
         <Box sx={nameBoxSx} mt={8} pt={8} pb={2}>
           <Typography variant="h5" align="center" sx={{ fontWeight: 700 }}>
@@ -44,13 +54,6 @@ const NameCard = ({ client }) => {
       </Box>
     </ClientDetailCard>
   );
-};
-
-const avatarSx = {
-  width: 120,
-  height: 120,
-  border: 3,
-  borderColor: "primary.contrastText",
 };
 
 const nameBoxSx = {

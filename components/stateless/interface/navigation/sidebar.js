@@ -3,6 +3,7 @@ import { Box, Button, Drawer } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import WhizpolicyLogo from "../misc/whizpolicy-logo";
 
 const Sidebar = ({ open, onClose, children }) => {
   return (
@@ -16,16 +17,7 @@ const Sidebar = ({ open, onClose, children }) => {
       >
         <Box sx={drawerContentSx}>
           <Box sx={logoBoxSx}>
-            <Link href="/">
-              <a>
-                <Image
-                  src="/whizpolicy-blue-gray.svg"
-                  alt="WhizPolicy Logo"
-                  width={106}
-                  height={67}
-                />
-              </a>
-            </Link>
+            <WhizpolicyLogo />
           </Box>
           <Box>{children}</Box>
         </Box>
@@ -39,16 +31,7 @@ const Sidebar = ({ open, onClose, children }) => {
       >
         <Box sx={drawerContentSx}>
           <Box sx={logoBoxSx}>
-            <Link href="/">
-              <a>
-                <Image
-                  src="/whizpolicy-blue-gray.svg"
-                  alt="WhizPolicy Logo"
-                  width={106}
-                  height={67}
-                />
-              </a>
-            </Link>
+            <WhizpolicyLogo />
           </Box>
           <Box>{children}</Box>
         </Box>

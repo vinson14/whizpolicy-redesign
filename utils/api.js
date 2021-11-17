@@ -1,12 +1,24 @@
 import { Amplify, API, Auth } from "aws-amplify";
+import differenceInYears from "date-fns/differenceInYears";
 import awsmobile from "../src/aws-exports";
+import {
+  findPolicyByPolicyId,
+  formatClientFormValues,
+  formatPolicyFormValues,
+} from "./utils";
 const endpoint = "https://a3dk3p85vd.execute-api.us-east-1.amazonaws.com/dev";
+const apiName = "whizpolicynodejsapi";
 
 Amplify.configure(awsmobile);
 
+const getJwtToken = async () => {
+  const token = (await Auth.currentSession()).getIdToken().getJwtToken();
+  return token;
+};
+
 export const getPolicies = async () => {
-  const jwtToken = (await Auth.currentSession()).getIdToken().getJwtToken();
-  const response = await API.get("whizpolicyclientsapi", "/policies", {
+  const jwtToken = await getJwtToken();
+  const response = await API.get(apiName, "/policies", {
     headers: {
       Authorization: `Bearer ${jwtToken}`,
     },
@@ -15,21 +27,43 @@ export const getPolicies = async () => {
 };
 
 export const getClients = async () => {
-  const jwtToken = (await Auth.currentSession()).getIdToken().getJwtToken();
-  const response = await API.get("whizpolicyclientsapi", "/clients", {
-    headers: {
-      Authorization: `${jwtToken}`,
-    },
-  });
-  return response;
+  console.log("getClients Ran");
+  const jwtToken = await getJwtToken();
+  try {
+    const response = await API.get(apiName, "/clients", {
+      headers: {
+        Authorization: `${jwtToken}`,
+      },
+    });
+    return response;
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export const postClient = async (client) => {
-  const jwtToken = (await Auth.currentSession()).getIdToken().getJwtToken();
-  console.log(client);
-  console.log(JSON.stringify(client));
-  const apiName = "whizpolicyclientsapi";
+  formatClientFormValues(client);
+  const jwtToken = await getJwtToken();
   const path = "/clients";
+  const init = {
+    body: { ...client },
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `${jwtToken}`,
+    },
+  };
+  try {
+    const response = await API.post(apiName, path, init);
+    return response;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const putClient = async (client) => {
+  formatClientFormValues(client);
+  const jwtToken = await getJwtToken();
+  const path = `/clients/${client.clientId}`;
   const init = {
     body: {
       ...client,
@@ -39,6 +73,167 @@ export const postClient = async (client) => {
       Authorization: `${jwtToken}`,
     },
   };
-  const response = await API.post(apiName, path, init);
+  const response = await API.put(apiName, path, init);
   return response;
+};
+
+export const deleteClient = async (clientId) => {
+  const jwtToken = await getJwtToken();
+  const path = `/clients/${clientId}`;
+  const init = {
+    body: {},
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `${jwtToken}`,
+    },
+  };
+
+  const response = await API.del(apiName, path, init);
+  return response;
+};
+
+export const postPolicyToClient = async (client, policy) => {
+  const jwtToken = await getJwtToken();
+  if (findPolicyByPolicyId(client.policies, policy.policyId)) {
+    console.log("policy already exists");
+    return;
+  }
+  formatPolicyFormValues(policy);
+  const path = `/clients/${client.clientId}/policies`;
+  const init = {
+    body: { ...policy },
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `${jwtToken}`,
+    },
+  };
+
+  try {
+    const response = await API.post(apiName, path, init);
+    return response;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const putPolicyToClient = async (client, policy) => {
+  formatPolicyFormValues(policy);
+  const jwtToken = await getJwtToken();
+  const path = `/clients/${client.clientId}/policies/${policy.policyId}`;
+  const init = {
+    body: { ...policy },
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `${jwtToken}`,
+    },
+  };
+  try {
+    const response = await API.put(apiName, path, init);
+    return response;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const deletePolicyToClient = async (client, policy) => {
+  const jwtToken = await getJwtToken();
+  const path = `/clients/${client.clientId}/policies/${policy.policyId}`;
+  const init = {
+    body: {},
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `${jwtToken}`,
+    },
+  };
+  try {
+    const response = await API.del(apiName, path, init);
+    return response;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const postDependantToClient = async (client, dependant) => {
+  const jwtToken = await getJwtToken();
+  const path = `/clients/${client.clientId}/dependants`;
+  const init = {
+    body: { ...dependant },
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `${jwtToken}`,
+    },
+  };
+
+  try {
+    const response = await API.post(apiName, path, init);
+    return response;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const deleteDependantToClient = async (client, dependant) => {
+  const jwtToken = await getJwtToken();
+  const path = `/clients/${client.clientId}/dependants/${dependant.name}`;
+  const init = {
+    body: {},
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `${jwtToken}`,
+    },
+  };
+  try {
+    const response = await API.del(apiName, path, init);
+    return response;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const signInUser = async (user) => {
+  try {
+    const loggedInUser = await Auth.signIn(user.username, user.password);
+    return loggedInUser;
+  } catch (error) {
+    console.log("error signing in", error);
+  }
+};
+
+export const signUpUser = async (formData) => {
+  try {
+    const { user } = await Auth.signUp(formData);
+    console.log(user);
+    return user;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const signOutUser = async () => {
+  try {
+    await Auth.signOut();
+    return true;
+  } catch (err) {
+    console.log("error", err);
+    return false;
+  }
+};
+
+export const isUserAuthenticated = async () => {
+  try {
+    const user = await Auth.currentAuthenticatedUser();
+    if (user) return true;
+  } catch (error) {
+    return false;
+  }
+};
+
+export const confirmSignUp = async (username, code) => {
+  try {
+    await Auth.confirmSignUp(username, code);
+    return true;
+  } catch (err) {
+    console.log("error", err);
+    return false;
+  }
 };

@@ -1,24 +1,58 @@
 {
+  "storage": {
+    "whizpolicynodejsdynamodb": {
+      "service": "DynamoDB",
+      "providerPlugin": "awscloudformation"
+    }
+  },
   "function": {
-    "whizpolicyclientslambda": {
+    "whizpolicynodejsclientslambda": {
       "build": true,
       "providerPlugin": "awscloudformation",
-      "service": "Lambda"
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "storage",
+          "resourceName": "whizpolicynodejsdynamodb",
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "attributeEnvMap": {
+            "Name": "TABLE_NAME",
+            "Arn": "TABLE_ARN"
+          }
+        }
+      ]
     },
-    "whizpolicypolicieslambda": {
+    "whizpolicynodejspolicieslambda": {
       "build": true,
       "providerPlugin": "awscloudformation",
-      "service": "Lambda"
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "storage",
+          "resourceName": "whizpolicynodejsdynamodb",
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "attributeEnvMap": {
+            "Name": "TABLE_NAME",
+            "Arn": "TABLE_ARN"
+          }
+        }
+      ]
     }
   },
   "api": {
-    "whizpolicyclientsapi": {
+    "whizpolicynodejsapi": {
       "service": "API Gateway",
       "providerPlugin": "awscloudformation",
       "dependsOn": [
         {
           "category": "function",
-          "resourceName": "whizpolicyclientslambda",
+          "resourceName": "whizpolicynodejsclientslambda",
           "attributes": [
             "Name",
             "Arn"
@@ -26,7 +60,7 @@
         },
         {
           "category": "function",
-          "resourceName": "whizpolicypolicieslambda",
+          "resourceName": "whizpolicynodejspolicieslambda",
           "attributes": [
             "Name",
             "Arn"
@@ -36,7 +70,7 @@
     }
   },
   "auth": {
-    "whizpolicyamplify1a74d288": {
+    "whizpolicynodejsd931ac04": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],

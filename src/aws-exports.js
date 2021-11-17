@@ -3,17 +3,24 @@
 
 const awsmobile = {
     "aws_project_region": "us-east-1",
-    "aws_cloud_logic_custom": [
+    "aws_dynamodb_all_tables_region": "us-east-1",
+    "aws_dynamodb_table_schemas": [
         {
-            "name": "whizpolicyclientsapi",
-            "endpoint": "https://a3dk3p85vd.execute-api.us-east-1.amazonaws.com/dev",
+            "tableName": "whizpolicy_nodejs_clients-dev",
             "region": "us-east-1"
         }
     ],
-    "aws_cognito_identity_pool_id": "us-east-1:751f4a86-66ed-4baf-a76a-fd15e09afc38",
+    "aws_cloud_logic_custom": [
+        {
+            "name": "whizpolicynodejsapi",
+            "endpoint": "https://1cw7jfd3jg.execute-api.us-east-1.amazonaws.com/dev",
+            "region": "us-east-1"
+        }
+    ],
+    "aws_cognito_identity_pool_id": "us-east-1:21f51ca0-2220-4f37-916c-230ce464b2bc",
     "aws_cognito_region": "us-east-1",
-    "aws_user_pools_id": "us-east-1_Kqgcdk4RT",
-    "aws_user_pools_web_client_id": "2u3q7htfcdqq76qj4r51rnbid7",
+    "aws_user_pools_id": "us-east-1_7GDucq1MF",
+    "aws_user_pools_web_client_id": "27rcur2si9deti6o2o3u25c836",
     "oauth": {},
     "aws_cognito_login_mechanisms": [
         "EMAIL"
