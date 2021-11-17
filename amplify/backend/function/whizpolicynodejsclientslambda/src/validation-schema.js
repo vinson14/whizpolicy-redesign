@@ -4,6 +4,7 @@ const clientSchema = {
   annualIncome: {
     in: ["body"],
     isInt: true,
+    toInt: true,
   },
   birthday: {
     in: ["body"],

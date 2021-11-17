@@ -10,7 +10,7 @@ const ClientCards = ({ clients, selectClient }) => {
         </Grid>
       )}
       {clients.map((client) => (
-        <Grid key={client.clientId} item lg={4} sm={12} xs={12}>
+        <Grid key={client.clientId} item lg={6} sm={12} xs={12}>
           <ClientCard onClick={() => selectClient(client)} client={client} />
         </Grid>
       ))}
