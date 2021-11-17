@@ -3,6 +3,15 @@ import { getInitials, getRandomAvatarColor } from "../../../utils/utils";
 import ClientDetailCard from "../../stateless/interface/cards/client-detail-card";
 
 const NameCard = ({ client }) => {
+  const avatarSx = {
+    width: 120,
+    height: 120,
+    border: 3,
+    borderColor: "primary.contrastText",
+    bgcolor: getRandomAvatarColor(),
+    typography: "h4",
+  };
+
   return (
     <ClientDetailCard>
       <Box
@@ -45,15 +54,6 @@ const NameCard = ({ client }) => {
       </Box>
     </ClientDetailCard>
   );
-};
-
-const avatarSx = {
-  width: 120,
-  height: 120,
-  border: 3,
-  borderColor: "primary.contrastText",
-  bgcolor: getRandomAvatarColor(),
-  typography: "h4",
 };
 
 const nameBoxSx = {
