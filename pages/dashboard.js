@@ -1,6 +1,8 @@
 import {
   CircularProgress,
   Container,
+  Fade,
+  Grow,
   List,
   ListItem,
   ListItemButton,
@@ -130,6 +132,7 @@ const Dashboard = () => {
   const context = {
     setLoading,
     setUpdateClients,
+    policyOnClick,
   };
 
   return (
@@ -162,7 +165,9 @@ const Dashboard = () => {
         </Sidebar>
         <Container sx={{ pb: 3 }}>
           {loading && <LoadingIcon />}
-          {!loading && mainComponent[selectedSidebarOption]}
+          <Fade in={!loading}>
+            <div>{mainComponent[selectedSidebarOption]}</div>
+          </Fade>
         </Container>
       </DashboardContainer>
     </DashboardContext.Provider>

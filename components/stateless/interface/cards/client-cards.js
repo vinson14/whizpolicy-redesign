@@ -1,4 +1,5 @@
-import { Grid, Typography } from "@mui/material";
+import { Grid, Grow, Typography } from "@mui/material";
+import CustomGrow from "../transitions/custom-grow";
 import ClientCard from "./client-card";
 
 const ClientCards = ({ clients, selectClient }) => {
@@ -9,10 +10,12 @@ const ClientCards = ({ clients, selectClient }) => {
           <Typography>No clients have been added yet</Typography>
         </Grid>
       )}
-      {clients.map((client) => (
-        <Grid key={client.clientId} item lg={6} sm={12} xs={12}>
-          <ClientCard onClick={() => selectClient(client)} client={client} />
-        </Grid>
+      {clients.map((client, index) => (
+        <CustomGrow show={true} index={index} key={client.clientId}>
+          <Grid item lg={6} sm={12} xs={12}>
+            <ClientCard onClick={() => selectClient(client)} client={client} />
+          </Grid>
+        </CustomGrow>
       ))}
     </>
   );

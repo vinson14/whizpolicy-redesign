@@ -10,8 +10,11 @@ import MainHeader from "../../stateless/interface/text/main-header";
 import AddPolicyForm from "../add-policy-form/add-policy-form";
 import { useRouter } from "next/router";
 import AddButton from "../../stateless/interface/buttons/add-button";
+import { useContext } from "react";
+import DashboardContext from "../../../context/dashboard-context";
 
-const PolicyCards = ({ client, policyOnClick }) => {
+const PolicyCards = ({ client }) => {
+  const { policyOnClick } = useContext(DashboardContext);
   return (
     <>
       <Box sx={{ display: "flex", justifyContent: "space-between", py: 3 }}>

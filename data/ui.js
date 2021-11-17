@@ -24,6 +24,8 @@ import DependantsCard from "../components/dashboard/client-details/dependants-ca
 import CoverageCard from "../components/dashboard/client-details/coverage-card";
 import { FileDownload } from "@mui/icons-material";
 import CheckboxInput from "../components/stateless/interface/form/checkbox-input";
+import { Divider } from "@mui/material";
+import PolicyCards from "../components/dashboard/client-details/policy-cards";
 
 // Dimensions
 export const FLOATING_ACTION_BUTTON_WIDTH = 160;
@@ -485,10 +487,13 @@ export const clientDetailsFinancialOverviewFields = [
 ];
 
 export const clientDetailsCards = [
-  NameCard,
-  ContactCard,
-  AboutCard,
-  DependantsCard,
+  { Component: NameCard, col: { xs: 12, lg: 6 } },
+  { Component: ContactCard, col: { xs: 12, lg: 6 } },
+  { Component: AboutCard, col: { xs: 12, lg: 6 } },
+  { Component: DependantsCard, col: { xs: 12, lg: 6 } },
+  { Component: CoverageCard, col: { xs: 12 } },
+  { Component: Divider, col: { xs: 12 }, variant: "middle" },
+  { Component: PolicyCards, col: { xs: 12 } },
 ];
 
 export const policyCardFields = [
