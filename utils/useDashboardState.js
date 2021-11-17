@@ -72,6 +72,11 @@ const useDashboardState = (clients, policies) => {
     setSelectedPolicy(policy);
   };
 
+  const goBackOneLevel = () => {
+    if (selectedPolicy && selectedClient) setSelectedPolicy(null);
+    else if (selectedClient) setSelectedClient(null);
+  };
+
   return [
     selectedSidebarOption,
     selectedClient,
@@ -80,6 +85,7 @@ const useDashboardState = (clients, policies) => {
     sidebarOptionOnClick,
     clientOnClick,
     policyOnClick,
+    goBackOneLevel,
   ];
 };
 

@@ -1,7 +1,7 @@
-import { AppBar, Avatar, Box, IconButton, Toolbar } from "@mui/material";
+import { AppBar, Avatar, IconButton, Toolbar } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-
-const TopAppBar = ({ menuOnClick }) => {
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+const TopAppBar = ({ menuOnClick, goBackOneLevel }) => {
   return (
     <AppBar position="sticky">
       <Toolbar
@@ -12,11 +12,15 @@ const TopAppBar = ({ menuOnClick }) => {
           color: (theme) => theme.palette.common.white,
         }}
       >
-        <IconButton>
-          <MenuIcon color="inherit" />
+        <IconButton color="inherit" onClick={goBackOneLevel}>
+          <ChevronLeftIcon color="inherit" size="large" />
         </IconButton>
         <Avatar>VO</Avatar>
-        <IconButton onClick={menuOnClick} color="inherit">
+        <IconButton
+          onClick={menuOnClick}
+          color="inherit"
+          sx={{ display: { md: "none" } }}
+        >
           <MenuIcon color="inherit" />
         </IconButton>
       </Toolbar>

@@ -68,6 +68,7 @@ const Dashboard = () => {
     sidebarOptionOnClick,
     clientOnClick,
     policyOnClick,
+    goBackOneLevel,
   ] = useDashboardState(clients, policies);
 
   const handleLogout = () => {
@@ -133,7 +134,7 @@ const Dashboard = () => {
 
   return (
     <DashboardContext.Provider value={context}>
-      <TopAppBar menuOnClick={openSidebar} />
+      <TopAppBar menuOnClick={openSidebar} goBackOneLevel={goBackOneLevel} />
       <DashboardContainer>
         <Sidebar open={showSidebar} onClose={closeSidebar}>
           <List>
