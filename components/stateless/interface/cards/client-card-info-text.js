@@ -46,7 +46,7 @@ const ClientCardInfoText = ({
       {icon && <ListItemIcon>{icon}</ListItemIcon>}
       <Box flexGrow={1}>
         <Typography variant="body2" color="text.secondary" align={align}>
-          {formatString(label)}
+          {label}
         </Typography>
         <Typography variant="body1" align={align}>
           {formattedValue()}
