@@ -23,9 +23,11 @@ export const findPolicyByPolicyId = (policies, policyId) => {
 };
 
 export function formatNumber(num, decPlaces = 0) {
+  console.log(typeof num);
   try {
     return num.toFixed(decPlaces).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
   } catch (err) {
+    console.log("error in formatting number", err);
     return num;
   }
 }
@@ -71,12 +73,11 @@ export const formatPolicyFormValues = (formData) => {
 };
 
 export const formatClientFormValues = (formData) => {
-  const fieldsToFormat = Object.keys(addClientFormFields).filter(
+  const fieldsToFormat = addClientFormFields.filter(
     (field) =>
-      addClientFormFields[field].type === INPUT_TYPE_CURRENCY ||
-      addClientFormFields[field].type === INPUT_TYPE_YEAR
+      field.type === INPUT_TYPE_CURRENCY || field.type === INPUT_TYPE_YEAR
   );
   fieldsToFormat.forEach(
-    (field) => (formData[field] = formatFormInt(formData[field]))
+    (field) => (formData[field.name] = formatFormInt(formData[field.name]))
   );
 };

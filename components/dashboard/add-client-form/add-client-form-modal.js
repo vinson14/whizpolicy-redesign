@@ -38,11 +38,11 @@ const ClientFormModal = ({
     if (edit) putClient(formData).then(() => setUpdateClients(true));
     else postClient(formData).then(() => setUpdateClients(true));
     console.log(formData);
-
-    handleClose();
   };
 
   const onDelete = () => {
+    handleClose();
+    setLoading(true);
     deleteClient(defaultValues.clientId);
     setUpdateClients(true);
   };

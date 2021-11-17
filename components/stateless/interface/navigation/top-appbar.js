@@ -9,11 +9,15 @@ const TopAppBar = ({ menuOnClick }) => {
           justifyContent: "space-between",
           p: { xs: 2 },
           pl: { md: 32 },
+          color: (theme) => theme.palette.common.white,
         }}
       >
+        <IconButton>
+          <MenuIcon color="inherit" />
+        </IconButton>
         <Avatar>VO</Avatar>
-        <IconButton onClick={menuOnClick}>
-          <MenuIcon sx={{ color: (theme) => theme.palette.common.white }} />
+        <IconButton onClick={menuOnClick} color="inherit">
+          <MenuIcon color="inherit" />
         </IconButton>
       </Toolbar>
     </AppBar>

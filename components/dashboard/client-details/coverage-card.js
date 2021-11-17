@@ -40,16 +40,6 @@ const CoverageCard = ({ client }) => {
       <Grid container>
         {client.financialOverview &&
           clientDetailsFinancialOverviewFields.map((field) => (
-            // <ClientCardInfoText
-            //   icon={field.icon}
-            //   endIcon={<InfoIcon />}
-            //   endIconOnClick={(event) => openPopover(event, field.key)}
-            //   pr={2}
-            //   label={field.label}
-            //   type={field.type}
-            //   value={client.financialOverview[field.key]["currentCoverage"]}
-            //   color={getColor(client.financialOverview[field.key])}
-            // />
             <CoverageText
               icon={field.key}
               key={field.key}
