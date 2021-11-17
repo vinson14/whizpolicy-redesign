@@ -15,6 +15,8 @@ import ResetButton from "../../stateless/interface/buttons/reset-button";
 import FormContainer from "../../stateless/interface/form/form-container";
 import ModalContainer from "../../stateless/interface/modal/modal-container";
 import DashboardContext from "../../../context/dashboard-context";
+import useModal from "../../../utils/useModal";
+import DeleteConfirmation from "../../stateless/interface/modal/delete-confirmation";
 
 const ClientFormModal = ({
   open,
@@ -31,6 +33,7 @@ const ClientFormModal = ({
   } = useForm({ mode: "onBlur", defaultValues });
 
   const { setLoading, setUpdateClients } = useContext(DashboardContext);
+  const [deleteModalState, openDeleteModal, closeDeleteModal] = useModal();
 
   const onSubmit = (formData) => {
     handleClose();
@@ -43,8 +46,7 @@ const ClientFormModal = ({
   const onDelete = () => {
     handleClose();
     setLoading(true);
-    deleteClient(defaultValues.clientId);
-    setUpdateClients(true);
+    deleteClient(defaultValues.clientId).then(() => setUpdateClients(true));
   };
 
   const resetClient = () => {
@@ -58,39 +60,42 @@ const ClientFormModal = ({
 
   return (
     <ModalContainer open={open} onClose={handleClose} title="Add Client">
-      <DialogContent>
-        <FormContainer handleSubmit={handleSubmit} onSubmit={onSubmit}>
-          <Grid p={3} spacing={1} justifyContent="space-between" container>
-            {addClientFormFields.map((field) => {
-              const InputComponent = inputTypeMapping[field.type];
-              return (
-                <Grid key={field.name} item {...field.col} p={2}>
-                  <InputComponent
-                    register={register}
-                    control={control}
-                    error={errors[field.name]}
-                    {...field}
-                  />
-                </Grid>
-              );
-            })}
-            <Grid item xs={12}>
-              {(edit && (
-                <>
-                  <EditButton type="submit">Submit</EditButton>
-                  <DeleteButton onClick={onDelete}>Delete</DeleteButton>
-                </>
-              )) || (
-                <>
-                  <AddButton type="submit">Add</AddButton>
-                  <ResetButton onClick={resetClient}>Reset</ResetButton>
-                </>
-              )}
-              <CancelButton onClick={cancelForm}>Cancel</CancelButton>
-            </Grid>
+      <FormContainer handleSubmit={handleSubmit} onSubmit={onSubmit}>
+        <DeleteConfirmation
+          deleteFunction={onDelete}
+          open={deleteModalState}
+          handleClose={closeDeleteModal}
+        />
+        <Grid p={3} spacing={1} justifyContent="space-between" container>
+          {addClientFormFields.map((field) => {
+            const InputComponent = inputTypeMapping[field.type];
+            return (
+              <Grid key={field.name} item {...field.col} p={2}>
+                <InputComponent
+                  register={register}
+                  control={control}
+                  error={errors[field.name]}
+                  {...field}
+                />
+              </Grid>
+            );
+          })}
+          <Grid item xs={12}>
+            {(edit && (
+              <>
+                <EditButton type="submit">Submit</EditButton>
+                <DeleteButton onClick={openDeleteModal}>Delete</DeleteButton>
+              </>
+            )) || (
+              <>
+                <AddButton type="submit">Add</AddButton>
+                <ResetButton onClick={resetClient}>Reset</ResetButton>
+              </>
+            )}
+            <CancelButton onClick={cancelForm}>Cancel</CancelButton>
           </Grid>
-        </FormContainer>
-      </DialogContent>
+        </Grid>
+      </FormContainer>
     </ModalContainer>
   );
 };

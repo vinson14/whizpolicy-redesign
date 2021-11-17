@@ -1,6 +1,7 @@
 import {
   Box,
   Dialog,
+  DialogContent,
   DialogTitle,
   IconButton,
   useMediaQuery,
@@ -25,7 +26,7 @@ const ModalContainer = ({ open, onClose, children, title }) => {
           <CloseIcon />
         </IconButton>
       </Box>
-      {children}
+      <DialogContent>{children}</DialogContent>
     </Dialog>
   );
 };

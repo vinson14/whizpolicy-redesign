@@ -9,12 +9,14 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { deleteDependantToClient } from "../../../utils/api";
 import { useContext } from "react";
 import DashboardContext from "../../../context/dashboard-context";
+import DeleteConfirmation from "../../stateless/interface/modal/delete-confirmation";
 
 const DependantsCard = ({ client }) => {
   const [dependantFormState, openDependantForm, closeDependantForm] =
     useModal();
 
   const { setLoading, setUpdateClients } = useContext(DashboardContext);
+  const [deleteModalState, openDeleteModal, closeDeleteModal] = useModal();
 
   const deleteDependant = (dependant) => {
     setLoading(true);
@@ -25,6 +27,11 @@ const DependantsCard = ({ client }) => {
 
   return (
     <ClientDetailCard>
+      <DeleteConfirmation
+        deleteFunction={deleteDependant}
+        open={deleteModalState}
+        handleClose={closeDeleteModal}
+      />
       <ClientCardHeader>Dependants</ClientCardHeader>
       <Grid container>
         {client.dependants &&

@@ -23,6 +23,8 @@ import DeleteButton from "../../stateless/interface/buttons/delete-button";
 import ResetButton from "../../stateless/interface/buttons/reset-button";
 import { useContext } from "react";
 import DashboardContext from "../../../context/dashboard-context";
+import DeleteConfirmation from "../../stateless/interface/modal/delete-confirmation";
+import useModal from "../../../utils/useModal";
 
 const AddPolicyForm = ({
   client,
@@ -45,6 +47,7 @@ const AddPolicyForm = ({
   });
 
   const { setLoading, setUpdateClients } = useContext(DashboardContext);
+  const [deleteModalState, openDeleteModal, closeDeleteModal] = useModal();
 
   const onSubmit = (formData) => {
     handleClose();
@@ -64,9 +67,10 @@ const AddPolicyForm = ({
   const handleDelete = () => {
     handleClose();
     setLoading(true);
-    deletePolicyToClient(client, defaultValues).then(() =>
-      setUpdateClients(true)
-    );
+    deletePolicyToClient(client, defaultValues).then(() => {
+      setUpdateClients(true);
+      console.log("set update clients true");
+    });
   };
 
   const cancelForm = () => {
@@ -75,42 +79,45 @@ const AddPolicyForm = ({
 
   return (
     <ModalContainer open={open} onClose={handleClose} title="Add Policy">
-      <DialogContent>
-        <FormContainer handleSubmit={handleSubmit} onSubmit={onSubmit}>
-          <Grid container p={3} spacing={1} justifyContent="space-between">
-            {!policyCategoryFields[policyFormCategory] && policyFormCategory}
-            {policyCategoryFields[policyFormCategory] &&
-              policyCategoryFields[policyFormCategory].map((fieldName) => {
-                const field = addPolicyFormFields[fieldName];
-                const InputComponent = inputTypeMapping[field.type];
-                return (
-                  <Grid item key={field.name} {...field.col} p={2}>
-                    <InputComponent
-                      {...field}
-                      register={register}
-                      control={control}
-                      error={errors[field.name]}
-                    />
-                  </Grid>
-                );
-              })}
-            <Grid item xs={12}>
-              {(edit && (
-                <>
-                  <EditButton type="submit">Confirm</EditButton>
-                  <DeleteButton onClick={handleDelete}>Delete</DeleteButton>
-                </>
-              )) || (
-                <>
-                  <AddButton type="submit">Add</AddButton>
-                  <ResetButton onClick={resetForm}>Reset</ResetButton>
-                </>
-              )}
-              <CancelButton onClick={cancelForm}>Cancel</CancelButton>
-            </Grid>
+      <FormContainer handleSubmit={handleSubmit} onSubmit={onSubmit}>
+        <DeleteConfirmation
+          deleteFunction={handleDelete}
+          open={deleteModalState}
+          handleClose={closeDeleteModal}
+        />
+        <Grid container p={3} spacing={1} justifyContent="space-between">
+          {!policyCategoryFields[policyFormCategory] && policyFormCategory}
+          {policyCategoryFields[policyFormCategory] &&
+            policyCategoryFields[policyFormCategory].map((fieldName) => {
+              const field = addPolicyFormFields[fieldName];
+              const InputComponent = inputTypeMapping[field.type];
+              return (
+                <Grid item key={field.name} {...field.col} p={2}>
+                  <InputComponent
+                    {...field}
+                    register={register}
+                    control={control}
+                    error={errors[field.name]}
+                  />
+                </Grid>
+              );
+            })}
+          <Grid item xs={12}>
+            {(edit && (
+              <>
+                <EditButton type="submit">Confirm</EditButton>
+                <DeleteButton onClick={openDeleteModal}>Delete</DeleteButton>
+              </>
+            )) || (
+              <>
+                <AddButton type="submit">Add</AddButton>
+                <ResetButton onClick={resetForm}>Reset</ResetButton>
+              </>
+            )}
+            <CancelButton onClick={cancelForm}>Cancel</CancelButton>
           </Grid>
-        </FormContainer>
-      </DialogContent>
+        </Grid>
+      </FormContainer>
     </ModalContainer>
   );
 };
