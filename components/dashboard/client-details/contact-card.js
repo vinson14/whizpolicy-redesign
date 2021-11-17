@@ -17,6 +17,7 @@ const ContactCard = ({ client }) => {
             value={client[field.key]}
             label={field.label}
             icon={field.icon}
+            type={field.type}
           />
         ))}
       </Grid>

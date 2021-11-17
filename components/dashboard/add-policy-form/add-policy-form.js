@@ -21,13 +21,14 @@ import {
 } from "../../../utils/api";
 import DeleteButton from "../../stateless/interface/buttons/delete-button";
 import ResetButton from "../../stateless/interface/buttons/reset-button";
+import { useContext } from "react";
+import DashboardContext from "../../../context/dashboard-context";
 
 const AddPolicyForm = ({
   client,
   open,
   handleClose,
   defaultValues = defaultPolicyFormValues,
-  setUpdateClients,
   edit,
 }) => {
   const {
@@ -43,8 +44,11 @@ const AddPolicyForm = ({
     name: POLICY_CATEGORY_KEY,
   });
 
+  const { setLoading, setUpdateClients } = useContext(DashboardContext);
+
   const onSubmit = (formData) => {
     handleClose();
+    setLoading(true);
 
     if (edit) {
       putPolicyToClient(client, formData).then(() => setUpdateClients(true));

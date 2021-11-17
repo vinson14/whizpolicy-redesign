@@ -52,6 +52,8 @@ export const INPUT_TYPE_CHECKBOX = "checkboxInput";
 
 // Field Types
 export const FIELD_TYPE_TEXT = "text";
+export const FIELD_TYPE_TEXT_CAMELCASE = "textCamel";
+export const FIELD_TYPE_TEXT_UPPERCASE = "textUpper";
 export const FIELD_TYPE_CURRENCY = "currency";
 export const FIELD_TYPE_INTEGER = "integer";
 export const FIELD_TYPE_DATE = "date";
@@ -400,11 +402,13 @@ export const clientDetailsContactFields = [
     label: CLIENT_MOBILE_LABEL,
     key: CLIENT_MOBILE_KEY,
     icon: <PhoneIcon />,
+    type: FIELD_TYPE_TEXT,
   },
   {
     label: CLIENT_EMAIL_LABEL,
     key: CLIENT_EMAIL_KEY,
     icon: <EmailIcon />,
+    type: FIELD_TYPE_TEXT,
   },
 ];
 
@@ -412,12 +416,12 @@ export const clientDetailsAboutFields = [
   {
     label: CLIENT_GENDER_LABEL,
     key: CLIENT_GENDER_KEY,
-    type: FIELD_TYPE_TEXT,
+    type: FIELD_TYPE_TEXT_CAMELCASE,
   },
   {
     label: CLIENT_MARITAL_STATUS_LABEL,
     key: CLIENT_MARITAL_STATUS_KEY,
-    type: FIELD_TYPE_TEXT,
+    type: FIELD_TYPE_TEXT_CAMELCASE,
   },
   {
     label: CLIENT_BIRTHDAY_LABEL,
@@ -432,12 +436,12 @@ export const clientDetailsAboutFields = [
   {
     label: CLIENT_SMOKER_LABEL,
     key: CLIENT_SMOKER_KEY,
-    type: FIELD_TYPE_TEXT,
+    type: FIELD_TYPE_TEXT_CAMELCASE,
   },
   {
     label: CLIENT_OCCUPATION_LABEL,
     key: CLIENT_OCCUPATION_KEY,
-    type: FIELD_TYPE_TEXT,
+    type: FIELD_TYPE_TEXT_CAMELCASE,
   },
 ];
 
@@ -488,11 +492,15 @@ export const clientDetailsCards = [
 ];
 
 export const policyCardFields = [
-  { label: POLICY_NUMBER_LABEL, key: POLICY_NUMBER_KEY, type: FIELD_TYPE_TEXT },
+  {
+    label: POLICY_NUMBER_LABEL,
+    key: POLICY_NUMBER_KEY,
+    type: FIELD_TYPE_TEXT_CAMELCASE,
+  },
   {
     label: POLICY_CATEGORY_LABEL,
     key: POLICY_CATEGORY_KEY,
-    type: FIELD_TYPE_TEXT,
+    type: FIELD_TYPE_TEXT_CAMELCASE,
   },
   {
     label: POLICY_PREMIUM_LABEL,
@@ -502,7 +510,7 @@ export const policyCardFields = [
   {
     label: POLICY_PREMIUM_MODE_LABEL,
     key: POLICY_PREMIUM_MODE_KEY,
-    type: FIELD_TYPE_TEXT,
+    type: FIELD_TYPE_TEXT_CAMELCASE,
   },
 ];
 
@@ -557,6 +565,26 @@ export const newClientDefaultValues = {
   [CLIENT_ANNUAL_INCOME_KEY]: "",
   [CLIENT_AGREED_KEY]: false,
 };
+
+export const allInsuranceCompanies = [
+  { label: INSURER_AIA_LABEL, value: INSURER_AIA_KEY },
+  { label: INSURER_AVIVA_LABEL, value: INSURER_AVIVA_KEY },
+  { label: INSURER_AXA_LABEL, value: INSURER_AXA_KEY },
+  { label: INSURER_ALLIANZ_LABEL, value: INSURER_ALLIANZ_KEY },
+  { label: INSURER_CHINA_LIFE_LABEL, value: INSURER_CHINA_LIFE_KEY },
+  { label: INSURER_CHINA_TAIPING_LABEL, value: INSURER_CHINA_TAIPING_KEY },
+  { label: INSURER_ETIQA_LABEL, value: INSURER_ETIQA_KEY },
+  { label: INSURER_FWD_LABEL, value: INSURER_FWD_KEY },
+  { label: INSURER_GREAT_EASTERN_LABEL, value: INSURER_GREAT_EASTERN_KEY },
+  { label: INSURER_HSBC_LABEL, value: INSURER_HSBC_KEY },
+  { label: INSURER_MANULIFE_LABEL, value: INSURER_MANULIFE_KEY },
+  { label: INSURER_NTUC_LABEL, value: INSURER_NTUC_KEY },
+  { label: INSURER_PRU_LABEL, value: INSURER_PRU_KEY },
+  { label: INSURER_RAFFLES_LABEL, value: INSURER_RAFFLES_KEY },
+  { label: INSURER_SING_LIFE_LABEL, value: INSURER_SING_LIFE_KEY },
+  { label: INSURER_TOKIO_MARINE_LABEL, value: INSURER_TOKIO_MARINE_KEY },
+  { label: INSURER_ZURICH_LABEL, value: INSURER_ZURICH_KEY },
+];
 
 export const addClientFormFields = [
   {
@@ -912,25 +940,7 @@ export const addPolicyFormFields = {
       md: 6,
       lg: 5,
     },
-    options: [
-      { label: INSURER_AIA_LABEL, value: INSURER_AIA_KEY },
-      { label: INSURER_AVIVA_LABEL, value: INSURER_AVIVA_KEY },
-      { label: INSURER_AXA_LABEL, value: INSURER_AXA_KEY },
-      { label: INSURER_ALLIANZ_LABEL, value: INSURER_ALLIANZ_KEY },
-      { label: INSURER_CHINA_LIFE_LABEL, value: INSURER_CHINA_LIFE_KEY },
-      { label: INSURER_CHINA_TAIPING_LABEL, value: INSURER_CHINA_TAIPING_KEY },
-      { label: INSURER_ETIQA_LABEL, value: INSURER_ETIQA_KEY },
-      { label: INSURER_FWD_LABEL, value: INSURER_FWD_KEY },
-      { label: INSURER_GREAT_EASTERN_LABEL, value: INSURER_GREAT_EASTERN_KEY },
-      { label: INSURER_HSBC_LABEL, value: INSURER_HSBC_KEY },
-      { label: INSURER_MANULIFE_LABEL, value: INSURER_MANULIFE_KEY },
-      { label: INSURER_NTUC_LABEL, value: INSURER_NTUC_KEY },
-      { label: INSURER_PRU_LABEL, value: INSURER_PRU_KEY },
-      { label: INSURER_RAFFLES_LABEL, value: INSURER_RAFFLES_KEY },
-      { label: INSURER_SING_LIFE_LABEL, value: INSURER_SING_LIFE_KEY },
-      { label: INSURER_TOKIO_MARINE_LABEL, value: INSURER_TOKIO_MARINE_KEY },
-      { label: INSURER_ZURICH_LABEL, value: INSURER_ZURICH_KEY },
-    ],
+    options: allInsuranceCompanies,
   },
   [POLICY_PREMIUM_MODE_KEY]: {
     name: POLICY_PREMIUM_MODE_KEY,
@@ -1337,22 +1347,22 @@ export const policyDetailsAboutCardFields = [
   {
     label: POLICY_NUMBER_LABEL,
     key: POLICY_NUMBER_KEY,
-    type: FIELD_TYPE_TEXT,
+    type: FIELD_TYPE_TEXT_CAMELCASE,
   },
   {
     label: POLICY_NAME_LABEL,
     key: POLICY_NAME_KEY,
-    type: FIELD_TYPE_TEXT,
+    type: FIELD_TYPE_TEXT_CAMELCASE,
   },
   {
     label: POLICY_CATEGORY_LABEL,
     key: POLICY_CATEGORY_KEY,
-    type: FIELD_TYPE_TEXT,
+    type: FIELD_TYPE_TEXT_CAMELCASE,
   },
   {
     label: POLICY_LIFE_ASSURED_LABEL,
     key: POLICY_LIFE_ASSURED_KEY,
-    type: FIELD_TYPE_TEXT,
+    type: FIELD_TYPE_TEXT_CAMELCASE,
   },
   {
     label: POLICY_PREMIUM_LABEL,
@@ -1362,12 +1372,12 @@ export const policyDetailsAboutCardFields = [
   {
     label: POLICY_PREMIUM_MODE_LABEL,
     key: POLICY_PREMIUM_MODE_KEY,
-    type: FIELD_TYPE_TEXT,
+    type: FIELD_TYPE_TEXT_CAMELCASE,
   },
   {
     label: POLICY_INSURER_LABEL,
     key: POLICY_INSURER_KEY,
-    type: FIELD_TYPE_TEXT,
+    type: FIELD_TYPE_TEXT_UPPERCASE,
   },
   {
     label: POLICY_INCEPTION_DATE_LABEL,

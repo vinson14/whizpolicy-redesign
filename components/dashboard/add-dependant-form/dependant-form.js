@@ -1,5 +1,7 @@
 import { DialogContent, Grid } from "@mui/material";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
+import DashboardContext from "../../../context/dashboard-context";
 import {
   addDependantFormFields,
   defaultDependantFormValues,
@@ -17,7 +19,6 @@ const DependantForm = ({
   open,
   handleClose,
   defaultValues = defaultDependantFormValues,
-  setUpdateClients,
   edit,
 }) => {
   const {
@@ -28,8 +29,11 @@ const DependantForm = ({
     reset,
   } = useForm({ mode: "onBlur", defaultValues });
 
+  const { setLoading, setUpdateClients } = useContext(DashboardContext);
+
   const onSubmit = (dependant) => {
     handleClose();
+    setLoading(true);
     postDependantToClient(client, dependant).then(() => setUpdateClients(true));
   };
   const resetForm = () => {
@@ -41,7 +45,7 @@ const DependantForm = ({
     handleClose();
   };
   return (
-    <ModalContainer open={open} onClose={handleClose} title="Add Dependant">
+    <ModalContainer open={open} onClose={cancelForm} title="Add Dependant">
       <DialogContent>
         <FormContainer handleSubmit={handleSubmit} onSubmit={onSubmit}>
           <Grid p={3} spacing={1} justifyContent="space-between" container>

@@ -40,6 +40,8 @@ import useDashboardState from "../utils/useDashboardState";
 import LoadingIcon from "../components/stateless/interface/misc/loading-icon";
 import TopAppBar from "../components/stateless/interface/navigation/top-appbar";
 import { useRouter } from "next/router";
+import DashboardContext from "../context/dashboard-context";
+
 Amplify.configure(awsConfig);
 
 const Dashboard = () => {
@@ -80,7 +82,7 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    console.log("this ran", authState);
+    console.log("useEffect updateClients", authState);
     if (authState) {
       setLoading(true);
       getClients()
@@ -97,9 +99,6 @@ const Dashboard = () => {
   }, [updateClients, authState]);
 
   onAuthUIStateChange((nextAuthState, authData) => {
-    console.log("onAuthUIStateChange ran");
-    console.log(nextAuthState);
-    console.log(authData);
     setAuthState(nextAuthState);
   });
 
@@ -127,8 +126,13 @@ const Dashboard = () => {
     ),
   };
 
+  const context = {
+    setLoading,
+    setUpdateClients,
+  };
+
   return (
-    <>
+    <DashboardContext.Provider value={context}>
       <TopAppBar menuOnClick={openSidebar} />
       <DashboardContainer>
         <Sidebar open={showSidebar} onClose={closeSidebar}>
@@ -160,7 +164,7 @@ const Dashboard = () => {
           {!loading && mainComponent[selectedSidebarOption]}
         </Container>
       </DashboardContainer>
-    </>
+    </DashboardContext.Provider>
   );
 };
 

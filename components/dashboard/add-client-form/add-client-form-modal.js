@@ -5,6 +5,7 @@ import {
   inputTypeMapping,
   newClientDefaultValues,
 } from "../../../data/ui";
+import { useContext } from "react";
 import { postClient, putClient, deleteClient } from "../../../utils/api";
 import AddButton from "../../stateless/interface/buttons/add-button";
 import CancelButton from "../../stateless/interface/buttons/cancel-button";
@@ -13,12 +14,12 @@ import EditButton from "../../stateless/interface/buttons/edit-button";
 import ResetButton from "../../stateless/interface/buttons/reset-button";
 import FormContainer from "../../stateless/interface/form/form-container";
 import ModalContainer from "../../stateless/interface/modal/modal-container";
+import DashboardContext from "../../../context/dashboard-context";
 
 const ClientFormModal = ({
   open,
   handleClose,
   defaultValues = newClientDefaultValues,
-  setUpdateClients,
   edit,
 }) => {
   const {
@@ -29,9 +30,11 @@ const ClientFormModal = ({
     reset,
   } = useForm({ mode: "onBlur", defaultValues });
 
+  const { setLoading, setUpdateClients } = useContext(DashboardContext);
+
   const onSubmit = (formData) => {
     handleClose();
-
+    setLoading(true);
     if (edit) putClient(formData).then(() => setUpdateClients(true));
     else postClient(formData).then(() => setUpdateClients(true));
     console.log(formData);

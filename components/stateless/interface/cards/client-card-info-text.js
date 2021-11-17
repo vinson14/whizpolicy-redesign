@@ -4,6 +4,8 @@ import {
   FIELD_TYPE_CURRENCY,
   FIELD_TYPE_DATE,
   FIELD_TYPE_INTEGER,
+  FIELD_TYPE_TEXT_CAMELCASE,
+  FIELD_TYPE_TEXT_UPPERCASE,
   FIELD_TYPE_TEXT,
 } from "../../../../data/ui";
 import { formatNumber, formatString } from "../../../../utils/utils";
@@ -14,17 +16,19 @@ const ClientCardInfoText = ({
   align = "left",
   value,
   icon,
-  type = FIELD_TYPE_TEXT,
+  type = FIELD_TYPE_TEXT_CAMELCASE,
   endIcon,
   endIconOnClick,
   ...props
 }) => {
   const formattedValue = () => {
     if (value == null) return "N.A.";
+    if (type === FIELD_TYPE_TEXT) return value;
     if (type === FIELD_TYPE_CURRENCY) return `$${formatNumber(value)}`;
     if (type === FIELD_TYPE_INTEGER) return value;
     if (type === FIELD_TYPE_DATE) return format(new Date(value), "d MMM yyyy");
-    if (type === FIELD_TYPE_TEXT) {
+    if (type === FIELD_TYPE_TEXT_UPPERCASE) return value.toUpperCase();
+    if (type === FIELD_TYPE_TEXT_CAMELCASE) {
       return formatString(value);
     }
   };
