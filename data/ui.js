@@ -26,6 +26,7 @@ import { FileDownload } from "@mui/icons-material";
 import CheckboxInput from "../components/stateless/interface/form/checkbox-input";
 import { Divider } from "@mui/material";
 import PolicyCards from "../components/dashboard/client-details/policy-cards";
+import AccidentIcon from "../components/stateless/interface/icons/accident-icon";
 
 // Dimensions
 export const FLOATING_ACTION_BUTTON_WIDTH = 160;
@@ -66,7 +67,7 @@ export const POLICY_CATEGORY_TERM_LIFE_KEY = "termLife";
 export const POLICY_CATEGORY_ENDOWMENT_KEY = "endowment";
 export const POLICY_CATEGORY_ILP_KEY = "ilp";
 export const POLICY_CATEGORY_ACCIDENT_KEY = "accident";
-export const POLICY_CATEGORY_HOSPITAL_KEY = "hospital";
+export const POLICY_CATEGORY_ISP_KEY = "integratedShieldPlan";
 
 // Policy Categories Labels
 export const POLICY_CATEGORY_WHOLE_LIFE_LABEL = "Whole Life";
@@ -74,7 +75,7 @@ export const POLICY_CATEGORY_TERM_LIFE_LABEL = "Term Life";
 export const POLICY_CATEGORY_ENDOWMENT_LABEL = "Endowment";
 export const POLICY_CATEGORY_ILP_LABEL = "Investment Linked";
 export const POLICY_CATEGORY_ACCIDENT_LABEL = "Accident";
-export const POLICY_CATEGORY_HOSPITAL_LABEL = "Integrated Shield Plan";
+export const POLICY_CATEGORY_ISP_LABEL = "Integrated Shield Plan";
 
 // Policy Object Keys
 export const POLICY_NUMBER_KEY = "policyNumber";
@@ -181,7 +182,7 @@ export const CLIENT_FINANCIAL_OVERVIEW_DEATH_KEY = "deathBenefit";
 export const CLIENT_FINANCIAL_OVERVIEW_TPD_KEY = "tpdBenefit";
 export const CLIENT_FINANCIAL_OVERVIEW_MAJOR_CI_KEY = "majorCiBenefit";
 export const CLIENT_FINANCIAL_OVERVIEW_EARLY_CI_KEY = "earlyCiBenefit";
-export const CLIENT_FINANCIAL_OVERVIEW_ACC_DEATH_KEY = "accidentalDeathBenefit";
+export const CLIENT_FINANCIAL_OVERVIEW_ACC_DEATH_KEY = "accidentalDeath";
 export const CLIENT_FINANCIAL_OVERVIEW_ACC_MED_KEY = "accidentalMedicalBenefit";
 export const CLIENT_FINANCIAL_OVERVIEW_DEATH_LABEL = "Death";
 export const CLIENT_FINANCIAL_OVERVIEW_TPD_LABEL = "Total Permanent Disability";
@@ -472,12 +473,13 @@ export const clientDetailsFinancialOverviewFields = [
     type: FIELD_TYPE_CURRENCY,
     icon: <HotelIcon />,
   },
-  // {
-  //   label: CLIENT_FINANCIAL_OVERVIEW_ACC_DEATH_LABEL,
-  //   key: CLIENT_FINANCIAL_OVERVIEW_ACC_DEATH_KEY,
-  //   type: FIELD_TYPE_CURRENCY,
-  //   icon: <PersonOffIcon />,
-  // },
+
+  {
+    label: CLIENT_FINANCIAL_OVERVIEW_ACC_DEATH_LABEL,
+    key: CLIENT_FINANCIAL_OVERVIEW_ACC_DEATH_KEY,
+    type: FIELD_TYPE_CURRENCY,
+    icon: <AccidentIcon />,
+  },
   // {
   //   label: CLIENT_FINANCIAL_OVERVIEW_ACC_MED_LABEL,
   //   key: CLIENT_FINANCIAL_OVERVIEW_ACC_MED_KEY,
@@ -868,8 +870,8 @@ export const addPolicyFormFields = {
         value: POLICY_CATEGORY_ACCIDENT_KEY,
       },
       {
-        label: POLICY_CATEGORY_HOSPITAL_LABEL,
-        value: POLICY_CATEGORY_HOSPITAL_KEY,
+        label: POLICY_CATEGORY_ISP_LABEL,
+        value: POLICY_CATEGORY_ISP_KEY,
       },
     ],
     col: {
@@ -1334,7 +1336,7 @@ export const policyCategoryFields = {
     POLICY_ILP_FUND_RISK_KEY,
   ],
   [POLICY_CATEGORY_ACCIDENT_KEY]: [...defaultAccPolicyFields],
-  [POLICY_CATEGORY_HOSPITAL_KEY]: [...defaultHospPolicyFields],
+  [POLICY_CATEGORY_ISP_KEY]: [...defaultHospPolicyFields],
 };
 
 export const inputTypeMapping = {

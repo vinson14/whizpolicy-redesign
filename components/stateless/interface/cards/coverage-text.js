@@ -9,8 +9,11 @@ import {
   CLIENT_FINANCIAL_OVERVIEW_TPD_KEY,
   CLIENT_FINANCIAL_OVERVIEW_MAJOR_CI_KEY,
   CLIENT_FINANCIAL_OVERVIEW_EARLY_CI_KEY,
+  CLIENT_FINANCIAL_OVERVIEW_ACC_DEATH_KEY,
 } from "../../../../data/ui";
 import { formatNumber } from "../../../../utils/utils";
+import AccidentIcon from "../icons/accident-icon";
+import SkullIcon from "../icons/skull-icon";
 
 const CoverageText = ({
   icon,
@@ -22,6 +25,14 @@ const CoverageText = ({
   sm = 6,
   md = 6,
 }) => {
+  const icons = {
+    [CLIENT_FINANCIAL_OVERVIEW_DEATH_KEY]: SkullIcon,
+    [CLIENT_FINANCIAL_OVERVIEW_TPD_KEY]: AccessibleForwardIcon,
+    [CLIENT_FINANCIAL_OVERVIEW_MAJOR_CI_KEY]: AccessibleForwardIcon,
+    [CLIENT_FINANCIAL_OVERVIEW_EARLY_CI_KEY]: HotelIcon,
+    [CLIENT_FINANCIAL_OVERVIEW_ACC_DEATH_KEY]: AccidentIcon,
+  };
+
   const Icon = icons[icon];
   return (
     <Grid
@@ -57,13 +68,6 @@ const CoverageText = ({
       </Box>
     </Grid>
   );
-};
-
-const icons = {
-  deathBenefit: PersonOffIcon,
-  tpdBenefit: AccessibleForwardIcon,
-  majorCiBenefit: AccessibleForwardIcon,
-  earlyCiBenefit: HotelIcon,
 };
 
 export default CoverageText;

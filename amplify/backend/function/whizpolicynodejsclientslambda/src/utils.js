@@ -2,6 +2,13 @@ const POLICY_DEATH_BENEFIT_KEY = "deathBenefit";
 const POLICY_TPD_BENEFIT_KEY = "tpdBenefit";
 const POLICY_MAJOR_CI_BENEFIT_KEY = "majorCiBenefit";
 const POLICY_EARLY_CI_BENEFIT_KEY = "earlyCiBenefit";
+const POLICY_ACC_DEATH_BENEFIT_KEY = "accidentalDeath";
+const POLICY_ACC_TPD_BENEFIT_KEY = "accidentalTpd";
+const POLICY_ACC_PARTIAL_DISABILITY_BENEFIT_KEY = "accidentalPartialDisability";
+const POLICY_ACC_MEDICAL_KEY = "accidentalMedical";
+const POLICY_ACC_ALT_MEDICAL_KEY = "accidentalTCM";
+const POLICY_ACC_DAILY_HOSP_KEY = "accidentalDailyHospitalIncome";
+const POLICY_ACC_WEEKLY_DIS_KEY = "accidentalWeeklyDisabilityIncome";
 const FINANCIAL_OVERVIEW_KEY = "financialOverview";
 const FINANCIAL_OVERVIEW_CURRENT_COVERAGE_KEY = "currentCoverage";
 const FINANCIAL_OVERVIEW_IDEAL_COVERAGE_KEY = "idealCoverage";
@@ -18,6 +25,8 @@ const benefitTypeKeys = [
   POLICY_TPD_BENEFIT_KEY,
   POLICY_MAJOR_CI_BENEFIT_KEY,
   POLICY_EARLY_CI_BENEFIT_KEY,
+  POLICY_ACC_DEATH_BENEFIT_KEY,
+  POLICY_ACC_TPD_BENEFIT_KEY,
 ];
 
 const incomeMultiplier = {
@@ -25,6 +34,8 @@ const incomeMultiplier = {
   [POLICY_TPD_BENEFIT_KEY]: 10,
   [POLICY_MAJOR_CI_BENEFIT_KEY]: 10,
   [POLICY_EARLY_CI_BENEFIT_KEY]: 10,
+  [POLICY_ACC_DEATH_BENEFIT_KEY]: 1,
+  [POLICY_ACC_TPD_BENEFIT_KEY]: 1,
 };
 
 const calculateCurrentCoverage = (client) => {
