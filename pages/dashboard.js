@@ -44,6 +44,7 @@ import DashboardContext from "../context/dashboard-context";
 
 Amplify.configure(awsConfig);
 
+
 const Dashboard = () => {
   const router = useRouter();
   const [authState, setAuthState] = useState();
@@ -58,6 +59,7 @@ const Dashboard = () => {
   const [clients, setClients] = useState([]);
   const [policies, setPolicies] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [authState, setAuthState] = useState();
   const [updateClients, setUpdateClients] = useState(false);
   const [showSidebar, openSidebar, closeSidebar] = useModal();
   const [
@@ -100,6 +102,7 @@ const Dashboard = () => {
   }, [updateClients, authState]);
 
   onAuthUIStateChange((nextAuthState, authData) => {
+
     setAuthState(nextAuthState);
   });
 

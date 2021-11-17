@@ -16,7 +16,7 @@ import ClientDetailCard from "./client-detail-card";
 const ClientCard = ({ client, onClick }) => {
   return (
     <ClientDetailCard onClick={onClick}>
-      <CardContent>
+      <CardContent sx={{ height: 1 }}>
         <Box display="flex" justifyContent="center" mt={3} mb={1}>
           <Avatar sx={{ bgcolor: getRandomAvatarColor() }}>
             {getInitials(client.name)}
