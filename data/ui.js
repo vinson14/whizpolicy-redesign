@@ -547,9 +547,10 @@ export const coverageInfoPopoverContent = {
     },
   ],
   [CLIENT_FINANCIAL_OVERVIEW_ACC_DEATH_KEY]: [
-    { qns: "Why do you need accDeath1", ans: "because thats why" },
-    { qns: "Why do you need accdaeth2", ans: "because thats why" },
-    { qns: "Why do you need accdeath3", ans: "because thats why" },
+    {
+      qns: "How much Accidental Death Coverage does the client need?",
+      ans: "Accidental Death coverage is usually planned according to the client’s family’s needs, taking into consideration any current debts and future plans, such as overseas tertiary education for your children.",
+    },
   ],
   [CLIENT_FINANCIAL_OVERVIEW_ACC_MED_KEY]: [
     { qns: "Why do you need accMed1", ans: "because thats why" },

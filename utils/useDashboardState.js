@@ -7,6 +7,7 @@ import {
   SIDEBAR_PORTFOLIO_VALUE,
 } from "../data/ui";
 import { findClientById, findPolicyByPolicyId } from "./utils";
+import { animateScroll } from "react-scroll";
 
 const useDashboardState = (clients, policies) => {
   const [selectedSidebarOption, setSelectedSidebarOption] = useState(
@@ -14,6 +15,10 @@ const useDashboardState = (clients, policies) => {
   );
   const [selectedClient, setSelectedClient] = useState();
   const [selectedPolicy, setSelectedPolicy] = useState();
+
+  const scrollToTop = () => {
+    animateScroll.scrollToTop();
+  };
 
   const defaultBreadcrumbs = {
     [SIDEBAR_CLIENTS_VALUE]: [
@@ -30,6 +35,7 @@ const useDashboardState = (clients, policies) => {
     setSelectedClient(null);
     setSelectedPolicy(null);
     setBreadcrumbLinks(defaultBreadcrumbs[value]);
+    scrollToTop();
   };
 
   useEffect(() => {
@@ -66,15 +72,18 @@ const useDashboardState = (clients, policies) => {
 
   const clientOnClick = (client) => {
     setSelectedClient(client);
+    scrollToTop();
   };
 
   const policyOnClick = (policy) => {
     setSelectedPolicy(policy);
+    scrollToTop();
   };
 
   const goBackOneLevel = () => {
     if (selectedPolicy && selectedClient) setSelectedPolicy(null);
     else if (selectedClient) setSelectedClient(null);
+    scrollToTop();
   };
 
   return [
