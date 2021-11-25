@@ -7,7 +7,7 @@ import {
   inputTypeMapping,
   newClientDefaultValues,
 } from "../../../data/ui";
-import { deleteClient, postClient } from "../../../utils/api";
+import { deleteClient, postClient, putClient } from "../../../utils/api";
 import useModal from "../../../utils/useModal";
 import AddButton from "../../stateless/interface/buttons/add-button";
 import CancelButton from "../../stateless/interface/buttons/cancel-button";
@@ -20,11 +20,15 @@ import ModalContainer from "../../stateless/interface/modal/modal-container";
 
 const ClientForm = ({ open, onClose, values }) => {
   const onSubmit = (client) => {
-    console.log(client);
-    setAddLoading(true);
     if (values) {
-      console.log(client);
+      setEditLoading(true);
+      putClient(client)
+        .then(() => setEditLoading(false))
+        .then(() => onClose())
+        .then(() => setLoading(true))
+        .then(() => setUpdateClients(true));
     } else {
+      setAddLoading(true);
       postClient(client)
         .then(() => setAddLoading(false))
         .then(() => onClose())
@@ -41,10 +45,13 @@ const ClientForm = ({ open, onClose, values }) => {
     mode: "onBlur",
     defaultValues: values ? { ...values } : { ...newClientDefaultValues },
   });
+
   const { setLoading, setUpdateClients } = useContext(DashboardContext);
   const [deleteModalState, openDeleteModal, closeDeleteModal] = useModal();
   const [deleteLoading, setDeleteLoading] = useState(false);
   const [addLoading, setAddLoading] = useState(false);
+  const [editLoading, setEditLoading] = useState(false);
+
   const onDelete = () => {
     closeDeleteModal();
     setDeleteLoading(true);
@@ -53,6 +60,10 @@ const ClientForm = ({ open, onClose, values }) => {
       .then(() => onClose())
       .then(() => setLoading(true))
       .then(() => setUpdateClients(true));
+  };
+
+  const onReset = () => {
+    reset({ ...newClientDefaultValues });
   };
 
   return (
@@ -84,7 +95,7 @@ const ClientForm = ({ open, onClose, values }) => {
                 <AddButton loading={addLoading} type="submit">
                   Add
                 </AddButton>
-                <ResetButton>Reset</ResetButton>
+                <ResetButton onClick={onReset}>Reset</ResetButton>
               </>
             )}
           </Grid>
