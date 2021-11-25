@@ -2,8 +2,9 @@ import { Amplify, API, Auth } from "aws-amplify";
 import differenceInYears from "date-fns/differenceInYears";
 import awsmobile from "../src/aws-exports";
 import {
+  deserializeClient,
   findPolicyByPolicyId,
-  formatClientFormValues,
+  serializeClientForm,
   formatPolicyFormValues,
 } from "./utils";
 const endpoint = "https://a3dk3p85vd.execute-api.us-east-1.amazonaws.com/dev";
@@ -30,19 +31,20 @@ export const getClients = async () => {
   console.log("getClients Ran");
   const jwtToken = await getJwtToken();
   try {
-    const response = await API.get(apiName, "/clients", {
+    const clients = await API.get(apiName, "/clients", {
       headers: {
         Authorization: `${jwtToken}`,
       },
     });
-    return response;
+    clients.forEach((client) => deserializeClient(client));
+    return clients;
   } catch (err) {
     console.log(err);
   }
 };
 
 export const postClient = async (client) => {
-  formatClientFormValues(client);
+  serializeClientForm(client);
   const jwtToken = await getJwtToken();
   const path = "/clients";
   const init = {
@@ -61,7 +63,7 @@ export const postClient = async (client) => {
 };
 
 export const putClient = async (client) => {
-  formatClientFormValues(client);
+  serializeClientForm(client);
   const jwtToken = await getJwtToken();
   const path = `/clients/${client.clientId}`;
   const init = {
@@ -89,6 +91,7 @@ export const deleteClient = async (clientId) => {
   };
 
   const response = await API.del(apiName, path, init);
+  console.log("Delete response", response);
   return response;
 };
 

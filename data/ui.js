@@ -565,18 +565,20 @@ export const coverageInfoPopoverContent = {
 };
 
 export const newClientDefaultValues = {
-  [CLIENT_NAME_KEY]: "",
-  [CLIENT_OCCUPATION_KEY]: "",
-  [CLIENT_MOBILE_KEY]: "",
+  [CLIENT_ADDRESS_KEY]: "",
+  [CLIENT_AGREED_KEY]: false,
+  [CLIENT_ANNUAL_INCOME_KEY]: "",
+  [CLIENT_BIRTHDAY_KEY]: new Date("1 Jan 2000"),
   [CLIENT_EMAIL_KEY]: "",
   [CLIENT_GENDER_KEY]: GENDER_MALE_VALUE,
-  [CLIENT_BIRTHDAY_KEY]: new Date("1 Jan 2000"),
   [CLIENT_MARITAL_STATUS_KEY]: MARITAL_STATUS_SINGLE_VALUE,
-  [CLIENT_SMOKER_KEY]: SMOKER_NO_VALUE,
-  [CLIENT_SALUTATION_KEY]: SALUTATION_MR_VALUE,
+  [CLIENT_MOBILE_KEY]: "",
+  [CLIENT_NAME_KEY]: "",
   [CLIENT_NATIONALITY_KEY]: "Singapore",
-  [CLIENT_ANNUAL_INCOME_KEY]: "",
-  [CLIENT_AGREED_KEY]: false,
+  [CLIENT_OCCUPATION_KEY]: "",
+  [CLIENT_REMARKS_KEY]: "",
+  [CLIENT_SALUTATION_KEY]: SALUTATION_MR_VALUE,
+  [CLIENT_SMOKER_KEY]: SMOKER_NO_VALUE,
 };
 
 export const allInsuranceCompanies = [
@@ -881,7 +883,6 @@ export const addPolicyFormFields = {
     col: {
       xs: 12,
       md: 6,
-      lg: 5,
     },
   },
   [POLICY_NAME_KEY]: {
@@ -889,28 +890,29 @@ export const addPolicyFormFields = {
     label: POLICY_NAME_LABEL,
     type: INPUT_TYPE_TEXT,
     placeholder: POLICY_NAME_LABEL,
-    required: {
-      value: true,
-      message: REQUIRED_MSG.replace(REQUIRED_MSG_PLACEHOLDER, "policy name"),
-    },
-    minLength: {
-      value: MIN_POLICY_NAME_LENGTH,
-      message: MIN_CHAR_MSG.replace(
-        MIN_CHAR_MSG_PLACEHOLDER,
-        MIN_POLICY_NAME_LENGTH
-      ),
-    },
-    maxLength: {
-      value: MAX_POLICY_NAME_LENGTH,
-      message: MAX_CHAR_MSG.replace(
-        MAX_CHAR_MSG_PLACEHOLDER,
-        MAX_POLICY_NAME_LENGTH
-      ),
+    rules: {
+      required: {
+        value: true,
+        message: REQUIRED_MSG.replace(REQUIRED_MSG_PLACEHOLDER, "policy name"),
+      },
+      minLength: {
+        value: MIN_POLICY_NAME_LENGTH,
+        message: MIN_CHAR_MSG.replace(
+          MIN_CHAR_MSG_PLACEHOLDER,
+          MIN_POLICY_NAME_LENGTH
+        ),
+      },
+      maxLength: {
+        value: MAX_POLICY_NAME_LENGTH,
+        message: MAX_CHAR_MSG.replace(
+          MAX_CHAR_MSG_PLACEHOLDER,
+          MAX_POLICY_NAME_LENGTH
+        ),
+      },
     },
     col: {
       xs: 12,
       md: 6,
-      lg: 5,
     },
   },
   [POLICY_NUMBER_KEY]: {

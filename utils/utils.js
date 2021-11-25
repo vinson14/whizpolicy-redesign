@@ -3,6 +3,7 @@ import {
   addPolicyFormFields,
   INPUT_TYPE_CURRENCY,
   INPUT_TYPE_YEAR,
+  INPUT_TYPE_DATEPICKER,
 } from "../data/ui";
 
 export const getInitials = (name) => {
@@ -10,7 +11,7 @@ export const getInitials = (name) => {
     const words = name.split(" ");
     return words[0].charAt(0) + words[1].charAt(0);
   } catch (err) {
-    return name.substring(0, 2);
+    return name.substring(0, 2).toUpperCase();
   }
 };
 
@@ -71,12 +72,23 @@ export const formatPolicyFormValues = (formData) => {
   );
 };
 
-export const formatClientFormValues = (formData) => {
+export const serializeClientForm = (formData) => {
   const fieldsToFormat = addClientFormFields.filter(
     (field) =>
       field.type === INPUT_TYPE_CURRENCY || field.type === INPUT_TYPE_YEAR
   );
+  console.log(fieldsToFormat);
   fieldsToFormat.forEach(
     (field) => (formData[field.name] = formatFormInt(formData[field.name]))
   );
+};
+
+export const deserializeClient = (formData) => {
+  const fieldsToDate = addClientFormFields.filter(
+    (field) => field.type === INPUT_TYPE_DATEPICKER
+  );
+  fieldsToDate.forEach((field) => {
+    const value = formData[field.name];
+    formData[field.name] = new Date(value);
+  });
 };

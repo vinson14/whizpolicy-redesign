@@ -10,7 +10,7 @@ const PhoneInput = ({ name, control, rules, error, ...props }) => {
       rules={rules}
       render={({ field }) => (
         <TextField
-          inputProps={{ type: "number" }}
+          inputProps={{ type: "tel" }}
           {...field}
           error={error ? true : false}
           fullWidth

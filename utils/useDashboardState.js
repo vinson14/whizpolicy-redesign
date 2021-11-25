@@ -41,7 +41,6 @@ const useDashboardState = (clients, policies) => {
   useEffect(() => {
     console.log("update selectedClient");
     if (clients.length === 0) {
-      console.log(clients.length);
       setSelectedClient(null);
       setSelectedPolicy(null);
     } else if (selectedPolicy && selectedClient) {

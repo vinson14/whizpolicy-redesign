@@ -1,8 +1,10 @@
 import { Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
+import { LoadingButton } from "@mui/lab";
 const AddButton = ({
   children,
+  loading = false,
   mr = 2,
   mb = 2,
   color = "primary",
@@ -10,7 +12,8 @@ const AddButton = ({
   ...props
 }) => {
   return (
-    <Button
+    <LoadingButton
+      loading={loading}
       {...props}
       color={color}
       variant={variant}
@@ -19,7 +22,7 @@ const AddButton = ({
       sx={{ mr: mr, mb: mb }}
     >
       {children}
-    </Button>
+    </LoadingButton>
   );
 };
 
