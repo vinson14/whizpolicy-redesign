@@ -15,16 +15,7 @@ import { formatNumber } from "../../../../utils/utils";
 import AccidentIcon from "../icons/accident-icon";
 import SkullIcon from "../icons/skull-icon";
 
-const CoverageText = ({
-  icon,
-  label,
-  value,
-  color,
-  onClick,
-  xs = 12,
-  sm = 6,
-  md = 6,
-}) => {
+const CoverageText = ({ icon, label, value, color, onClick, xs = 12, sm = 6, md = 6 }) => {
   const icons = {
     [CLIENT_FINANCIAL_OVERVIEW_DEATH_KEY]: SkullIcon,
     [CLIENT_FINANCIAL_OVERVIEW_TPD_KEY]: AccessibleForwardIcon,
@@ -35,18 +26,9 @@ const CoverageText = ({
 
   const Icon = icons[icon];
   return (
-    <Grid
-      item
-      xs={xs}
-      sm={sm}
-      md={md}
-      display="flex"
-      alignItems="stretch"
-      justifyContent="center"
-      p={2}
-    >
+    <Grid item xs={xs} sm={sm} md={md} display="flex" alignItems="stretch" justifyContent="center" p={2}>
       <Box mr={3} display="flex" alignItems="center">
-        <Icon color={color} />
+        <Icon color={color} fontSize="large" />
       </Box>
       <Box
         flexGrow={1}

@@ -10,7 +10,7 @@ import ClientFormModal from "./add-client-form/client-form";
 import useModal from "../../utils/useModal";
 import PolicyDetails from "./policy-details/policy-details";
 import DashboardHeaderContainer from "../stateless/layout/dashboard-header-container";
-import AddPolicyForm from "./add-policy-form/add-policy-form";
+import PolicyForm from "./add-policy-form/policy-form";
 import ClientForm from "./add-client-form/client-form";
 
 const DashboardClients = ({
@@ -70,7 +70,7 @@ const DashboardClients = ({
             <ClientForm open={clientFormModalState} onClose={closeClientFormModal} values={selectedClient} />
           )}
           {addPolicyFormModalState && (
-            <AddPolicyForm open={addPolicyFormModalState} onClose={closeAddPolicyFormModal} client={selectedClient} />
+            <PolicyForm open={addPolicyFormModalState} onClose={closeAddPolicyFormModal} client={selectedClient} />
           )}
         </Grid>
       </Box>

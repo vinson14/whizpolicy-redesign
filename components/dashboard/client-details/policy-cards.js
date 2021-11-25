@@ -7,7 +7,7 @@ import ClientCardHeader from "../../stateless/interface/cards/client-card-header
 import ClientCardInfoText from "../../stateless/interface/cards/client-card-info-text";
 import ClientDetailCard from "../../stateless/interface/cards/client-detail-card";
 import MainHeader from "../../stateless/interface/text/main-header";
-import AddPolicyForm from "../add-policy-form/add-policy-form";
+import AddPolicyForm from "../add-policy-form/policy-form";
 import { useRouter } from "next/router";
 import AddButton from "../../stateless/interface/buttons/add-button";
 import { useContext } from "react";
@@ -25,10 +25,7 @@ const PolicyCards = ({ client }) => {
         {client.policies &&
           client.policies.map((policy) => (
             <Grid key={policy.policyNumber} item xs={12} lg={6}>
-              <PolicyCard
-                policy={policy}
-                onClick={() => policyOnClick(policy)}
-              />
+              <PolicyCard policy={policy} onClick={() => policyOnClick(policy)} />
             </Grid>
           ))}
         {(!client.policies || client.policies.length == 0) && (
@@ -51,12 +48,7 @@ export const PolicyCard = ({ policy, onClick }) => {
       </ClientCardHeader>
       <Grid container>
         {policyCardFields.map((field) => (
-          <ClientCardInfoText
-            key={field.key}
-            label={field.label}
-            value={policy[field.key]}
-            type={field.type}
-          />
+          <ClientCardInfoText key={field.key} label={field.label} value={policy[field.key]} type={field.type} />
         ))}
       </Grid>
     </ClientDetailCard>

@@ -2,7 +2,7 @@ import { Grid } from "@mui/material";
 import useModal from "../../../utils/useModal";
 import FloatingEditButton from "../../stateless/interface/buttons/floating-edit-button";
 import CustomGrow from "../../stateless/interface/transitions/custom-grow";
-import AddPolicyForm from "../add-policy-form/add-policy-form";
+import PolicyForm from "../add-policy-form/policy-form";
 import PolicyAboutCard from "./policy-about-card";
 import PolicyCoverageCard from "./policy-coverage-card";
 
@@ -24,7 +24,7 @@ const PolicyDetails = ({ client, policy, setLoading }) => {
 
       <FloatingEditButton onClick={openPolicyModal}>Edit Policy</FloatingEditButton>
       {editPolicyModalState && (
-        <AddPolicyForm open={editPolicyModalState} client={client} onClose={closePolicyModal} values={policy} />
+        <PolicyForm open={editPolicyModalState} client={client} onClose={closePolicyModal} values={policy} />
       )}
     </>
   );
