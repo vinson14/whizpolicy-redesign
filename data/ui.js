@@ -724,16 +724,17 @@ export const addClientFormFields = [
     name: CLIENT_NATIONALITY_KEY,
     label: CLIENT_NATIONALITY_LABEL,
     placeholder: "Singapore",
-    required: {
-      value: true,
-      message: "Please select a nationality from the list",
-    },
     type: INPUT_TYPE_AUTOCOMPLETE,
     options: countryList().getLabels(),
+    rules: {
+      required: {
+        value: true,
+        message: "Please select a nationality from the list",
+      },
+    },
     col: {
       xs: 12,
       md: 6,
-      lg: 5,
     },
   },
 ];

@@ -3,9 +3,10 @@ import { Controller } from "react-hook-form";
 
 const AutocompleteInput = ({
   name,
-  control,
   label,
-  defaultValue,
+  control,
+  rules,
+  error,
   options,
   placeholder,
   shrink = true,
@@ -14,7 +15,7 @@ const AutocompleteInput = ({
     <Controller
       name={name}
       control={control}
-      defaultValue={defaultValue}
+      rules={rules}
       render={({ field }) => (
         <Autocomplete
           value={field.value}
@@ -25,7 +26,10 @@ const AutocompleteInput = ({
           renderInput={(params) => (
             <TextField
               {...params}
+              fullWidth
               label={label}
+              error={error ? true : false}
+              helperText={error?.message}
               InputLabelProps={{ shrink }}
               placeholder={placeholder}
             />
