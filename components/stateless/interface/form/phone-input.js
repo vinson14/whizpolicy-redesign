@@ -1,7 +1,7 @@
 import { TextField } from "@mui/material";
 import { Controller } from "react-hook-form";
 
-const TextInput = ({ name, control, rules, error, ...props }) => {
+const PhoneInput = ({ name, control, rules, error, ...props }) => {
   return (
     <Controller
       name={name}
@@ -10,6 +10,7 @@ const TextInput = ({ name, control, rules, error, ...props }) => {
       rules={rules}
       render={({ field }) => (
         <TextField
+          inputProps={{ type: "tel" }}
           {...field}
           error={error ? true : false}
           fullWidth
@@ -22,4 +23,4 @@ const TextInput = ({ name, control, rules, error, ...props }) => {
   );
 };
 
-export default TextInput;
+export default PhoneInput;

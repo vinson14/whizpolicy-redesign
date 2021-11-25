@@ -6,11 +6,12 @@ import ClientCards from "../stateless/interface/cards/client-cards";
 import CustomBreadcrumbs from "../stateless/interface/navigation/breadcrumbs";
 import MainHeader from "../stateless/interface/text/main-header";
 import ClientDetails from "./client-details/dashboard-client-details";
-import ClientFormModal from "./add-client-form/add-client-form-modal";
+import ClientFormModal from "./add-client-form/client-form";
 import useModal from "../../utils/useModal";
 import PolicyDetails from "./policy-details/policy-details";
 import DashboardHeaderContainer from "../stateless/layout/dashboard-header-container";
 import AddPolicyForm from "./add-policy-form/add-policy-form";
+import ClientForm from "./add-client-form/client-form";
 
 const DashboardClients = ({
   openSidebar,
@@ -37,15 +38,9 @@ const DashboardClients = ({
     } else if (selectedClient != null && selectedPolicy == null) {
       return (
         <>
-          <FloatingEditButton onClick={openEditClientModal} bottom={10}>
+          <FloatingEditButton onClick={openClientFormModal} bottom={10}>
             Edit Client
           </FloatingEditButton>
-          <ClientFormModal
-            open={editClientModalState}
-            handleClose={closeEditClientModal}
-            defaultValues={selectedClient}
-            edit
-          />
           <FloatingAddButton onClick={openAddPolicyFormModal}>
             Add Policy
           </FloatingAddButton>
@@ -97,10 +92,13 @@ const DashboardClients = ({
           {selectedClient != null && selectedPolicy != null && (
             <PolicyDetails client={selectedClient} policy={selectedPolicy} />
           )}
-          <ClientFormModal
-            open={clientFormModalState}
-            handleClose={closeClientFormModal}
-          />
+          {clientFormModalState && (
+            <ClientForm
+              open={clientFormModalState}
+              onClose={closeClientFormModal}
+              values={selectedClient}
+            />
+          )}
         </Grid>
       </Box>
     </>

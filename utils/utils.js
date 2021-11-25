@@ -23,7 +23,6 @@ export const findPolicyByPolicyId = (policies, policyId) => {
 };
 
 export function formatNumber(num, decPlaces = 0) {
-  console.log(typeof num);
   try {
     return num.toFixed(decPlaces).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
   } catch (err) {

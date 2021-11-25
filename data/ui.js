@@ -22,11 +22,11 @@ import NameCard from "../components/dashboard/client-details/name-card";
 import AboutCard from "../components/dashboard/client-details/about-card";
 import DependantsCard from "../components/dashboard/client-details/dependants-card";
 import CoverageCard from "../components/dashboard/client-details/coverage-card";
-import { FileDownload } from "@mui/icons-material";
 import CheckboxInput from "../components/stateless/interface/form/checkbox-input";
 import { Divider } from "@mui/material";
 import PolicyCards from "../components/dashboard/client-details/policy-cards";
 import AccidentIcon from "../components/stateless/interface/icons/accident-icon";
+import PhoneInput from "../components/stateless/interface/form/phone-input";
 
 // Dimensions
 export const FLOATING_ACTION_BUTTON_WIDTH = 160;
@@ -52,6 +52,7 @@ export const INPUT_TYPE_DATEPICKER = "datepicker";
 export const INPUT_TYPE_CURRENCY = "currencyInput";
 export const INPUT_TYPE_YEAR = "yearInput";
 export const INPUT_TYPE_CHECKBOX = "checkboxInput";
+export const INPUT_TYPE_PHONE = "phoneInput";
 
 // Field Types
 export const FIELD_TYPE_TEXT = "text";
@@ -598,30 +599,48 @@ export const addClientFormFields = [
   {
     name: CLIENT_NAME_KEY,
     label: CLIENT_NAME_LABEL,
-    defaultValue: "",
     type: INPUT_TYPE_TEXT,
+    col: { xs: 12, md: 6 },
     placeholder: "John Doe",
-    required: {
-      value: true,
-      message: REQUIRED_MSG.replace(REQUIRED_MSG_PLACEHOLDER, "name"),
+    rules: {
+      required: {
+        value: true,
+        message: REQUIRED_MSG.replace(REQUIRED_MSG_PLACEHOLDER, "name"),
+      },
+      minLength: {
+        value: MIN_CLIENT_NAME_LENGTH,
+        message: MIN_CHAR_MSG.replace(
+          MIN_CHAR_MSG_PLACEHOLDER,
+          MIN_CLIENT_NAME_LENGTH
+        ),
+      },
+      maxLength: {
+        value: MAX_CLIENT_NAME_LENGTH,
+        message: MAX_CHAR_MSG.replace(
+          MAX_CHAR_MSG_PLACEHOLDER,
+          MAX_CLIENT_NAME_LENGTH
+        ),
+      },
     },
-    minLength: {
-      value: MIN_CLIENT_NAME_LENGTH,
-      message: MIN_CHAR_MSG.replace(
-        MIN_CHAR_MSG_PLACEHOLDER,
-        MIN_CLIENT_NAME_LENGTH
-      ),
-    },
-    maxLength: {
-      value: MAX_CLIENT_NAME_LENGTH,
-      message: MAX_CHAR_MSG.replace(
-        MAX_CHAR_MSG_PLACEHOLDER,
-        MAX_CLIENT_NAME_LENGTH
-      ),
-    },
-    pattern: {
-      value: /\b([A-ZÀ-ÿ][-,a-z. ']+[ ]*)+/,
-      message: ALPHA_ONLY_MSG,
+  },
+  {
+    name: CLIENT_EMAIL_KEY,
+    label: CLIENT_EMAIL_LABEL,
+    placeholder: "johndoe@gmail.com",
+    type: INPUT_TYPE_TEXT,
+    rules: {
+      required: {
+        value: true,
+        message: REQUIRED_MSG_SPECIAL.replace(
+          REQUIRED_MSG_PLACEHOLDER,
+          "email"
+        ),
+      },
+      pattern: {
+        value:
+          /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/,
+        message: INVALID_EMAIL_MSG,
+      },
     },
     col: {
       xs: 12,
@@ -643,7 +662,6 @@ export const addClientFormFields = [
     col: {
       xs: 12,
       md: 6,
-      lg: 5,
     },
   },
   {
@@ -658,34 +676,13 @@ export const addClientFormFields = [
     col: {
       xs: 12,
       md: 6,
-      lg: 5,
-    },
-  },
-  {
-    name: CLIENT_EMAIL_KEY,
-    label: CLIENT_EMAIL_LABEL,
-    placeholder: "johndoe@gmail.com",
-    required: {
-      value: true,
-      message: REQUIRED_MSG_SPECIAL.replace(REQUIRED_MSG_PLACEHOLDER, "email"),
-    },
-    pattern: {
-      value:
-        /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/,
-      message: INVALID_EMAIL_MSG,
-    },
-    type: INPUT_TYPE_TEXT,
-    col: {
-      xs: 12,
-      md: 6,
-      lg: 5,
     },
   },
   {
     name: CLIENT_MOBILE_KEY,
     label: CLIENT_MOBILE_LABEL,
-    placeholder: "+65",
-    type: INPUT_TYPE_TEXT,
+    placeholder: "9123 4567",
+    type: INPUT_TYPE_PHONE,
     col: {
       xs: 12,
       md: 6,
@@ -721,13 +718,11 @@ export const addClientFormFields = [
     col: {
       xs: 12,
       md: 6,
-      lg: 5,
     },
   },
   {
     name: CLIENT_NATIONALITY_KEY,
     label: CLIENT_NATIONALITY_LABEL,
-    defaultValue: "Singapore",
     placeholder: "Singapore",
     required: {
       value: true,
@@ -741,108 +736,255 @@ export const addClientFormFields = [
       lg: 5,
     },
   },
-  {
-    name: CLIENT_SMOKER_KEY,
-    label: CLIENT_SMOKER_LABEL,
-    type: INPUT_TYPE_SELECT,
-    options: [
-      { label: SMOKER_NO_LABEL, value: SMOKER_NO_VALUE },
-      { label: SMOKER_YES_LABEL, value: SMOKER_YES_VALUE },
-    ],
-    col: {
-      xs: 12,
-      md: 6,
-      lg: 5,
-    },
-  },
-  {
-    name: CLIENT_BIRTHDAY_KEY,
-    label: CLIENT_BIRTHDAY_LABEL,
-    defaultValue: new Date("Jan 01, 2000"),
-    type: INPUT_TYPE_DATEPICKER,
-    col: {
-      xs: 12,
-      md: 6,
-      lg: 5,
-    },
-  },
-  {
-    name: CLIENT_OCCUPATION_KEY,
-    label: CLIENT_OCCUPATION_LABEL,
-    placeholder: "Occupation",
-    type: INPUT_TYPE_TEXT,
-    col: {
-      xs: 12,
-      md: 6,
-      lg: 5,
-    },
-  },
-  {
-    name: CLIENT_ANNUAL_INCOME_KEY,
-    label: CLIENT_ANNUAL_INCOME_LABEL,
-    min: {
-      value: 0,
-      message: NON_NEG_MSG,
-    },
-    max: {
-      value: MAX_ANNUAL_INCOME,
-      message: "The max value is ",
-    },
-    placeholder: "1,000,000",
-    startAdornment: "$",
-    type: INPUT_TYPE_CURRENCY,
-    col: {
-      xs: 12,
-      md: 6,
-      lg: 5,
-    },
-  },
-  {
-    name: CLIENT_ADDRESS_KEY,
-    label: CLIENT_ADDRESS_LABEL,
-    type: INPUT_TYPE_TEXT,
-    multiline: true,
-    col: {
-      xs: 12,
-    },
-    maxLength: {
-      value: MAX_ADDRESS_LENGTH,
-      message: MAX_CHAR_MSG.replace(
-        MAX_CHAR_MSG_PLACEHOLDER,
-        MAX_ADDRESS_LENGTH
-      ),
-    },
-  },
-  {
-    name: CLIENT_REMARKS_KEY,
-    label: CLIENT_REMARKS_LABEL,
-    type: INPUT_TYPE_TEXT,
-    multiline: true,
-    col: {
-      xs: 12,
-    },
-    maxLength: {
-      value: MAX_CLIENT_REMARKS_LENGTH,
-      message: MAX_CHAR_MSG.replace(
-        MAX_CHAR_MSG_PLACEHOLDER,
-        MAX_CLIENT_REMARKS_LENGTH
-      ),
-    },
-  },
-  {
-    name: CLIENT_AGREED_KEY,
-    label: CLIENT_AGREED_LABEL,
-    type: INPUT_TYPE_CHECKBOX,
-    col: {
-      xs: 12,
-    },
-    required: {
-      value: true,
-      message: CONSENT_REQUIRE_MSG,
-    },
-    validate: (v) => v,
-  },
 ];
+
+// export const addClientFormFields = [
+//   {
+//     name: CLIENT_NAME_KEY,
+//     label: CLIENT_NAME_LABEL,
+//     type: INPUT_TYPE_TEXT,
+//     required: {
+//       value: true,
+//       message: REQUIRED_MSG.replace(REQUIRED_MSG_PLACEHOLDER, "name"),
+//     },
+//     minLength: {
+//       value: MIN_CLIENT_NAME_LENGTH,
+//       message: MIN_CHAR_MSG.replace(
+//         MIN_CHAR_MSG_PLACEHOLDER,
+//         MIN_CLIENT_NAME_LENGTH
+//       ),
+//     },
+//     maxLength: {
+//       value: MAX_CLIENT_NAME_LENGTH,
+//       message: MAX_CHAR_MSG.replace(
+//         MAX_CHAR_MSG_PLACEHOLDER,
+//         MAX_CLIENT_NAME_LENGTH
+//       ),
+//     },
+//     pattern: {
+//       value: /\b([A-ZÀ-ÿ][-,a-z. ']+[ ]*)+/,
+//       message: ALPHA_ONLY_MSG,
+//     },
+//     col: {
+//       xs: 12,
+//       md: 6,
+//       lg: 5,
+//     },
+//   },
+//   {
+//     name: CLIENT_SALUTATION_KEY,
+//     label: CLIENT_SALUTATION_LABEL,
+//     type: INPUT_TYPE_SELECT,
+//     options: [
+//       { label: SALUTATION_MR_LABEL, value: SALUTATION_MR_VALUE },
+//       { label: SALUTATION_MS_LABEL, value: SALUTATION_MS_VALUE },
+//       { label: SALUTATION_MRS_LABEL, value: SALUTATION_MRS_VALUE },
+//       { label: SALUTATION_MDM_LABEL, value: SALUTATION_MDM_VALUE },
+//       { label: SALUTATION_DR_LABEL, value: SALUTATION_DR_VALUE },
+//     ],
+//     col: {
+//       xs: 12,
+//       md: 6,
+//       lg: 5,
+//     },
+//   },
+//   {
+//     name: CLIENT_GENDER_KEY,
+//     label: CLIENT_GENDER_LABEL,
+//     type: INPUT_TYPE_SELECT,
+//     options: [
+//       { label: GENDER_MALE_LABEL, value: GENDER_MALE_VALUE },
+//       { label: GENDER_FEMALE_LABEL, value: GENDER_FEMALE_VALUE },
+//       { label: GENDER_OTHERS_LABEL, value: GENDER_OTHERS_VALUE },
+//     ],
+//     col: {
+//       xs: 12,
+//       md: 6,
+//       lg: 5,
+//     },
+//   },
+//   {
+//     name: CLIENT_EMAIL_KEY,
+//     label: CLIENT_EMAIL_LABEL,
+//     placeholder: "johndoe@gmail.com",
+//     required: {
+//       value: true,
+//       message: REQUIRED_MSG_SPECIAL.replace(REQUIRED_MSG_PLACEHOLDER, "email"),
+//     },
+//     pattern: {
+//       value:
+//         /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/,
+//       message: INVALID_EMAIL_MSG,
+//     },
+//     type: INPUT_TYPE_TEXT,
+//     col: {
+//       xs: 12,
+//       md: 6,
+//       lg: 5,
+//     },
+//   },
+//   {
+//     name: CLIENT_MOBILE_KEY,
+//     label: CLIENT_MOBILE_LABEL,
+//     placeholder: "+65",
+//     type: INPUT_TYPE_TEXT,
+//     col: {
+//       xs: 12,
+//       md: 6,
+//       lg: 5,
+//     },
+//   },
+//   {
+//     name: CLIENT_MARITAL_STATUS_KEY,
+//     label: CLIENT_MARITAL_STATUS_LABEL,
+//     type: INPUT_TYPE_SELECT,
+//     options: [
+//       {
+//         label: MARITAL_STATUS_SINGLE_LABEL,
+//         value: MARITAL_STATUS_SINGLE_VALUE,
+//       },
+//       {
+//         label: MARITAL_STATUS_MARRIED_LABEL,
+//         value: MARITAL_STATUS_MARRIED_VALUE,
+//       },
+//       {
+//         label: MARITAL_STATUS_DIVORCED_LABEL,
+//         value: MARITAL_STATUS_DIVORCED_VALUE,
+//       },
+//       {
+//         label: MARITAL_STATUS_SEPARATED_LABEL,
+//         value: MARITAL_STATUS_SEPARATED_VALUE,
+//       },
+//       {
+//         label: MARITAL_STATUS_WIDOWED_LABEL,
+//         value: MARITAL_STATUS_WIDOWED_VALUE,
+//       },
+//     ],
+//     col: {
+//       xs: 12,
+//       md: 6,
+//       lg: 5,
+//     },
+//   },
+//   {
+//     name: CLIENT_NATIONALITY_KEY,
+//     label: CLIENT_NATIONALITY_LABEL,
+//     defaultValue: "Singapore",
+//     placeholder: "Singapore",
+//     required: {
+//       value: true,
+//       message: "Please select a nationality from the list",
+//     },
+//     type: INPUT_TYPE_AUTOCOMPLETE,
+//     options: countryList().getLabels(),
+//     col: {
+//       xs: 12,
+//       md: 6,
+//       lg: 5,
+//     },
+//   },
+//   {
+//     name: CLIENT_SMOKER_KEY,
+//     label: CLIENT_SMOKER_LABEL,
+//     type: INPUT_TYPE_SELECT,
+//     options: [
+//       { label: SMOKER_NO_LABEL, value: SMOKER_NO_VALUE },
+//       { label: SMOKER_YES_LABEL, value: SMOKER_YES_VALUE },
+//     ],
+//     col: {
+//       xs: 12,
+//       md: 6,
+//       lg: 5,
+//     },
+//   },
+//   {
+//     name: CLIENT_BIRTHDAY_KEY,
+//     label: CLIENT_BIRTHDAY_LABEL,
+//     defaultValue: new Date("Jan 01, 2000"),
+//     type: INPUT_TYPE_DATEPICKER,
+//     col: {
+//       xs: 12,
+//       md: 6,
+//       lg: 5,
+//     },
+//   },
+//   {
+//     name: CLIENT_OCCUPATION_KEY,
+//     label: CLIENT_OCCUPATION_LABEL,
+//     placeholder: "Occupation",
+//     type: INPUT_TYPE_TEXT,
+//     col: {
+//       xs: 12,
+//       md: 6,
+//       lg: 5,
+//     },
+//   },
+//   {
+//     name: CLIENT_ANNUAL_INCOME_KEY,
+//     label: CLIENT_ANNUAL_INCOME_LABEL,
+//     min: {
+//       value: 0,
+//       message: NON_NEG_MSG,
+//     },
+//     max: {
+//       value: MAX_ANNUAL_INCOME,
+//       message: "The max value is ",
+//     },
+//     placeholder: "1,000,000",
+//     startAdornment: "$",
+//     type: INPUT_TYPE_CURRENCY,
+//     col: {
+//       xs: 12,
+//       md: 6,
+//       lg: 5,
+//     },
+//   },
+//   {
+//     name: CLIENT_ADDRESS_KEY,
+//     label: CLIENT_ADDRESS_LABEL,
+//     type: INPUT_TYPE_TEXT,
+//     multiline: true,
+//     col: {
+//       xs: 12,
+//     },
+//     maxLength: {
+//       value: MAX_ADDRESS_LENGTH,
+//       message: MAX_CHAR_MSG.replace(
+//         MAX_CHAR_MSG_PLACEHOLDER,
+//         MAX_ADDRESS_LENGTH
+//       ),
+//     },
+//   },
+//   {
+//     name: CLIENT_REMARKS_KEY,
+//     label: CLIENT_REMARKS_LABEL,
+//     type: INPUT_TYPE_TEXT,
+//     multiline: true,
+//     col: {
+//       xs: 12,
+//     },
+//     maxLength: {
+//       value: MAX_CLIENT_REMARKS_LENGTH,
+//       message: MAX_CHAR_MSG.replace(
+//         MAX_CHAR_MSG_PLACEHOLDER,
+//         MAX_CLIENT_REMARKS_LENGTH
+//       ),
+//     },
+//   },
+//   {
+//     name: CLIENT_AGREED_KEY,
+//     label: CLIENT_AGREED_LABEL,
+//     type: INPUT_TYPE_CHECKBOX,
+//     col: {
+//       xs: 12,
+//     },
+//     required: {
+//       value: true,
+//       message: CONSENT_REQUIRE_MSG,
+//     },
+//     validate: (v) => v,
+//   },
+// ];
 
 export const addPolicyFormFields = {
   [POLICY_CATEGORY_KEY]: {
@@ -1349,6 +1491,7 @@ export const inputTypeMapping = {
   [INPUT_TYPE_CURRENCY]: CurrencyInput,
   [INPUT_TYPE_YEAR]: YearInput,
   [INPUT_TYPE_CHECKBOX]: CheckboxInput,
+  [INPUT_TYPE_PHONE]: PhoneInput,
 };
 
 export const policyDetailsAboutCardFields = [

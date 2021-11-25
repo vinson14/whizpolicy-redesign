@@ -31,7 +31,7 @@ const ClientFormModal = ({
     formState: { errors },
     reset,
   } = useForm({ mode: "onBlur", defaultValues });
-
+  console.log("ClientFormModal renders");
   const { setLoading, setUpdateClients } = useContext(DashboardContext);
   const [deleteModalState, openDeleteModal, closeDeleteModal] = useModal();
 

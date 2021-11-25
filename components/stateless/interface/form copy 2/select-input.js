@@ -1,7 +1,20 @@
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import {
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from "@mui/material";
 import { Controller } from "react-hook-form";
 
-const SelectInput = ({ name, control, options, label, ...props }) => {
+const SelectInput = ({
+  name,
+  control,
+  label,
+  defaultValue,
+  options,
+  shrink = true,
+}) => {
   return (
     <Controller
       name={name}
