@@ -22,15 +22,9 @@ const DashboardClients = ({
   clientOnClick,
   policyOnClick,
 }) => {
-  const [clientFormModalState, openClientFormModal, closeClientFormModal] =
-    useModal();
-  const [editClientModalState, openEditClientModal, closeEditClientModal] =
-    useModal();
-  const [
-    addPolicyFormModalState,
-    openAddPolicyFormModal,
-    closeAddPolicyFormModal,
-  ] = useModal();
+  const [clientFormModalState, openClientFormModal, closeClientFormModal] = useModal();
+  const [editClientModalState, openEditClientModal, closeEditClientModal] = useModal();
+  const [addPolicyFormModalState, openAddPolicyFormModal, closeAddPolicyFormModal] = useModal();
 
   const renderButton = () => {
     if (selectedClient != null && selectedPolicy != null) {
@@ -41,22 +35,13 @@ const DashboardClients = ({
           <FloatingEditButton onClick={openClientFormModal} bottom={10}>
             Edit Client
           </FloatingEditButton>
-          <FloatingAddButton onClick={openAddPolicyFormModal}>
-            Add Policy
-          </FloatingAddButton>
-          <AddPolicyForm
-            open={addPolicyFormModalState}
-            handleClose={closeAddPolicyFormModal}
-            client={selectedClient}
-          />
+          <FloatingAddButton onClick={openAddPolicyFormModal}>Add Policy</FloatingAddButton>
         </>
       );
     } else if (selectedClient == null) {
       return (
         <>
-          <FloatingAddButton onClick={openClientFormModal}>
-            Add Client
-          </FloatingAddButton>
+          <FloatingAddButton onClick={openClientFormModal}>Add Client</FloatingAddButton>
         </>
       );
     }
@@ -69,35 +54,23 @@ const DashboardClients = ({
           <Grid item>
             <CustomBreadcrumbs breadcrumbs={breadcrumbLinks} />
           </Grid>
-          <Grid
-            item
-            flexGrow={1}
-            display="flex"
-            justifyContent="end"
-            alignItems="center"
-          >
+          <Grid item flexGrow={1} display="flex" justifyContent="end" alignItems="center">
             {renderButton()}
           </Grid>
         </DashboardHeaderContainer>
         <Grid container mt={{ xs: 2, md: 5 }} spacing={3} alignItems="stretch">
-          {selectedClient == null && (
-            <ClientCards clients={clients} selectClient={clientOnClick} />
-          )}
+          {selectedClient == null && <ClientCards clients={clients} selectClient={clientOnClick} />}
           {selectedClient != null && selectedPolicy == null && (
-            <ClientDetails
-              client={selectedClient}
-              policyOnClick={policyOnClick}
-            />
+            <ClientDetails client={selectedClient} policyOnClick={policyOnClick} />
           )}
           {selectedClient != null && selectedPolicy != null && (
             <PolicyDetails client={selectedClient} policy={selectedPolicy} />
           )}
           {clientFormModalState && (
-            <ClientForm
-              open={clientFormModalState}
-              onClose={closeClientFormModal}
-              values={selectedClient}
-            />
+            <ClientForm open={clientFormModalState} onClose={closeClientFormModal} values={selectedClient} />
+          )}
+          {addPolicyFormModalState && (
+            <AddPolicyForm open={addPolicyFormModalState} onClose={closeAddPolicyFormModal} client={selectedClient} />
           )}
         </Grid>
       </Box>

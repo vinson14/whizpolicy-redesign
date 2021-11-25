@@ -10,7 +10,6 @@ import HotelIcon from "@mui/icons-material/Hotel";
 import LocalHospitalIcon from "@mui/icons-material/LocalHospital";
 
 import countryList from "react-select-country-list";
-import RadioInput from "../components/stateless/interface/form/radio-input";
 import TextInput from "../components/stateless/interface/form/text-input";
 import AutocompleteInput from "../components/stateless/interface/form/autocomplete-input";
 import SelectInput from "../components/stateless/interface/form/select-input";
@@ -94,13 +93,11 @@ export const POLICY_EARLY_CI_BENEFIT_KEY = "earlyCiBenefit";
 export const POLICY_MATURITY_DATE_KEY = "maturityDate";
 export const POLICY_TERM_KEY = "policyTerm";
 export const POLICY_PREMIUM_TERM_KEY = "premiumTerm";
-export const POLICY_GUARANTEED_MATURITY_BENEFIT_KEY =
-  "guaranteedMaturityBenefit";
+export const POLICY_GUARANTEED_MATURITY_BENEFIT_KEY = "guaranteedMaturityBenefit";
 export const POLICY_INCEPTION_DATE_KEY = "inceptionDate";
 export const POLICY_ACC_DEATH_BENEFIT_KEY = "accidentalDeath";
 export const POLICY_ACC_TPD_BENEFIT_KEY = "accidentalTpd";
-export const POLICY_ACC_PARTIAL_DISABILITY_BENEFIT_KEY =
-  "accidentalPartialDisability";
+export const POLICY_ACC_PARTIAL_DISABILITY_BENEFIT_KEY = "accidentalPartialDisability";
 export const POLICY_ACC_MEDICAL_KEY = "accidentalMedical";
 export const POLICY_ACC_ALT_MEDICAL_KEY = "accidentalTCM";
 export const POLICY_ACC_DAILY_HOSP_KEY = "accidentalDailyHospitalIncome";
@@ -121,19 +118,16 @@ export const POLICY_PREMIUM_LABEL = "Premium";
 export const POLICY_PREMIUM_MODE_LABEL = "Premium Mode";
 export const POLICY_DEATH_BENEFIT_LABEL = "Death Benefit";
 export const POLICY_TPD_BENEFIT_LABEL = "Total Permanent Disability";
-export const POLICY_ACC_PARTIAL_DISABILITY_BENEFIT_LABEL =
-  "Partial Permanent Disability";
+export const POLICY_ACC_PARTIAL_DISABILITY_BENEFIT_LABEL = "Partial Permanent Disability";
 export const POLICY_MAJOR_CI_BENEFIT_LABEL = "Major Critical Illness";
 export const POLICY_EARLY_CI_BENEFIT_LABEL = "Early Critical Illness";
 export const POLICY_MATURITY_DATE_LABEL = "Maturity Date";
 export const POLICY_TERM_LABEL = "Policy Term";
 export const POLICY_PREMIUM_TERM_LABEL = "Premium Term";
-export const POLICY_GUARANTEED_MATURITY_BENEFIT_LABEL =
-  "Guaranteed Maturity Benefit";
+export const POLICY_GUARANTEED_MATURITY_BENEFIT_LABEL = "Guaranteed Maturity Benefit";
 export const POLICY_INCEPTION_DATE_LABEL = "Inception Date";
 export const POLICY_ACC_DEATH_BENEFIT_LABEL = "Death Benefit";
-export const POLICY_ACC_TPD_BENEFIT_LABEL =
-  "Total Permanent Disability Benefit";
+export const POLICY_ACC_TPD_BENEFIT_LABEL = "Total Permanent Disability Benefit";
 export const POLICY_ACC_MEDICAL_LABEL = "Medical Reimbursement Benefit";
 export const POLICY_ACC_ALT_MEDICAL_LABEL = "TCM / Chiropractic Benefit";
 export const POLICY_ACC_DAILY_HOSP_LABEL = "Daily Hospital Benefit";
@@ -188,13 +182,10 @@ export const CLIENT_FINANCIAL_OVERVIEW_ACC_DEATH_KEY = "accidentalDeath";
 export const CLIENT_FINANCIAL_OVERVIEW_ACC_MED_KEY = "accidentalMedicalBenefit";
 export const CLIENT_FINANCIAL_OVERVIEW_DEATH_LABEL = "Death";
 export const CLIENT_FINANCIAL_OVERVIEW_TPD_LABEL = "Total Permanent Disability";
-export const CLIENT_FINANCIAL_OVERVIEW_MAJOR_CI_LABEL =
-  "Major Critical Illness";
-export const CLIENT_FINANCIAL_OVERVIEW_EARLY_CI_LABEL =
-  "Early Critical Illness";
+export const CLIENT_FINANCIAL_OVERVIEW_MAJOR_CI_LABEL = "Major Critical Illness";
+export const CLIENT_FINANCIAL_OVERVIEW_EARLY_CI_LABEL = "Early Critical Illness";
 export const CLIENT_FINANCIAL_OVERVIEW_ACC_DEATH_LABEL = "Accidental Death";
-export const CLIENT_FINANCIAL_OVERVIEW_ACC_MED_LABEL =
-  "Accidental Medical Reimbursement";
+export const CLIENT_FINANCIAL_OVERVIEW_ACC_MED_LABEL = "Accidental Medical Reimbursement";
 
 // Client Dependant Field key and value
 export const CLIENT_DEPENDANT_NAME_KEY = "name";
@@ -299,9 +290,9 @@ export const SALUTATION_DR_VALUE = "dr";
 export const SALUTATION_DR_LABEL = "Dr";
 
 // Policy fund risk levels
-export const POLICY_ILP_FUND_RISK_HIGH_KEY = "high";
-export const POLICY_ILP_FUND_RISK_BALANCED_KEY = "balanced";
-export const POLICY_ILP_FUND_RISK_LOW_KEY = "low";
+export const POLICY_ILP_FUND_RISK_HIGH_VALUE = "high";
+export const POLICY_ILP_FUND_RISK_BALANCED_VALUE = "balanced";
+export const POLICY_ILP_FUND_RISK_LOW_VALUE = "low";
 export const POLICY_ILP_FUND_RISK_HIGH_LABEL = "High";
 export const POLICY_ILP_FUND_RISK_BALANCED_LABEL = "Balanced";
 export const POLICY_ILP_FUND_RISK_LOW_LABEL = "Low";
@@ -335,6 +326,8 @@ export const MAX_SUM_ASSURED = 99999999999;
 export const MIN_CLIENT_NAME_LENGTH = 2;
 export const MAX_CLIENT_NAME_LENGTH = 70;
 export const MAX_ANNUAL_INCOME = 99999999999;
+export const MAX_BENEFIT = 99999999999;
+export const MAX_PREMIUM = 9999999999;
 export const MAX_CLIENT_REMARKS_LENGTH = 1000;
 export const MAX_ADDRESS_LENGTH = 1000;
 
@@ -352,8 +345,7 @@ export const NON_NEG_MSG = "This value cannot be less than 0";
 export const ALPHA_ONLY_MSG = "Only alphabets are allowed";
 export const MAX_VALUE_MSG = "This value cannot exceed MAX_VALUE";
 export const MAX_VALUE_MSG_PLACEHOLDER = "MAX_VALUE";
-export const CONSENT_REQUIRE_MSG =
-  "Please confirm that consent has been obtained from client";
+export const CONSENT_REQUIRE_MSG = "Please confirm that consent has been obtained from client";
 
 export const sidebarItems = [
   {
@@ -615,17 +607,11 @@ export const addClientFormFields = [
       },
       minLength: {
         value: MIN_CLIENT_NAME_LENGTH,
-        message: MIN_CHAR_MSG.replace(
-          MIN_CHAR_MSG_PLACEHOLDER,
-          MIN_CLIENT_NAME_LENGTH
-        ),
+        message: MIN_CHAR_MSG.replace(MIN_CHAR_MSG_PLACEHOLDER, MIN_CLIENT_NAME_LENGTH),
       },
       maxLength: {
         value: MAX_CLIENT_NAME_LENGTH,
-        message: MAX_CHAR_MSG.replace(
-          MAX_CHAR_MSG_PLACEHOLDER,
-          MAX_CLIENT_NAME_LENGTH
-        ),
+        message: MAX_CHAR_MSG.replace(MAX_CHAR_MSG_PLACEHOLDER, MAX_CLIENT_NAME_LENGTH),
       },
     },
   },
@@ -637,10 +623,7 @@ export const addClientFormFields = [
     rules: {
       required: {
         value: true,
-        message: REQUIRED_MSG_SPECIAL.replace(
-          REQUIRED_MSG_PLACEHOLDER,
-          "email"
-        ),
+        message: REQUIRED_MSG_SPECIAL.replace(REQUIRED_MSG_PLACEHOLDER, "email"),
       },
       pattern: {
         value:
@@ -790,10 +773,7 @@ export const addClientFormFields = [
       },
       max: {
         value: MAX_ANNUAL_INCOME,
-        message: MAX_VALUE_MSG.replace(
-          MAX_VALUE_MSG_PLACEHOLDER,
-          MAX_ANNUAL_INCOME
-        ),
+        message: MAX_VALUE_MSG.replace(MAX_VALUE_MSG_PLACEHOLDER, MAX_ANNUAL_INCOME),
       },
     },
     placeholder: "1,000,000",
@@ -813,10 +793,7 @@ export const addClientFormFields = [
     },
     maxLength: {
       value: MAX_ADDRESS_LENGTH,
-      message: MAX_CHAR_MSG.replace(
-        MAX_CHAR_MSG_PLACEHOLDER,
-        MAX_ADDRESS_LENGTH
-      ),
+      message: MAX_CHAR_MSG.replace(MAX_CHAR_MSG_PLACEHOLDER, MAX_ADDRESS_LENGTH),
     },
   },
   {
@@ -829,10 +806,7 @@ export const addClientFormFields = [
     },
     maxLength: {
       value: MAX_CLIENT_REMARKS_LENGTH,
-      message: MAX_CHAR_MSG.replace(
-        MAX_CHAR_MSG_PLACEHOLDER,
-        MAX_CLIENT_REMARKS_LENGTH
-      ),
+      message: MAX_CHAR_MSG.replace(MAX_CHAR_MSG_PLACEHOLDER, MAX_CLIENT_REMARKS_LENGTH),
     },
   },
   {
@@ -897,17 +871,11 @@ export const addPolicyFormFields = {
       },
       minLength: {
         value: MIN_POLICY_NAME_LENGTH,
-        message: MIN_CHAR_MSG.replace(
-          MIN_CHAR_MSG_PLACEHOLDER,
-          MIN_POLICY_NAME_LENGTH
-        ),
+        message: MIN_CHAR_MSG.replace(MIN_CHAR_MSG_PLACEHOLDER, MIN_POLICY_NAME_LENGTH),
       },
       maxLength: {
         value: MAX_POLICY_NAME_LENGTH,
-        message: MAX_CHAR_MSG.replace(
-          MAX_CHAR_MSG_PLACEHOLDER,
-          MAX_POLICY_NAME_LENGTH
-        ),
+        message: MAX_CHAR_MSG.replace(MAX_CHAR_MSG_PLACEHOLDER, MAX_POLICY_NAME_LENGTH),
       },
     },
     col: {
@@ -919,51 +887,42 @@ export const addPolicyFormFields = {
     name: POLICY_NUMBER_KEY,
     label: POLICY_NUMBER_LABEL,
     type: INPUT_TYPE_TEXT,
-    required: {
-      value: true,
-      message: REQUIRED_MSG.replace(REQUIRED_MSG_PLACEHOLDER, "policy number"),
-    },
-    minLength: {
-      value: MIN_POLICY_NUM_LENGTH,
-      message: MIN_CHAR_MSG.replace(
-        MIN_CHAR_MSG_PLACEHOLDER,
-        MIN_POLICY_NUM_LENGTH
-      ),
-    },
-    maxLength: {
-      value: MAX_POLICY_NUM_LENGTH,
-      message: MAX_CHAR_MSG.replace(
-        MAX_CHAR_MSG_PLACEHOLDER,
-        MAX_POLICY_NUM_LENGTH
-      ),
+    rules: {
+      required: {
+        value: true,
+        message: REQUIRED_MSG.replace(REQUIRED_MSG_PLACEHOLDER, "policy number"),
+      },
+      minLength: {
+        value: MIN_POLICY_NUM_LENGTH,
+        message: MIN_CHAR_MSG.replace(MIN_CHAR_MSG_PLACEHOLDER, MIN_POLICY_NUM_LENGTH),
+      },
+      maxLength: {
+        value: MAX_POLICY_NUM_LENGTH,
+        message: MAX_CHAR_MSG.replace(MAX_CHAR_MSG_PLACEHOLDER, MAX_POLICY_NUM_LENGTH),
+      },
     },
     col: {
       xs: 12,
       md: 6,
-      lg: 5,
     },
   },
   [POLICY_INSURER_KEY]: {
     name: POLICY_INSURER_KEY,
     label: POLICY_INSURER_LABEL,
-    defaultValue: "",
     type: INPUT_TYPE_SELECT,
     col: {
       xs: 12,
       md: 6,
-      lg: 5,
     },
     options: allInsuranceCompanies,
   },
   [POLICY_PREMIUM_MODE_KEY]: {
     name: POLICY_PREMIUM_MODE_KEY,
     label: POLICY_PREMIUM_MODE_LABEL,
-    defaultValue: "",
     type: INPUT_TYPE_SELECT,
     col: {
       xs: 12,
       md: 6,
-      lg: 5,
     },
     options: [
       { label: PREMIUM_MODE_ANNUALLY_LABEL, value: PREMIUM_MODE_ANNUALLY_KEY },
@@ -981,111 +940,171 @@ export const addPolicyFormFields = {
   [POLICY_PREMIUM_KEY]: {
     name: POLICY_PREMIUM_KEY,
     label: POLICY_PREMIUM_LABEL,
-    defaultValue: "",
     type: INPUT_TYPE_CURRENCY,
     col: {
       xs: 12,
       md: 6,
-      lg: 5,
+    },
+    rules: {
+      min: {
+        value: 0,
+        message: NON_NEG_MSG,
+      },
+      max: {
+        value: MAX_PREMIUM,
+        message: MAX_VALUE_MSG.replace(MAX_VALUE_MSG_PLACEHOLDER, MAX_PREMIUM),
+      },
     },
   },
   [POLICY_DEATH_BENEFIT_KEY]: {
     name: POLICY_DEATH_BENEFIT_KEY,
     label: POLICY_DEATH_BENEFIT_LABEL,
-    defaultValue: "",
     type: INPUT_TYPE_CURRENCY,
+    rules: {
+      min: {
+        value: 0,
+        message: NON_NEG_MSG,
+      },
+      max: {
+        value: MAX_BENEFIT,
+        message: MAX_VALUE_MSG.replace(MAX_VALUE_MSG_PLACEHOLDER, MAX_BENEFIT),
+      },
+    },
     col: {
       xs: 12,
       md: 6,
-      lg: 5,
     },
   },
   [POLICY_TPD_BENEFIT_KEY]: {
     name: POLICY_TPD_BENEFIT_KEY,
     label: POLICY_TPD_BENEFIT_LABEL,
-    defaultValue: "",
     type: INPUT_TYPE_CURRENCY,
     col: {
       xs: 12,
       md: 6,
-      lg: 5,
+    },
+    rules: {
+      min: {
+        value: 0,
+        message: NON_NEG_MSG,
+      },
+      max: {
+        value: MAX_BENEFIT,
+        message: MAX_VALUE_MSG.replace(MAX_VALUE_MSG_PLACEHOLDER, MAX_BENEFIT),
+      },
     },
   },
   [POLICY_MAJOR_CI_BENEFIT_KEY]: {
     name: POLICY_MAJOR_CI_BENEFIT_KEY,
     label: POLICY_MAJOR_CI_BENEFIT_LABEL,
-    defaultValue: "",
     type: INPUT_TYPE_CURRENCY,
     col: {
       xs: 12,
       md: 6,
-      lg: 5,
+    },
+    rules: {
+      min: {
+        value: 0,
+        message: NON_NEG_MSG,
+      },
+      max: {
+        value: MAX_BENEFIT,
+        message: MAX_VALUE_MSG.replace(MAX_VALUE_MSG_PLACEHOLDER, MAX_BENEFIT),
+      },
     },
   },
   [POLICY_EARLY_CI_BENEFIT_KEY]: {
     name: POLICY_EARLY_CI_BENEFIT_KEY,
     label: POLICY_EARLY_CI_BENEFIT_LABEL,
-    defaultValue: "",
     type: INPUT_TYPE_CURRENCY,
     col: {
       xs: 12,
       md: 6,
-      lg: 5,
+    },
+    rules: {
+      min: {
+        value: 0,
+        message: NON_NEG_MSG,
+      },
+      max: {
+        value: MAX_BENEFIT,
+        message: MAX_VALUE_MSG.replace(MAX_VALUE_MSG_PLACEHOLDER, MAX_BENEFIT),
+      },
     },
   },
   [POLICY_MATURITY_DATE_KEY]: {
     name: POLICY_MATURITY_DATE_KEY,
     label: POLICY_MATURITY_DATE_LABEL,
-    defaultValue: new Date(),
     type: INPUT_TYPE_DATEPICKER,
     col: {
       xs: 12,
       md: 6,
-      lg: 5,
     },
   },
   [POLICY_TERM_KEY]: {
     name: POLICY_TERM_KEY,
     label: POLICY_TERM_LABEL,
-    defaultValue: "",
     type: INPUT_TYPE_YEAR,
     col: {
       xs: 12,
       md: 6,
-      lg: 5,
+    },
+    rules: {
+      min: {
+        value: 0,
+        message: NON_NEG_MSG,
+      },
+      max: {
+        value: MAX_POLICY_TERM,
+        message: MAX_VALUE_MSG.replace(MAX_VALUE_MSG_PLACEHOLDER, MAX_POLICY_TERM),
+      },
     },
   },
   [POLICY_PREMIUM_TERM_KEY]: {
     name: POLICY_PREMIUM_TERM_KEY,
     label: POLICY_PREMIUM_TERM_LABEL,
-    defaultValue: "",
     type: INPUT_TYPE_YEAR,
     col: {
       xs: 12,
       md: 6,
-      lg: 5,
+    },
+    rules: {
+      min: {
+        value: 0,
+        message: NON_NEG_MSG,
+      },
+      max: {
+        value: MAX_PREMIUM_TERM,
+        message: MAX_VALUE_MSG.replace(MAX_VALUE_MSG_PLACEHOLDER, MAX_PREMIUM_TERM),
+      },
     },
   },
   [POLICY_GUARANTEED_MATURITY_BENEFIT_KEY]: {
     name: POLICY_GUARANTEED_MATURITY_BENEFIT_KEY,
     label: POLICY_GUARANTEED_MATURITY_BENEFIT_LABEL,
-    defaultValue: "",
     type: INPUT_TYPE_CURRENCY,
     col: {
       xs: 12,
       md: 6,
-      lg: 5,
+    },
+    rules: {
+      min: {
+        value: 0,
+        message: NON_NEG_MSG,
+      },
+      max: {
+        value: MAX_BENEFIT,
+        message: MAX_VALUE_MSG.replace(MAX_VALUE_MSG_PLACEHOLDER, MAX_BENEFIT),
+      },
     },
   },
   [POLICY_INCEPTION_DATE_KEY]: {
     name: POLICY_INCEPTION_DATE_KEY,
     label: POLICY_INCEPTION_DATE_LABEL,
-    defaultValue: new Date(),
     type: INPUT_TYPE_DATEPICKER,
     col: {
       xs: 12,
       md: 6,
-      lg: 5,
     },
   },
   [POLICY_ACC_DEATH_BENEFIT_KEY]: {
@@ -1095,7 +1114,16 @@ export const addPolicyFormFields = {
     col: {
       xs: 12,
       md: 6,
-      lg: 5,
+    },
+    rules: {
+      min: {
+        value: 0,
+        message: NON_NEG_MSG,
+      },
+      max: {
+        value: MAX_BENEFIT,
+        message: MAX_VALUE_MSG.replace(MAX_VALUE_MSG_PLACEHOLDER, MAX_BENEFIT),
+      },
     },
   },
   [POLICY_ACC_MEDICAL_KEY]: {
@@ -1105,7 +1133,16 @@ export const addPolicyFormFields = {
     col: {
       xs: 12,
       md: 6,
-      lg: 5,
+    },
+    rules: {
+      min: {
+        value: 0,
+        message: NON_NEG_MSG,
+      },
+      max: {
+        value: MAX_BENEFIT,
+        message: MAX_VALUE_MSG.replace(MAX_VALUE_MSG_PLACEHOLDER, MAX_BENEFIT),
+      },
     },
   },
   [POLICY_ACC_DAILY_HOSP_KEY]: {
@@ -1115,7 +1152,16 @@ export const addPolicyFormFields = {
     col: {
       xs: 12,
       md: 6,
-      lg: 5,
+    },
+    rules: {
+      min: {
+        value: 0,
+        message: NON_NEG_MSG,
+      },
+      max: {
+        value: MAX_BENEFIT,
+        message: MAX_VALUE_MSG.replace(MAX_VALUE_MSG_PLACEHOLDER, MAX_BENEFIT),
+      },
     },
   },
   [POLICY_ACC_ALT_MEDICAL_KEY]: {
@@ -1125,7 +1171,16 @@ export const addPolicyFormFields = {
     col: {
       xs: 12,
       md: 6,
-      lg: 5,
+    },
+    rules: {
+      min: {
+        value: 0,
+        message: NON_NEG_MSG,
+      },
+      max: {
+        value: MAX_BENEFIT,
+        message: MAX_VALUE_MSG.replace(MAX_VALUE_MSG_PLACEHOLDER, MAX_BENEFIT),
+      },
     },
   },
   [POLICY_ACC_WEEKLY_DIS_KEY]: {
@@ -1135,7 +1190,16 @@ export const addPolicyFormFields = {
     col: {
       xs: 12,
       md: 6,
-      lg: 5,
+    },
+    rules: {
+      min: {
+        value: 0,
+        message: NON_NEG_MSG,
+      },
+      max: {
+        value: MAX_BENEFIT,
+        message: MAX_VALUE_MSG.replace(MAX_VALUE_MSG_PLACEHOLDER, MAX_BENEFIT),
+      },
     },
   },
   [POLICY_ACC_TPD_BENEFIT_KEY]: {
@@ -1145,7 +1209,16 @@ export const addPolicyFormFields = {
     col: {
       xs: 12,
       md: 6,
-      lg: 5,
+    },
+    rules: {
+      min: {
+        value: 0,
+        message: NON_NEG_MSG,
+      },
+      max: {
+        value: MAX_BENEFIT,
+        message: MAX_VALUE_MSG.replace(MAX_VALUE_MSG_PLACEHOLDER, MAX_BENEFIT),
+      },
     },
   },
   [POLICY_ACC_PARTIAL_DISABILITY_BENEFIT_KEY]: {
@@ -1155,7 +1228,16 @@ export const addPolicyFormFields = {
     col: {
       xs: 12,
       md: 6,
-      lg: 5,
+    },
+    rules: {
+      min: {
+        value: 0,
+        message: NON_NEG_MSG,
+      },
+      max: {
+        value: MAX_BENEFIT,
+        message: MAX_VALUE_MSG.replace(MAX_VALUE_MSG_PLACEHOLDER, MAX_BENEFIT),
+      },
     },
   },
   [POLICY_ACC_MOBILITY_AID_KEY]: {
@@ -1165,7 +1247,16 @@ export const addPolicyFormFields = {
     col: {
       xs: 12,
       md: 6,
-      lg: 5,
+    },
+    rules: {
+      min: {
+        value: 0,
+        message: NON_NEG_MSG,
+      },
+      max: {
+        value: MAX_BENEFIT,
+        message: MAX_VALUE_MSG.replace(MAX_VALUE_MSG_PLACEHOLDER, MAX_BENEFIT),
+      },
     },
   },
   [POLICY_ACC_HOME_MOD_KEY]: {
@@ -1175,7 +1266,16 @@ export const addPolicyFormFields = {
     col: {
       xs: 12,
       md: 6,
-      lg: 5,
+    },
+    rules: {
+      min: {
+        value: 0,
+        message: NON_NEG_MSG,
+      },
+      max: {
+        value: MAX_BENEFIT,
+        message: MAX_VALUE_MSG.replace(MAX_VALUE_MSG_PLACEHOLDER, MAX_BENEFIT),
+      },
     },
   },
   [POLICY_ILP_FUND_RISK_KEY]: {
@@ -1185,21 +1285,20 @@ export const addPolicyFormFields = {
     options: [
       {
         label: POLICY_ILP_FUND_RISK_HIGH_LABEL,
-        value: POLICY_ILP_FUND_RISK_HIGH_KEY,
+        value: POLICY_ILP_FUND_RISK_HIGH_VALUE,
       },
       {
         label: POLICY_ILP_FUND_RISK_BALANCED_LABEL,
-        value: POLICY_ILP_FUND_RISK_BALANCED_KEY,
+        value: POLICY_ILP_FUND_RISK_BALANCED_VALUE,
       },
       {
         label: POLICY_ILP_FUND_RISK_LOW_LABEL,
-        value: POLICY_ILP_FUND_RISK_LOW_KEY,
+        value: POLICY_ILP_FUND_RISK_LOW_VALUE,
       },
     ],
     col: {
       xs: 12,
       md: 6,
-      lg: 5,
     },
   },
   [POLICY_HOSP_WARD_TYPE_KEY]: {
@@ -1223,7 +1322,6 @@ export const addPolicyFormFields = {
     col: {
       xs: 12,
       md: 6,
-      lg: 5,
     },
   },
   [POLICY_HOSP_RIDER_TYPE_KEY]: {
@@ -1247,39 +1345,38 @@ export const addPolicyFormFields = {
     col: {
       xs: 12,
       md: 6,
-      lg: 5,
     },
   },
 };
 
 export const defaultPolicyFormValues = {
-  [POLICY_NUMBER_KEY]: "",
-  [POLICY_NAME_KEY]: "",
+  [POLICY_ACC_DAILY_HOSP_KEY]: "",
+  [POLICY_ACC_DEATH_BENEFIT_KEY]: "",
+  [POLICY_ACC_HOME_MOD_KEY]: "",
+  [POLICY_ACC_MEDICAL_KEY]: "",
+  [POLICY_ACC_MOBILITY_AID_KEY]: "",
+  [POLICY_ACC_PARTIAL_DISABILITY_BENEFIT_KEY]: "",
+  [POLICY_ACC_ALT_MEDICAL_KEY]: "",
+  [POLICY_ACC_TPD_BENEFIT_KEY]: "",
+  [POLICY_ACC_WEEKLY_DIS_KEY]: "",
+  [POLICY_DEATH_BENEFIT_KEY]: "",
+  [POLICY_EARLY_CI_BENEFIT_KEY]: "",
+  [POLICY_GUARANTEED_MATURITY_BENEFIT_KEY]: "",
+  [POLICY_HOSP_RIDER_TYPE_KEY]: POLICY_HOSP_RIDER_TYPE_NO_VALUE,
+  [POLICY_HOSP_WARD_TYPE_KEY]: POLICY_HOSP_WARD_TYPE_PRIVATE_VALUE,
+  [POLICY_ILP_FUND_RISK_KEY]: POLICY_ILP_FUND_RISK_BALANCED_VALUE,
+  [POLICY_INCEPTION_DATE_KEY]: new Date(),
   [POLICY_INSURER_KEY]: INSURER_AIA_KEY,
+  [POLICY_MAJOR_CI_BENEFIT_KEY]: "",
+  [POLICY_MATURITY_DATE_KEY]: new Date(),
   [POLICY_CATEGORY_KEY]: POLICY_CATEGORY_WHOLE_LIFE_KEY,
+  [POLICY_NAME_KEY]: "",
+  [POLICY_NUMBER_KEY]: "",
+  [POLICY_TERM_KEY]: "",
   [POLICY_PREMIUM_KEY]: "",
   [POLICY_PREMIUM_MODE_KEY]: PREMIUM_MODE_ANNUALLY_KEY,
-  [POLICY_DEATH_BENEFIT_KEY]: "",
-  [POLICY_TPD_BENEFIT_KEY]: "",
-  [POLICY_MAJOR_CI_BENEFIT_KEY]: "",
-  [POLICY_EARLY_CI_BENEFIT_KEY]: "",
-  [POLICY_ACC_DEATH_BENEFIT_KEY]: "",
-  [POLICY_ACC_TPD_BENEFIT_KEY]: "",
-  [POLICY_ACC_PARTIAL_DISABILITY_BENEFIT_KEY]: "",
-  [POLICY_ACC_MEDICAL_KEY]: "",
-  [POLICY_ACC_ALT_MEDICAL_KEY]: "",
-  [POLICY_ACC_DAILY_HOSP_KEY]: "",
-  [POLICY_ACC_WEEKLY_DIS_KEY]: "",
-  [POLICY_ACC_MOBILITY_AID_KEY]: "",
-  [POLICY_ACC_HOME_MOD_KEY]: "",
-  [POLICY_ILP_FUND_RISK_KEY]: POLICY_ILP_FUND_RISK_BALANCED_KEY,
-  [POLICY_HOSP_WARD_TYPE_KEY]: POLICY_HOSP_WARD_TYPE_PRIVATE_VALUE,
-  [POLICY_HOSP_RIDER_TYPE_KEY]: POLICY_HOSP_RIDER_TYPE_FULL_VALUE,
-  [POLICY_GUARANTEED_MATURITY_BENEFIT_KEY]: "",
-  [POLICY_TERM_KEY]: "",
   [POLICY_PREMIUM_TERM_KEY]: "",
-  [POLICY_INCEPTION_DATE_KEY]: new Date(),
-  [POLICY_MATURITY_DATE_KEY]: new Date(),
+  [POLICY_TPD_BENEFIT_KEY]: "",
 };
 
 export const defaultPolicyFields = [
@@ -1337,17 +1434,13 @@ export const policyCategoryFields = {
     POLICY_MATURITY_DATE_KEY,
     POLICY_GUARANTEED_MATURITY_BENEFIT_KEY,
   ],
-  [POLICY_CATEGORY_ILP_KEY]: [
-    ...defaultLifePolicyFields,
-    POLICY_ILP_FUND_RISK_KEY,
-  ],
+  [POLICY_CATEGORY_ILP_KEY]: [...defaultLifePolicyFields, POLICY_ILP_FUND_RISK_KEY],
   [POLICY_CATEGORY_ACCIDENT_KEY]: [...defaultAccPolicyFields],
   [POLICY_CATEGORY_ISP_KEY]: [...defaultHospPolicyFields],
 };
 
 export const inputTypeMapping = {
   [INPUT_TYPE_TEXT]: TextInput,
-  [INPUT_TYPE_RADIO]: RadioInput,
   [INPUT_TYPE_SELECT]: SelectInput,
   [INPUT_TYPE_AUTOCOMPLETE]: AutocompleteInput,
   [INPUT_TYPE_DATEPICKER]: DateInput,
@@ -1458,17 +1551,11 @@ export const addDependantFormFields = [
     },
     minLength: {
       value: MIN_CLIENT_NAME_LENGTH,
-      message: MIN_CHAR_MSG.replace(
-        MIN_CHAR_MSG_PLACEHOLDER,
-        MIN_CLIENT_NAME_LENGTH
-      ),
+      message: MIN_CHAR_MSG.replace(MIN_CHAR_MSG_PLACEHOLDER, MIN_CLIENT_NAME_LENGTH),
     },
     maxLength: {
       value: MAX_CLIENT_NAME_LENGTH,
-      message: MAX_CHAR_MSG.replace(
-        MAX_CHAR_MSG_PLACEHOLDER,
-        MAX_CLIENT_NAME_LENGTH
-      ),
+      message: MAX_CHAR_MSG.replace(MAX_CHAR_MSG_PLACEHOLDER, MAX_CLIENT_NAME_LENGTH),
     },
     pattern: {
       value: /\b([A-ZÀ-ÿ][-,a-z. ']+[ ]*)+/,

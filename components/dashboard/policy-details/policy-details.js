@@ -22,17 +22,10 @@ const PolicyDetails = ({ client, policy, setLoading }) => {
         </Grid>
       </CustomGrow>
 
-      <FloatingEditButton onClick={openPolicyModal}>
-        Edit Policy
-      </FloatingEditButton>
-      <AddPolicyForm
-        open={editPolicyModalState}
-        client={client}
-        handleClose={closePolicyModal}
-        defaultValues={policy}
-        setLoading={setLoading}
-        edit
-      />
+      <FloatingEditButton onClick={openPolicyModal}>Edit Policy</FloatingEditButton>
+      {editPolicyModalState && (
+        <AddPolicyForm open={editPolicyModalState} client={client} onClose={closePolicyModal} values={policy} />
+      )}
     </>
   );
 };
