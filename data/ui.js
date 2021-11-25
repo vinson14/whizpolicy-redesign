@@ -27,6 +27,7 @@ import { Divider } from "@mui/material";
 import PolicyCards from "../components/dashboard/client-details/policy-cards";
 import AccidentIcon from "../components/stateless/interface/icons/accident-icon";
 import PhoneInput from "../components/stateless/interface/form/phone-input";
+import { isAfter } from "date-fns";
 
 // Dimensions
 export const FLOATING_ACTION_BUTTON_WIDTH = 160;
@@ -343,6 +344,7 @@ export const MIN_CHAR_MSG = "This field should have at least CHAR characters";
 export const MAX_CHAR_MSG_PLACEHOLDER = "CHAR";
 export const MAX_CHAR_MSG = "This field should have at most CHAR characters";
 export const REQUIRED_MSG_PLACEHOLDER = "KEY";
+export const FUTURE_DATE_ERR_MSG = "This cannot be a date in the future";
 export const REQUIRED_MSG = "Please provide a KEY";
 export const REQUIRED_MSG_SPECIAL = "Please provide an KEY";
 export const INVALID_EMAIL_MSG = "Please provide a valid email";
@@ -729,8 +731,35 @@ export const addClientFormFields = [
     rules: {
       required: {
         value: true,
-        message: "Please select a nationality from the list",
+        message: REQUIRED_MSG.replace(REQUIRED_MSG_PLACEHOLDER, "nationality"),
       },
+    },
+    col: {
+      xs: 12,
+      md: 6,
+    },
+  },
+  {
+    name: CLIENT_SMOKER_KEY,
+    label: CLIENT_SMOKER_LABEL,
+    type: INPUT_TYPE_SELECT,
+    options: [
+      { label: SMOKER_NO_LABEL, value: SMOKER_NO_VALUE },
+      { label: SMOKER_YES_LABEL, value: SMOKER_YES_VALUE },
+    ],
+    col: {
+      xs: 12,
+      md: 6,
+    },
+  },
+  {
+    name: CLIENT_BIRTHDAY_KEY,
+    label: CLIENT_BIRTHDAY_LABEL,
+    minDate: new Date("1 Jan 1900"),
+    maxDate: new Date(),
+    type: INPUT_TYPE_DATEPICKER,
+    rules: {
+      validate: (value) => !isAfter(value, new Date()) || FUTURE_DATE_ERR_MSG,
     },
     col: {
       xs: 12,

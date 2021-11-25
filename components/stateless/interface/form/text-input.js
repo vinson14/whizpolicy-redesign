@@ -10,9 +10,9 @@ const TextInput = ({ name, control, rules, error, ...props }) => {
       rules={rules}
       render={({ field }) => (
         <TextField
+          fullWidth
           {...field}
           error={error ? true : false}
-          fullWidth
           helperText={error?.message}
           InputLabelProps={{ shrink: true }}
           {...props}
