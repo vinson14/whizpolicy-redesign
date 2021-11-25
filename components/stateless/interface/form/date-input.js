@@ -27,6 +27,7 @@ const DateInput = ({
             {...field}
             renderInput={(params) => (
               <TextField
+                fullWidth
                 helperText={error?.message}
                 {...params}
                 error={Boolean(error)}

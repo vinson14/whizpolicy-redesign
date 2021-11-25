@@ -335,7 +335,7 @@ export const MAX_SUM_ASSURED = 99999999999;
 export const MIN_CLIENT_NAME_LENGTH = 2;
 export const MAX_CLIENT_NAME_LENGTH = 70;
 export const MAX_ANNUAL_INCOME = 99999999999;
-export const MAX_CLIENT_REMARKS_LENGTH = 10000;
+export const MAX_CLIENT_REMARKS_LENGTH = 1000;
 export const MAX_ADDRESS_LENGTH = 1000;
 
 // Form error messages
@@ -350,6 +350,8 @@ export const REQUIRED_MSG_SPECIAL = "Please provide an KEY";
 export const INVALID_EMAIL_MSG = "Please provide a valid email";
 export const NON_NEG_MSG = "This value cannot be less than 0";
 export const ALPHA_ONLY_MSG = "Only alphabets are allowed";
+export const MAX_VALUE_MSG = "This value cannot exceed MAX_VALUE";
+export const MAX_VALUE_MSG_PLACEHOLDER = "MAX_VALUE";
 export const CONSENT_REQUIRE_MSG =
   "Please confirm that consent has been obtained from client";
 
@@ -764,6 +766,71 @@ export const addClientFormFields = [
     col: {
       xs: 12,
       md: 6,
+    },
+  },
+  {
+    name: CLIENT_OCCUPATION_KEY,
+    label: CLIENT_OCCUPATION_LABEL,
+    placeholder: "Occupation",
+    type: INPUT_TYPE_TEXT,
+    col: {
+      xs: 12,
+      md: 6,
+    },
+  },
+  {
+    name: CLIENT_ANNUAL_INCOME_KEY,
+    label: CLIENT_ANNUAL_INCOME_LABEL,
+    rules: {
+      min: {
+        value: 0,
+        message: NON_NEG_MSG,
+      },
+      max: {
+        value: MAX_ANNUAL_INCOME,
+        message: MAX_VALUE_MSG.replace(
+          MAX_VALUE_MSG_PLACEHOLDER,
+          MAX_ANNUAL_INCOME
+        ),
+      },
+    },
+    placeholder: "1,000,000",
+    type: INPUT_TYPE_CURRENCY,
+    col: {
+      xs: 12,
+      md: 6,
+    },
+  },
+  {
+    name: CLIENT_ADDRESS_KEY,
+    label: CLIENT_ADDRESS_LABEL,
+    type: INPUT_TYPE_TEXT,
+    multiline: true,
+    col: {
+      xs: 12,
+    },
+    maxLength: {
+      value: MAX_ADDRESS_LENGTH,
+      message: MAX_CHAR_MSG.replace(
+        MAX_CHAR_MSG_PLACEHOLDER,
+        MAX_ADDRESS_LENGTH
+      ),
+    },
+  },
+  {
+    name: CLIENT_REMARKS_KEY,
+    label: CLIENT_REMARKS_LABEL,
+    type: INPUT_TYPE_TEXT,
+    multiline: true,
+    col: {
+      xs: 12,
+    },
+    maxLength: {
+      value: MAX_CLIENT_REMARKS_LENGTH,
+      message: MAX_CHAR_MSG.replace(
+        MAX_CHAR_MSG_PLACEHOLDER,
+        MAX_CLIENT_REMARKS_LENGTH
+      ),
     },
   },
 ];
