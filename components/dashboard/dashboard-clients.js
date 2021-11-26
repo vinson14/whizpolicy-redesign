@@ -12,7 +12,7 @@ import CustomBreadcrumbs from "../stateless/interface/navigation/breadcrumbs";
 import LoadingIcon from "../stateless/interface/misc/loading-icon";
 import TopAppBar from "../stateless/interface/navigation/top-appbar";
 import ClientForm from "./add-client-form/client-form";
-const DashboardClients = ({ authState }) => {
+const DashboardClients = ({ authState, openSidebar }) => {
   const [
     clients,
     selectedClient,
@@ -30,7 +30,7 @@ const DashboardClients = ({ authState }) => {
     <LoadingIcon />
   ) : (
     <>
-      <TopAppBar goBack={goBack} />
+      <TopAppBar goBack={goBack} menuOnClick={openSidebar} />
       <Box p={{ md: 5, xs: 1 }}>
         <DashboardHeaderContainer>
           <CustomBreadcrumbs breadcrumbs={breadcrumbs} />
