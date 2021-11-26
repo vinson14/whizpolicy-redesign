@@ -39,7 +39,7 @@ const CoverageCard = ({ client }) => {
   return (
     <ClientDetailCard>
       <ClientCardHeader>Coverage Overview</ClientCardHeader>
-      <Grid container>
+      <Grid container justifyContent="center">
         {client.financialOverview &&
           clientDetailsFinancialOverviewFields.map((field) => (
             <CoverageText
@@ -67,12 +67,7 @@ const CoverageCard = ({ client }) => {
   );
 };
 
-const CoverageInfoPopover = ({
-  anchorEl,
-  handleClose,
-  selectedKey,
-  client,
-}) => {
+const CoverageInfoPopover = ({ anchorEl, handleClose, selectedKey, client }) => {
   const content = coverageInfoPopoverContent[selectedKey];
   const clientInfoText = [
     {
@@ -81,15 +76,11 @@ const CoverageInfoPopover = ({
     },
     {
       label: "Current Coverage",
-      value: `$${formatNumber(
-        client["financialOverview"][selectedKey]["currentCoverage"]
-      )}`,
+      value: `$${formatNumber(client["financialOverview"][selectedKey]["currentCoverage"])}`,
     },
     {
       label: "Ideal Coverage",
-      value: `$${formatNumber(
-        client["financialOverview"][selectedKey]["idealCoverage"]
-      )}`,
+      value: `$${formatNumber(client["financialOverview"][selectedKey]["idealCoverage"])}`,
     },
   ];
   return (
@@ -109,22 +100,11 @@ const CoverageInfoPopover = ({
         </Grid>
         {content.map((qns) => (
           <Fragment key={qns.qns}>
-            <ClientCardInfoText
-              xs={12}
-              sm={12}
-              label={qns.qns}
-              value={qns.ans}
-            />
+            <ClientCardInfoText xs={12} sm={12} label={qns.qns} value={qns.ans} />
           </Fragment>
         ))}
         {clientInfoText.map((text) => (
-          <ClientCardInfoText
-            xs={12}
-            sm={12}
-            label={text.label}
-            value={text.value}
-            key={text.label}
-          />
+          <ClientCardInfoText xs={12} sm={12} label={text.label} value={text.value} key={text.label} />
         ))}
       </Grid>
     </Popover>

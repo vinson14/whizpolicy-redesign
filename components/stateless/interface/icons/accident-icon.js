@@ -1,9 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCarCrash } from "@fortawesome/free-solid-svg-icons";
 import FaIconWrapper from "./fa-icon-wrapper";
-const AccidentIcon = ({ color }) => {
+const AccidentIcon = ({ color, ...props }) => {
   return (
-    <FaIconWrapper color={color}>
+    <FaIconWrapper {...props} color={color}>
       <FontAwesomeIcon icon={faCarCrash} />
     </FaIconWrapper>
   );

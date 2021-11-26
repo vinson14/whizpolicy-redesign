@@ -14,21 +14,13 @@ import {
 import { formatNumber } from "../../../../utils/utils";
 import AccidentIcon from "../icons/accident-icon";
 import SkullIcon from "../icons/skull-icon";
+import CoverageIcon from "../icons/coverage-icon";
 
-const CoverageText = ({ icon, label, value, color, onClick, xs = 12, sm = 6, md = 6 }) => {
-  const icons = {
-    [CLIENT_FINANCIAL_OVERVIEW_DEATH_KEY]: SkullIcon,
-    [CLIENT_FINANCIAL_OVERVIEW_TPD_KEY]: AccessibleForwardIcon,
-    [CLIENT_FINANCIAL_OVERVIEW_MAJOR_CI_KEY]: AccessibleForwardIcon,
-    [CLIENT_FINANCIAL_OVERVIEW_EARLY_CI_KEY]: HotelIcon,
-    [CLIENT_FINANCIAL_OVERVIEW_ACC_DEATH_KEY]: AccidentIcon,
-  };
-
-  const Icon = icons[icon];
+const CoverageText = ({ icon, label, value, color, onClick, xs = 12, sm = 8, md = 8, lg = 6 }) => {
   return (
-    <Grid item xs={xs} sm={sm} md={md} display="flex" alignItems="stretch" justifyContent="center" p={2}>
+    <Grid item xs={xs} sm={sm} md={md} lg={lg} display="flex" alignItems="stretch" justifyContent="center" p={2}>
       <Box mr={3} display="flex" alignItems="center">
-        <Icon color={color} />
+        <CoverageIcon icon={icon} color={color} />
       </Box>
       <Box
         flexGrow={1}
@@ -47,24 +39,6 @@ const CoverageText = ({ icon, label, value, color, onClick, xs = 12, sm = 6, md 
           <InfoIcon sx={{ cursor: "pointer", color: (theme) => theme.palette.common.white }} />
         </IconButton>
       </Box>
-      {/* <Box
-        flexGrow={1}
-        display="flex"
-        flexDirection="column"
-        justifyContent="center"
-        borderRadius={3}
-        bgcolor={`${color}.main`}
-        color={`${color}.contrastText`}
-        p={2}
-      >
-        <Typography variant="body2">{label}</Typography>
-        <Typography variant="body1">${formatNumber(value)}</Typography>
-      </Box>
-      <Box ml={3} display="flex" alignItems="center">
-        <IconButton onClick={onClick}>
-          <InfoIcon color="text.secondary" sx={{ cursor: "pointer" }} />
-        </IconButton>
-      </Box> */}
     </Grid>
   );
 };
