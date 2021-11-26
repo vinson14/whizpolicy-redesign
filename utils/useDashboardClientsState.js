@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { animateScroll } from "react-scroll";
 import { getClients } from "./api";
 import { findClientById, findPolicyByPolicyId } from "./utils";
 
@@ -8,6 +9,10 @@ const useDashboardClientsState = (authState) => {
   const [selectedPolicy, setSelectedPolicy] = useState(null);
   const [breadcrumbs, setBreadcrumbs] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const scrollToTop = () => {
+    animateScroll.scrollToTop();
+  };
 
   const setAllNull = () => {
     setSelectedClient(null);
@@ -55,6 +60,7 @@ const useDashboardClientsState = (authState) => {
   };
 
   useEffect(() => {
+    scrollToTop();
     if (!selectedClient) {
       setBreadcrumbs([
         { label: "Dashboard", onClick: null },
@@ -69,7 +75,13 @@ const useDashboardClientsState = (authState) => {
     } else {
       setBreadcrumbs([
         { label: "Dashboard", onClick: null },
-        { label: "Clients", onClick: () => setSelectedClient(null) },
+        {
+          label: "Clients",
+          onClick: () => {
+            setSelectedClient(null);
+            setSelectedPolicy(null);
+          },
+        },
         { label: `${selectedClient?.name}`, onClick: () => setSelectedPolicy(null) },
         { label: `${selectedPolicy?.policyNumber}`, onClick: null },
       ]);
