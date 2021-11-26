@@ -37,7 +37,9 @@ const DashboardClients = ({ authState, openSidebar }) => {
         </DashboardHeaderContainer>
         <Grid mt={{ xs: 2, md: 5 }} container alignItems="stretch" spacing={3}>
           {!selectedClient && <ClientCards clients={clients} clientOnClick={clientOnClick} />}
-          {selectedClient && !selectedPolicy && <ClientDetails client={selectedClient} policyOnClick={policyOnClick} />}
+          {selectedClient && !selectedPolicy && (
+            <ClientDetails client={selectedClient} policyOnClick={policyOnClick} setLoading={setLoading} />
+          )}
           {selectedClient && selectedPolicy && <PolicyDetails client={selectedClient} policy={selectedPolicy} />}
         </Grid>
         {policyFormModalState && (

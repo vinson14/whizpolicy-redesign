@@ -1,3 +1,4 @@
+import { differenceInYears } from "date-fns";
 import {
   addClientFormFields,
   addPolicyFormFields,
@@ -47,14 +48,7 @@ export const formatFormInt = (string) => {
 };
 
 export const getRandomAvatarColor = () => {
-  const colors = [
-    "primary",
-    "secondary",
-    "error",
-    "warning",
-    "info",
-    "success",
-  ];
+  const colors = ["primary", "secondary", "error", "warning", "info", "success"];
   const shades = ["main", "light", "dark"];
   const randomColor = colors[Math.floor(Math.random() * colors.length)];
   const randomShade = shades[Math.floor(Math.random() * shades.length)];
@@ -64,31 +58,28 @@ export const getRandomAvatarColor = () => {
 export const formatPolicyFormValues = (formData) => {
   const fieldsToFormat = Object.keys(addPolicyFormFields).filter(
     (field) =>
-      addPolicyFormFields[field].type === INPUT_TYPE_CURRENCY ||
-      addPolicyFormFields[field].type === INPUT_TYPE_YEAR
+      addPolicyFormFields[field].type === INPUT_TYPE_CURRENCY || addPolicyFormFields[field].type === INPUT_TYPE_YEAR
   );
-  fieldsToFormat.forEach(
-    (field) => (formData[field] = formatFormInt(formData[field]))
-  );
+  fieldsToFormat.forEach((field) => (formData[field] = formatFormInt(formData[field])));
 };
 
 export const serializeClientForm = (formData) => {
   const fieldsToFormat = addClientFormFields.filter(
-    (field) =>
-      field.type === INPUT_TYPE_CURRENCY || field.type === INPUT_TYPE_YEAR
+    (field) => field.type === INPUT_TYPE_CURRENCY || field.type === INPUT_TYPE_YEAR
   );
   console.log(fieldsToFormat);
-  fieldsToFormat.forEach(
-    (field) => (formData[field.name] = formatFormInt(formData[field.name]))
-  );
+  fieldsToFormat.forEach((field) => (formData[field.name] = formatFormInt(formData[field.name])));
 };
 
 export const deserializeClient = (formData) => {
-  const fieldsToDate = addClientFormFields.filter(
-    (field) => field.type === INPUT_TYPE_DATEPICKER
-  );
+  const fieldsToDate = addClientFormFields.filter((field) => field.type === INPUT_TYPE_DATEPICKER);
   fieldsToDate.forEach((field) => {
     const value = formData[field.name];
     formData[field.name] = new Date(value);
   });
+};
+
+export const getAge = (birthday) => {
+  if (typeof birthday === "string") return differenceInYears(new Date(), new Date(birthday));
+  return differenceInYears(new Date(), birthday);
 };

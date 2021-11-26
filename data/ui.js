@@ -197,6 +197,8 @@ export const CLIENT_DEPENDANT_NAME_KEY = "name";
 export const CLIENT_DEPENDANT_RELATIONSHIP_KEY = "relationship";
 export const CLIENT_DEPENDANT_NAME_LABEL = "Name";
 export const CLIENT_DEPENDANT_RELATIONSHIP_LABEL = "Relationship";
+export const CLIENT_DEPENDANT_BIRTHDAY_KEY = "birthday";
+export const CLIENT_DEPENDANT_BIRTHDAY_LABEL = "Birthday";
 
 // Client Dependant Relationship Values and Label
 export const CLIENT_DEPENDANT_SON_VALUE = "son";
@@ -1592,6 +1594,7 @@ export const policyDetailsCoverageCardFields = [
 export const defaultDependantFormValues = {
   [CLIENT_DEPENDANT_NAME_KEY]: "",
   [CLIENT_DEPENDANT_RELATIONSHIP_KEY]: CLIENT_DEPENDANT_SON_VALUE,
+  [CLIENT_DEPENDANT_BIRTHDAY_KEY]: new Date("1 Jan 2000"),
 };
 
 export const addDependantFormFields = [
@@ -1599,26 +1602,23 @@ export const addDependantFormFields = [
     name: CLIENT_DEPENDANT_NAME_KEY,
     label: CLIENT_DEPENDANT_NAME_LABEL,
     type: INPUT_TYPE_TEXT,
-    required: {
-      value: true,
-      message: REQUIRED_MSG.replace(REQUIRED_MSG_PLACEHOLDER, "name"),
-    },
-    minLength: {
-      value: MIN_CLIENT_NAME_LENGTH,
-      message: MIN_CHAR_MSG.replace(MIN_CHAR_MSG_PLACEHOLDER, MIN_CLIENT_NAME_LENGTH),
-    },
-    maxLength: {
-      value: MAX_CLIENT_NAME_LENGTH,
-      message: MAX_CHAR_MSG.replace(MAX_CHAR_MSG_PLACEHOLDER, MAX_CLIENT_NAME_LENGTH),
-    },
-    pattern: {
-      value: /\b([A-ZÀ-ÿ][-,a-z. ']+[ ]*)+/,
-      message: ALPHA_ONLY_MSG,
+    rules: {
+      required: {
+        value: true,
+        message: REQUIRED_MSG.replace(REQUIRED_MSG_PLACEHOLDER, "name"),
+      },
+      minLength: {
+        value: MIN_CLIENT_NAME_LENGTH,
+        message: MIN_CHAR_MSG.replace(MIN_CHAR_MSG_PLACEHOLDER, MIN_CLIENT_NAME_LENGTH),
+      },
+      maxLength: {
+        value: MAX_CLIENT_NAME_LENGTH,
+        message: MAX_CHAR_MSG.replace(MAX_CHAR_MSG_PLACEHOLDER, MAX_CLIENT_NAME_LENGTH),
+      },
     },
     col: {
       xs: 12,
       md: 6,
-      lg: 5,
     },
   },
   {
@@ -1647,7 +1647,20 @@ export const addDependantFormFields = [
     col: {
       xs: 12,
       md: 6,
-      lg: 5,
+    },
+  },
+  {
+    name: CLIENT_DEPENDANT_BIRTHDAY_KEY,
+    label: CLIENT_DEPENDANT_BIRTHDAY_LABEL,
+    minDate: new Date("1 Jan 1900"),
+    maxDate: new Date(),
+    type: INPUT_TYPE_DATEPICKER,
+    rules: {
+      validate: (value) => !isAfter(value, new Date()) || FUTURE_DATE_ERR_MSG,
+    },
+    col: {
+      xs: 12,
+      md: 6,
     },
   },
 ];

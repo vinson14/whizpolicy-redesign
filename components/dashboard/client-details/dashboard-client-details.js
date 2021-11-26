@@ -8,12 +8,12 @@ import NameCard from "./name-card";
 import PolicyCards from "./policy-cards";
 import RemarksCard from "./remarks-card";
 
-const ClientDetails = ({ client, policyOnClick }) => {
+const ClientDetails = ({ client, policyOnClick, setLoading }) => {
   const components = [
     { Component: <NameCard client={client} />, col: { xs: 12, lg: 6 } },
     { Component: <ContactCard client={client} />, col: { xs: 12, lg: 6 } },
     { Component: <AboutCard client={client} />, col: { xs: 12, lg: 6 } },
-    { Component: <DependantsCard client={client} />, col: { xs: 12, lg: 6 } },
+    { Component: <DependantsCard client={client} setLoading={setLoading} />, col: { xs: 12, lg: 6 } },
     { Component: <CoverageCard client={client} />, col: { xs: 12 } },
     { Component: <RemarksCard client={client} />, col: { xs: 12 } },
     { Component: <Divider client={client} variant="middle" />, col: { xs: 12, lg: 6 } },

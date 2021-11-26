@@ -1,12 +1,8 @@
 import { DialogContent, Grid } from "@mui/material";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import DashboardContext from "../../../context/dashboard-context";
-import {
-  addDependantFormFields,
-  defaultDependantFormValues,
-  inputTypeMapping,
-} from "../../../data/ui";
+import { addDependantFormFields, defaultDependantFormValues, inputTypeMapping } from "../../../data/ui";
 import { postDependantToClient } from "../../../utils/api";
 import AddButton from "../../stateless/interface/buttons/add-button";
 import CancelButton from "../../stateless/interface/buttons/cancel-button";
@@ -14,34 +10,28 @@ import ResetButton from "../../stateless/interface/buttons/reset-button";
 import FormContainer from "../../stateless/interface/form/form-container";
 import ModalContainer from "../../stateless/interface/modal/modal-container";
 
-const DependantForm = ({
-  client,
-  open,
-  handleClose,
-  defaultValues = defaultDependantFormValues,
-  edit,
-}) => {
+const DependantForm = ({ client, open, handleClose, setLoading }) => {
   const {
-    register,
     control,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm({ mode: "onBlur", defaultValues });
+  } = useForm({ mode: "onBlur", defaultValues: { ...defaultDependantFormValues } });
 
-  const { setLoading, setUpdateClients } = useContext(DashboardContext);
+  const [addDependantLoading, setAddDependantLoading] = useState(false);
 
   const onSubmit = (dependant) => {
-    handleClose();
-    setLoading(true);
-    postDependantToClient(client, dependant).then(() => setUpdateClients(true));
+    setAddDependantLoading(true);
+    postDependantToClient(client, dependant)
+      .then(() => setAddDependantLoading(false))
+      .then(() => handleClose())
+      .then(() => setLoading(true));
   };
   const resetForm = () => {
-    reset({}, { keepDefaultValues: true });
+    reset({ ...defaultDependantFormValues });
   };
 
   const cancelForm = () => {
-    resetForm();
     handleClose();
   };
   return (
@@ -53,17 +43,14 @@ const DependantForm = ({
               const InputComponent = inputTypeMapping[field.type];
               return (
                 <Grid key={field.name} item {...field.col} p={2}>
-                  <InputComponent
-                    register={register}
-                    control={control}
-                    error={errors[field.name]}
-                    {...field}
-                  />
+                  <InputComponent error={errors[field.name]} {...field} control={control} />
                 </Grid>
               );
             })}
             <Grid item xs={12}>
-              <AddButton type="submit">Add</AddButton>
+              <AddButton loading={addDependantLoading} type="submit">
+                Add
+              </AddButton>
               <ResetButton onClick={resetForm}>Reset</ResetButton>
               <CancelButton onClick={cancelForm}>Cancel</CancelButton>
             </Grid>
