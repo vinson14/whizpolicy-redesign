@@ -28,9 +28,26 @@ const CoverageText = ({ icon, label, value, color, onClick, xs = 12, sm = 6, md 
   return (
     <Grid item xs={xs} sm={sm} md={md} display="flex" alignItems="stretch" justifyContent="center" p={2}>
       <Box mr={3} display="flex" alignItems="center">
-        <Icon color={color} fontSize="large" />
+        <Icon color={color} />
       </Box>
       <Box
+        flexGrow={1}
+        bgcolor={`${color}.main`}
+        borderRadius={3}
+        p={2}
+        color={`${color}.contrastText`}
+        display="flex"
+        justifyContent="space-between"
+      >
+        <Box>
+          <Typography variant="body2">{label}</Typography>
+          <Typography variant="body1">${formatNumber(value)}</Typography>
+        </Box>
+        <IconButton onClick={onClick}>
+          <InfoIcon sx={{ cursor: "pointer", color: (theme) => theme.palette.common.white }} />
+        </IconButton>
+      </Box>
+      {/* <Box
         flexGrow={1}
         display="flex"
         flexDirection="column"
@@ -47,7 +64,7 @@ const CoverageText = ({ icon, label, value, color, onClick, xs = 12, sm = 6, md 
         <IconButton onClick={onClick}>
           <InfoIcon color="text.secondary" sx={{ cursor: "pointer" }} />
         </IconButton>
-      </Box>
+      </Box> */}
     </Grid>
   );
 };
