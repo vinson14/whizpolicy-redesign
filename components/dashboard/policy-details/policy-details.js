@@ -6,7 +6,7 @@ import PolicyForm from "../add-policy-form/policy-form";
 import PolicyAboutCard from "./policy-about-card";
 import PolicyCoverageCard from "./policy-coverage-card";
 
-const PolicyDetails = ({ client, policy, setLoading }) => {
+const PolicyDetails = ({ policy }) => {
   const [editPolicyModalState, openPolicyModal, closePolicyModal] = useModal();
 
   return (
@@ -21,11 +21,6 @@ const PolicyDetails = ({ client, policy, setLoading }) => {
           <PolicyCoverageCard policy={policy} />
         </Grid>
       </CustomGrow>
-
-      <FloatingEditButton onClick={openPolicyModal}>Edit Policy</FloatingEditButton>
-      {editPolicyModalState && (
-        <PolicyForm open={editPolicyModalState} client={client} onClose={closePolicyModal} values={policy} />
-      )}
     </>
   );
 };

@@ -347,6 +347,8 @@ export const MAX_VALUE_MSG = "This value cannot exceed MAX_VALUE";
 export const MAX_VALUE_MSG_PLACEHOLDER = "MAX_VALUE";
 export const CONSENT_REQUIRE_MSG = "Please confirm that consent has been obtained from client";
 
+export const NAVBAR_HEIGHT = 80;
+
 export const sidebarItems = [
   {
     label: SIDEBAR_CLIENTS_LABEL,

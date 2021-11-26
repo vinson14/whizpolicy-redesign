@@ -14,7 +14,7 @@ import FormContainer from "../../stateless/interface/form/form-container";
 import DeleteConfirmation from "../../stateless/interface/modal/delete-confirmation";
 import ModalContainer from "../../stateless/interface/modal/modal-container";
 
-const ClientForm = ({ open, onClose, values }) => {
+const ClientForm = ({ open, onClose, values, setLoading }) => {
   const {
     control,
     handleSubmit,
@@ -25,7 +25,6 @@ const ClientForm = ({ open, onClose, values }) => {
     defaultValues: values ? { ...values } : { ...newClientDefaultValues },
   });
 
-  const { setLoading, setUpdateClients } = useContext(DashboardContext);
   const [deleteModalState, openDeleteModal, closeDeleteModal] = useModal();
   const [deleteLoading, setDeleteLoading] = useState(false);
   const [addLoading, setAddLoading] = useState(false);
@@ -37,15 +36,13 @@ const ClientForm = ({ open, onClose, values }) => {
       putClient(client)
         .then(() => setEditLoading(false))
         .then(() => onClose())
-        .then(() => setLoading(true))
-        .then(() => setUpdateClients(true));
+        .then(() => setLoading(true));
     } else {
       setAddLoading(true);
       postClient(client)
         .then(() => setAddLoading(false))
         .then(() => onClose())
-        .then(() => setLoading(true))
-        .then(() => setUpdateClients(true));
+        .then(() => setLoading(true));
     }
   };
 
@@ -55,8 +52,7 @@ const ClientForm = ({ open, onClose, values }) => {
     deleteClient(values.clientId)
       .then(() => setDeleteLoading(false))
       .then(() => onClose())
-      .then(() => setLoading(true))
-      .then(() => setUpdateClients(true));
+      .then(() => setLoading(true));
   };
 
   const onReset = () => {

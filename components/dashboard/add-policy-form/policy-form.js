@@ -19,7 +19,7 @@ import FormContainer from "../../stateless/interface/form/form-container";
 import DeleteConfirmation from "../../stateless/interface/modal/delete-confirmation";
 import ModalContainer from "../../stateless/interface/modal/modal-container";
 
-const PolicyForm = ({ open, onClose, values, client }) => {
+const PolicyForm = ({ open, onClose, values, client, setLoading }) => {
   const {
     control,
     handleSubmit,
@@ -30,7 +30,6 @@ const PolicyForm = ({ open, onClose, values, client }) => {
     mode: "onBlur",
     defaultValues: values ? { ...values } : { ...defaultPolicyFormValues },
   });
-  const { setLoading, setUpdateClients } = useContext(DashboardContext);
   const [deleteModalState, openDeleteModal, closeDeleteModal] = useModal();
   const [deleteLoading, setDeleteLoading] = useState(false);
   const [addLoading, setAddLoading] = useState(false);
@@ -38,20 +37,20 @@ const PolicyForm = ({ open, onClose, values, client }) => {
   const policyCategory = watch(POLICY_CATEGORY_KEY);
   const fieldNames = policyCategoryFields[policyCategory];
   const onSubmit = (policy) => {
+    console.log(policy);
     if (values) {
       setEditLoading(true);
       putPolicyToClient(client, policy)
         .then(() => setEditLoading(false))
         .then(() => onClose())
-        .then(() => setLoading(true))
-        .then(() => setUpdateClients(true));
+        .then(() => setLoading(true));
     } else {
+      console.log("this happened");
       setAddLoading(true);
       postPolicyToClient(client, policy)
         .then(() => setAddLoading(false))
         .then(() => onClose())
-        .then(() => setLoading(true))
-        .then(() => setUpdateClients(true));
+        .then(() => setLoading(true));
     }
   };
 
@@ -61,8 +60,7 @@ const PolicyForm = ({ open, onClose, values, client }) => {
     deletePolicyToClient(client, values)
       .then(() => setDeleteLoading(false))
       .then(() => onClose())
-      .then(() => setLoading(true))
-      .then(() => setUpdateClients(true));
+      .then(() => setLoading(true));
   };
 
   const onReset = () => reset({ ...defaultPolicyFormValues });

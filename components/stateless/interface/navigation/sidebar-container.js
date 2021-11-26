@@ -5,16 +5,10 @@ import Link from "next/link";
 import { useState } from "react";
 import WhizpolicyLogo from "../misc/whizpolicy-logo";
 
-const Sidebar = ({ open, onClose, children }) => {
+const SidebarContainer = ({ open, onClose, children }) => {
   return (
     <>
-      <Drawer
-        sx={drawerSx}
-        open={open}
-        onClose={onClose}
-        variant="temporary"
-        anchor="left"
-      >
+      <Drawer sx={drawerSx} open={open} onClose={onClose} variant="temporary" anchor="left">
         <Box sx={drawerContentSx}>
           <Box sx={logoBoxSx}>
             <WhizpolicyLogo />
@@ -22,13 +16,7 @@ const Sidebar = ({ open, onClose, children }) => {
           <Box>{children}</Box>
         </Box>
       </Drawer>
-      <Drawer
-        sx={permanentDrawerSx}
-        open={open}
-        onClose={onClose}
-        variant="permanent"
-        anchor="left"
-      >
+      <Drawer sx={permanentDrawerSx} open={open} onClose={onClose} variant="permanent" anchor="left">
         <Box sx={drawerContentSx}>
           <Box sx={logoBoxSx}>
             <WhizpolicyLogo />
@@ -71,4 +59,4 @@ const logoBoxSx = {
 
 const childrenBoxSx = {};
 
-export default Sidebar;
+export default SidebarContainer;

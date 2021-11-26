@@ -1,12 +1,7 @@
-import { Grid } from "@mui/material";
-import SidebarButton from "../interface/buttons/sidebar-button";
+import { Box } from "@mui/material";
 
-const DashboardHeaderContainer = ({ openSidebar, children }) => {
-  return (
-    <Grid container spacing={{ xs: 8 }} sx={{ pt: 2 }} alignItems="center">
-      {children}
-    </Grid>
-  );
+const DashboardHeaderContainer = ({ children }) => {
+  return <Box>{children}</Box>;
 };
 
 export default DashboardHeaderContainer;

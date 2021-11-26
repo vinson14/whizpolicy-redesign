@@ -13,8 +13,7 @@ import AddButton from "../../stateless/interface/buttons/add-button";
 import { useContext } from "react";
 import DashboardContext from "../../../context/dashboard-context";
 
-const PolicyCards = ({ client }) => {
-  const { policyOnClick } = useContext(DashboardContext);
+const PolicyCards = ({ policies, policyOnClick }) => {
   return (
     <>
       <Box sx={{ display: "flex", justifyContent: "space-between", py: 3 }}>
@@ -22,13 +21,13 @@ const PolicyCards = ({ client }) => {
       </Box>
 
       <Grid container spacing={3} alignItems="stretch">
-        {client.policies &&
-          client.policies.map((policy) => (
-            <Grid key={policy.policyNumber} item xs={12} lg={6}>
+        {policies &&
+          policies.map((policy) => (
+            <Grid key={policy.policyId} item xs={12} lg={6}>
               <PolicyCard policy={policy} onClick={() => policyOnClick(policy)} />
             </Grid>
           ))}
-        {(!client.policies || client.policies.length == 0) && (
+        {!policies && (
           <Grid item xs={12}>
             <Box py={3}>
               <Typography>No policies have been added yet</Typography>

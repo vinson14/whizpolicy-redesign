@@ -1,12 +1,7 @@
 import { Amplify, API, Auth } from "aws-amplify";
 import differenceInYears from "date-fns/differenceInYears";
 import awsmobile from "../src/aws-exports";
-import {
-  deserializeClient,
-  findPolicyByPolicyId,
-  serializeClientForm,
-  formatPolicyFormValues,
-} from "./utils";
+import { deserializeClient, findPolicyByPolicyId, serializeClientForm, formatPolicyFormValues } from "./utils";
 const endpoint = "https://a3dk3p85vd.execute-api.us-east-1.amazonaws.com/dev";
 const apiName = "whizpolicynodejsapi";
 
@@ -96,6 +91,7 @@ export const deleteClient = async (clientId) => {
 };
 
 export const postPolicyToClient = async (client, policy) => {
+  console.log("postPolicyToClient ran");
   const jwtToken = await getJwtToken();
   if (findPolicyByPolicyId(client.policies, policy.policyId)) {
     console.log("policy already exists");
