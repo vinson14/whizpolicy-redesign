@@ -6,6 +6,7 @@ import CoverageCard from "./coverage-card";
 import DependantsCard from "./dependants-card";
 import NameCard from "./name-card";
 import PolicyCards from "./policy-cards";
+import RemarksCard from "./remarks-card";
 
 const ClientDetails = ({ client, policyOnClick }) => {
   const components = [
@@ -14,6 +15,7 @@ const ClientDetails = ({ client, policyOnClick }) => {
     { Component: <AboutCard client={client} />, col: { xs: 12, lg: 6 } },
     { Component: <DependantsCard client={client} />, col: { xs: 12, lg: 6 } },
     { Component: <CoverageCard client={client} />, col: { xs: 12 } },
+    { Component: <RemarksCard client={client} />, col: { xs: 12 } },
     { Component: <Divider client={client} variant="middle" />, col: { xs: 12, lg: 6 } },
     { Component: <PolicyCards policies={client.policies} policyOnClick={policyOnClick} />, col: { xs: 12 } },
   ];

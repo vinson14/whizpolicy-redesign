@@ -8,6 +8,7 @@ import PersonOffIcon from "@mui/icons-material/PersonOff";
 import AccessibleForwardIcon from "@mui/icons-material/AccessibleForward";
 import HotelIcon from "@mui/icons-material/Hotel";
 import LocalHospitalIcon from "@mui/icons-material/LocalHospital";
+import HomeIcon from "@mui/icons-material/Home";
 
 import countryList from "react-select-country-list";
 import TextInput from "../components/stateless/interface/form/text-input";
@@ -410,6 +411,12 @@ export const clientDetailsContactFields = [
     label: CLIENT_EMAIL_LABEL,
     key: CLIENT_EMAIL_KEY,
     icon: <EmailIcon />,
+    type: FIELD_TYPE_TEXT,
+  },
+  {
+    label: CLIENT_ADDRESS_LABEL,
+    key: CLIENT_ADDRESS_KEY,
+    icon: <HomeIcon />,
     type: FIELD_TYPE_TEXT,
   },
 ];
