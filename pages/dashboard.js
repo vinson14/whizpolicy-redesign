@@ -10,7 +10,7 @@ import {
   ListItemText,
 } from "@mui/material";
 import { useState, useEffect } from "react";
-import Sidebar from "../components/stateless/interface/navigation/sidebar";
+import SidebarContainer from "../components/stateless/interface/navigation/sidebar-container";
 import {
   SIDEBAR_CLIENTS_VALUE,
   SIDEBAR_PORTFOLIO_VALUE,
@@ -22,20 +22,10 @@ import DashboardContainer from "../components/dashboard/dashboard-container";
 import DashboardClients from "../components/dashboard/dashboard-clients";
 import DashboardPortfolio from "../components/dashboard/dashboard-portfolio";
 import useModal from "../utils/useModal";
-import {
-  getClients,
-  getClientsWithAuth,
-  getPolicies,
-  isUserAuthenticated,
-  signOutUser,
-} from "../utils/api";
+import { getClients, getClientsWithAuth, getPolicies, isUserAuthenticated, signOutUser } from "../utils/api";
 import { Amplify, Auth } from "aws-amplify";
 import awsConfig from "../src/aws-exports";
-import {
-  AmplifyAuthContainer,
-  AmplifyAuthenticator,
-  AmplifySignUp,
-} from "@aws-amplify/ui-react";
+import { AmplifyAuthContainer, AmplifyAuthenticator, AmplifySignUp } from "@aws-amplify/ui-react";
 import SidebarLogoutButton from "../components/stateless/interface/buttons/sidebar-logout-button";
 import { AuthState, onAuthUIStateChange } from "@aws-amplify/ui-components";
 import useDashboardState from "../utils/useDashboardState";
@@ -43,6 +33,7 @@ import LoadingIcon from "../components/stateless/interface/misc/loading-icon";
 import TopAppBar from "../components/stateless/interface/navigation/top-appbar";
 import { useRouter } from "next/router";
 import DashboardContext from "../context/dashboard-context";
+import DashboardSidebar from "../components/dashboard/dashboard-sidebar";
 
 Amplify.configure(awsConfig);
 
@@ -61,7 +52,7 @@ const Dashboard = () => {
   const [policies, setPolicies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [updateClients, setUpdateClients] = useState(false);
-  const [showSidebar, openSidebar, closeSidebar] = useModal();
+  const [sidebarState, openSidebar, closeSidebar] = useModal();
   const [
     selectedSidebarOption,
     selectedClient,
@@ -139,30 +130,12 @@ const Dashboard = () => {
     <DashboardContext.Provider value={context}>
       <TopAppBar menuOnClick={openSidebar} goBackOneLevel={goBackOneLevel} />
       <DashboardContainer>
-        <Sidebar open={showSidebar} onClose={closeSidebar}>
-          <List>
-            {sidebarItems.map((item) => (
-              <ListItem key={item.value}>
-                <ListItemButton
-                  selected={selectedSidebarOption === item.value}
-                  onClick={() => {
-                    sidebarOptionOnClick(item.value);
-                    closeSidebar();
-                  }}
-                >
-                  <ListItemIcon>{item.icon}</ListItemIcon>
-                  <ListItemText primary={item.label} />
-                </ListItemButton>
-              </ListItem>
-            ))}
-            <SidebarLogoutButton
-              onClick={() => {
-                handleLogout();
-                closeSidebar();
-              }}
-            />
-          </List>
-        </Sidebar>
+        <DashboardSidebar
+          open={sidebarState}
+          onClose={closeSidebar}
+          selectedSidebarOption={selectedSidebarOption}
+          sidebarOptionOnClick={sidebarOptionOnClick}
+        />
         <Container sx={{ pb: 3 }}>
           {loading && <LoadingIcon />}
           <Fade in={!loading}>
