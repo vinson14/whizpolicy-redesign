@@ -119,7 +119,7 @@ export const POLICY_PREMIUM_LABEL = "Premium";
 export const POLICY_PREMIUM_MODE_LABEL = "Premium Mode";
 export const POLICY_DEATH_BENEFIT_LABEL = "Death Benefit";
 export const POLICY_TPD_BENEFIT_LABEL = "Total Permanent Disability";
-export const POLICY_ACC_PARTIAL_DISABILITY_BENEFIT_LABEL = "Partial Permanent Disability";
+export const POLICY_ACC_PARTIAL_DISABILITY_BENEFIT_LABEL = "Acc. Partial Perm. Disability";
 export const POLICY_MAJOR_CI_BENEFIT_LABEL = "Major Critical Illness";
 export const POLICY_EARLY_CI_BENEFIT_LABEL = "Early Critical Illness";
 export const POLICY_MATURITY_DATE_LABEL = "Maturity Date";
@@ -127,8 +127,8 @@ export const POLICY_TERM_LABEL = "Policy Term";
 export const POLICY_PREMIUM_TERM_LABEL = "Premium Term";
 export const POLICY_GUARANTEED_MATURITY_BENEFIT_LABEL = "Guaranteed Maturity Benefit";
 export const POLICY_INCEPTION_DATE_LABEL = "Inception Date";
-export const POLICY_ACC_DEATH_BENEFIT_LABEL = "Death Benefit";
-export const POLICY_ACC_TPD_BENEFIT_LABEL = "Total Permanent Disability Benefit";
+export const POLICY_ACC_DEATH_BENEFIT_LABEL = "Acc. Death";
+export const POLICY_ACC_TPD_BENEFIT_LABEL = "Acc. Total Perm. Disability";
 export const POLICY_ACC_MEDICAL_LABEL = "Medical Reimbursement Benefit";
 export const POLICY_ACC_ALT_MEDICAL_LABEL = "TCM / Chiropractic Benefit";
 export const POLICY_ACC_DAILY_HOSP_LABEL = "Daily Hospital Benefit";
@@ -1395,6 +1395,7 @@ export const defaultPolicyFields = [
   POLICY_PREMIUM_TERM_KEY,
   POLICY_TERM_KEY,
   POLICY_INCEPTION_DATE_KEY,
+  POLICY_MATURITY_DATE_KEY,
 ];
 
 export const defaultLifePolicyFields = [
