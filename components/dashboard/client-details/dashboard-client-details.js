@@ -13,7 +13,7 @@ const ClientDetails = ({ client, policyOnClick }) => {
     { Component: <ContactCard client={client} />, col: { xs: 12, lg: 6 } },
     { Component: <AboutCard client={client} />, col: { xs: 12, lg: 6 } },
     { Component: <DependantsCard client={client} />, col: { xs: 12, lg: 6 } },
-    { Component: <CoverageCard client={client} />, col: { xs: 12, lg: 6 } },
+    { Component: <CoverageCard client={client} />, col: { xs: 12 } },
     { Component: <Divider client={client} variant="middle" />, col: { xs: 12, lg: 6 } },
     { Component: <PolicyCards policies={client.policies} policyOnClick={policyOnClick} />, col: { xs: 12 } },
   ];

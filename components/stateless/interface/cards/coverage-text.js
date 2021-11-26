@@ -16,7 +16,7 @@ import AccidentIcon from "../icons/accident-icon";
 import SkullIcon from "../icons/skull-icon";
 import CoverageIcon from "../icons/coverage-icon";
 
-const CoverageText = ({ icon, label, value, color, onClick, xs = 12, sm = 8, md = 8, lg = 6 }) => {
+const CoverageText = ({ icon, label, value, color, onClick, xs = 12, sm = 8, md = 8, lg = 5 }) => {
   return (
     <Grid item xs={xs} sm={sm} md={md} lg={lg} display="flex" alignItems="stretch" justifyContent="center" p={2}>
       <Box mr={3} display="flex" alignItems="center">
