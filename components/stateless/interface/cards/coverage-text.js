@@ -30,14 +30,19 @@ const CoverageText = ({ icon, label, value, color, onClick, xs = 12, sm = 8, md 
         color={`${color}.contrastText`}
         display="flex"
         justifyContent="space-between"
+        alignItems="center"
+        onClick={onClick}
+        sx={{ cursor: "pointer" }}
       >
         <Box>
           <Typography variant="body2">{label}</Typography>
           <Typography variant="body1">${formatNumber(value)}</Typography>
         </Box>
-        <IconButton onClick={onClick}>
-          <InfoIcon sx={{ cursor: "pointer", color: (theme) => theme.palette.common.white }} />
-        </IconButton>
+        <Box>
+          <IconButton onClick={onClick}>
+            <InfoIcon sx={{ cursor: "pointer", color: (theme) => theme.palette.common.white }} />
+          </IconButton>
+        </Box>
       </Box>
     </Grid>
   );
