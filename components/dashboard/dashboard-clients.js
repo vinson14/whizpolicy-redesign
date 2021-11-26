@@ -57,7 +57,7 @@ const DashboardClients = ({ authState }) => {
             setLoading={setLoading}
           />
         )}
-        {!selectedClient && <FloatingAddButton>Add Client</FloatingAddButton>}
+        {!selectedClient && <FloatingAddButton onClick={openClientForm}>Add Client</FloatingAddButton>}
         {selectedClient && !selectedPolicy && (
           <>
             <FloatingEditButton onClick={openClientForm} bottom={10}>
