@@ -206,39 +206,39 @@ export const CLIENT_DEPENDANT_MOTHER_VALUE = "mother";
 export const CLIENT_DEPENDANT_MOTHER_LABEL = "Aged Mother";
 
 // Insurer Keys and Labels
-export const INSURER_AIA_KEY = "aia";
+export const INSURER_AIA_KEY = "AIA";
 export const INSURER_AIA_LABEL = "AIA";
-export const INSURER_PRU_KEY = "prudential";
+export const INSURER_PRU_KEY = "Prudential";
 export const INSURER_PRU_LABEL = "Prudential";
-export const INSURER_GREAT_EASTERN_KEY = "greatEastern";
+export const INSURER_GREAT_EASTERN_KEY = "Great Eastern";
 export const INSURER_GREAT_EASTERN_LABEL = "Great Eastern";
-export const INSURER_NTUC_KEY = "ntucIncome";
+export const INSURER_NTUC_KEY = "NTUC Income";
 export const INSURER_NTUC_LABEL = "NTUC Income";
-export const INSURER_AVIVA_KEY = "aviva";
+export const INSURER_AVIVA_KEY = "Aviva";
 export const INSURER_AVIVA_LABEL = "Aviva";
-export const INSURER_AXA_KEY = "axa";
+export const INSURER_AXA_KEY = "AXA";
 export const INSURER_AXA_LABEL = "AXA";
-export const INSURER_ALLIANZ_KEY = "allianz";
+export const INSURER_ALLIANZ_KEY = "Allianz";
 export const INSURER_ALLIANZ_LABEL = "Allianz";
-export const INSURER_CHINA_LIFE_KEY = "chinaLife";
+export const INSURER_CHINA_LIFE_KEY = "China Life";
 export const INSURER_CHINA_LIFE_LABEL = "China Life";
-export const INSURER_CHINA_TAIPING_KEY = "chinaTaiping";
+export const INSURER_CHINA_TAIPING_KEY = "China Taiping";
 export const INSURER_CHINA_TAIPING_LABEL = "China Taiping";
-export const INSURER_ETIQA_KEY = "etiqa";
+export const INSURER_ETIQA_KEY = "Etiqa";
 export const INSURER_ETIQA_LABEL = "Etiqa";
-export const INSURER_FWD_KEY = "fwd";
+export const INSURER_FWD_KEY = "FWD";
 export const INSURER_FWD_LABEL = "FWD";
-export const INSURER_HSBC_KEY = "hsbc";
+export const INSURER_HSBC_KEY = "HSBC";
 export const INSURER_HSBC_LABEL = "HSBC";
-export const INSURER_MANULIFE_KEY = "manulife";
+export const INSURER_MANULIFE_KEY = "Manulife";
 export const INSURER_MANULIFE_LABEL = "Manulife";
-export const INSURER_RAFFLES_KEY = "raffles";
+export const INSURER_RAFFLES_KEY = "Raffles Health";
 export const INSURER_RAFFLES_LABEL = "Raffles Health";
-export const INSURER_SING_LIFE_KEY = "singLife";
+export const INSURER_SING_LIFE_KEY = "Sing Life";
 export const INSURER_SING_LIFE_LABEL = "Sing Life";
-export const INSURER_TOKIO_MARINE_KEY = "tokioMarine";
+export const INSURER_TOKIO_MARINE_KEY = "Tokio Marine";
 export const INSURER_TOKIO_MARINE_LABEL = "Tokio Marine";
-export const INSURER_ZURICH_KEY = "zurich";
+export const INSURER_ZURICH_KEY = "Zurich International";
 export const INSURER_ZURICH_LABEL = "Zurich International";
 
 // Premium Mode Keys and Labels
@@ -1456,12 +1456,12 @@ export const policyDetailsAboutCardFields = [
   {
     label: POLICY_NUMBER_LABEL,
     key: POLICY_NUMBER_KEY,
-    type: FIELD_TYPE_TEXT_CAMELCASE,
+    type: FIELD_TYPE_TEXT,
   },
   {
     label: POLICY_NAME_LABEL,
     key: POLICY_NAME_KEY,
-    type: FIELD_TYPE_TEXT_CAMELCASE,
+    type: FIELD_TYPE_TEXT,
   },
   {
     label: POLICY_CATEGORY_LABEL,
@@ -1486,7 +1486,7 @@ export const policyDetailsAboutCardFields = [
   {
     label: POLICY_INSURER_LABEL,
     key: POLICY_INSURER_KEY,
-    type: FIELD_TYPE_TEXT_UPPERCASE,
+    type: FIELD_TYPE_TEXT,
   },
   {
     label: POLICY_INCEPTION_DATE_LABEL,

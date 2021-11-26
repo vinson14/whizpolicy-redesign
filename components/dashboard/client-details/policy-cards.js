@@ -27,7 +27,7 @@ const PolicyCards = ({ policies, policyOnClick }) => {
               <PolicyCard policy={policy} onClick={() => policyOnClick(policy)} />
             </Grid>
           ))}
-        {!policies && (
+        {policies.length === 0 && (
           <Grid item xs={12}>
             <Box py={3}>
               <Typography>No policies have been added yet</Typography>
