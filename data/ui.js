@@ -487,16 +487,6 @@ export const clientDetailsFinancialOverviewFields = [
   // },
 ];
 
-export const clientDetailsCards = [
-  { Component: NameCard, col: { xs: 12, lg: 6 } },
-  { Component: ContactCard, col: { xs: 12, lg: 6 } },
-  { Component: AboutCard, col: { xs: 12, lg: 6 } },
-  { Component: DependantsCard, col: { xs: 12, lg: 6 } },
-  { Component: CoverageCard, col: { xs: 12 } },
-  { Component: Divider, col: { xs: 12 }, variant: "middle" },
-  { Component: PolicyCards, col: { xs: 12 } },
-];
-
 export const policyCardFields = [
   {
     label: POLICY_NUMBER_LABEL,

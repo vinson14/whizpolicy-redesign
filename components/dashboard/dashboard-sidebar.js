@@ -13,7 +13,7 @@ const DashboardSidebar = ({ open, onClose, selectedSidebarOption, sidebarOptionO
               selected={selectedSidebarOption === item.value}
               onClick={() => {
                 sidebarOptionOnClick(item.value);
-                closeSidebar();
+                onClose();
               }}
             >
               <ListItemIcon>{item.icon}</ListItemIcon>
@@ -24,7 +24,7 @@ const DashboardSidebar = ({ open, onClose, selectedSidebarOption, sidebarOptionO
         <SidebarLogoutButton
           onClick={() => {
             handleLogout();
-            closeSidebar();
+            onClose();
           }}
         />
       </List>
