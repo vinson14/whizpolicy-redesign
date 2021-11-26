@@ -445,6 +445,11 @@ export const clientDetailsAboutFields = [
     key: CLIENT_OCCUPATION_KEY,
     type: FIELD_TYPE_TEXT_CAMELCASE,
   },
+  {
+    label: CLIENT_ANNUAL_INCOME_LABEL,
+    key: CLIENT_ANNUAL_INCOME_KEY,
+    type: FIELD_TYPE_CURRENCY,
+  },
 ];
 
 export const clientDetailsFinancialOverviewFields = [
