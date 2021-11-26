@@ -154,6 +154,8 @@ export const CLIENT_NATIONALITY_KEY = "nationality";
 export const CLIENT_ANNUAL_INCOME_KEY = "annualIncome";
 export const CLIENT_ADDRESS_KEY = "address";
 export const CLIENT_REMARKS_KEY = "remarks";
+export const CLIENT_ETHNICITY_KEY = "ethnicity";
+export const CLIENT_RELIGION_KEY = "religion";
 export const CLIENT_AGREED_KEY = "clientAgreed";
 
 // Client Object Labels
@@ -171,6 +173,8 @@ export const CLIENT_NATIONALITY_LABEL = "Nationality";
 export const CLIENT_ANNUAL_INCOME_LABEL = "Annual Income";
 export const CLIENT_ADDRESS_LABEL = "Address";
 export const CLIENT_REMARKS_LABEL = "Remarks";
+export const CLIENT_ETHNICITY_LABEL = "Ethnicity";
+export const CLIENT_RELIGION_LABEL = "Religion";
 export const CLIENT_AGREED_LABEL =
   "I confirm that I have obtained consent from my client to upload his/her personal data on this website.";
 
@@ -289,6 +293,17 @@ export const SALUTATION_MS_VALUE = "ms";
 export const SALUTATION_MS_LABEL = "Ms";
 export const SALUTATION_DR_VALUE = "dr";
 export const SALUTATION_DR_LABEL = "Dr";
+
+export const CLIENT_ETHNICITY_CHINESE_KEY = "chinese";
+export const CLIENT_ETHNICITY_CHINESE_LABEL = "Chinese";
+export const CLIENT_ETHNICITY_MALAY_LABEL_KEY = "malay";
+export const CLIENT_ETHINICITY_MALAY_LABEL = "Malay";
+export const CLIENT_ETHNICITY_INDIAN_LABEL_KEY = "indian";
+export const CLIENT_ETHINICITY_INDIAN_LABEL = "Indian";
+export const CLIENT_ETHNICITY_EURASIAN_LABEL_KEY = "eurasian";
+export const CLIENT_ETHINICITY_EURASIAN_LABEL = "Eurasian";
+export const CLIENT_ETHNICITY_OTHERS_LABEL_KEY = "others";
+export const CLIENT_ETHINICITY_OTHERS_LABEL = "Others";
 
 // Policy fund risk levels
 export const POLICY_ILP_FUND_RISK_HIGH_VALUE = "high";
@@ -570,12 +585,14 @@ export const newClientDefaultValues = {
   [CLIENT_ANNUAL_INCOME_KEY]: "",
   [CLIENT_BIRTHDAY_KEY]: new Date("1 Jan 2000"),
   [CLIENT_EMAIL_KEY]: "",
+  [CLIENT_ETHNICITY_KEY]: CLIENT_ETHNICITY_CHINESE_KEY,
   [CLIENT_GENDER_KEY]: GENDER_MALE_VALUE,
   [CLIENT_MARITAL_STATUS_KEY]: MARITAL_STATUS_SINGLE_VALUE,
   [CLIENT_MOBILE_KEY]: "",
   [CLIENT_NAME_KEY]: "",
   [CLIENT_NATIONALITY_KEY]: "Singapore",
   [CLIENT_OCCUPATION_KEY]: "",
+  [CLIENT_RELIGION_KEY]: "",
   [CLIENT_REMARKS_KEY]: "",
   [CLIENT_SALUTATION_KEY]: SALUTATION_MR_VALUE,
   [CLIENT_SMOKER_KEY]: SMOKER_NO_VALUE,
@@ -790,6 +807,35 @@ export const addClientFormFields = [
     },
   },
   {
+    name: CLIENT_ETHNICITY_KEY,
+    label: CLIENT_ETHNICITY_LABEL,
+    type: INPUT_TYPE_SELECT,
+    col: {
+      xs: 12,
+      md: 6,
+    },
+    options: [
+      { label: CLIENT_ETHNICITY_CHINESE_LABEL, value: CLIENT_ETHNICITY_CHINESE_KEY },
+      { label: CLIENT_ETHINICITY_MALAY_LABEL, value: CLIENT_ETHNICITY_MALAY_LABEL_KEY },
+      { label: CLIENT_ETHINICITY_INDIAN_LABEL, value: CLIENT_ETHNICITY_INDIAN_LABEL_KEY },
+      { label: CLIENT_ETHINICITY_EURASIAN_LABEL, value: CLIENT_ETHNICITY_EURASIAN_LABEL_KEY },
+      { label: CLIENT_ETHINICITY_OTHERS_LABEL, value: CLIENT_ETHNICITY_OTHERS_LABEL_KEY },
+    ],
+  },
+  {
+    name: CLIENT_RELIGION_KEY,
+    label: CLIENT_RELIGION_LABEL,
+    type: INPUT_TYPE_TEXT,
+    col: {
+      xs: 12,
+      md: 6,
+    },
+    maxLength: {
+      value: MAX_CLIENT_NAME_LENGTH,
+      message: MAX_CHAR_MSG.replace(MAX_CHAR_MSG_PLACEHOLDER, MAX_CLIENT_NAME_LENGTH),
+    },
+  },
+  {
     name: CLIENT_ADDRESS_KEY,
     label: CLIENT_ADDRESS_LABEL,
     type: INPUT_TYPE_TEXT,
@@ -815,6 +861,7 @@ export const addClientFormFields = [
       message: MAX_CHAR_MSG.replace(MAX_CHAR_MSG_PLACEHOLDER, MAX_CLIENT_REMARKS_LENGTH),
     },
   },
+
   {
     name: CLIENT_AGREED_KEY,
     label: CLIENT_AGREED_LABEL,
