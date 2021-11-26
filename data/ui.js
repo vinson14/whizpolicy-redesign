@@ -202,9 +202,9 @@ export const CLIENT_DEPENDANT_DAUGHTER_LABEL = "Daughter";
 export const CLIENT_DEPENDANT_SPOUSE_VALUE = "spouse";
 export const CLIENT_DEPENDANT_SPOUSE_LABEL = "Spouse";
 export const CLIENT_DEPENDANT_FATHER_VALUE = "father";
-export const CLIENT_DEPENDANT_FATHER_LABEL = "Aged Father";
+export const CLIENT_DEPENDANT_FATHER_LABEL = "Father";
 export const CLIENT_DEPENDANT_MOTHER_VALUE = "mother";
-export const CLIENT_DEPENDANT_MOTHER_LABEL = "Aged Mother";
+export const CLIENT_DEPENDANT_MOTHER_LABEL = "Mother";
 
 // Insurer Keys and Labels
 export const INSURER_AIA_KEY = "AIA";
