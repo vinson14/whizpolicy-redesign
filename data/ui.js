@@ -636,7 +636,6 @@ export const addClientFormFields = [
     col: {
       xs: 12,
       md: 6,
-      lg: 5,
     },
   },
   {
@@ -677,7 +676,6 @@ export const addClientFormFields = [
     col: {
       xs: 12,
       md: 6,
-      lg: 5,
     },
   },
   {
