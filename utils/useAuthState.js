@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { isUserAuthenticated } from "./api";
+import { isUserAuthenticated, signOutUser } from "./api";
 
 const useAuthState = () => {
   const [authState, setAuthState] = useState(false);
@@ -11,7 +11,17 @@ const useAuthState = () => {
       else setAuthState(true);
     });
   }, []);
-  return authState;
+
+  const handleLogout = () => {
+    signOutUser().then((res) => {
+      if (res) {
+        setAuthState(false);
+        router.push("/login");
+      }
+    });
+  };
+
+  return [authState, handleLogout];
 };
 
 export default useAuthState;

@@ -8,6 +8,7 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  Typography,
 } from "@mui/material";
 import { useState, useEffect } from "react";
 import SidebarContainer from "../components/stateless/interface/navigation/sidebar-container";
@@ -17,6 +18,7 @@ import {
   SIDEBAR_SETTINGS_VALUE,
   SIDEBAR_PROFILE_VALUE,
   sidebarItems,
+  NAVBAR_HEIGHT,
 } from "../data/ui";
 import DashboardContainer from "../components/dashboard/dashboard-container";
 import DashboardClients from "../components/dashboard/dashboard-clients";
@@ -40,89 +42,29 @@ Amplify.configure(awsConfig);
 
 const Dashboard = () => {
   const router = useRouter();
-  const authState = useAuthState();
+  const [authState, handleLogout] = useAuthState();
 
-  const [clients, setClients] = useState([]);
-  const [policies, setPolicies] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [updateClients, setUpdateClients] = useState(false);
   const [sidebarState, openSidebar, closeSidebar] = useModal();
-  const [
-    selectedSidebarOption,
-    selectedClient,
-    selectedPolicy,
-    breadcrumbLinks,
-    sidebarOptionOnClick,
-    clientOnClick,
-    policyOnClick,
-    goBackOneLevel,
-  ] = useDashboardState(clients, policies);
-
-  const handleLogout = () => {
-    setLoading(true);
-    signOutUser().then((res) => {
-      if (res) {
-        setAuthState(false);
-        setLoading(false);
-        router.push("/login");
-      }
-    });
-  };
-
-  useEffect(() => {
-    console.log("useEffect updateClients", authState);
-    if (authState) {
-      setLoading(true);
-      getClients()
-        .then((data) => {
-          console.log(data);
-          setClients(data);
-        })
-        .then(() => setLoading(false));
-      // getPolicies().then((policies) => setPolicies(policies));
-    } else {
-      setClients([]);
-    }
-    setUpdateClients(false);
-  }, [updateClients, authState]);
-
+  const [selectedSidebarOption, setSelectedSidebarOption] = useState(SIDEBAR_CLIENTS_VALUE);
   const mainComponent = {
     [SIDEBAR_CLIENTS_VALUE]: <DashboardClients authState={authState} />,
-    [SIDEBAR_PORTFOLIO_VALUE]: (
-      <DashboardPortfolio
-        openSidebar={openSidebar}
-        policies={policies}
-        selectedPolicy={selectedPolicy}
-        breadcrumbLinks={breadcrumbLinks}
-        policyOnClick={policyOnClick}
-      />
-    ),
-  };
-
-  const context = {
-    setLoading,
-    setUpdateClients,
-    policyOnClick,
+    [SIDEBAR_PORTFOLIO_VALUE]: <Typography>Dashboard Portfolio</Typography>,
   };
 
   return (
-    <DashboardContext.Provider value={context}>
-      <TopAppBar menuOnClick={openSidebar} goBackOneLevel={goBackOneLevel} />
+    <>
       <DashboardContainer>
         <DashboardSidebar
           open={sidebarState}
           onClose={closeSidebar}
           selectedSidebarOption={selectedSidebarOption}
-          sidebarOptionOnClick={sidebarOptionOnClick}
+          sidebarOptionOnClick={setSelectedSidebarOption}
         />
-        <Container sx={{ pb: 3 }}>
-          {loading && <LoadingIcon />}
-          <Fade in={!loading}>
-            <div>{mainComponent[selectedSidebarOption]}</div>
-          </Fade>
+        <Container sx={{ pb: 3, mt: NAVBAR_HEIGHT / 8 }}>
+          <div>{mainComponent[selectedSidebarOption]}</div>
         </Container>
       </DashboardContainer>
-    </DashboardContext.Provider>
+    </>
   );
 };
 
