@@ -13,7 +13,7 @@ import { signInUser, signOutUser } from "../utils/api";
 const LoginPage = () => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const { register, handleSubmit } = useForm({ mode: "onBlur", defaultValues });
+  const { control, handleSubmit } = useForm({ mode: "onBlur", defaultValues });
   const onSubmit = (data) => {
     console.log(data);
     setLoading(true);
@@ -48,7 +48,7 @@ const LoginPage = () => {
           <Grid p={3} justifyContent="space-between" container>
             {userFormFields.map((field) => (
               <Grid key={field.name} item {...field.col} p={2}>
-                <TextInput key={field.name} register={register} {...field} />
+                <TextInput key={field.name} control={control} {...field} />
               </Grid>
             ))}
 
@@ -58,12 +58,7 @@ const LoginPage = () => {
               </Button>
             </Grid>
             <Grid item xs={12} p={2}>
-              <Button
-                variant="contained"
-                color="secondary"
-                onClick={routeToSignupPage}
-                fullWidth
-              >
+              <Button variant="contained" color="secondary" onClick={routeToSignupPage} fullWidth>
                 Sign up here
               </Button>
             </Grid>

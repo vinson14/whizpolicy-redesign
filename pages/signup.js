@@ -7,12 +7,7 @@ import FormContainer from "../components/stateless/interface/form/form-container
 import TextInput from "../components/stateless/interface/form/text-input";
 import LoadingIcon from "../components/stateless/interface/misc/loading-icon";
 import WhizpolicyLogo from "../components/stateless/interface/misc/whizpolicy-logo";
-import {
-  confirmSignUp,
-  signInUser,
-  signOutUser,
-  signUpUser,
-} from "../utils/api";
+import { confirmSignUp, signInUser, signOutUser, signUpUser } from "../utils/api";
 
 const SignupPage = () => {
   const [loading, setLoading] = useState(false);
@@ -20,7 +15,7 @@ const SignupPage = () => {
   const [confirmUser, setConfirmUser] = useState(false);
   const [error, setError] = useState(false);
   const router = useRouter();
-  const { register, handleSubmit } = useForm({ mode: "onBlur", defaultValues });
+  const { control, handleSubmit } = useForm({ mode: "onBlur", defaultValues });
   const onSubmit = (data) => {
     if (!confirmUser) {
       console.log(data);
@@ -58,9 +53,7 @@ const SignupPage = () => {
       </Box>
       <Box>
         <Typography variant="h5" align="center" sx={{ pt: 2, px: 1 }}>
-          {confirmUser
-            ? "Please check your email for the verification code"
-            : "Create account"}
+          {confirmUser ? "Please check your email for the verification code" : "Create account"}
         </Typography>
       </Box>
       <Box maxWidth={400}>
@@ -69,12 +62,7 @@ const SignupPage = () => {
             {!confirmUser ? (
               userFormFields.map((field) => (
                 <Grid key={field.name} item {...field.col} p={2}>
-                  <TextInput
-                    error={error}
-                    helperText="Username already exists"
-                    register={register}
-                    {...field}
-                  />
+                  <TextInput error={error} helperText="Username already exists" control={control} {...field} />
                 </Grid>
               ))
             ) : (
