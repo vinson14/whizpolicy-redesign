@@ -13,7 +13,7 @@ import { signInUser, signOutUser } from "../utils/api";
 const LoginPage = () => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const { control, handleSubmit } = useForm({ mode: "onBlur", defaultValues });
+  const { control, handleSubmit } = useForm({ mode: "onBlur" });
   const onSubmit = (data) => {
     console.log(data);
     setLoading(true);

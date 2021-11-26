@@ -38,6 +38,7 @@ const Dashboard = () => {
           onClose={closeSidebar}
           selectedSidebarOption={selectedSidebarOption}
           sidebarOptionOnClick={setSelectedSidebarOption}
+          handleLogout={handleLogout}
         />
         <Container sx={{ pb: 3, mt: NAVBAR_HEIGHT / 8 }}>
           <div>{mainComponent[selectedSidebarOption]}</div>

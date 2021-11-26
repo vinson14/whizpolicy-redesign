@@ -8,6 +8,7 @@ import PersonOffIcon from "@mui/icons-material/PersonOff";
 import AccessibleForwardIcon from "@mui/icons-material/AccessibleForward";
 import HotelIcon from "@mui/icons-material/Hotel";
 import LocalHospitalIcon from "@mui/icons-material/LocalHospital";
+import HomeIcon from "@mui/icons-material/Home";
 
 import countryList from "react-select-country-list";
 import TextInput from "../components/stateless/interface/form/text-input";
@@ -118,7 +119,7 @@ export const POLICY_PREMIUM_LABEL = "Premium";
 export const POLICY_PREMIUM_MODE_LABEL = "Premium Mode";
 export const POLICY_DEATH_BENEFIT_LABEL = "Death Benefit";
 export const POLICY_TPD_BENEFIT_LABEL = "Total Permanent Disability";
-export const POLICY_ACC_PARTIAL_DISABILITY_BENEFIT_LABEL = "Partial Permanent Disability";
+export const POLICY_ACC_PARTIAL_DISABILITY_BENEFIT_LABEL = "Acc. Partial Perm. Disability";
 export const POLICY_MAJOR_CI_BENEFIT_LABEL = "Major Critical Illness";
 export const POLICY_EARLY_CI_BENEFIT_LABEL = "Early Critical Illness";
 export const POLICY_MATURITY_DATE_LABEL = "Maturity Date";
@@ -126,8 +127,8 @@ export const POLICY_TERM_LABEL = "Policy Term";
 export const POLICY_PREMIUM_TERM_LABEL = "Premium Term";
 export const POLICY_GUARANTEED_MATURITY_BENEFIT_LABEL = "Guaranteed Maturity Benefit";
 export const POLICY_INCEPTION_DATE_LABEL = "Inception Date";
-export const POLICY_ACC_DEATH_BENEFIT_LABEL = "Death Benefit";
-export const POLICY_ACC_TPD_BENEFIT_LABEL = "Total Permanent Disability Benefit";
+export const POLICY_ACC_DEATH_BENEFIT_LABEL = "Acc. Death";
+export const POLICY_ACC_TPD_BENEFIT_LABEL = "Acc. Total Perm. Disability";
 export const POLICY_ACC_MEDICAL_LABEL = "Medical Reimbursement Benefit";
 export const POLICY_ACC_ALT_MEDICAL_LABEL = "TCM / Chiropractic Benefit";
 export const POLICY_ACC_DAILY_HOSP_LABEL = "Daily Hospital Benefit";
@@ -153,6 +154,8 @@ export const CLIENT_NATIONALITY_KEY = "nationality";
 export const CLIENT_ANNUAL_INCOME_KEY = "annualIncome";
 export const CLIENT_ADDRESS_KEY = "address";
 export const CLIENT_REMARKS_KEY = "remarks";
+export const CLIENT_ETHNICITY_KEY = "ethnicity";
+export const CLIENT_RELIGION_KEY = "religion";
 export const CLIENT_AGREED_KEY = "clientAgreed";
 
 // Client Object Labels
@@ -170,6 +173,8 @@ export const CLIENT_NATIONALITY_LABEL = "Nationality";
 export const CLIENT_ANNUAL_INCOME_LABEL = "Annual Income";
 export const CLIENT_ADDRESS_LABEL = "Address";
 export const CLIENT_REMARKS_LABEL = "Remarks";
+export const CLIENT_ETHNICITY_LABEL = "Ethnicity";
+export const CLIENT_RELIGION_LABEL = "Religion";
 export const CLIENT_AGREED_LABEL =
   "I confirm that I have obtained consent from my client to upload his/her personal data on this website.";
 
@@ -192,6 +197,8 @@ export const CLIENT_DEPENDANT_NAME_KEY = "name";
 export const CLIENT_DEPENDANT_RELATIONSHIP_KEY = "relationship";
 export const CLIENT_DEPENDANT_NAME_LABEL = "Name";
 export const CLIENT_DEPENDANT_RELATIONSHIP_LABEL = "Relationship";
+export const CLIENT_DEPENDANT_BIRTHDAY_KEY = "birthday";
+export const CLIENT_DEPENDANT_BIRTHDAY_LABEL = "Birthday";
 
 // Client Dependant Relationship Values and Label
 export const CLIENT_DEPENDANT_SON_VALUE = "son";
@@ -201,9 +208,9 @@ export const CLIENT_DEPENDANT_DAUGHTER_LABEL = "Daughter";
 export const CLIENT_DEPENDANT_SPOUSE_VALUE = "spouse";
 export const CLIENT_DEPENDANT_SPOUSE_LABEL = "Spouse";
 export const CLIENT_DEPENDANT_FATHER_VALUE = "father";
-export const CLIENT_DEPENDANT_FATHER_LABEL = "Aged Father";
+export const CLIENT_DEPENDANT_FATHER_LABEL = "Father";
 export const CLIENT_DEPENDANT_MOTHER_VALUE = "mother";
-export const CLIENT_DEPENDANT_MOTHER_LABEL = "Aged Mother";
+export const CLIENT_DEPENDANT_MOTHER_LABEL = "Mother";
 
 // Insurer Keys and Labels
 export const INSURER_AIA_KEY = "AIA";
@@ -289,6 +296,17 @@ export const SALUTATION_MS_LABEL = "Ms";
 export const SALUTATION_DR_VALUE = "dr";
 export const SALUTATION_DR_LABEL = "Dr";
 
+export const CLIENT_ETHNICITY_CHINESE_KEY = "chinese";
+export const CLIENT_ETHNICITY_CHINESE_LABEL = "Chinese";
+export const CLIENT_ETHNICITY_MALAY_LABEL_KEY = "malay";
+export const CLIENT_ETHINICITY_MALAY_LABEL = "Malay";
+export const CLIENT_ETHNICITY_INDIAN_LABEL_KEY = "indian";
+export const CLIENT_ETHINICITY_INDIAN_LABEL = "Indian";
+export const CLIENT_ETHNICITY_EURASIAN_LABEL_KEY = "eurasian";
+export const CLIENT_ETHINICITY_EURASIAN_LABEL = "Eurasian";
+export const CLIENT_ETHNICITY_OTHERS_LABEL_KEY = "others";
+export const CLIENT_ETHINICITY_OTHERS_LABEL = "Others";
+
 // Policy fund risk levels
 export const POLICY_ILP_FUND_RISK_HIGH_VALUE = "high";
 export const POLICY_ILP_FUND_RISK_BALANCED_VALUE = "balanced";
@@ -346,6 +364,10 @@ export const ALPHA_ONLY_MSG = "Only alphabets are allowed";
 export const MAX_VALUE_MSG = "This value cannot exceed MAX_VALUE";
 export const MAX_VALUE_MSG_PLACEHOLDER = "MAX_VALUE";
 export const CONSENT_REQUIRE_MSG = "Please confirm that consent has been obtained from client";
+export const AFTER_DATE_MSG = "This date cannot be after the ERR_DATE.";
+export const AFTER_DATE_MSG_PLACEHOLDER = "ERR_DATE";
+export const BEFORE_DATE_MSG = "This date cannot be before the ERR_DATE.";
+export const BEFORE_DATE_MSG_PLACEHOLDER = "ERR_DATE";
 
 export const NAVBAR_HEIGHT = 80;
 
@@ -412,6 +434,12 @@ export const clientDetailsContactFields = [
     icon: <EmailIcon />,
     type: FIELD_TYPE_TEXT,
   },
+  {
+    label: CLIENT_ADDRESS_LABEL,
+    key: CLIENT_ADDRESS_KEY,
+    icon: <HomeIcon />,
+    type: FIELD_TYPE_TEXT,
+  },
 ];
 
 export const clientDetailsAboutFields = [
@@ -444,6 +472,11 @@ export const clientDetailsAboutFields = [
     label: CLIENT_OCCUPATION_LABEL,
     key: CLIENT_OCCUPATION_KEY,
     type: FIELD_TYPE_TEXT_CAMELCASE,
+  },
+  {
+    label: CLIENT_ANNUAL_INCOME_LABEL,
+    key: CLIENT_ANNUAL_INCOME_KEY,
+    type: FIELD_TYPE_CURRENCY,
   },
 ];
 
@@ -554,12 +587,14 @@ export const newClientDefaultValues = {
   [CLIENT_ANNUAL_INCOME_KEY]: "",
   [CLIENT_BIRTHDAY_KEY]: new Date("1 Jan 2000"),
   [CLIENT_EMAIL_KEY]: "",
+  [CLIENT_ETHNICITY_KEY]: CLIENT_ETHNICITY_CHINESE_KEY,
   [CLIENT_GENDER_KEY]: GENDER_MALE_VALUE,
   [CLIENT_MARITAL_STATUS_KEY]: MARITAL_STATUS_SINGLE_VALUE,
   [CLIENT_MOBILE_KEY]: "",
   [CLIENT_NAME_KEY]: "",
   [CLIENT_NATIONALITY_KEY]: "Singapore",
   [CLIENT_OCCUPATION_KEY]: "",
+  [CLIENT_RELIGION_KEY]: "",
   [CLIENT_REMARKS_KEY]: "",
   [CLIENT_SALUTATION_KEY]: SALUTATION_MR_VALUE,
   [CLIENT_SMOKER_KEY]: SMOKER_NO_VALUE,
@@ -774,6 +809,35 @@ export const addClientFormFields = [
     },
   },
   {
+    name: CLIENT_ETHNICITY_KEY,
+    label: CLIENT_ETHNICITY_LABEL,
+    type: INPUT_TYPE_SELECT,
+    col: {
+      xs: 12,
+      md: 6,
+    },
+    options: [
+      { label: CLIENT_ETHNICITY_CHINESE_LABEL, value: CLIENT_ETHNICITY_CHINESE_KEY },
+      { label: CLIENT_ETHINICITY_MALAY_LABEL, value: CLIENT_ETHNICITY_MALAY_LABEL_KEY },
+      { label: CLIENT_ETHINICITY_INDIAN_LABEL, value: CLIENT_ETHNICITY_INDIAN_LABEL_KEY },
+      { label: CLIENT_ETHINICITY_EURASIAN_LABEL, value: CLIENT_ETHNICITY_EURASIAN_LABEL_KEY },
+      { label: CLIENT_ETHINICITY_OTHERS_LABEL, value: CLIENT_ETHNICITY_OTHERS_LABEL_KEY },
+    ],
+  },
+  {
+    name: CLIENT_RELIGION_KEY,
+    label: CLIENT_RELIGION_LABEL,
+    type: INPUT_TYPE_TEXT,
+    col: {
+      xs: 12,
+      md: 6,
+    },
+    maxLength: {
+      value: MAX_CLIENT_NAME_LENGTH,
+      message: MAX_CHAR_MSG.replace(MAX_CHAR_MSG_PLACEHOLDER, MAX_CLIENT_NAME_LENGTH),
+    },
+  },
+  {
     name: CLIENT_ADDRESS_KEY,
     label: CLIENT_ADDRESS_LABEL,
     type: INPUT_TYPE_TEXT,
@@ -799,6 +863,7 @@ export const addClientFormFields = [
       message: MAX_CHAR_MSG.replace(MAX_CHAR_MSG_PLACEHOLDER, MAX_CLIENT_REMARKS_LENGTH),
     },
   },
+
   {
     name: CLIENT_AGREED_KEY,
     label: CLIENT_AGREED_LABEL,
@@ -1379,6 +1444,7 @@ export const defaultPolicyFields = [
   POLICY_PREMIUM_TERM_KEY,
   POLICY_TERM_KEY,
   POLICY_INCEPTION_DATE_KEY,
+  POLICY_MATURITY_DATE_KEY,
 ];
 
 export const defaultLifePolicyFields = [
@@ -1528,6 +1594,7 @@ export const policyDetailsCoverageCardFields = [
 export const defaultDependantFormValues = {
   [CLIENT_DEPENDANT_NAME_KEY]: "",
   [CLIENT_DEPENDANT_RELATIONSHIP_KEY]: CLIENT_DEPENDANT_SON_VALUE,
+  [CLIENT_DEPENDANT_BIRTHDAY_KEY]: new Date("1 Jan 2000"),
 };
 
 export const addDependantFormFields = [
@@ -1535,26 +1602,23 @@ export const addDependantFormFields = [
     name: CLIENT_DEPENDANT_NAME_KEY,
     label: CLIENT_DEPENDANT_NAME_LABEL,
     type: INPUT_TYPE_TEXT,
-    required: {
-      value: true,
-      message: REQUIRED_MSG.replace(REQUIRED_MSG_PLACEHOLDER, "name"),
-    },
-    minLength: {
-      value: MIN_CLIENT_NAME_LENGTH,
-      message: MIN_CHAR_MSG.replace(MIN_CHAR_MSG_PLACEHOLDER, MIN_CLIENT_NAME_LENGTH),
-    },
-    maxLength: {
-      value: MAX_CLIENT_NAME_LENGTH,
-      message: MAX_CHAR_MSG.replace(MAX_CHAR_MSG_PLACEHOLDER, MAX_CLIENT_NAME_LENGTH),
-    },
-    pattern: {
-      value: /\b([A-ZÀ-ÿ][-,a-z. ']+[ ]*)+/,
-      message: ALPHA_ONLY_MSG,
+    rules: {
+      required: {
+        value: true,
+        message: REQUIRED_MSG.replace(REQUIRED_MSG_PLACEHOLDER, "name"),
+      },
+      minLength: {
+        value: MIN_CLIENT_NAME_LENGTH,
+        message: MIN_CHAR_MSG.replace(MIN_CHAR_MSG_PLACEHOLDER, MIN_CLIENT_NAME_LENGTH),
+      },
+      maxLength: {
+        value: MAX_CLIENT_NAME_LENGTH,
+        message: MAX_CHAR_MSG.replace(MAX_CHAR_MSG_PLACEHOLDER, MAX_CLIENT_NAME_LENGTH),
+      },
     },
     col: {
       xs: 12,
       md: 6,
-      lg: 5,
     },
   },
   {
@@ -1583,7 +1647,20 @@ export const addDependantFormFields = [
     col: {
       xs: 12,
       md: 6,
-      lg: 5,
+    },
+  },
+  {
+    name: CLIENT_DEPENDANT_BIRTHDAY_KEY,
+    label: CLIENT_DEPENDANT_BIRTHDAY_LABEL,
+    minDate: new Date("1 Jan 1900"),
+    maxDate: new Date(),
+    type: INPUT_TYPE_DATEPICKER,
+    rules: {
+      validate: (value) => !isAfter(value, new Date()) || FUTURE_DATE_ERR_MSG,
+    },
+    col: {
+      xs: 12,
+      md: 6,
     },
   },
 ];

@@ -43,7 +43,7 @@ export const PolicyCard = ({ policy, onClick }) => {
   return (
     <ClientDetailCard onClick={onClick}>
       <ClientCardHeader>
-        {insurerLabels[policy.insurer]} - {policy.policyName}
+        {policy.insurer} - {policy.policyName}
       </ClientCardHeader>
       <Grid container>
         {policyCardFields.map((field) => (

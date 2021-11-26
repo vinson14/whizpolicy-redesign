@@ -22,6 +22,7 @@ const useDashboardClientsState = (authState) => {
 
   useEffect(() => {
     if (!authState) {
+      setLoading(true);
       setAllNull();
       return;
     }
@@ -62,19 +63,14 @@ const useDashboardClientsState = (authState) => {
   useEffect(() => {
     scrollToTop();
     if (!selectedClient) {
-      setBreadcrumbs([
-        { label: "Dashboard", onClick: null },
-        { label: "Clients", onClick: null },
-      ]);
+      setBreadcrumbs([{ label: "Clients", onClick: null }]);
     } else if (!selectedPolicy) {
       setBreadcrumbs([
-        { label: "Dashboard", onClick: null },
         { label: "Clients", onClick: () => setSelectedClient(null) },
         { label: `${selectedClient?.name}`, onClick: null },
       ]);
     } else {
       setBreadcrumbs([
-        { label: "Dashboard", onClick: null },
         {
           label: "Clients",
           onClick: () => {

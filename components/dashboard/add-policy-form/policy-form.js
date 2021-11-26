@@ -8,9 +8,11 @@ import {
   inputTypeMapping,
   policyCategoryFields,
   POLICY_CATEGORY_KEY,
+  POLICY_INCEPTION_DATE_KEY,
 } from "../../../data/ui";
 import { deletePolicyToClient, postPolicyToClient, putPolicyToClient } from "../../../utils/api";
 import useModal from "../../../utils/useModal";
+import usePolicyTerm from "../../../utils/usePolicyTerm";
 import AddButton from "../../stateless/interface/buttons/add-button";
 import DeleteButton from "../../stateless/interface/buttons/delete-button";
 import EditButton from "../../stateless/interface/buttons/edit-button";
@@ -26,15 +28,19 @@ const PolicyForm = ({ open, onClose, values, client, setLoading }) => {
     watch,
     formState: { errors },
     reset,
+    setValue,
+    setError,
   } = useForm({
     mode: "onBlur",
     defaultValues: values ? { ...values } : { ...defaultPolicyFormValues },
   });
+  usePolicyTerm(watch, setValue, setError);
   const [deleteModalState, openDeleteModal, closeDeleteModal] = useModal();
   const [deleteLoading, setDeleteLoading] = useState(false);
   const [addLoading, setAddLoading] = useState(false);
   const [editLoading, setEditLoading] = useState(false);
   const policyCategory = watch(POLICY_CATEGORY_KEY);
+
   const fieldNames = policyCategoryFields[policyCategory];
   const onSubmit = (policy) => {
     console.log(policy);

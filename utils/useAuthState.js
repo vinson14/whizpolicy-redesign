@@ -13,6 +13,7 @@ const useAuthState = () => {
   }, []);
 
   const handleLogout = () => {
+    setAuthState(false);
     signOutUser().then((res) => {
       if (res) {
         setAuthState(false);
