@@ -71,7 +71,7 @@ const ClientForm = ({ open, onClose, values, setLoading }) => {
               </Grid>
             );
           })}
-          <Grid item xs={12}>
+          <Grid item xs={12} p={1}>
             {values ? (
               <>
                 <EditButton loading={editLoading} type="submit">
