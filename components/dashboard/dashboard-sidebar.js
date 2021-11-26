@@ -1,9 +1,18 @@
 import { List, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
+import { useState } from "react";
 import { sidebarItems } from "../../data/ui";
 import SidebarLogoutButton from "../stateless/interface/buttons/sidebar-logout-button";
 import SidebarContainer from "../stateless/interface/navigation/sidebar-container";
 
-const DashboardSidebar = ({ open, onClose, selectedSidebarOption, sidebarOptionOnClick }) => {
+const DashboardSidebar = ({ open, onClose, selectedSidebarOption, sidebarOptionOnClick, handleLogout }) => {
+  const [loggingOut, setLoggingOut] = useState(false);
+
+  const logoutOnClick = () => {
+    setLoggingOut(true);
+    handleLogout();
+    onClose();
+  };
+
   return (
     <SidebarContainer open={open} onClose={onClose}>
       <List>
@@ -21,12 +30,7 @@ const DashboardSidebar = ({ open, onClose, selectedSidebarOption, sidebarOptionO
             </ListItemButton>
           </ListItem>
         ))}
-        <SidebarLogoutButton
-          onClick={() => {
-            handleLogout();
-            onClose();
-          }}
-        />
+        <SidebarLogoutButton onClick={logoutOnClick} />
       </List>
     </SidebarContainer>
   );

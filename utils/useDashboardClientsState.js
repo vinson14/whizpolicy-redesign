@@ -22,6 +22,7 @@ const useDashboardClientsState = (authState) => {
 
   useEffect(() => {
     if (!authState) {
+      setLoading(true);
       setAllNull();
       return;
     }
