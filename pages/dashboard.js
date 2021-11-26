@@ -34,19 +34,13 @@ import TopAppBar from "../components/stateless/interface/navigation/top-appbar";
 import { useRouter } from "next/router";
 import DashboardContext from "../context/dashboard-context";
 import DashboardSidebar from "../components/dashboard/dashboard-sidebar";
+import useAuthState from "../utils/useAuthState";
 
 Amplify.configure(awsConfig);
 
 const Dashboard = () => {
   const router = useRouter();
-  const [authState, setAuthState] = useState();
-
-  useEffect(() => {
-    isUserAuthenticated().then((res) => {
-      if (!res) router.push("/login");
-      else setAuthState(true);
-    });
-  }, []);
+  const authState = useAuthState();
 
   const [clients, setClients] = useState([]);
   const [policies, setPolicies] = useState([]);
@@ -92,23 +86,8 @@ const Dashboard = () => {
     setUpdateClients(false);
   }, [updateClients, authState]);
 
-  onAuthUIStateChange((nextAuthState, authData) => {
-    setAuthState(nextAuthState);
-  });
-
   const mainComponent = {
-    [SIDEBAR_CLIENTS_VALUE]: (
-      <DashboardClients
-        openSidebar={openSidebar}
-        clients={clients}
-        selectedClient={selectedClient}
-        selectedPolicy={selectedPolicy}
-        breadcrumbLinks={breadcrumbLinks}
-        clientOnClick={clientOnClick}
-        policyOnClick={policyOnClick}
-        setUpdateClients={setUpdateClients}
-      />
-    ),
+    [SIDEBAR_CLIENTS_VALUE]: <DashboardClients authState={authState} />,
     [SIDEBAR_PORTFOLIO_VALUE]: (
       <DashboardPortfolio
         openSidebar={openSidebar}

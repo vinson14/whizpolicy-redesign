@@ -11,7 +11,7 @@ const ClientDetails = ({ client, policyOnClick }) => {
         return (
           <CustomGrow key={index} index={index}>
             <Grid item {...col}>
-              <Component client={client} {...props} />
+              <Component policies={client.policies} client={client} policyOnClick={policyOnClick} {...props} />
             </Grid>
           </CustomGrow>
         );
