@@ -1,4 +1,5 @@
 import { Amplify, API, Auth } from "aws-amplify";
+import { differenceInCalendarYears } from "date-fns";
 import differenceInYears from "date-fns/differenceInYears";
 import awsmobile from "../src/aws-exports";
 import { deserializeClient, findPolicyByPolicyId, serializeClientForm, formatPolicyFormValues } from "./utils";
@@ -235,4 +236,8 @@ export const confirmSignUp = async (username, code) => {
     console.log("error", err);
     return false;
   }
+};
+
+export const getDifferenceInCalendarYears = (earlierDate, laterDate) => {
+  return differenceInCalendarYears(laterDate, earlierDate);
 };

@@ -347,6 +347,10 @@ export const ALPHA_ONLY_MSG = "Only alphabets are allowed";
 export const MAX_VALUE_MSG = "This value cannot exceed MAX_VALUE";
 export const MAX_VALUE_MSG_PLACEHOLDER = "MAX_VALUE";
 export const CONSENT_REQUIRE_MSG = "Please confirm that consent has been obtained from client";
+export const AFTER_DATE_MSG = "This date cannot be after the ERR_DATE.";
+export const AFTER_DATE_MSG_PLACEHOLDER = "ERR_DATE";
+export const BEFORE_DATE_MSG = "This date cannot be before the ERR_DATE.";
+export const BEFORE_DATE_MSG_PLACEHOLDER = "ERR_DATE";
 
 export const NAVBAR_HEIGHT = 80;
 
