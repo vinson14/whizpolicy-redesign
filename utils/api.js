@@ -196,6 +196,7 @@ export const signInUser = async (user) => {
     return loggedInUser;
   } catch (error) {
     console.log("error signing in", error);
+    return false;
   }
 };
 

@@ -17,6 +17,7 @@ import SelectInput from "../components/stateless/interface/form/select-input";
 import DateInput from "../components/stateless/interface/form/date-input";
 import CurrencyInput from "../components/stateless/interface/form/currency-input";
 import YearInput from "../components/stateless/interface/form/year-input";
+import PasswordInput from "../components/stateless/interface/form/password-input";
 import ContactCard from "../components/dashboard/client-details/contact-card";
 import NameCard from "../components/dashboard/client-details/name-card";
 import AboutCard from "../components/dashboard/client-details/about-card";
@@ -54,6 +55,7 @@ export const INPUT_TYPE_CURRENCY = "currencyInput";
 export const INPUT_TYPE_YEAR = "yearInput";
 export const INPUT_TYPE_CHECKBOX = "checkboxInput";
 export const INPUT_TYPE_PHONE = "phoneInput";
+export const INPUT_TYPE_PASSWORD = "passwordInput";
 
 // Field Types
 export const FIELD_TYPE_TEXT = "text";
@@ -330,6 +332,19 @@ export const POLICY_HOSP_RIDER_TYPE_FULL_LABEL = "Full";
 export const POLICY_HOSP_RIDER_TYPE_PARTIAL_VALUE = "partial";
 export const POLICY_HOSP_RIDER_TYPE_PARTIAL_LABEL = "Partial";
 
+// Login and registration fields
+export const LOGIN_USERNAME_KEY = "username";
+export const LOGIN_USERNAME_LABEL = "Username";
+export const LOGIN_PASSWORD_KEY = "password";
+export const LOGIN_PASSWORD_LABEL = "Password";
+
+export const SIGNUP_EMAIL_KEY = "email";
+export const SIGNUP_EMAIL_LABEL = "Email";
+export const SIGNUP_PASSWORD_KEY = "password";
+export const SIGNUP_PASSWORD_LABEL = "Password";
+export const SIGNUP_CONFIRM_PASSWORD_KEY = "confirmPassword";
+export const SIGNUP_CONFIRM_PASSWORD_LABEL = "Confirm Password";
+
 // Validation values
 export const MIN_POLICY_NAME_LENGTH = 2;
 export const MAX_POLICY_NAME_LENGTH = 70;
@@ -348,6 +363,7 @@ export const MAX_BENEFIT = 99999999999;
 export const MAX_PREMIUM = 9999999999;
 export const MAX_CLIENT_REMARKS_LENGTH = 1000;
 export const MAX_ADDRESS_LENGTH = 1000;
+export const MIN_PASSWORD_LENGTH = 8;
 
 // Form error messages
 export const MIN_CHAR_MSG_PLACEHOLDER = "CHAR";
@@ -1504,6 +1520,7 @@ export const inputTypeMapping = {
   [INPUT_TYPE_YEAR]: YearInput,
   [INPUT_TYPE_CHECKBOX]: CheckboxInput,
   [INPUT_TYPE_PHONE]: PhoneInput,
+  [INPUT_TYPE_PASSWORD]: PasswordInput,
 };
 
 export const policyDetailsAboutCardFields = [
@@ -1669,4 +1686,99 @@ export const coverageOverviewLegend = [
   { label: "Sufficient coverage", color: "secondary.main" },
   { label: "Insufficient coverage", color: "warning.main" },
   { label: "No coverage", color: "error.main" },
+];
+
+export const defaultLoginFormValues = {
+  [LOGIN_USERNAME_KEY]: "",
+  [LOGIN_PASSWORD_KEY]: "",
+};
+
+export const loginFields = [
+  {
+    name: LOGIN_USERNAME_KEY,
+    label: LOGIN_USERNAME_LABEL,
+    type: INPUT_TYPE_TEXT,
+    rules: {
+      required: {
+        value: true,
+        message: REQUIRED_MSG.replace(REQUIRED_MSG_PLACEHOLDER, "username"),
+      },
+    },
+    col: {
+      xs: 12,
+      md: 6,
+    },
+  },
+  {
+    name: LOGIN_PASSWORD_KEY,
+    label: LOGIN_PASSWORD_LABEL,
+    type: INPUT_TYPE_PASSWORD,
+    rules: {
+      required: {
+        value: true,
+        message: REQUIRED_MSG.replace(REQUIRED_MSG_PLACEHOLDER, "password"),
+      },
+    },
+    col: {
+      xs: 12,
+      md: 6,
+    },
+  },
+];
+
+export const defaultSignupFormValues = {
+  [SIGNUP_EMAIL_KEY]: "",
+  [SIGNUP_PASSWORD_KEY]: "",
+  [SIGNUP_CONFIRM_PASSWORD_KEY]: "",
+};
+
+export const signupFields = [
+  {
+    name: SIGNUP_EMAIL_KEY,
+    label: SIGNUP_EMAIL_LABEL,
+    type: INPUT_TYPE_TEXT,
+    rules: {
+      required: {
+        value: true,
+        message: REQUIRED_MSG.replace(REQUIRED_MSG_PLACEHOLDER, "email"),
+      },
+      pattern: {
+        value:
+          /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/,
+        message: INVALID_EMAIL_MSG,
+      },
+    },
+    col: {
+      xs: 12,
+      md: 6,
+    },
+  },
+  {
+    name: SIGNUP_PASSWORD_KEY,
+    label: SIGNUP_PASSWORD_LABEL,
+    type: INPUT_TYPE_PASSWORD,
+    rules: {
+      required: {
+        value: true,
+        message: REQUIRED_MSG.replace(REQUIRED_MSG_PLACEHOLDER, "password"),
+      },
+      minLength: {
+        value: MIN_PASSWORD_LENGTH,
+        message: MIN_CHAR_MSG.replace(MIN_CHAR_MSG_PLACEHOLDER, MIN_PASSWORD_LENGTH),
+      },
+    },
+    col: {
+      xs: 12,
+      md: 6,
+    },
+  },
+  {
+    name: SIGNUP_CONFIRM_PASSWORD_KEY,
+    label: SIGNUP_CONFIRM_PASSWORD_LABEL,
+    type: INPUT_TYPE_PASSWORD,
+    col: {
+      xs: 12,
+      md: 6,
+    },
+  },
 ];
