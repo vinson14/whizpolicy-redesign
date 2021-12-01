@@ -63,7 +63,7 @@ const useDashboardClientsState = (authState) => {
   useEffect(() => {
     scrollToTop();
     if (!selectedClient) {
-      setBreadcrumbs([{ label: "Clients", onClick: null }]);
+      setBreadcrumbs([]);
     } else if (!selectedPolicy) {
       setBreadcrumbs([
         { label: "Clients", onClick: () => setSelectedClient(null) },
