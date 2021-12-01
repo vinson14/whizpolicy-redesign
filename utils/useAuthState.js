@@ -6,12 +6,11 @@ const useAuthState = () => {
   const [authState, setAuthState] = useState(false);
   const router = useRouter();
   useEffect(() => {
-    console.log("useAuthState useEffect runs");
     isUserAuthenticated().then((res) => {
       if (!res) router.push("/login");
       else setAuthState(true);
     });
-  }, []);
+  }, [router]);
 
   const handleLogout = () => {
     setAuthState(false);

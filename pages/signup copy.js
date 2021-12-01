@@ -18,7 +18,6 @@ const SignupPage = () => {
   const { control, handleSubmit } = useForm({ mode: "onBlur", defaultValues });
   const onSubmit = (data) => {
     if (!confirmUser) {
-      console.log(data);
       setLoading(true);
       signUpUser(data)
         .then((newUser) => {

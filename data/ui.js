@@ -1488,7 +1488,6 @@ export const defaultPolicyFields = [
 
 export const defaultLifePolicyFields = [
   ...defaultPolicyFields,
-  POLICY_MATURITY_DATE_KEY,
   POLICY_DEATH_BENEFIT_KEY,
   POLICY_TPD_BENEFIT_KEY,
   POLICY_MAJOR_CI_BENEFIT_KEY,

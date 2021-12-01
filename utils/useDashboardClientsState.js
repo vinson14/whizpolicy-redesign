@@ -39,7 +39,6 @@ const useDashboardClientsState = (authState) => {
     setSelectedClient(newSelectedClient);
     if (newSelectedClient) {
       const foundPolicy = findPolicyByPolicyId(newSelectedClient.policies, selectedPolicy?.policyId);
-      console.log("foundPolicy", foundPolicy);
       setSelectedPolicy(foundPolicy);
     }
   }, [clients, selectedClient, selectedPolicy]);
