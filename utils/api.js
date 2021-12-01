@@ -193,7 +193,6 @@ export const deleteDependantToClient = async (client, dependant) => {
 
 export const signInUser = async (user) => {
   try {
-    console.log(user);
     const loggedInUser = await Auth.signIn(user.username, user.password);
     return { ok: true, loggedInUser };
   } catch (error) {
