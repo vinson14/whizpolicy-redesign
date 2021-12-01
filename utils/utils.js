@@ -17,7 +17,7 @@ export const getInitials = (name) => {
 };
 
 export const findClientById = (clients, id) => {
-  return clients.find((client) => client.clientId == id);
+  return clients ? clients.find((client) => client.clientId == id) : null;
 };
 
 export const findPolicyByPolicyId = (policies, policyId) => {

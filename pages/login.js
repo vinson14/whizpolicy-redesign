@@ -9,6 +9,8 @@ import { LoadingButton } from "@mui/lab";
 import { signInUser } from "../utils/api";
 import { useRouter } from "next/router";
 import { defaultLoginFormValues, inputTypeMapping, loginFields } from "../data/ui";
+import LoginHeader from "../components/stateless/interface/misc/login-header";
+import BaseButton from "../components/stateless/interface/buttons/base-button";
 
 const LoginPage = () => {
   const router = useRouter();
@@ -22,9 +24,11 @@ const LoginPage = () => {
   } = useForm({ mode: "onBlur", defaultValues: { ...defaultLoginFormValues } });
   const onSubmit = (values) => {
     setLoading(true);
-    signInUser(values).then((user) => {
-      if (user) {
+    signInUser(values).then((res) => {
+      if (res.ok) {
         router.push("/dashboard");
+      } else if (res.error.name === "UserNotConfirmedException") {
+        router.push(`/verify-user?username=${values.username}`);
       } else {
         setInvalidCredentials(true);
         setLoading(false);
@@ -38,14 +42,7 @@ const LoginPage = () => {
   };
   return (
     <Container sx={containerSx}>
-      <Box display="flex" justifyContent="center">
-        <WhizpolicyLogo size={1.5} />
-      </Box>
-      <Box>
-        <Typography variant="h6" align="center" sx={{ mt: 1, pt: 3, px: 1 }}>
-          Sign In
-        </Typography>
-      </Box>
+      <LoginHeader title="Login" />
       <Box>
         <FormContainer handleSubmit={handleSubmit} onSubmit={onSubmit}>
           <Box p={4} width={400} display="flex" flexDirection="column" justifyContent="center" alignItems="center">
@@ -57,18 +54,13 @@ const LoginPage = () => {
                 </Box>
               );
             })}
-            <LoadingButton loading={loading} type="submit" variant="contained" fullWidth sx={{ my: 3 }}>
+
+            <BaseButton loading={loading} type="submit" fullWidth>
               Login
-            </LoadingButton>
-            <LoadingButton
-              loading={rerouteLoading}
-              variant="contained"
-              color="secondary"
-              onClick={routeToSignupPage}
-              fullWidth
-            >
+            </BaseButton>
+            <BaseButton loading={rerouteLoading} color="secondary" onClick={routeToSignupPage} fullWidth>
               Sign up
-            </LoadingButton>
+            </BaseButton>
           </Box>
         </FormContainer>
       </Box>

@@ -338,7 +338,15 @@ export const LOGIN_USERNAME_LABEL = "Username";
 export const LOGIN_PASSWORD_KEY = "password";
 export const LOGIN_PASSWORD_LABEL = "Password";
 
-export const SIGNUP_EMAIL_KEY = "email";
+export const SIGNUP_USERNAME_KEY = "username";
+export const SIGNUP_USERNAME_LABEL = "Username";
+export const SIGNUP_GIVEN_NAME_KEY = "attributes.given_name";
+export const SIGNUP_GIVEN_NAME_LABEL = "Given Name";
+export const SIGNUP_FAMILY_NAME_KEY = "attributes.family_name";
+export const SIGNUP_FAMILY_NAME_LABEL = "Family Name";
+export const SIGNUP_RNF_KEY = "attributes.custom:rnf_code";
+export const SIGNUP_RNF_LABEL = "RNF Code";
+export const SIGNUP_EMAIL_KEY = "username";
 export const SIGNUP_EMAIL_LABEL = "Email";
 export const SIGNUP_PASSWORD_KEY = "password";
 export const SIGNUP_PASSWORD_LABEL = "Password";
@@ -380,10 +388,26 @@ export const ALPHA_ONLY_MSG = "Only alphabets are allowed";
 export const MAX_VALUE_MSG = "This value cannot exceed MAX_VALUE";
 export const MAX_VALUE_MSG_PLACEHOLDER = "MAX_VALUE";
 export const CONSENT_REQUIRE_MSG = "Please confirm that consent has been obtained from client";
-export const AFTER_DATE_MSG = "This date cannot be after the ERR_DATE.";
+export const AFTER_DATE_MSG = "This date cannot be after the ERR_DATE";
 export const AFTER_DATE_MSG_PLACEHOLDER = "ERR_DATE";
-export const BEFORE_DATE_MSG = "This date cannot be before the ERR_DATE.";
+export const BEFORE_DATE_MSG = "This date cannot be before the ERR_DATE";
 export const BEFORE_DATE_MSG_PLACEHOLDER = "ERR_DATE";
+export const EMAIL_EXISTS_MSG = "This email address has already been registered";
+export const PASSWORD_NO_UPPERCASE_MSG = "Your password must contain at least 1 uppercase alphabet";
+export const PASSWORD_NO_LOWERCASE_MSG = "Your password must contain at least 1 lowercase alphabet";
+export const PASSWORD_NO_DIGIT_MSG = "Your password must contain at least 1 digit";
+export const PASSWORD_NO_SPECIAL_CHAR_MSG =
+  "Your password must contain at least 1 one of the following special characters: ^ $ * . [ ] { } ( ) ? - \" ! @ # % & / \\ , > < ' : ; | _ ~ ` + =";
+export const INVALID_VERIFICATION_CODE_MSG =
+  "Please ensure you have entered the correct verification code.\nIf you have not received a verification code, please request for a new verification code below.";
+
+// Regex expressions
+export const EMAIL_REGEX =
+  /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
+export const PASSWORD_UPPERCASE_LETTER_REGEX = /^(?=.*[A-Z])/;
+export const PASSWORD_LOWERCASE_LETTER_REGEX = /^(?=.*[a-z])/;
+export const PASSWORD_DIGIT_REGEX = /^(?=.*\d)/;
+export const PASSWORD_SPECIAL_CHAR_REGEX = /^(?=.*[\^$*[\]{}()?\-"!@#%&/\\,><':;|_~`+=])/;
 
 export const NAVBAR_HEIGHT = 80;
 
@@ -669,8 +693,7 @@ export const addClientFormFields = [
         message: REQUIRED_MSG_SPECIAL.replace(REQUIRED_MSG_PLACEHOLDER, "email"),
       },
       pattern: {
-        value:
-          /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/,
+        value: EMAIL_REGEX,
         message: INVALID_EMAIL_MSG,
       },
     },
@@ -1730,9 +1753,27 @@ export const defaultSignupFormValues = {
   [SIGNUP_EMAIL_KEY]: "",
   [SIGNUP_PASSWORD_KEY]: "",
   [SIGNUP_CONFIRM_PASSWORD_KEY]: "",
+  [SIGNUP_GIVEN_NAME_KEY]: "",
+  [SIGNUP_FAMILY_NAME_KEY]: "",
+  [SIGNUP_RNF_KEY]: "",
 };
 
 export const signupFields = [
+  // {
+  //   name: SIGNUP_USERNAME_KEY,
+  //   label: SIGNUP_USERNAME_LABEL,
+  //   type: INPUT_TYPE_TEXT,
+  //   rules: {
+  //     required: {
+  //       value: true,
+  //       message: REQUIRED_MSG.replace(REQUIRED_MSG_PLACEHOLDER, "username"),
+  //     },
+  //   },
+  //   col: {
+  //     xs: 12,
+  //     md: 6,
+  //   },
+  // },
   {
     name: SIGNUP_EMAIL_KEY,
     label: SIGNUP_EMAIL_LABEL,
@@ -1743,8 +1784,7 @@ export const signupFields = [
         message: REQUIRED_MSG.replace(REQUIRED_MSG_PLACEHOLDER, "email"),
       },
       pattern: {
-        value:
-          /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/,
+        value: EMAIL_REGEX,
         message: INVALID_EMAIL_MSG,
       },
     },
@@ -1766,6 +1806,12 @@ export const signupFields = [
         value: MIN_PASSWORD_LENGTH,
         message: MIN_CHAR_MSG.replace(MIN_CHAR_MSG_PLACEHOLDER, MIN_PASSWORD_LENGTH),
       },
+      validate: {
+        upperCaseChar: (v) => PASSWORD_UPPERCASE_LETTER_REGEX.test(v) || PASSWORD_NO_UPPERCASE_MSG,
+        lowerCaseChar: (v) => PASSWORD_LOWERCASE_LETTER_REGEX.test(v) || PASSWORD_NO_LOWERCASE_MSG,
+        digit: (v) => PASSWORD_DIGIT_REGEX.test(v) || PASSWORD_NO_DIGIT_MSG,
+        specialChar: (v) => PASSWORD_SPECIAL_CHAR_REGEX.test(v) || PASSWORD_NO_SPECIAL_CHAR_MSG,
+      },
     },
     col: {
       xs: 12,
@@ -1781,4 +1827,54 @@ export const signupFields = [
       md: 6,
     },
   },
+  {
+    name: SIGNUP_GIVEN_NAME_KEY,
+    label: SIGNUP_GIVEN_NAME_LABEL,
+    type: INPUT_TYPE_TEXT,
+    rules: {
+      required: {
+        value: true,
+        message: REQUIRED_MSG.replace(REQUIRED_MSG_PLACEHOLDER, "given name"),
+      },
+    },
+    col: {
+      xs: 12,
+      md: 6,
+    },
+  },
+  {
+    name: SIGNUP_FAMILY_NAME_KEY,
+    label: SIGNUP_FAMILY_NAME_LABEL,
+    type: INPUT_TYPE_TEXT,
+    rules: {
+      required: {
+        value: true,
+        message: REQUIRED_MSG.replace(REQUIRED_MSG_PLACEHOLDER, "family name"),
+      },
+    },
+    col: {
+      xs: 12,
+      md: 6,
+    },
+  },
+  {
+    name: SIGNUP_RNF_KEY,
+    label: SIGNUP_RNF_LABEL,
+    type: INPUT_TYPE_TEXT,
+    rules: {
+      required: {
+        value: true,
+        message: REQUIRED_MSG.replace(REQUIRED_MSG_PLACEHOLDER, "RNF Code"),
+      },
+    },
+    col: {
+      xs: 12,
+      md: 6,
+    },
+  },
 ];
+
+export const userNameAlreadyExistsError = {
+  type: "Username Exists",
+  message: "This email address has already been taken",
+};
