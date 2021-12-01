@@ -42,7 +42,7 @@ const useDashboardClientsState = (authState) => {
       console.log("foundPolicy", foundPolicy);
       setSelectedPolicy(foundPolicy);
     }
-  }, [clients]);
+  }, [clients, selectedClient, selectedPolicy]);
 
   const clientOnClick = (client) => {
     setSelectedClient(client);
