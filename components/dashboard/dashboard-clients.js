@@ -35,7 +35,7 @@ const DashboardClients = ({ authState, openSidebar }) => {
         <DashboardHeaderContainer>
           <CustomBreadcrumbs breadcrumbs={breadcrumbs} />
         </DashboardHeaderContainer>
-        <Grid mt={{ xs: 2, md: 5 }} container alignItems="stretch" spacing={3}>
+        <Grid mt={{ xs: 2, md: 3 }} container alignItems="stretch" spacing={3}>
           {!selectedClient && <ClientCards clients={clients} clientOnClick={clientOnClick} />}
           {selectedClient && !selectedPolicy && (
             <ClientDetails client={selectedClient} policyOnClick={policyOnClick} setLoading={setLoading} />
