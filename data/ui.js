@@ -520,6 +520,16 @@ export const clientDetailsAboutFields = [
     key: CLIENT_ANNUAL_INCOME_KEY,
     type: FIELD_TYPE_CURRENCY,
   },
+  {
+    label: CLIENT_ETHNICITY_LABEL,
+    key: CLIENT_ETHNICITY_KEY,
+    type: FIELD_TYPE_TEXT_CAMELCASE,
+  },
+  {
+    label: CLIENT_RELIGION_LABEL,
+    key: CLIENT_RELIGION_KEY,
+    type: FIELD_TYPE_CURRENCY,
+  },
 ];
 
 export const clientDetailsFinancialOverviewFields = [
