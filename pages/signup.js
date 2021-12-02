@@ -31,7 +31,7 @@ const SignupPage = () => {
     formState: { errors },
     setError,
     watch,
-  } = useForm({ defaultValues: { ...defaultSignupFormValues } });
+  } = useForm({ mode: "onTouched", defaultValues: { ...defaultSignupFormValues } });
 
   const onSubmit = (values) => {
     setLoading(true);

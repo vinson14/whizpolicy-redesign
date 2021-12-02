@@ -372,6 +372,8 @@ export const MAX_PREMIUM = 9999999999;
 export const MAX_CLIENT_REMARKS_LENGTH = 1000;
 export const MAX_ADDRESS_LENGTH = 1000;
 export const MIN_PASSWORD_LENGTH = 8;
+export const MIN_RNF_CODE_LENGTH = 12;
+export const MAX_RNF_CODE_LENGTH = 12;
 
 // Form error messages
 export const MIN_CHAR_MSG_PLACEHOLDER = "CHAR";
@@ -1481,9 +1483,9 @@ export const defaultPolicyFields = [
   POLICY_PREMIUM_KEY,
   POLICY_PREMIUM_MODE_KEY,
   POLICY_PREMIUM_TERM_KEY,
-  POLICY_TERM_KEY,
   POLICY_INCEPTION_DATE_KEY,
   POLICY_MATURITY_DATE_KEY,
+  POLICY_TERM_KEY,
 ];
 
 export const defaultLifePolicyFields = [
@@ -1525,7 +1527,6 @@ export const policyCategoryFields = {
   [POLICY_CATEGORY_ENDOWMENT_KEY]: [
     ...defaultPolicyFields,
     POLICY_DEATH_BENEFIT_KEY,
-    POLICY_MATURITY_DATE_KEY,
     POLICY_GUARANTEED_MATURITY_BENEFIT_KEY,
   ],
   [POLICY_CATEGORY_ILP_KEY]: [...defaultLifePolicyFields, POLICY_ILP_FUND_RISK_KEY],
@@ -1864,6 +1865,38 @@ export const signupFields = [
       required: {
         value: true,
         message: REQUIRED_MSG.replace(REQUIRED_MSG_PLACEHOLDER, "RNF Code"),
+      },
+      minLength: {
+        value: MIN_RNF_CODE_LENGTH,
+        message: MIN_CHAR_MSG.replace(MIN_CHAR_MSG_PLACEHOLDER, MIN_RNF_CODE_LENGTH),
+      },
+      maxLength: {
+        value: MAX_RNF_CODE_LENGTH,
+        message: MAX_CHAR_MSG.replace(MAX_CHAR_MSG_PLACEHOLDER, MAX_RNF_CODE_LENGTH),
+      },
+    },
+    col: {
+      xs: 12,
+      md: 6,
+    },
+  },
+];
+
+export const resetPasswordDefaultValues = { [SIGNUP_EMAIL_KEY]: "" };
+
+export const resetPasswordFields = [
+  {
+    name: SIGNUP_EMAIL_KEY,
+    label: SIGNUP_EMAIL_LABEL,
+    type: INPUT_TYPE_TEXT,
+    rules: {
+      required: {
+        value: true,
+        message: REQUIRED_MSG.replace(REQUIRED_MSG_PLACEHOLDER, "email"),
+      },
+      pattern: {
+        value: EMAIL_REGEX,
+        message: INVALID_EMAIL_MSG,
       },
     },
     col: {

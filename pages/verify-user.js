@@ -3,6 +3,7 @@ import { Box, Container, Typography } from "@mui/material";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import BaseButton from "../components/stateless/interface/buttons/base-button";
 import FormContainer from "../components/stateless/interface/form/form-container";
 import NumberInput from "../components/stateless/interface/form/number-input";
 import LoginHeader from "../components/stateless/interface/misc/login-header";
@@ -69,10 +70,10 @@ const VerifyUser = () => {
               </Typography>
             </Box>
 
-            <LoadingButton loading={loading} type="submit" variant="contained" fullWidth sx={{ my: 3 }}>
+            <BaseButton loading={loading} type="submit" variant="contained" fullWidth sx={{ my: 3 }}>
               Submit
-            </LoadingButton>
-            <LoadingButton
+            </BaseButton>
+            <BaseButton
               loading={resendLoading}
               onClick={resendConfirmationCode}
               color="secondary"
@@ -80,7 +81,7 @@ const VerifyUser = () => {
               fullWidth
             >
               Resend Confirmation Code
-            </LoadingButton>
+            </BaseButton>
           </Box>
           {resendConfirmationMessage && (
             <Box>

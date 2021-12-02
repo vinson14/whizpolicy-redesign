@@ -249,6 +249,18 @@ export const resendConfirmation = async (username) => {
   }
 };
 
+export const forgotPassword = async (email) => {
+  try {
+    const response = await Auth.forgotPassword(email);
+    if (response) {
+      console.log(response);
+      return { ok: true, response };
+    }
+  } catch (error) {
+    return { ok: false, error };
+  }
+};
+
 export const getDifferenceInCalendarYears = (earlierDate, laterDate) => {
   return differenceInCalendarYears(laterDate, earlierDate);
 };
