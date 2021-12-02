@@ -48,7 +48,6 @@ const ResetPassword = () => {
                 </Typography>
               </Box>
             )}
-
             <BaseButton loading={loading} type="submit" variant="contained" fullWidth sx={{ my: 3 }}>
               Reset Password
             </BaseButton>
