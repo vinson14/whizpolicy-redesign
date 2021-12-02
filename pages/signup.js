@@ -20,6 +20,7 @@ import {
 import LoginHeader from "../components/stateless/interface/misc/login-header";
 import BaseButton from "../components/stateless/interface/buttons/base-button";
 import _ from "lodash";
+import LoginContainer from "../components/stateless/layout/login-container";
 
 const SignupPage = () => {
   const router = useRouter();
@@ -57,7 +58,7 @@ const SignupPage = () => {
   };
 
   return (
-    <Container sx={containerSx}>
+    <LoginContainer>
       <LoginHeader title="Sign up" />
       <Box>
         <FormContainer handleSubmit={handleSubmit} onSubmit={onSubmit}>
@@ -81,15 +82,8 @@ const SignupPage = () => {
           </Box>
         </FormContainer>
       </Box>
-    </Container>
+    </LoginContainer>
   );
 };
-const containerSx = {
-  p: 3,
-  height: "100vh",
-  display: "flex",
-  justifyContent: "center",
-  flexDirection: "column",
-  alignItems: "center",
-};
+
 export default SignupPage;

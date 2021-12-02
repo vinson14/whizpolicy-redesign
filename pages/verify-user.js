@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import FormContainer from "../components/stateless/interface/form/form-container";
 import NumberInput from "../components/stateless/interface/form/number-input";
 import LoginHeader from "../components/stateless/interface/misc/login-header";
+import LoginContainer from "../components/stateless/layout/login-container";
 import { INVALID_VERIFICATION_CODE_MSG, REQUIRED_MSG, REQUIRED_MSG_PLACEHOLDER } from "../data/ui";
 import { confirmSignUp, resendConfirmation } from "../utils/api";
 
@@ -20,7 +21,6 @@ const VerifyUser = () => {
     handleSubmit,
     formState: { errors },
     setError,
-    watch,
   } = useForm({ mode: "onBlur", defaultValues: { code: "" } });
 
   const onSubmit = (values) => {
@@ -44,7 +44,7 @@ const VerifyUser = () => {
   };
 
   return (
-    <Container sx={containerSx}>
+    <LoginContainer>
       <LoginHeader />
       <Box>
         <FormContainer handleSubmit={handleSubmit} onSubmit={onSubmit}>
@@ -89,17 +89,8 @@ const VerifyUser = () => {
           )}
         </FormContainer>
       </Box>
-    </Container>
+    </LoginContainer>
   );
-};
-
-const containerSx = {
-  p: 3,
-  height: "100vh",
-  display: "flex",
-  justifyContent: "center",
-  flexDirection: "column",
-  alignItems: "center",
 };
 
 export default VerifyUser;

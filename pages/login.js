@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 import { defaultLoginFormValues, inputTypeMapping, loginFields } from "../data/ui";
 import LoginHeader from "../components/stateless/interface/misc/login-header";
 import BaseButton from "../components/stateless/interface/buttons/base-button";
+import LoginContainer from "../components/stateless/layout/login-container";
 
 const LoginPage = () => {
   const router = useRouter();
@@ -41,7 +42,7 @@ const LoginPage = () => {
     setRerouteLoading(true);
   };
   return (
-    <Container sx={containerSx}>
+    <LoginContainer>
       <LoginHeader title="Login" />
       <Box>
         <FormContainer handleSubmit={handleSubmit} onSubmit={onSubmit}>
@@ -69,15 +70,8 @@ const LoginPage = () => {
           <Typography color="error">Invalid username or password</Typography>
         </Box>
       )}
-    </Container>
+    </LoginContainer>
   );
 };
-const containerSx = {
-  p: 3,
-  height: "100vh",
-  display: "flex",
-  justifyContent: "center",
-  flexDirection: "column",
-  alignItems: "center",
-};
+
 export default LoginPage;
