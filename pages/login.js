@@ -1,99 +1,77 @@
-import Auth from "@aws-amplify/auth";
-import { Box, Button, Container, Grid, Typography } from "@mui/material";
-import { useRouter } from "next/router";
+import { Box, Container, Typography } from "@mui/material";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import FormContainer from "../components/stateless/interface/form/form-container";
 import TextInput from "../components/stateless/interface/form/text-input";
-import LoadingIcon from "../components/stateless/interface/misc/loading-icon";
+import PasswordInput from "../components/stateless/interface/form/password-input";
 import WhizpolicyLogo from "../components/stateless/interface/misc/whizpolicy-logo";
-import MainHeader from "../components/stateless/interface/text/main-header";
-import { signInUser, signOutUser } from "../utils/api";
+import { LoadingButton } from "@mui/lab";
+import { signInUser } from "../utils/api";
+import { useRouter } from "next/router";
+import { defaultLoginFormValues, inputTypeMapping, loginFields } from "../data/ui";
+import LoginHeader from "../components/stateless/interface/misc/login-header";
+import BaseButton from "../components/stateless/interface/buttons/base-button";
 
 const LoginPage = () => {
-  const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const { control, handleSubmit } = useForm({ mode: "onBlur" });
-  const onSubmit = (data) => {
-    console.log(data);
+  const [loading, setLoading] = useState(false);
+  const [rerouteLoading, setRerouteLoading] = useState(false);
+  const [invalidCredentials, setInvalidCredentials] = useState(false);
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ mode: "onBlur", defaultValues: { ...defaultLoginFormValues } });
+  const onSubmit = (values) => {
     setLoading(true);
-    signInUser(data)
-      .then((loggedInUser) => {
+    signInUser(values).then((res) => {
+      if (res.ok) {
+        router.push("/dashboard");
+      } else if (res.error.name === "UserNotConfirmedException") {
+        router.push(`/verify-user?username=${values.username}`);
+      } else {
+        setInvalidCredentials(true);
         setLoading(false);
-        if (loggedInUser) router.push("/dashboard");
-      })
-      .catch((err) => {
-        console.log(err);
-        setLoading(false);
-      });
+      }
+    });
   };
 
   const routeToSignupPage = () => {
-    setLoading(true);
     router.push("/signup");
+    setRerouteLoading(true);
   };
-
-  return !loading ? (
+  return (
     <Container sx={containerSx}>
-      <Box display="flex" justifyContent="center">
-        <WhizpolicyLogo />
-      </Box>
+      <LoginHeader title="Login" />
       <Box>
-        <Typography variant="h5" align="center" sx={{ pt: 2, px: 1 }}>
-          Sign In
-        </Typography>
-      </Box>
-      <Box maxWidth={400}>
         <FormContainer handleSubmit={handleSubmit} onSubmit={onSubmit}>
-          <Grid p={3} justifyContent="space-between" container>
-            {userFormFields.map((field) => (
-              <Grid key={field.name} item {...field.col} p={2}>
-                <TextInput key={field.name} control={control} {...field} />
-              </Grid>
-            ))}
+          <Box p={4} width={400} display="flex" flexDirection="column" justifyContent="center" alignItems="center">
+            {loginFields.map((field) => {
+              const InputComponent = inputTypeMapping[field.type];
+              return (
+                <Box key={field.name} width="100%" mb={3}>
+                  <InputComponent error={errors[field.name]} {...field} control={control} />
+                </Box>
+              );
+            })}
 
-            <Grid item xs={12} p={2}>
-              <Button type="submit" variant="contained" fullWidth>
-                Login
-              </Button>
-            </Grid>
-            <Grid item xs={12} p={2}>
-              <Button variant="contained" color="secondary" onClick={routeToSignupPage} fullWidth>
-                Sign up here
-              </Button>
-            </Grid>
-          </Grid>
+            <BaseButton loading={loading} type="submit" fullWidth>
+              Login
+            </BaseButton>
+            <BaseButton loading={rerouteLoading} color="secondary" onClick={routeToSignupPage} fullWidth>
+              Sign up
+            </BaseButton>
+          </Box>
         </FormContainer>
       </Box>
+      {invalidCredentials && (
+        <Box>
+          <Typography color="error">Invalid username or password</Typography>
+        </Box>
+      )}
     </Container>
-  ) : (
-    <LoadingIcon />
   );
 };
-const defaultValues = {
-  username: "",
-  password: "",
-};
-
-const userFormFields = [
-  {
-    name: "username",
-    label: "Username",
-    placeholder: "",
-    col: {
-      xs: 12,
-    },
-  },
-  {
-    name: "password",
-    label: "Password",
-    type: "password",
-    col: {
-      xs: 12,
-    },
-  },
-];
-
 const containerSx = {
   p: 3,
   height: "100vh",

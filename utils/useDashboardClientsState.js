@@ -39,10 +39,9 @@ const useDashboardClientsState = (authState) => {
     setSelectedClient(newSelectedClient);
     if (newSelectedClient) {
       const foundPolicy = findPolicyByPolicyId(newSelectedClient.policies, selectedPolicy?.policyId);
-      console.log("foundPolicy", foundPolicy);
       setSelectedPolicy(foundPolicy);
     }
-  }, [clients]);
+  }, [clients, selectedClient, selectedPolicy]);
 
   const clientOnClick = (client) => {
     setSelectedClient(client);
@@ -63,7 +62,7 @@ const useDashboardClientsState = (authState) => {
   useEffect(() => {
     scrollToTop();
     if (!selectedClient) {
-      setBreadcrumbs([{ label: "Clients", onClick: null }]);
+      setBreadcrumbs([]);
     } else if (!selectedPolicy) {
       setBreadcrumbs([
         { label: "Clients", onClick: () => setSelectedClient(null) },

@@ -1,28 +1,16 @@
-import { Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import { LoadingButton } from "@mui/lab";
-const AddButton = ({
-  children,
-  loading = false,
-  mr = 2,
-  mb = 2,
-  color = "primary",
-  variant = "contained",
-  ...props
-}) => {
+import BaseButton from "./base-button";
+const AddButton = ({ children, loading = false, variant = "contained", ...props }) => {
   return (
-    <LoadingButton
+    <BaseButton
       loading={loading}
-      {...props}
-      color={color}
-      variant={variant}
-      aria-label={children}
+      color="primary"
       startIcon={variant === "contained" ? <AddIcon /> : <AddCircleIcon />}
-      sx={{ mr: mr, mb: mb }}
+      {...props}
     >
       {children}
-    </LoadingButton>
+    </BaseButton>
   );
 };
 
