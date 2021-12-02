@@ -43,6 +43,7 @@ const PolicyForm = ({ open, onClose, values, client, setLoading }) => {
 
   const fieldNames = policyCategoryFields[policyCategory];
   const onSubmit = (policy) => {
+    console.log(policy);
     if (values) {
       setEditLoading(true);
       putPolicyToClient(client, policy)
@@ -50,6 +51,7 @@ const PolicyForm = ({ open, onClose, values, client, setLoading }) => {
         .then(() => onClose())
         .then(() => setLoading(true));
     } else {
+      console.log("this happened");
       setAddLoading(true);
       postPolicyToClient(client, policy)
         .then(() => setAddLoading(false))

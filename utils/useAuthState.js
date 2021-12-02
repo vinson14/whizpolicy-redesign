@@ -10,7 +10,7 @@ const useAuthState = () => {
       if (!res) router.push("/login");
       else setAuthState(true);
     });
-  }, [router]);
+  }, []);
 
   const handleLogout = () => {
     setAuthState(false);

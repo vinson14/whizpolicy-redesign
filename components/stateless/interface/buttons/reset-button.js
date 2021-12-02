@@ -1,11 +1,24 @@
 import ReplayIcon from "@mui/icons-material/Replay";
-import BaseButton from "./base-button";
+import { Button } from "@mui/material";
 
-const ResetButton = ({ children, color = "secondary", ...props }) => {
+const ResetButton = ({
+  children,
+  mr = 2,
+  mb = 2,
+  color = "secondary",
+  ...props
+}) => {
   return (
-    <BaseButton {...props} color={color} startIcon={<ReplayIcon />}>
+    <Button
+      {...props}
+      color={color}
+      variant="contained"
+      aria-label={children}
+      startIcon={<ReplayIcon />}
+      sx={{ mr: mr, mb: mb }}
+    >
       {children}
-    </BaseButton>
+    </Button>
   );
 };
 

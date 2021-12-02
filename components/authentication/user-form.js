@@ -35,6 +35,7 @@ const UserForm = ({ open, handleClose }) => {
 
   const { register, handleSubmit } = useForm({ mode: "onBlur", defaultValues });
   const onSubmit = (data) => {
+    console.log(data);
     signInUser(data);
   };
   return (
