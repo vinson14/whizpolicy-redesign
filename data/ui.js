@@ -528,7 +528,7 @@ export const clientDetailsAboutFields = [
   {
     label: CLIENT_RELIGION_LABEL,
     key: CLIENT_RELIGION_KEY,
-    type: FIELD_TYPE_CURRENCY,
+    type: FIELD_TYPE_TEXT_CAMELCASE,
   },
 ];
 
