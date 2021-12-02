@@ -5,7 +5,6 @@ import awsmobile from "../src/aws-exports";
 import { deserializeClient, findPolicyByPolicyId, serializeClientForm, formatPolicyFormValues } from "./utils";
 const endpoint = "https://a3dk3p85vd.execute-api.us-east-1.amazonaws.com/dev";
 const apiName = "whizpolicynodejsapi";
-export const UsernameExistsException = "UsernameExistsException";
 
 Amplify.configure(awsmobile);
 
@@ -194,9 +193,9 @@ export const deleteDependantToClient = async (client, dependant) => {
 export const signInUser = async (user) => {
   try {
     const loggedInUser = await Auth.signIn(user.username, user.password);
-    return { ok: true, loggedInUser };
+    return loggedInUser;
   } catch (error) {
-    return { ok: false, error };
+    console.log("error signing in", error);
   }
 };
 
@@ -204,9 +203,9 @@ export const signUpUser = async (formData) => {
   try {
     const { user } = await Auth.signUp(formData);
     console.log(user);
-    return { user, ok: true };
-  } catch (error) {
-    return { ok: false, error };
+    return user;
+  } catch (err) {
+    console.log(err);
   }
 };
 
@@ -235,16 +234,6 @@ export const confirmSignUp = async (username, code) => {
     return true;
   } catch (err) {
     console.log("error", err);
-    return false;
-  }
-};
-
-export const resendConfirmation = async (username) => {
-  try {
-    await Auth.resendSignUp(username);
-    return true;
-  } catch (err) {
-    console.log(err);
     return false;
   }
 };

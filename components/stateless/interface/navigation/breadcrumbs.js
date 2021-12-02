@@ -4,7 +4,7 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
 const CustomBreadcrumbs = ({ breadcrumbs }) => {
   const disabled = (index) => {
-    return index === breadcrumbs.length - 1;
+    return index === breadcrumbs.length - 1 || index === 0;
   };
 
   return (
