@@ -22,7 +22,7 @@ const ClientCardInfoText = ({
   ...props
 }) => {
   const formattedValue = () => {
-    if (value === "" || value === null) return "NIL";
+    if (value === "" || value == null) return "NIL";
     if (type === FIELD_TYPE_TEXT) return value;
     if (type === FIELD_TYPE_CURRENCY) return `$${formatNumber(value)}`;
     if (type === FIELD_TYPE_INTEGER) return value;

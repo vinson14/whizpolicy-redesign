@@ -110,6 +110,7 @@ export const POLICY_ACC_HOME_MOD_KEY = "accidentalHomeModification";
 export const POLICY_ILP_FUND_RISK_KEY = "ilpFundRisk";
 export const POLICY_HOSP_WARD_TYPE_KEY = "hospitalWardType";
 export const POLICY_HOSP_RIDER_TYPE_KEY = "hospitalRiderType";
+export const POLICY_REMARKS_KEY = "policyRemarks";
 
 // Policy Object Labels
 export const POLICY_NUMBER_LABEL = "Policy Number";
@@ -140,7 +141,7 @@ export const POLICY_ACC_HOME_MOD_LABEL = "Home Modifications Allowance";
 export const POLICY_ILP_FUND_RISK_LABEL = "Fund Risk Level";
 export const POLICY_HOSP_WARD_TYPE_LABEL = "Ward Type";
 export const POLICY_HOSP_RIDER_TYPE_LABEL = "Rider Type";
-
+export const POLICY_REMARKS_LABEL = "Remarks";
 // Client Object Keys
 export const CLIENT_NAME_KEY = "name";
 export const CLIENT_OCCUPATION_KEY = "occupation";
@@ -1433,24 +1434,37 @@ export const addPolicyFormFields = {
   [POLICY_HOSP_RIDER_TYPE_KEY]: {
     name: POLICY_HOSP_RIDER_TYPE_KEY,
     label: POLICY_HOSP_RIDER_TYPE_LABEL,
-    type: INPUT_TYPE_SELECT,
-    options: [
-      {
-        label: POLICY_HOSP_RIDER_TYPE_NO_LABEL,
-        value: POLICY_HOSP_RIDER_TYPE_NO_VALUE,
-      },
-      {
-        label: POLICY_HOSP_RIDER_TYPE_FULL_LABEL,
-        value: POLICY_HOSP_RIDER_TYPE_FULL_VALUE,
-      },
-      {
-        label: POLICY_HOSP_RIDER_TYPE_PARTIAL_LABEL,
-        value: POLICY_HOSP_RIDER_TYPE_PARTIAL_VALUE,
-      },
-    ],
+    type: INPUT_TYPE_TEXT,
+    // options: [
+    //   {
+    //     label: POLICY_HOSP_RIDER_TYPE_NO_LABEL,
+    //     value: POLICY_HOSP_RIDER_TYPE_NO_VALUE,
+    //   },
+    //   {
+    //     label: POLICY_HOSP_RIDER_TYPE_FULL_LABEL,
+    //     value: POLICY_HOSP_RIDER_TYPE_FULL_VALUE,
+    //   },
+    //   {
+    //     label: POLICY_HOSP_RIDER_TYPE_PARTIAL_LABEL,
+    //     value: POLICY_HOSP_RIDER_TYPE_PARTIAL_VALUE,
+    //   },
+    // ],
     col: {
       xs: 12,
       md: 6,
+    },
+  },
+  [POLICY_REMARKS_KEY]: {
+    name: POLICY_REMARKS_KEY,
+    label: POLICY_REMARKS_LABEL,
+    type: INPUT_TYPE_TEXT,
+    multiline: true,
+    col: {
+      xs: 12,
+    },
+    maxLength: {
+      value: MAX_CLIENT_REMARKS_LENGTH,
+      message: MAX_CHAR_MSG.replace(MAX_CHAR_MSG_PLACEHOLDER, MAX_CLIENT_REMARKS_LENGTH),
     },
   },
 };
@@ -1468,7 +1482,7 @@ export const defaultPolicyFormValues = {
   [POLICY_DEATH_BENEFIT_KEY]: "",
   [POLICY_EARLY_CI_BENEFIT_KEY]: "",
   [POLICY_GUARANTEED_MATURITY_BENEFIT_KEY]: "",
-  [POLICY_HOSP_RIDER_TYPE_KEY]: POLICY_HOSP_RIDER_TYPE_NO_VALUE,
+  [POLICY_HOSP_RIDER_TYPE_KEY]: "",
   [POLICY_HOSP_WARD_TYPE_KEY]: POLICY_HOSP_WARD_TYPE_PRIVATE_VALUE,
   [POLICY_ILP_FUND_RISK_KEY]: POLICY_ILP_FUND_RISK_BALANCED_VALUE,
   [POLICY_INCEPTION_DATE_KEY]: new Date(),
@@ -1504,6 +1518,7 @@ export const defaultLifePolicyFields = [
   POLICY_TPD_BENEFIT_KEY,
   POLICY_MAJOR_CI_BENEFIT_KEY,
   POLICY_EARLY_CI_BENEFIT_KEY,
+  POLICY_REMARKS_KEY,
 ];
 
 export const defaultAccPolicyFields = [
@@ -1517,6 +1532,7 @@ export const defaultAccPolicyFields = [
   POLICY_ACC_WEEKLY_DIS_KEY,
   POLICY_ACC_MOBILITY_AID_KEY,
   POLICY_ACC_HOME_MOD_KEY,
+  POLICY_REMARKS_KEY,
 ];
 
 export const defaultHospPolicyFields = [
@@ -1529,6 +1545,7 @@ export const defaultHospPolicyFields = [
   POLICY_PREMIUM_KEY,
   POLICY_PREMIUM_MODE_KEY,
   POLICY_INCEPTION_DATE_KEY,
+  POLICY_REMARKS_KEY,
 ];
 
 export const policyCategoryFields = {
@@ -1538,6 +1555,7 @@ export const policyCategoryFields = {
     ...defaultPolicyFields,
     POLICY_DEATH_BENEFIT_KEY,
     POLICY_GUARANTEED_MATURITY_BENEFIT_KEY,
+    POLICY_REMARKS_KEY,
   ],
   [POLICY_CATEGORY_ILP_KEY]: [...defaultLifePolicyFields, POLICY_ILP_FUND_RISK_KEY],
   [POLICY_CATEGORY_ACCIDENT_KEY]: [...defaultAccPolicyFields],
@@ -1920,3 +1938,11 @@ export const userNameAlreadyExistsError = {
   type: "Username Exists",
   message: "This email address has already been taken",
 };
+
+export const shieldPlanFields = [
+  { label: POLICY_INSURER_LABEL, key: POLICY_INSURER_KEY, type: FIELD_TYPE_TEXT },
+  { label: POLICY_NUMBER_LABEL, key: POLICY_NUMBER_KEY, type: FIELD_TYPE_TEXT },
+  { label: POLICY_HOSP_WARD_TYPE_LABEL, key: POLICY_HOSP_WARD_TYPE_KEY, type: FIELD_TYPE_TEXT_CAMELCASE },
+  { label: POLICY_HOSP_RIDER_TYPE_LABEL, key: POLICY_HOSP_RIDER_TYPE_KEY, type: FIELD_TYPE_TEXT },
+  { label: POLICY_REMARKS_LABEL, key: POLICY_REMARKS_KEY, type: FIELD_TYPE_TEXT },
+];
