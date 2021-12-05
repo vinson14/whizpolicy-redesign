@@ -17,6 +17,7 @@ import SelectInput from "../components/stateless/interface/form/select-input";
 import DateInput from "../components/stateless/interface/form/date-input";
 import CurrencyInput from "../components/stateless/interface/form/currency-input";
 import YearInput from "../components/stateless/interface/form/year-input";
+import PasswordInput from "../components/stateless/interface/form/password-input";
 import ContactCard from "../components/dashboard/client-details/contact-card";
 import NameCard from "../components/dashboard/client-details/name-card";
 import AboutCard from "../components/dashboard/client-details/about-card";
@@ -54,6 +55,7 @@ export const INPUT_TYPE_CURRENCY = "currencyInput";
 export const INPUT_TYPE_YEAR = "yearInput";
 export const INPUT_TYPE_CHECKBOX = "checkboxInput";
 export const INPUT_TYPE_PHONE = "phoneInput";
+export const INPUT_TYPE_PASSWORD = "passwordInput";
 
 // Field Types
 export const FIELD_TYPE_TEXT = "text";
@@ -70,6 +72,7 @@ export const POLICY_CATEGORY_ENDOWMENT_KEY = "endowment";
 export const POLICY_CATEGORY_ILP_KEY = "ilp";
 export const POLICY_CATEGORY_ACCIDENT_KEY = "accident";
 export const POLICY_CATEGORY_ISP_KEY = "integratedShieldPlan";
+export const POLICY_CATEGORY_CARESHIELD_KEY = "careshield";
 
 // Policy Categories Labels
 export const POLICY_CATEGORY_WHOLE_LIFE_LABEL = "Whole Life";
@@ -78,6 +81,7 @@ export const POLICY_CATEGORY_ENDOWMENT_LABEL = "Endowment";
 export const POLICY_CATEGORY_ILP_LABEL = "Investment Linked";
 export const POLICY_CATEGORY_ACCIDENT_LABEL = "Accident";
 export const POLICY_CATEGORY_ISP_LABEL = "Integrated Shield Plan";
+export const POLICY_CATEGORY_CARESHIELD_LABEL = "CareShield/ElderShield";
 
 // Policy Object Keys
 export const POLICY_NUMBER_KEY = "policyNumber";
@@ -108,6 +112,8 @@ export const POLICY_ACC_HOME_MOD_KEY = "accidentalHomeModification";
 export const POLICY_ILP_FUND_RISK_KEY = "ilpFundRisk";
 export const POLICY_HOSP_WARD_TYPE_KEY = "hospitalWardType";
 export const POLICY_HOSP_RIDER_TYPE_KEY = "hospitalRiderType";
+export const POLICY_DISABILITY_INCOME_KEY = "disabilityIncome";
+export const POLICY_REMARKS_KEY = "policyRemarks";
 
 // Policy Object Labels
 export const POLICY_NUMBER_LABEL = "Policy Number";
@@ -138,7 +144,8 @@ export const POLICY_ACC_HOME_MOD_LABEL = "Home Modifications Allowance";
 export const POLICY_ILP_FUND_RISK_LABEL = "Fund Risk Level";
 export const POLICY_HOSP_WARD_TYPE_LABEL = "Ward Type";
 export const POLICY_HOSP_RIDER_TYPE_LABEL = "Rider Type";
-
+export const POLICY_DISABILITY_INCOME_LABEL = "Disability Income";
+export const POLICY_REMARKS_LABEL = "Remarks";
 // Client Object Keys
 export const CLIENT_NAME_KEY = "name";
 export const CLIENT_OCCUPATION_KEY = "occupation";
@@ -330,6 +337,27 @@ export const POLICY_HOSP_RIDER_TYPE_FULL_LABEL = "Full";
 export const POLICY_HOSP_RIDER_TYPE_PARTIAL_VALUE = "partial";
 export const POLICY_HOSP_RIDER_TYPE_PARTIAL_LABEL = "Partial";
 
+// Login and registration fields
+export const LOGIN_USERNAME_KEY = "username";
+export const LOGIN_USERNAME_LABEL = "Username";
+export const LOGIN_PASSWORD_KEY = "password";
+export const LOGIN_PASSWORD_LABEL = "Password";
+
+export const SIGNUP_USERNAME_KEY = "username";
+export const SIGNUP_USERNAME_LABEL = "Username";
+export const SIGNUP_GIVEN_NAME_KEY = "attributes.given_name";
+export const SIGNUP_GIVEN_NAME_LABEL = "Given Name";
+export const SIGNUP_FAMILY_NAME_KEY = "attributes.family_name";
+export const SIGNUP_FAMILY_NAME_LABEL = "Family Name";
+export const SIGNUP_RNF_KEY = "attributes.custom:rnf_code";
+export const SIGNUP_RNF_LABEL = "RNF Code";
+export const SIGNUP_EMAIL_KEY = "username";
+export const SIGNUP_EMAIL_LABEL = "Email";
+export const SIGNUP_PASSWORD_KEY = "password";
+export const SIGNUP_PASSWORD_LABEL = "Password";
+export const SIGNUP_CONFIRM_PASSWORD_KEY = "confirmPassword";
+export const SIGNUP_CONFIRM_PASSWORD_LABEL = "Confirm Password";
+
 // Validation values
 export const MIN_POLICY_NAME_LENGTH = 2;
 export const MAX_POLICY_NAME_LENGTH = 70;
@@ -348,6 +376,9 @@ export const MAX_BENEFIT = 99999999999;
 export const MAX_PREMIUM = 9999999999;
 export const MAX_CLIENT_REMARKS_LENGTH = 1000;
 export const MAX_ADDRESS_LENGTH = 1000;
+export const MIN_PASSWORD_LENGTH = 8;
+export const MIN_RNF_CODE_LENGTH = 12;
+export const MAX_RNF_CODE_LENGTH = 12;
 
 // Form error messages
 export const MIN_CHAR_MSG_PLACEHOLDER = "CHAR";
@@ -364,10 +395,26 @@ export const ALPHA_ONLY_MSG = "Only alphabets are allowed";
 export const MAX_VALUE_MSG = "This value cannot exceed MAX_VALUE";
 export const MAX_VALUE_MSG_PLACEHOLDER = "MAX_VALUE";
 export const CONSENT_REQUIRE_MSG = "Please confirm that consent has been obtained from client";
-export const AFTER_DATE_MSG = "This date cannot be after the ERR_DATE.";
+export const AFTER_DATE_MSG = "This date cannot be after the ERR_DATE";
 export const AFTER_DATE_MSG_PLACEHOLDER = "ERR_DATE";
-export const BEFORE_DATE_MSG = "This date cannot be before the ERR_DATE.";
+export const BEFORE_DATE_MSG = "This date cannot be before the ERR_DATE";
 export const BEFORE_DATE_MSG_PLACEHOLDER = "ERR_DATE";
+export const EMAIL_EXISTS_MSG = "This email address has already been registered";
+export const PASSWORD_NO_UPPERCASE_MSG = "Your password must contain at least 1 uppercase alphabet";
+export const PASSWORD_NO_LOWERCASE_MSG = "Your password must contain at least 1 lowercase alphabet";
+export const PASSWORD_NO_DIGIT_MSG = "Your password must contain at least 1 digit";
+export const PASSWORD_NO_SPECIAL_CHAR_MSG =
+  "Your password must contain at least 1 one of the following special characters: ^ $ * . [ ] { } ( ) ? - \" ! @ # % & / \\ , > < ' : ; | _ ~ ` + =";
+export const INVALID_VERIFICATION_CODE_MSG =
+  "Please ensure you have entered the correct verification code.\nIf you have not received a verification code, please request for a new verification code below.";
+
+// Regex expressions
+export const EMAIL_REGEX =
+  /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
+export const PASSWORD_UPPERCASE_LETTER_REGEX = /^(?=.*[A-Z])/;
+export const PASSWORD_LOWERCASE_LETTER_REGEX = /^(?=.*[a-z])/;
+export const PASSWORD_DIGIT_REGEX = /^(?=.*\d)/;
+export const PASSWORD_SPECIAL_CHAR_REGEX = /^(?=.*[\^$*[\]{}()?\-"!@#%&/\\,><':;|_~`+=])/;
 
 export const NAVBAR_HEIGHT = 80;
 
@@ -477,6 +524,16 @@ export const clientDetailsAboutFields = [
     label: CLIENT_ANNUAL_INCOME_LABEL,
     key: CLIENT_ANNUAL_INCOME_KEY,
     type: FIELD_TYPE_CURRENCY,
+  },
+  {
+    label: CLIENT_ETHNICITY_LABEL,
+    key: CLIENT_ETHNICITY_KEY,
+    type: FIELD_TYPE_TEXT_CAMELCASE,
+  },
+  {
+    label: CLIENT_RELIGION_LABEL,
+    key: CLIENT_RELIGION_KEY,
+    type: FIELD_TYPE_TEXT,
   },
 ];
 
@@ -653,8 +710,7 @@ export const addClientFormFields = [
         message: REQUIRED_MSG_SPECIAL.replace(REQUIRED_MSG_PLACEHOLDER, "email"),
       },
       pattern: {
-        value:
-          /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/,
+        value: EMAIL_REGEX,
         message: INVALID_EMAIL_MSG,
       },
     },
@@ -907,6 +963,10 @@ export const addPolicyFormFields = {
       {
         label: POLICY_CATEGORY_ISP_LABEL,
         value: POLICY_CATEGORY_ISP_KEY,
+      },
+      {
+        label: POLICY_CATEGORY_CARESHIELD_LABEL,
+        value: POLICY_CATEGORY_CARESHIELD_KEY,
       },
     ],
     col: {
@@ -1382,24 +1442,46 @@ export const addPolicyFormFields = {
   [POLICY_HOSP_RIDER_TYPE_KEY]: {
     name: POLICY_HOSP_RIDER_TYPE_KEY,
     label: POLICY_HOSP_RIDER_TYPE_LABEL,
-    type: INPUT_TYPE_SELECT,
-    options: [
-      {
-        label: POLICY_HOSP_RIDER_TYPE_NO_LABEL,
-        value: POLICY_HOSP_RIDER_TYPE_NO_VALUE,
-      },
-      {
-        label: POLICY_HOSP_RIDER_TYPE_FULL_LABEL,
-        value: POLICY_HOSP_RIDER_TYPE_FULL_VALUE,
-      },
-      {
-        label: POLICY_HOSP_RIDER_TYPE_PARTIAL_LABEL,
-        value: POLICY_HOSP_RIDER_TYPE_PARTIAL_VALUE,
-      },
-    ],
+    type: INPUT_TYPE_TEXT,
+    // options: [
+    //   {
+    //     label: POLICY_HOSP_RIDER_TYPE_NO_LABEL,
+    //     value: POLICY_HOSP_RIDER_TYPE_NO_VALUE,
+    //   },
+    //   {
+    //     label: POLICY_HOSP_RIDER_TYPE_FULL_LABEL,
+    //     value: POLICY_HOSP_RIDER_TYPE_FULL_VALUE,
+    //   },
+    //   {
+    //     label: POLICY_HOSP_RIDER_TYPE_PARTIAL_LABEL,
+    //     value: POLICY_HOSP_RIDER_TYPE_PARTIAL_VALUE,
+    //   },
+    // ],
     col: {
       xs: 12,
       md: 6,
+    },
+  },
+  [POLICY_DISABILITY_INCOME_KEY]: {
+    name: POLICY_DISABILITY_INCOME_KEY,
+    label: POLICY_DISABILITY_INCOME_LABEL,
+    type: INPUT_TYPE_CURRENCY,
+    col: {
+      xs: 12,
+      md: 6,
+    },
+  },
+  [POLICY_REMARKS_KEY]: {
+    name: POLICY_REMARKS_KEY,
+    label: POLICY_REMARKS_LABEL,
+    type: INPUT_TYPE_TEXT,
+    multiline: true,
+    col: {
+      xs: 12,
+    },
+    maxLength: {
+      value: MAX_CLIENT_REMARKS_LENGTH,
+      message: MAX_CHAR_MSG.replace(MAX_CHAR_MSG_PLACEHOLDER, MAX_CLIENT_REMARKS_LENGTH),
     },
   },
 };
@@ -1415,9 +1497,10 @@ export const defaultPolicyFormValues = {
   [POLICY_ACC_TPD_BENEFIT_KEY]: "",
   [POLICY_ACC_WEEKLY_DIS_KEY]: "",
   [POLICY_DEATH_BENEFIT_KEY]: "",
+  [POLICY_DISABILITY_INCOME_KEY]: "",
   [POLICY_EARLY_CI_BENEFIT_KEY]: "",
   [POLICY_GUARANTEED_MATURITY_BENEFIT_KEY]: "",
-  [POLICY_HOSP_RIDER_TYPE_KEY]: POLICY_HOSP_RIDER_TYPE_NO_VALUE,
+  [POLICY_HOSP_RIDER_TYPE_KEY]: "",
   [POLICY_HOSP_WARD_TYPE_KEY]: POLICY_HOSP_WARD_TYPE_PRIVATE_VALUE,
   [POLICY_ILP_FUND_RISK_KEY]: POLICY_ILP_FUND_RISK_BALANCED_VALUE,
   [POLICY_INCEPTION_DATE_KEY]: new Date(),
@@ -1431,6 +1514,7 @@ export const defaultPolicyFormValues = {
   [POLICY_PREMIUM_KEY]: "",
   [POLICY_PREMIUM_MODE_KEY]: PREMIUM_MODE_ANNUALLY_KEY,
   [POLICY_PREMIUM_TERM_KEY]: "",
+  [POLICY_REMARKS_KEY]: "",
   [POLICY_TPD_BENEFIT_KEY]: "",
 };
 
@@ -1441,19 +1525,19 @@ export const defaultPolicyFields = [
   POLICY_NUMBER_KEY,
   POLICY_PREMIUM_KEY,
   POLICY_PREMIUM_MODE_KEY,
-  POLICY_PREMIUM_TERM_KEY,
-  POLICY_TERM_KEY,
   POLICY_INCEPTION_DATE_KEY,
   POLICY_MATURITY_DATE_KEY,
+  POLICY_TERM_KEY,
+  POLICY_PREMIUM_TERM_KEY,
 ];
 
 export const defaultLifePolicyFields = [
   ...defaultPolicyFields,
-  POLICY_MATURITY_DATE_KEY,
   POLICY_DEATH_BENEFIT_KEY,
   POLICY_TPD_BENEFIT_KEY,
   POLICY_MAJOR_CI_BENEFIT_KEY,
   POLICY_EARLY_CI_BENEFIT_KEY,
+  POLICY_REMARKS_KEY,
 ];
 
 export const defaultAccPolicyFields = [
@@ -1467,6 +1551,7 @@ export const defaultAccPolicyFields = [
   POLICY_ACC_WEEKLY_DIS_KEY,
   POLICY_ACC_MOBILITY_AID_KEY,
   POLICY_ACC_HOME_MOD_KEY,
+  POLICY_REMARKS_KEY,
 ];
 
 export const defaultHospPolicyFields = [
@@ -1479,6 +1564,7 @@ export const defaultHospPolicyFields = [
   POLICY_PREMIUM_KEY,
   POLICY_PREMIUM_MODE_KEY,
   POLICY_INCEPTION_DATE_KEY,
+  POLICY_REMARKS_KEY,
 ];
 
 export const policyCategoryFields = {
@@ -1487,12 +1573,13 @@ export const policyCategoryFields = {
   [POLICY_CATEGORY_ENDOWMENT_KEY]: [
     ...defaultPolicyFields,
     POLICY_DEATH_BENEFIT_KEY,
-    POLICY_MATURITY_DATE_KEY,
     POLICY_GUARANTEED_MATURITY_BENEFIT_KEY,
+    POLICY_REMARKS_KEY,
   ],
   [POLICY_CATEGORY_ILP_KEY]: [...defaultLifePolicyFields, POLICY_ILP_FUND_RISK_KEY],
   [POLICY_CATEGORY_ACCIDENT_KEY]: [...defaultAccPolicyFields],
   [POLICY_CATEGORY_ISP_KEY]: [...defaultHospPolicyFields],
+  [POLICY_CATEGORY_CARESHIELD_KEY]: [...defaultPolicyFields, POLICY_DISABILITY_INCOME_KEY],
 };
 
 export const inputTypeMapping = {
@@ -1504,6 +1591,7 @@ export const inputTypeMapping = {
   [INPUT_TYPE_YEAR]: YearInput,
   [INPUT_TYPE_CHECKBOX]: CheckboxInput,
   [INPUT_TYPE_PHONE]: PhoneInput,
+  [INPUT_TYPE_PASSWORD]: PasswordInput,
 };
 
 export const policyDetailsAboutCardFields = [
@@ -1669,4 +1757,212 @@ export const coverageOverviewLegend = [
   { label: "Sufficient coverage", color: "secondary.main" },
   { label: "Insufficient coverage", color: "warning.main" },
   { label: "No coverage", color: "error.main" },
+];
+
+export const defaultLoginFormValues = {
+  [LOGIN_USERNAME_KEY]: "",
+  [LOGIN_PASSWORD_KEY]: "",
+};
+
+export const loginFields = [
+  {
+    name: LOGIN_USERNAME_KEY,
+    label: LOGIN_USERNAME_LABEL,
+    type: INPUT_TYPE_TEXT,
+    rules: {
+      required: {
+        value: true,
+        message: REQUIRED_MSG.replace(REQUIRED_MSG_PLACEHOLDER, "username"),
+      },
+    },
+    col: {
+      xs: 12,
+      md: 6,
+    },
+  },
+  {
+    name: LOGIN_PASSWORD_KEY,
+    label: LOGIN_PASSWORD_LABEL,
+    type: INPUT_TYPE_PASSWORD,
+    rules: {
+      required: {
+        value: true,
+        message: REQUIRED_MSG.replace(REQUIRED_MSG_PLACEHOLDER, "password"),
+      },
+    },
+    col: {
+      xs: 12,
+      md: 6,
+    },
+  },
+];
+
+export const defaultSignupFormValues = {
+  [SIGNUP_EMAIL_KEY]: "",
+  [SIGNUP_PASSWORD_KEY]: "",
+  [SIGNUP_CONFIRM_PASSWORD_KEY]: "",
+  [SIGNUP_GIVEN_NAME_KEY]: "",
+  [SIGNUP_FAMILY_NAME_KEY]: "",
+  [SIGNUP_RNF_KEY]: "",
+};
+
+export const signupFields = [
+  // {
+  //   name: SIGNUP_USERNAME_KEY,
+  //   label: SIGNUP_USERNAME_LABEL,
+  //   type: INPUT_TYPE_TEXT,
+  //   rules: {
+  //     required: {
+  //       value: true,
+  //       message: REQUIRED_MSG.replace(REQUIRED_MSG_PLACEHOLDER, "username"),
+  //     },
+  //   },
+  //   col: {
+  //     xs: 12,
+  //     md: 6,
+  //   },
+  // },
+  {
+    name: SIGNUP_EMAIL_KEY,
+    label: SIGNUP_EMAIL_LABEL,
+    type: INPUT_TYPE_TEXT,
+    rules: {
+      required: {
+        value: true,
+        message: REQUIRED_MSG.replace(REQUIRED_MSG_PLACEHOLDER, "email"),
+      },
+      pattern: {
+        value: EMAIL_REGEX,
+        message: INVALID_EMAIL_MSG,
+      },
+    },
+    col: {
+      xs: 12,
+      md: 6,
+    },
+  },
+  {
+    name: SIGNUP_PASSWORD_KEY,
+    label: SIGNUP_PASSWORD_LABEL,
+    type: INPUT_TYPE_PASSWORD,
+    rules: {
+      required: {
+        value: true,
+        message: REQUIRED_MSG.replace(REQUIRED_MSG_PLACEHOLDER, "password"),
+      },
+      minLength: {
+        value: MIN_PASSWORD_LENGTH,
+        message: MIN_CHAR_MSG.replace(MIN_CHAR_MSG_PLACEHOLDER, MIN_PASSWORD_LENGTH),
+      },
+      validate: {
+        upperCaseChar: (v) => PASSWORD_UPPERCASE_LETTER_REGEX.test(v) || PASSWORD_NO_UPPERCASE_MSG,
+        lowerCaseChar: (v) => PASSWORD_LOWERCASE_LETTER_REGEX.test(v) || PASSWORD_NO_LOWERCASE_MSG,
+        digit: (v) => PASSWORD_DIGIT_REGEX.test(v) || PASSWORD_NO_DIGIT_MSG,
+        specialChar: (v) => PASSWORD_SPECIAL_CHAR_REGEX.test(v) || PASSWORD_NO_SPECIAL_CHAR_MSG,
+      },
+    },
+    col: {
+      xs: 12,
+      md: 6,
+    },
+  },
+  {
+    name: SIGNUP_CONFIRM_PASSWORD_KEY,
+    label: SIGNUP_CONFIRM_PASSWORD_LABEL,
+    type: INPUT_TYPE_PASSWORD,
+    col: {
+      xs: 12,
+      md: 6,
+    },
+  },
+  {
+    name: SIGNUP_GIVEN_NAME_KEY,
+    label: SIGNUP_GIVEN_NAME_LABEL,
+    type: INPUT_TYPE_TEXT,
+    rules: {
+      required: {
+        value: true,
+        message: REQUIRED_MSG.replace(REQUIRED_MSG_PLACEHOLDER, "given name"),
+      },
+    },
+    col: {
+      xs: 12,
+      md: 6,
+    },
+  },
+  {
+    name: SIGNUP_FAMILY_NAME_KEY,
+    label: SIGNUP_FAMILY_NAME_LABEL,
+    type: INPUT_TYPE_TEXT,
+    rules: {
+      required: {
+        value: true,
+        message: REQUIRED_MSG.replace(REQUIRED_MSG_PLACEHOLDER, "family name"),
+      },
+    },
+    col: {
+      xs: 12,
+      md: 6,
+    },
+  },
+  {
+    name: SIGNUP_RNF_KEY,
+    label: SIGNUP_RNF_LABEL,
+    type: INPUT_TYPE_TEXT,
+    rules: {
+      required: {
+        value: true,
+        message: REQUIRED_MSG.replace(REQUIRED_MSG_PLACEHOLDER, "RNF Code"),
+      },
+      minLength: {
+        value: MIN_RNF_CODE_LENGTH,
+        message: MIN_CHAR_MSG.replace(MIN_CHAR_MSG_PLACEHOLDER, MIN_RNF_CODE_LENGTH),
+      },
+      maxLength: {
+        value: MAX_RNF_CODE_LENGTH,
+        message: MAX_CHAR_MSG.replace(MAX_CHAR_MSG_PLACEHOLDER, MAX_RNF_CODE_LENGTH),
+      },
+    },
+    col: {
+      xs: 12,
+      md: 6,
+    },
+  },
+];
+
+export const resetPasswordDefaultValues = { [SIGNUP_EMAIL_KEY]: "" };
+
+export const resetPasswordFields = [
+  {
+    name: SIGNUP_EMAIL_KEY,
+    label: SIGNUP_EMAIL_LABEL,
+    type: INPUT_TYPE_TEXT,
+    rules: {
+      required: {
+        value: true,
+        message: REQUIRED_MSG.replace(REQUIRED_MSG_PLACEHOLDER, "email"),
+      },
+      pattern: {
+        value: EMAIL_REGEX,
+        message: INVALID_EMAIL_MSG,
+      },
+    },
+    col: {
+      xs: 12,
+      md: 6,
+    },
+  },
+];
+
+export const userNameAlreadyExistsError = {
+  type: "Username Exists",
+  message: "This email address has already been taken",
+};
+
+export const shieldPlanFields = [
+  { label: POLICY_INSURER_LABEL, key: POLICY_INSURER_KEY, type: FIELD_TYPE_TEXT },
+  { label: POLICY_NUMBER_LABEL, key: POLICY_NUMBER_KEY, type: FIELD_TYPE_TEXT },
+  { label: POLICY_HOSP_WARD_TYPE_LABEL, key: POLICY_HOSP_WARD_TYPE_KEY, type: FIELD_TYPE_TEXT_CAMELCASE },
+  { label: POLICY_HOSP_RIDER_TYPE_LABEL, key: POLICY_HOSP_RIDER_TYPE_KEY, type: FIELD_TYPE_TEXT },
+  { label: POLICY_REMARKS_LABEL, key: POLICY_REMARKS_KEY, type: FIELD_TYPE_TEXT },
 ];

@@ -17,7 +17,7 @@ export const getInitials = (name) => {
 };
 
 export const findClientById = (clients, id) => {
-  return clients.find((client) => client.clientId == id);
+  return clients ? clients.find((client) => client.clientId == id) : null;
 };
 
 export const findPolicyByPolicyId = (policies, policyId) => {
@@ -67,7 +67,6 @@ export const serializeClientForm = (formData) => {
   const fieldsToFormat = addClientFormFields.filter(
     (field) => field.type === INPUT_TYPE_CURRENCY || field.type === INPUT_TYPE_YEAR
   );
-  console.log(fieldsToFormat);
   fieldsToFormat.forEach((field) => (formData[field.name] = formatFormInt(formData[field.name])));
 };
 

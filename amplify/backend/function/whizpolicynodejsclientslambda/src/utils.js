@@ -16,7 +16,6 @@ const CLIENT_ANNUAL_INCOME_KEY = "annualIncome";
 const { differenceInYears } = require("date-fns");
 
 const calculateAge = (birthday) => {
-  console.log(differenceInYears(new Date(), new Date(birthday)));
   return differenceInYears(new Date(), new Date(birthday));
 };
 
@@ -42,17 +41,18 @@ const calculateCurrentCoverage = (client) => {
   const overview = {};
   benefitTypeKeys.forEach((benefitType) => {
     overview[benefitType] = {};
-    overview[benefitType][FINANCIAL_OVERVIEW_CURRENT_COVERAGE_KEY] =
-      client.policies.reduce((sum, policy) => sum + policy[benefitType], 0);
+    overview[benefitType][FINANCIAL_OVERVIEW_CURRENT_COVERAGE_KEY] = client.policies.reduce(
+      (sum, policy) => sum + policy[benefitType],
+      0
+    );
   });
   return overview;
 };
 
 const calculateIdealCoverage = (client) => {
   benefitTypeKeys.forEach((benefitType) => {
-    client[FINANCIAL_OVERVIEW_KEY][benefitType][
-      FINANCIAL_OVERVIEW_IDEAL_COVERAGE_KEY
-    ] = client[CLIENT_ANNUAL_INCOME_KEY] * incomeMultiplier[benefitType];
+    client[FINANCIAL_OVERVIEW_KEY][benefitType][FINANCIAL_OVERVIEW_IDEAL_COVERAGE_KEY] =
+      client[CLIENT_ANNUAL_INCOME_KEY] * incomeMultiplier[benefitType];
   });
 };
 

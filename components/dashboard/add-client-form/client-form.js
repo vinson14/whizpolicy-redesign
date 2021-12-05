@@ -75,7 +75,7 @@ const ClientForm = ({ open, onClose, values, setLoading }) => {
             {values ? (
               <>
                 <EditButton loading={editLoading} type="submit">
-                  Edit
+                  Update
                 </EditButton>
                 <DeleteButton loading={deleteLoading} onClick={openDeleteModal}>
                   Delete
