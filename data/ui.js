@@ -72,6 +72,7 @@ export const POLICY_CATEGORY_ENDOWMENT_KEY = "endowment";
 export const POLICY_CATEGORY_ILP_KEY = "ilp";
 export const POLICY_CATEGORY_ACCIDENT_KEY = "accident";
 export const POLICY_CATEGORY_ISP_KEY = "integratedShieldPlan";
+export const POLICY_CATEGORY_CARESHIELD_KEY = "careshield";
 
 // Policy Categories Labels
 export const POLICY_CATEGORY_WHOLE_LIFE_LABEL = "Whole Life";
@@ -80,6 +81,7 @@ export const POLICY_CATEGORY_ENDOWMENT_LABEL = "Endowment";
 export const POLICY_CATEGORY_ILP_LABEL = "Investment Linked";
 export const POLICY_CATEGORY_ACCIDENT_LABEL = "Accident";
 export const POLICY_CATEGORY_ISP_LABEL = "Integrated Shield Plan";
+export const POLICY_CATEGORY_CARESHIELD_LABEL = "CareShield/ElderShield";
 
 // Policy Object Keys
 export const POLICY_NUMBER_KEY = "policyNumber";
@@ -110,6 +112,7 @@ export const POLICY_ACC_HOME_MOD_KEY = "accidentalHomeModification";
 export const POLICY_ILP_FUND_RISK_KEY = "ilpFundRisk";
 export const POLICY_HOSP_WARD_TYPE_KEY = "hospitalWardType";
 export const POLICY_HOSP_RIDER_TYPE_KEY = "hospitalRiderType";
+export const POLICY_DISABILITY_INCOME_KEY = "disabilityIncome";
 export const POLICY_REMARKS_KEY = "policyRemarks";
 
 // Policy Object Labels
@@ -141,6 +144,7 @@ export const POLICY_ACC_HOME_MOD_LABEL = "Home Modifications Allowance";
 export const POLICY_ILP_FUND_RISK_LABEL = "Fund Risk Level";
 export const POLICY_HOSP_WARD_TYPE_LABEL = "Ward Type";
 export const POLICY_HOSP_RIDER_TYPE_LABEL = "Rider Type";
+export const POLICY_DISABILITY_INCOME_LABEL = "Disability Income";
 export const POLICY_REMARKS_LABEL = "Remarks";
 // Client Object Keys
 export const CLIENT_NAME_KEY = "name";
@@ -960,6 +964,10 @@ export const addPolicyFormFields = {
         label: POLICY_CATEGORY_ISP_LABEL,
         value: POLICY_CATEGORY_ISP_KEY,
       },
+      {
+        label: POLICY_CATEGORY_CARESHIELD_LABEL,
+        value: POLICY_CATEGORY_CARESHIELD_KEY,
+      },
     ],
     col: {
       xs: 12,
@@ -1454,6 +1462,15 @@ export const addPolicyFormFields = {
       md: 6,
     },
   },
+  [POLICY_DISABILITY_INCOME_KEY]: {
+    name: POLICY_DISABILITY_INCOME_KEY,
+    label: POLICY_DISABILITY_INCOME_LABEL,
+    type: INPUT_TYPE_CURRENCY,
+    col: {
+      xs: 12,
+      md: 6,
+    },
+  },
   [POLICY_REMARKS_KEY]: {
     name: POLICY_REMARKS_KEY,
     label: POLICY_REMARKS_LABEL,
@@ -1480,6 +1497,7 @@ export const defaultPolicyFormValues = {
   [POLICY_ACC_TPD_BENEFIT_KEY]: "",
   [POLICY_ACC_WEEKLY_DIS_KEY]: "",
   [POLICY_DEATH_BENEFIT_KEY]: "",
+  [POLICY_DISABILITY_INCOME_KEY]: "",
   [POLICY_EARLY_CI_BENEFIT_KEY]: "",
   [POLICY_GUARANTEED_MATURITY_BENEFIT_KEY]: "",
   [POLICY_HOSP_RIDER_TYPE_KEY]: "",
@@ -1496,6 +1514,7 @@ export const defaultPolicyFormValues = {
   [POLICY_PREMIUM_KEY]: "",
   [POLICY_PREMIUM_MODE_KEY]: PREMIUM_MODE_ANNUALLY_KEY,
   [POLICY_PREMIUM_TERM_KEY]: "",
+  [POLICY_REMARKS_KEY]: "",
   [POLICY_TPD_BENEFIT_KEY]: "",
 };
 
@@ -1560,6 +1579,7 @@ export const policyCategoryFields = {
   [POLICY_CATEGORY_ILP_KEY]: [...defaultLifePolicyFields, POLICY_ILP_FUND_RISK_KEY],
   [POLICY_CATEGORY_ACCIDENT_KEY]: [...defaultAccPolicyFields],
   [POLICY_CATEGORY_ISP_KEY]: [...defaultHospPolicyFields],
+  [POLICY_CATEGORY_CARESHIELD_KEY]: [...defaultPolicyFields, POLICY_DISABILITY_INCOME_KEY],
 };
 
 export const inputTypeMapping = {
