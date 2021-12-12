@@ -1810,6 +1810,7 @@ export const defaultSignupFormValues = {
   [SIGNUP_GIVEN_NAME_KEY]: "",
   [SIGNUP_FAMILY_NAME_KEY]: "",
   [SIGNUP_RNF_KEY]: "",
+  [SIGNUP_AGREE_TO_T_AND_C_KEY]: false,
 };
 
 export const signupFields = [
