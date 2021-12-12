@@ -94,7 +94,7 @@ const text = [
     header: "SITE ACCESS",
     subsections: [
       "You are responsible for all access to the Site via your internet connection, even if it is by someone else.",
-      "We do not warrant that Our Website is free from any viruses or other malicious, destructive or corrupting code or that viruses, malware or spyware will not be transmitted in connection with or arising from the use of Our Website.",
+      "We do not warrant that Our Site is free from any viruses or other malicious, destructive or corrupting code or that viruses, malware or spyware will not be transmitted in connection with or arising from the use of Our Website.",
       "We shall make reasonable efforts to keep the Site up and running at all times. We cannot, however, promise that the Site or any specific function or element of the Site will always be accessible or error-free. The Site may be inaccessible at times when we are doing upgrades or performing necessary maintenance on the Site. We are also not liable for any loss of data or consequential damage as a result of the temporary disruption.",
     ],
   },
@@ -109,7 +109,7 @@ const text = [
     header: "DISCLAIMER OF WARRANTIES AND LIMITATION OF LIABILITY",
     subsections: [
       'All information published on the Site is provided on an "as is" and "as available" basis with no explicit or implied warranty of any kind. We make no representations as to the quality, completeness or accuracy of any content made available on the Site.',
-      "The Site and Software do not offer advice and accepts no liability. Nothing published on the Site is intended to give you or your clients with any legal, tax, investment, financial, or other sort of advice. Any information or advice you offer to your clients based on the Site or Software is at your own risk, and you are solely responsible for the accuracy and completeness of any advice rendered.",
+      "The Site and Software do not offer advice and accepts no liability. Nothing published on the Site is intended to provide anyone with any legal, tax, investment, financial, or other sort of advice. Any decision made based on the information or advice from the Site or Software is at your own risk, and you are solely responsible for the accuracy and completeness of any advice rendered.",
       "We shall not be liable for any loss of profit, business, or income, any costs or expenditures, or any special, indirect, or consequential damages of any kind, caused or incurred by you as a consequence of or in connection with the provision to the Site.",
     ],
   },
@@ -124,7 +124,7 @@ const text = [
   {
     header: "REGISTRATION",
     subsections: [
-      "To register as a user on Our Website, you must be at least 18 years old and not be prohibited from doing so by any relevant legislation.",
+      "To register as a user on Our Site, you must be at least 18 years old and not be prohibited from doing so by any relevant legislation.",
       "You accept that the registration information supplied by You or anyone authorised by You at registration is correct and that you agree to update the abovementioned registration information as and when it changes.",
       "You are solely responsible for the security of your user login information and password at all times. You agree to alert us as soon as possible if you feel that your account has been accessed without your permission.",
       "You agree not to get or attempt to obtain unauthorised access to the Site or any protected information by any methods other than those specifically made available by Us for Your use.",
