@@ -29,6 +29,7 @@ import PolicyCards from "../components/dashboard/client-details/policy-cards";
 import AccidentIcon from "../components/stateless/interface/icons/accident-icon";
 import PhoneInput from "../components/stateless/interface/form/phone-input";
 import { isAfter } from "date-fns";
+import TandCInput from "../components/stateless/interface/form/terms-and-conditions-input";
 
 // Dimensions
 export const FLOATING_ACTION_BUTTON_WIDTH = 160;
@@ -56,6 +57,7 @@ export const INPUT_TYPE_YEAR = "yearInput";
 export const INPUT_TYPE_CHECKBOX = "checkboxInput";
 export const INPUT_TYPE_PHONE = "phoneInput";
 export const INPUT_TYPE_PASSWORD = "passwordInput";
+export const INPUT_TYPE_T_AND_C = "t&csInput";
 
 // Field Types
 export const FIELD_TYPE_TEXT = "text";
@@ -361,6 +363,8 @@ export const SIGNUP_PASSWORD_KEY = "password";
 export const SIGNUP_PASSWORD_LABEL = "Password";
 export const SIGNUP_CONFIRM_PASSWORD_KEY = "confirmPassword";
 export const SIGNUP_CONFIRM_PASSWORD_LABEL = "Confirm Password";
+export const SIGNUP_AGREE_TO_T_AND_C_KEY = "agreeToT&Cs";
+export const SIGNUP_AGREE_TO_T_AND_C_LABEL = "I agree with the Terms and Conditions";
 
 // Validation values
 export const MIN_POLICY_NAME_LENGTH = 2;
@@ -411,6 +415,7 @@ export const PASSWORD_NO_SPECIAL_CHAR_MSG =
   "Your password must contain at least 1 one of the following special characters: ^ $ * . [ ] { } ( ) ? - \" ! @ # % & / \\ , > < ' : ; | _ ~ ` + =";
 export const INVALID_VERIFICATION_CODE_MSG =
   "Please ensure you have entered the correct verification code.\nIf you have not received a verification code, please request for a new verification code below.";
+export const AGREE_T_AND_C_MSG = "You must agree to the Terms and Conditions to proceed with the sign up";
 
 // Regex expressions
 export const EMAIL_REGEX =
@@ -1638,6 +1643,7 @@ export const inputTypeMapping = {
   [INPUT_TYPE_CHECKBOX]: CheckboxInput,
   [INPUT_TYPE_PHONE]: PhoneInput,
   [INPUT_TYPE_PASSWORD]: PasswordInput,
+  [INPUT_TYPE_T_AND_C]: TandCInput,
 };
 
 export const policyDetailsAboutCardFields = [
@@ -1850,6 +1856,7 @@ export const defaultSignupFormValues = {
   [SIGNUP_GIVEN_NAME_KEY]: "",
   [SIGNUP_FAMILY_NAME_KEY]: "",
   [SIGNUP_RNF_KEY]: "",
+  [SIGNUP_AGREE_TO_T_AND_C_KEY]: false,
 };
 
 export const signupFields = [
@@ -1972,6 +1979,18 @@ export const signupFields = [
     col: {
       xs: 12,
       md: 6,
+    },
+  },
+  {
+    name: SIGNUP_AGREE_TO_T_AND_C_KEY,
+    label: SIGNUP_AGREE_TO_T_AND_C_LABEL,
+    type: INPUT_TYPE_T_AND_C,
+    col: {
+      xs: 12,
+    },
+    required: {
+      value: true,
+      message: AGREE_T_AND_C_MSG,
     },
   },
 ];

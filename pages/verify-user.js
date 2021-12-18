@@ -7,6 +7,7 @@ import BaseButton from "../components/stateless/interface/buttons/base-button";
 import FormContainer from "../components/stateless/interface/form/form-container";
 import NumberInput from "../components/stateless/interface/form/number-input";
 import LoginHeader from "../components/stateless/interface/misc/login-header";
+import MetaData from "../components/stateless/interface/misc/meta-data";
 import LoginContainer from "../components/stateless/layout/login-container";
 import { INVALID_VERIFICATION_CODE_MSG, REQUIRED_MSG, REQUIRED_MSG_PLACEHOLDER } from "../data/ui";
 import { confirmSignUp, resendConfirmation } from "../utils/api";
@@ -46,6 +47,7 @@ const VerifyUser = () => {
 
   return (
     <LoginContainer>
+      <MetaData title="Verify Account" />
       <LoginHeader />
       <Box>
         <FormContainer handleSubmit={handleSubmit} onSubmit={onSubmit}>
