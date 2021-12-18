@@ -42,9 +42,7 @@ const PolicyCards = ({ policies, policyOnClick }) => {
 export const PolicyCard = ({ policy, onClick }) => {
   return (
     <ClientDetailCard onClick={onClick}>
-      <ClientCardHeader>
-        {policy.insurer} - {policy.policyName}
-      </ClientCardHeader>
+      <ClientCardHeader>{policy.policyName}</ClientCardHeader>
       <Grid container>
         {policyCardFields.map((field) => (
           <ClientCardInfoText key={field.key} label={field.label} value={policy[field.key]} type={field.type} />

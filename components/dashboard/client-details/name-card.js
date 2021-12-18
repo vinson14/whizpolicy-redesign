@@ -17,11 +17,11 @@ const NameCard = ({ client }) => {
     <ClientDetailCard>
       <Box minHeight={180} height={1} position="relative" display={{ xs: "none", sm: "block" }}>
         <Box sx={avatarBoxSx}>
-          <Avatar sx={avatarSx}>{getInitials(client.name)}</Avatar>{" "}
+          <Avatar sx={avatarSx}>{getInitials(client)}</Avatar>
         </Box>
         <Box height={0.7} sx={nameBoxSx} p={3}>
           <Typography variant="h5" align="right" sx={{ fontWeight: 700 }}>
-            {client[CLIENT_GIVEN_NAME_KEY]} {client[CLIENT_FAMILY_NAME_KEY]}
+            {client[CLIENT_GIVEN_NAME_KEY]} {client[CLIENT_FAMILY_NAME_KEY].toUpperCase()}
           </Typography>
           <Typography component="h6" variant="caption" align="right">
             {client.occupation}

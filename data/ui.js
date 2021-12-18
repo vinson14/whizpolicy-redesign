@@ -69,6 +69,7 @@ export const FIELD_TYPE_DATE = "date";
 
 // Policy Categories
 export const POLICY_CATEGORY_WHOLE_LIFE_KEY = "wholeLife";
+export const POLICY_CATEGORY_WHOLE_LIFE_WITH_MULTIPLIER_KEY = "wholeLifeWithMultiplier";
 export const POLICY_CATEGORY_TERM_LIFE_KEY = "termLife";
 export const POLICY_CATEGORY_ENDOWMENT_KEY = "endowment";
 export const POLICY_CATEGORY_ILP_KEY = "ilp";
@@ -77,7 +78,8 @@ export const POLICY_CATEGORY_ISP_KEY = "integratedShieldPlan";
 export const POLICY_CATEGORY_CARESHIELD_KEY = "careshield";
 
 // Policy Categories Labels
-export const POLICY_CATEGORY_WHOLE_LIFE_LABEL = "Whole Life";
+export const POLICY_CATEGORY_WHOLE_LIFE_LABEL = "Whole Life (Traditional)";
+export const POLICY_CATEGORY_WHOLE_LIFE_WITH_MULTIPLIER_LABEL = "Whole Life (Multiplier)";
 export const POLICY_CATEGORY_TERM_LIFE_LABEL = "Term Life";
 export const POLICY_CATEGORY_ENDOWMENT_LABEL = "Endowment";
 export const POLICY_CATEGORY_ILP_LABEL = "Investment Linked";
@@ -92,8 +94,12 @@ export const POLICY_INSURER_KEY = "insurer";
 export const POLICY_LIFE_ASSURED_KEY = "lifeAssured";
 export const POLICY_CATEGORY_KEY = "policyCategory";
 export const POLICY_PREMIUM_KEY = "premium";
+export const POLICY_PREMIUM_CASH_KEY = "premiumCash";
+export const POLICY_PREMIUM_MEDISAVE_KEY = "premiumMedisave";
 export const POLICY_PREMIUM_MODE_KEY = "premiumMode";
 export const POLICY_DEATH_BENEFIT_KEY = "deathBenefit";
+export const POLICY_MULTIPLIER_KEY = "multiplier";
+export const POLICY_DEATH_BENEFIT_MULTIPLER_END_AGE_KEY = "deathBenefitMultiplerEndAge";
 export const POLICY_TPD_BENEFIT_KEY = "tpdBenefit";
 export const POLICY_MAJOR_CI_BENEFIT_KEY = "majorCiBenefit";
 export const POLICY_EARLY_CI_BENEFIT_KEY = "earlyCiBenefit";
@@ -124,8 +130,12 @@ export const POLICY_INSURER_LABEL = "Insurer";
 export const POLICY_LIFE_ASSURED_LABEL = "Life Assured";
 export const POLICY_CATEGORY_LABEL = "Category";
 export const POLICY_PREMIUM_LABEL = "Premium";
+export const POLICY_PREMIUM_CASH_LABEL = "Premium (Cash)";
+export const POLICY_PREMIUM_MEDISAVE_LABEL = "Premium (Medisave)";
 export const POLICY_PREMIUM_MODE_LABEL = "Premium Mode";
 export const POLICY_DEATH_BENEFIT_LABEL = "Death Benefit";
+export const POLICY_MULTIPLIER_LABEL = "Multiplier";
+export const POLICY_DEATH_BENEFIT_MULTIPLER_END_AGE_LABEL = "Multiplier End Age";
 export const POLICY_TPD_BENEFIT_LABEL = "Total Permanent Disability";
 export const POLICY_ACC_PARTIAL_DISABILITY_BENEFIT_LABEL = "Acc. Partial Perm. Disability";
 export const POLICY_MAJOR_CI_BENEFIT_LABEL = "Major Critical Illness";
@@ -975,6 +985,10 @@ export const addPolicyFormFields = {
         value: POLICY_CATEGORY_WHOLE_LIFE_KEY,
       },
       {
+        label: POLICY_CATEGORY_WHOLE_LIFE_WITH_MULTIPLIER_LABEL,
+        value: POLICY_CATEGORY_WHOLE_LIFE_WITH_MULTIPLIER_KEY,
+      },
+      {
         label: POLICY_CATEGORY_TERM_LIFE_LABEL,
         value: POLICY_CATEGORY_TERM_LIFE_KEY,
       },
@@ -1472,21 +1486,21 @@ export const addPolicyFormFields = {
   [POLICY_HOSP_RIDER_TYPE_KEY]: {
     name: POLICY_HOSP_RIDER_TYPE_KEY,
     label: POLICY_HOSP_RIDER_TYPE_LABEL,
-    type: INPUT_TYPE_TEXT,
-    // options: [
-    //   {
-    //     label: POLICY_HOSP_RIDER_TYPE_NO_LABEL,
-    //     value: POLICY_HOSP_RIDER_TYPE_NO_VALUE,
-    //   },
-    //   {
-    //     label: POLICY_HOSP_RIDER_TYPE_FULL_LABEL,
-    //     value: POLICY_HOSP_RIDER_TYPE_FULL_VALUE,
-    //   },
-    //   {
-    //     label: POLICY_HOSP_RIDER_TYPE_PARTIAL_LABEL,
-    //     value: POLICY_HOSP_RIDER_TYPE_PARTIAL_VALUE,
-    //   },
-    // ],
+    type: INPUT_TYPE_SELECT,
+    options: [
+      {
+        label: POLICY_HOSP_RIDER_TYPE_NO_LABEL,
+        value: POLICY_HOSP_RIDER_TYPE_NO_VALUE,
+      },
+      {
+        label: POLICY_HOSP_RIDER_TYPE_FULL_LABEL,
+        value: POLICY_HOSP_RIDER_TYPE_FULL_VALUE,
+      },
+      {
+        label: POLICY_HOSP_RIDER_TYPE_PARTIAL_LABEL,
+        value: POLICY_HOSP_RIDER_TYPE_PARTIAL_VALUE,
+      },
+    ],
     col: {
       xs: 12,
       md: 6,
@@ -1514,6 +1528,54 @@ export const addPolicyFormFields = {
       message: MAX_CHAR_MSG.replace(MAX_CHAR_MSG_PLACEHOLDER, MAX_CLIENT_REMARKS_LENGTH),
     },
   },
+  [POLICY_PREMIUM_CASH_KEY]: {
+    name: POLICY_PREMIUM_CASH_KEY,
+    label: POLICY_PREMIUM_CASH_LABEL,
+    type: INPUT_TYPE_CURRENCY,
+    col: {
+      xs: 12,
+      md: 6,
+    },
+  },
+  [POLICY_PREMIUM_MEDISAVE_KEY]: {
+    name: POLICY_PREMIUM_MEDISAVE_KEY,
+    label: POLICY_PREMIUM_MEDISAVE_LABEL,
+    type: INPUT_TYPE_CURRENCY,
+    col: {
+      xs: 12,
+      md: 6,
+    },
+  },
+  [POLICY_MULTIPLIER_KEY]: {
+    name: POLICY_MULTIPLIER_KEY,
+    label: POLICY_MULTIPLIER_LABEL,
+    type: INPUT_TYPE_SELECT,
+    col: {
+      xs: 12,
+      md: 6,
+    },
+    options: [
+      { label: 1, value: 1 },
+      { label: 2, value: 2 },
+      { label: 3, value: 3 },
+      { label: 4, value: 4 },
+      { label: 5, value: 5 },
+      { label: 6, value: 6 },
+      { label: 7, value: 7 },
+      { label: 8, value: 8 },
+      { label: 9, value: 9 },
+      { label: 10, value: 10 },
+    ],
+  },
+  [POLICY_DEATH_BENEFIT_MULTIPLER_END_AGE_KEY]: {
+    name: POLICY_DEATH_BENEFIT_MULTIPLER_END_AGE_KEY,
+    label: POLICY_DEATH_BENEFIT_MULTIPLER_END_AGE_LABEL,
+    type: INPUT_TYPE_YEAR,
+    col: {
+      xs: 12,
+      md: 6,
+    },
+  },
 };
 
 export const defaultPolicyFormValues = {
@@ -1527,10 +1589,12 @@ export const defaultPolicyFormValues = {
   [POLICY_ACC_TPD_BENEFIT_KEY]: "",
   [POLICY_ACC_WEEKLY_DIS_KEY]: "",
   [POLICY_DEATH_BENEFIT_KEY]: "",
+  [POLICY_MULTIPLIER_KEY]: 1,
+  [POLICY_DEATH_BENEFIT_MULTIPLER_END_AGE_KEY]: "",
   [POLICY_DISABILITY_INCOME_KEY]: "",
   [POLICY_EARLY_CI_BENEFIT_KEY]: "",
   [POLICY_GUARANTEED_MATURITY_BENEFIT_KEY]: "",
-  [POLICY_HOSP_RIDER_TYPE_KEY]: "",
+  [POLICY_HOSP_RIDER_TYPE_KEY]: POLICY_HOSP_RIDER_TYPE_NO_VALUE,
   [POLICY_HOSP_WARD_TYPE_KEY]: POLICY_HOSP_WARD_TYPE_PRIVATE_VALUE,
   [POLICY_ILP_FUND_RISK_KEY]: POLICY_ILP_FUND_RISK_BALANCED_VALUE,
   [POLICY_INCEPTION_DATE_KEY]: new Date(),
@@ -1542,6 +1606,8 @@ export const defaultPolicyFormValues = {
   [POLICY_NUMBER_KEY]: "",
   [POLICY_TERM_KEY]: "",
   [POLICY_PREMIUM_KEY]: "",
+  [POLICY_PREMIUM_CASH_KEY]: "",
+  [POLICY_PREMIUM_MEDISAVE_KEY]: "",
   [POLICY_PREMIUM_MODE_KEY]: PREMIUM_MODE_ANNUALLY_KEY,
   [POLICY_PREMIUM_TERM_KEY]: "",
   [POLICY_REMARKS_KEY]: "",
@@ -1570,6 +1636,17 @@ export const defaultLifePolicyFields = [
   POLICY_REMARKS_KEY,
 ];
 
+export const lifePolicyWithMultiplierFields = [
+  ...defaultPolicyFields,
+  POLICY_DEATH_BENEFIT_KEY,
+  POLICY_TPD_BENEFIT_KEY,
+  POLICY_MAJOR_CI_BENEFIT_KEY,
+  POLICY_EARLY_CI_BENEFIT_KEY,
+  POLICY_MULTIPLIER_KEY,
+  POLICY_DEATH_BENEFIT_MULTIPLER_END_AGE_KEY,
+  POLICY_REMARKS_KEY,
+];
+
 export const defaultAccPolicyFields = [
   ...defaultPolicyFields,
   POLICY_ACC_DEATH_BENEFIT_KEY,
@@ -1589,16 +1666,18 @@ export const defaultHospPolicyFields = [
   POLICY_INSURER_KEY,
   POLICY_NAME_KEY,
   POLICY_NUMBER_KEY,
+  POLICY_PREMIUM_CASH_KEY,
+  POLICY_PREMIUM_MEDISAVE_KEY,
+  POLICY_PREMIUM_MODE_KEY,
   POLICY_HOSP_WARD_TYPE_KEY,
   POLICY_HOSP_RIDER_TYPE_KEY,
-  POLICY_PREMIUM_KEY,
-  POLICY_PREMIUM_MODE_KEY,
   POLICY_INCEPTION_DATE_KEY,
   POLICY_REMARKS_KEY,
 ];
 
 export const policyCategoryFields = {
   [POLICY_CATEGORY_WHOLE_LIFE_KEY]: [...defaultLifePolicyFields],
+  [POLICY_CATEGORY_WHOLE_LIFE_WITH_MULTIPLIER_KEY]: [...lifePolicyWithMultiplierFields],
   [POLICY_CATEGORY_TERM_LIFE_KEY]: [...defaultLifePolicyFields],
   [POLICY_CATEGORY_ENDOWMENT_KEY]: [
     ...defaultPolicyFields,
@@ -1625,65 +1704,104 @@ export const inputTypeMapping = {
   [INPUT_TYPE_T_AND_C]: TandCInput,
 };
 
-export const policyDetailsAboutCardFields = [
-  {
+export const policyDetailsAboutCardFields = {
+  [POLICY_NUMBER_KEY]: {
     label: POLICY_NUMBER_LABEL,
     key: POLICY_NUMBER_KEY,
     type: FIELD_TYPE_TEXT,
   },
-  {
+  [POLICY_NAME_KEY]: {
     label: POLICY_NAME_LABEL,
     key: POLICY_NAME_KEY,
     type: FIELD_TYPE_TEXT,
   },
-  {
+  [POLICY_CATEGORY_KEY]: {
     label: POLICY_CATEGORY_LABEL,
     key: POLICY_CATEGORY_KEY,
     type: FIELD_TYPE_TEXT_CAMELCASE,
   },
-  {
-    label: POLICY_LIFE_ASSURED_LABEL,
-    key: POLICY_LIFE_ASSURED_KEY,
-    type: FIELD_TYPE_TEXT_CAMELCASE,
-  },
-  {
+  // {
+  //   label: POLICY_LIFE_ASSURED_LABEL,
+  //   key: POLICY_LIFE_ASSURED_KEY,
+  //   type: FIELD_TYPE_TEXT_CAMELCASE,
+  // },
+  [POLICY_PREMIUM_KEY]: {
     label: POLICY_PREMIUM_LABEL,
     key: POLICY_PREMIUM_KEY,
     type: FIELD_TYPE_CURRENCY,
   },
-  {
+  [POLICY_PREMIUM_CASH_KEY]: {
+    label: POLICY_PREMIUM_CASH_LABEL,
+    key: POLICY_PREMIUM_CASH_KEY,
+    type: FIELD_TYPE_CURRENCY,
+  },
+  [POLICY_PREMIUM_MEDISAVE_KEY]: {
+    label: POLICY_PREMIUM_MEDISAVE_LABEL,
+    key: POLICY_PREMIUM_MEDISAVE_KEY,
+    type: FIELD_TYPE_CURRENCY,
+  },
+  [POLICY_PREMIUM_MODE_KEY]: {
     label: POLICY_PREMIUM_MODE_LABEL,
     key: POLICY_PREMIUM_MODE_KEY,
     type: FIELD_TYPE_TEXT_CAMELCASE,
   },
-  {
+  [POLICY_INSURER_KEY]: {
     label: POLICY_INSURER_LABEL,
     key: POLICY_INSURER_KEY,
     type: FIELD_TYPE_TEXT,
   },
-  {
+  [POLICY_INCEPTION_DATE_KEY]: {
     label: POLICY_INCEPTION_DATE_LABEL,
     key: POLICY_INCEPTION_DATE_KEY,
     type: FIELD_TYPE_DATE,
   },
-  {
-    label: POLICY_TERM_LABEL,
-    key: POLICY_TERM_KEY,
-    type: FIELD_TYPE_INTEGER,
-  },
-  {
+  [POLICY_MATURITY_DATE_KEY]: {
     label: POLICY_MATURITY_DATE_LABEL,
     key: POLICY_MATURITY_DATE_KEY,
     type: FIELD_TYPE_DATE,
   },
-  {
+  [POLICY_TERM_KEY]: {
+    label: POLICY_TERM_LABEL,
+    key: POLICY_TERM_KEY,
+    type: FIELD_TYPE_INTEGER,
+  },
+  [POLICY_PREMIUM_TERM_KEY]: {
     label: POLICY_PREMIUM_TERM_LABEL,
     key: POLICY_PREMIUM_TERM_KEY,
     type: FIELD_TYPE_INTEGER,
   },
+};
+
+export const defaultPolicyDetailsAboutCardFields = [
+  POLICY_NUMBER_KEY,
+  POLICY_NAME_KEY,
+  POLICY_CATEGORY_KEY,
+  // {
+  //   label: POLICY_LIFE_ASSURED_LABEL,
+  //   key: POLICY_LIFE_ASSURED_KEY,
+  //   type: FIELD_TYPE_TEXT_CAMELCASE,
+  // },
+  POLICY_PREMIUM_KEY,
+  POLICY_PREMIUM_MODE_KEY,
+  POLICY_INSURER_KEY,
+  POLICY_INCEPTION_DATE_KEY,
+  POLICY_MATURITY_DATE_KEY,
+  POLICY_TERM_KEY,
+  POLICY_PREMIUM_TERM_KEY,
 ];
 
-export const policyDetailsCoverageCardFields = [
+export const ispPolicyDetailsAboutCardFields = [
+  POLICY_NUMBER_KEY,
+  POLICY_NAME_KEY,
+  POLICY_CATEGORY_KEY,
+  POLICY_INSURER_KEY,
+  POLICY_PREMIUM_CASH_KEY,
+  POLICY_PREMIUM_MEDISAVE_KEY,
+  POLICY_PREMIUM_MODE_KEY,
+  POLICY_INCEPTION_DATE_KEY,
+];
+
+export const lifePolicyDetailsCoverageCardFields = [
   {
     label: POLICY_DEATH_BENEFIT_LABEL,
     key: POLICY_DEATH_BENEFIT_KEY,
@@ -1707,6 +1825,24 @@ export const policyDetailsCoverageCardFields = [
     key: POLICY_EARLY_CI_BENEFIT_KEY,
     type: FIELD_TYPE_CURRENCY,
     icon: <HotelIcon />,
+  },
+];
+
+export const ispPolicyDetailsCoverageCardFields = [
+  {
+    label: POLICY_HOSP_WARD_TYPE_LABEL,
+    key: POLICY_HOSP_WARD_TYPE_KEY,
+    type: FIELD_TYPE_TEXT_CAMELCASE,
+  },
+  {
+    label: POLICY_HOSP_RIDER_TYPE_LABEL,
+    key: POLICY_HOSP_RIDER_TYPE_KEY,
+    type: FIELD_TYPE_TEXT_CAMELCASE,
+  },
+  {
+    label: POLICY_REMARKS_LABEL,
+    key: POLICY_REMARKS_KEY,
+    type: FIELD_TYPE_TEXT,
   },
 ];
 

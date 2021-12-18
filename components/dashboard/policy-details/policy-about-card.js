@@ -1,22 +1,42 @@
 import { Grid } from "@mui/material";
-import { policyDetailsAboutCardFields } from "../../../data/ui";
+import {
+  POLICY_CATEGORY_KEY,
+  POLICY_CATEGORY_WHOLE_LIFE_KEY,
+  POLICY_CATEGORY_TERM_LIFE_KEY,
+  POLICY_CATEGORY_ENDOWMENT_KEY,
+  POLICY_CATEGORY_ILP_KEY,
+  POLICY_CATEGORY_ACCIDENT_KEY,
+  POLICY_CATEGORY_ISP_KEY,
+  POLICY_CATEGORY_CARESHIELD_KEY,
+  defaultPolicyDetailsAboutCardFields,
+  policyDetailsAboutCardFields,
+  ispPolicyDetailsAboutCardFields,
+} from "../../../data/ui";
 import ClientCardHeader from "../../stateless/interface/cards/client-card-header";
 import ClientCardInfoText from "../../stateless/interface/cards/client-card-info-text";
 import ClientDetailCard from "../../stateless/interface/cards/client-detail-card";
 
 const PolicyAboutCard = ({ policy }) => {
+  const policyCategoryFields = {
+    [POLICY_CATEGORY_WHOLE_LIFE_KEY]: defaultPolicyDetailsAboutCardFields,
+    [POLICY_CATEGORY_TERM_LIFE_KEY]: defaultPolicyDetailsAboutCardFields,
+    [POLICY_CATEGORY_ENDOWMENT_KEY]: defaultPolicyDetailsAboutCardFields,
+    [POLICY_CATEGORY_ILP_KEY]: defaultPolicyDetailsAboutCardFields,
+    [POLICY_CATEGORY_ACCIDENT_KEY]: defaultPolicyDetailsAboutCardFields,
+    [POLICY_CATEGORY_ISP_KEY]: ispPolicyDetailsAboutCardFields,
+    [POLICY_CATEGORY_CARESHIELD_KEY]: defaultPolicyDetailsAboutCardFields,
+  };
+
+  const fields = policyCategoryFields[policy[POLICY_CATEGORY_KEY]];
+
   return (
     <ClientDetailCard>
       <ClientCardHeader>Policy Info</ClientCardHeader>
       <Grid container>
-        {policyDetailsAboutCardFields.map((field) => (
-          <ClientCardInfoText
-            key={field.key}
-            label={field.label}
-            value={policy[field.key]}
-            type={field.type}
-          />
-        ))}
+        {fields.map((fieldName) => {
+          const field = policyDetailsAboutCardFields[fieldName];
+          return <ClientCardInfoText key={field.key} label={field.label} value={policy[field.key]} type={field.type} />;
+        })}
       </Grid>
     </ClientDetailCard>
   );

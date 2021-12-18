@@ -1,3 +1,4 @@
+import { ConstructionOutlined } from "@mui/icons-material";
 import { differenceInYears } from "date-fns";
 import {
   addClientFormFields,
@@ -5,14 +6,19 @@ import {
   INPUT_TYPE_CURRENCY,
   INPUT_TYPE_YEAR,
   INPUT_TYPE_DATEPICKER,
+  CLIENT_GIVEN_NAME_KEY,
+  CLIENT_FAMILY_NAME_KEY,
 } from "../data/ui";
 
-export const getInitials = (name) => {
+export const getName = (client) => {
+  return `${client[CLIENT_GIVEN_NAME_KEY]} ${client[CLIENT_FAMILY_NAME_KEY]}`;
+};
+
+export const getInitials = (client) => {
   try {
-    const words = name.split(" ");
-    return words[0].charAt(0) + words[1].charAt(0);
+    return client[CLIENT_GIVEN_NAME_KEY].charAt(0) + client[CLIENT_FAMILY_NAME_KEY].charAt(0);
   } catch (err) {
-    return name.substring(0, 2).toUpperCase();
+    return "";
   }
 };
 
