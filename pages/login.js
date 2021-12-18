@@ -12,6 +12,7 @@ import { defaultLoginFormValues, inputTypeMapping, loginFields } from "../data/u
 import LoginHeader from "../components/stateless/interface/misc/login-header";
 import BaseButton from "../components/stateless/interface/buttons/base-button";
 import LoginContainer from "../components/stateless/layout/login-container";
+import MetaData from "../components/stateless/interface/misc/meta-data";
 
 const LoginPage = () => {
   const router = useRouter();
@@ -43,6 +44,7 @@ const LoginPage = () => {
   };
   return (
     <LoginContainer>
+      <MetaData title="Login" />
       <LoginHeader title="Login" />
       <Box>
         <FormContainer handleSubmit={handleSubmit} onSubmit={onSubmit}>
