@@ -21,6 +21,7 @@ import LoginHeader from "../components/stateless/interface/misc/login-header";
 import BaseButton from "../components/stateless/interface/buttons/base-button";
 import _ from "lodash";
 import LoginContainer from "../components/stateless/layout/login-container";
+import MetaData from "../components/stateless/interface/misc/meta-data";
 
 const SignupPage = () => {
   const router = useRouter();
@@ -59,6 +60,7 @@ const SignupPage = () => {
 
   return (
     <LoginContainer>
+      <MetaData title="Sign up" />
       <LoginHeader title="Sign up" />
       <Box>
         <FormContainer handleSubmit={handleSubmit} onSubmit={onSubmit}>

@@ -6,6 +6,7 @@ import BaseButton from "../components/stateless/interface/buttons/base-button";
 import FormContainer from "../components/stateless/interface/form/form-container";
 import TextInput from "../components/stateless/interface/form/text-input";
 import LoginHeader from "../components/stateless/interface/misc/login-header";
+import MetaData from "../components/stateless/interface/misc/meta-data";
 import LoginContainer from "../components/stateless/layout/login-container";
 import { inputTypeMapping, resetPasswordDefaultValues, resetPasswordFields, SIGNUP_EMAIL_KEY } from "../data/ui";
 import { forgotPassword } from "../utils/api";
@@ -29,6 +30,7 @@ const ResetPassword = () => {
 
   return (
     <LoginContainer>
+      <MetaData title="Reset Password" />
       <LoginHeader title="Reset password" />
       <Box>
         <FormContainer handleSubmit={handleSubmit} onSubmit={onSubmit}>
