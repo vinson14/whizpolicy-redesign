@@ -148,6 +148,8 @@ export const POLICY_DISABILITY_INCOME_LABEL = "Disability Income";
 export const POLICY_REMARKS_LABEL = "Remarks";
 // Client Object Keys
 export const CLIENT_NAME_KEY = "name";
+export const CLIENT_GIVEN_NAME_KEY = "givenName";
+export const CLIENT_FAMILY_NAME_KEY = "familyName";
 export const CLIENT_OCCUPATION_KEY = "occupation";
 export const CLIENT_AGE_KEY = "age";
 export const CLIENT_MOBILE_KEY = "mobile";
@@ -167,6 +169,8 @@ export const CLIENT_AGREED_KEY = "clientAgreed";
 
 // Client Object Labels
 export const CLIENT_NAME_LABEL = "Name";
+export const CLIENT_GIVEN_NAME_LABEL = "Given Name";
+export const CLIENT_FAMILY_NAME_LABEL = "Family Name";
 export const CLIENT_OCCUPATION_LABEL = "Occupation";
 export const CLIENT_AGE_LABEL = "Age";
 export const CLIENT_MOBILE_LABEL = "Mobile";
@@ -177,7 +181,7 @@ export const CLIENT_MARITAL_STATUS_LABEL = "Marital Status";
 export const CLIENT_SMOKER_LABEL = "Smoker";
 export const CLIENT_SALUTATION_LABEL = "Salutation";
 export const CLIENT_NATIONALITY_LABEL = "Nationality";
-export const CLIENT_ANNUAL_INCOME_LABEL = "Annual Income";
+export const CLIENT_ANNUAL_INCOME_LABEL = "Estimated Annual Income";
 export const CLIENT_ADDRESS_LABEL = "Address";
 export const CLIENT_REMARKS_LABEL = "Remarks";
 export const CLIENT_ETHNICITY_LABEL = "Ethnicity";
@@ -645,7 +649,9 @@ export const newClientDefaultValues = {
   [CLIENT_BIRTHDAY_KEY]: new Date("1 Jan 2000"),
   [CLIENT_EMAIL_KEY]: "",
   [CLIENT_ETHNICITY_KEY]: CLIENT_ETHNICITY_CHINESE_KEY,
+  [CLIENT_FAMILY_NAME_KEY]: "",
   [CLIENT_GENDER_KEY]: GENDER_MALE_VALUE,
+  [CLIENT_GIVEN_NAME_KEY]: "",
   [CLIENT_MARITAL_STATUS_KEY]: MARITAL_STATUS_SINGLE_VALUE,
   [CLIENT_MOBILE_KEY]: "",
   [CLIENT_NAME_KEY]: "",
@@ -688,6 +694,46 @@ export const addClientFormFields = [
       required: {
         value: true,
         message: REQUIRED_MSG.replace(REQUIRED_MSG_PLACEHOLDER, "name"),
+      },
+      minLength: {
+        value: MIN_CLIENT_NAME_LENGTH,
+        message: MIN_CHAR_MSG.replace(MIN_CHAR_MSG_PLACEHOLDER, MIN_CLIENT_NAME_LENGTH),
+      },
+      maxLength: {
+        value: MAX_CLIENT_NAME_LENGTH,
+        message: MAX_CHAR_MSG.replace(MAX_CHAR_MSG_PLACEHOLDER, MAX_CLIENT_NAME_LENGTH),
+      },
+    },
+  },
+  {
+    name: CLIENT_GIVEN_NAME_KEY,
+    label: CLIENT_GIVEN_NAME_LABEL,
+    type: INPUT_TYPE_TEXT,
+    col: { xs: 12, md: 6 },
+    rules: {
+      required: {
+        value: true,
+        message: REQUIRED_MSG.replace(REQUIRED_MSG_PLACEHOLDER, "Given Name"),
+      },
+      minLength: {
+        value: MIN_CLIENT_NAME_LENGTH,
+        message: MIN_CHAR_MSG.replace(MIN_CHAR_MSG_PLACEHOLDER, MIN_CLIENT_NAME_LENGTH),
+      },
+      maxLength: {
+        value: MAX_CLIENT_NAME_LENGTH,
+        message: MAX_CHAR_MSG.replace(MAX_CHAR_MSG_PLACEHOLDER, MAX_CLIENT_NAME_LENGTH),
+      },
+    },
+  },
+  {
+    name: CLIENT_FAMILY_NAME_KEY,
+    label: CLIENT_FAMILY_NAME_LABEL,
+    type: INPUT_TYPE_TEXT,
+    col: { xs: 12, md: 6 },
+    rules: {
+      required: {
+        value: true,
+        message: REQUIRED_MSG.replace(REQUIRED_MSG_PLACEHOLDER, "Family Name"),
       },
       minLength: {
         value: MIN_CLIENT_NAME_LENGTH,
