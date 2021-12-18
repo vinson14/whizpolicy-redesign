@@ -690,27 +690,6 @@ export const allInsuranceCompanies = [
 
 export const addClientFormFields = [
   {
-    name: CLIENT_NAME_KEY,
-    label: CLIENT_NAME_LABEL,
-    type: INPUT_TYPE_TEXT,
-    col: { xs: 12, md: 6 },
-    placeholder: "John Doe",
-    rules: {
-      required: {
-        value: true,
-        message: REQUIRED_MSG.replace(REQUIRED_MSG_PLACEHOLDER, "name"),
-      },
-      minLength: {
-        value: MIN_CLIENT_NAME_LENGTH,
-        message: MIN_CHAR_MSG.replace(MIN_CHAR_MSG_PLACEHOLDER, MIN_CLIENT_NAME_LENGTH),
-      },
-      maxLength: {
-        value: MAX_CLIENT_NAME_LENGTH,
-        message: MAX_CHAR_MSG.replace(MAX_CHAR_MSG_PLACEHOLDER, MAX_CLIENT_NAME_LENGTH),
-      },
-    },
-  },
-  {
     name: CLIENT_GIVEN_NAME_KEY,
     label: CLIENT_GIVEN_NAME_LABEL,
     type: INPUT_TYPE_TEXT,

@@ -34,7 +34,12 @@ const clientSchema = {
     in: ["body"],
     trim: true,
   },
-  name: {
+  givenName: {
+    in: ["body"],
+    trim: true,
+    notEmpty: true,
+  },
+  familyName: {
     in: ["body"],
     trim: true,
     notEmpty: true,
