@@ -32,7 +32,7 @@ const CoverageCard = ({ client }) => {
   return (
     <ClientDetailCard>
       <ClientCardHeader>Coverage Overview</ClientCardHeader>
-      <Grid container justifyContent="center">
+      <Grid container>
         {client.financialOverview &&
           clientDetailsFinancialOverviewFields.map((field) => (
             <CoverageText
