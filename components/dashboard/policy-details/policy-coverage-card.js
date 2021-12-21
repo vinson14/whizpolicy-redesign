@@ -1,7 +1,14 @@
 import { Grid } from "@mui/material";
 import {
+  accPolicyDetailsCoverageCardFields,
+  endowmentPolicyDetailsCoverageCardFields,
+  ilpPolicyDetailsCoverageCardFields,
   ispPolicyDetailsCoverageCardFields,
   lifePolicyDetailsCoverageCardFields,
+  policyDetailsCoverageFields,
+  POLICY_CATEGORY_ACCIDENT_KEY,
+  POLICY_CATEGORY_ENDOWMENT_KEY,
+  POLICY_CATEGORY_ILP_KEY,
   POLICY_CATEGORY_ISP_KEY,
   POLICY_CATEGORY_KEY,
   POLICY_CATEGORY_TERM_LIFE_KEY,
@@ -15,23 +22,29 @@ const PolicyCoverageCard = ({ policy }) => {
   const policyTypeFields = {
     [POLICY_CATEGORY_WHOLE_LIFE_KEY]: lifePolicyDetailsCoverageCardFields,
     [POLICY_CATEGORY_TERM_LIFE_KEY]: lifePolicyDetailsCoverageCardFields,
+    [POLICY_CATEGORY_ACCIDENT_KEY]: accPolicyDetailsCoverageCardFields,
+    [POLICY_CATEGORY_ILP_KEY]: ilpPolicyDetailsCoverageCardFields,
+    [POLICY_CATEGORY_ENDOWMENT_KEY]: endowmentPolicyDetailsCoverageCardFields,
     [POLICY_CATEGORY_ISP_KEY]: ispPolicyDetailsCoverageCardFields,
   };
 
-  const fields = policyTypeFields[policy[POLICY_CATEGORY_KEY]];
+  const fieldNames = policyTypeFields[policy[POLICY_CATEGORY_KEY]];
   return (
     <ClientDetailCard>
       <ClientCardHeader>Policy Benefits</ClientCardHeader>
       <Grid container>
-        {fields.map((field) => (
-          <ClientCardInfoText
-            value={policy[field.key]}
-            label={field.label}
-            type={field.type}
-            key={field.key}
-            icon={field.icon}
-          />
-        ))}
+        {fieldNames.map((fieldName) => {
+          const field = policyDetailsCoverageFields[fieldName];
+          return (
+            <ClientCardInfoText
+              value={policy[field.key]}
+              label={field.label}
+              type={field.type}
+              key={field.key}
+              icon={field.icon}
+            />
+          );
+        })}
       </Grid>
     </ClientDetailCard>
   );
