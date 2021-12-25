@@ -595,7 +595,7 @@ export const clientDetailsFinancialOverviewFields = [
     icon: <AccidentIcon />,
   },
   {
-    label: CLIENT_FINANCIAL_OVERVIEW_DISABILITY_LABEL_KEY,
+    label: CLIENT_FINANCIAL_OVERVIEW_DISABILITY_INCOME_LABEL,
     key: CLIENT_FINANCIAL_OVERVIEW_DISABILITY_INCOME_KEY,
     type: FIELD_TYPE_CURRENCY,
     icon: <AccessibleForwardIcon />,
@@ -2001,7 +2001,6 @@ export const ispPolicyDetailsCoverageCardFields = [
   POLICY_HOSP_RIDER_TYPE_KEY,
   POLICY_REMARKS_KEY,
 ];
-
 
 export const careshieldPolicyDetailsCoverageCardFields = [POLICY_DISABILITY_INCOME_KEY, POLICY_REMARKS_KEY];
 
