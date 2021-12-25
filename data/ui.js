@@ -2002,6 +2002,7 @@ export const ispPolicyDetailsCoverageCardFields = [
   POLICY_REMARKS_KEY,
 ];
 
+
 export const careshieldPolicyDetailsCoverageCardFields = [POLICY_DISABILITY_INCOME_KEY, POLICY_REMARKS_KEY];
 
 export const defaultDependantFormValues = {
