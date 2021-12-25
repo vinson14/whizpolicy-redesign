@@ -219,6 +219,7 @@ export const CLIENT_FINANCIAL_OVERVIEW_MAJOR_CI_LABEL = "Major Critical Illness"
 export const CLIENT_FINANCIAL_OVERVIEW_EARLY_CI_LABEL = "Early Critical Illness";
 export const CLIENT_FINANCIAL_OVERVIEW_ACC_DEATH_LABEL = "Accidental Death";
 export const CLIENT_FINANCIAL_OVERVIEW_ACC_MED_LABEL = "Accidental Medical Reimbursement";
+export const CLIENT_FINANCIAL_OVERVIEW_DISABILITY_INCOME_LABEL = "Disability Income";
 
 // Client Dependant Field key and value
 export const CLIENT_DEPENDANT_NAME_KEY = "name";
@@ -594,7 +595,7 @@ export const clientDetailsFinancialOverviewFields = [
     icon: <AccidentIcon />,
   },
   {
-    label: CLIENT_FINANCIAL_OVERVIEW_DISABILITY_INCOME_KEY,
+    label: CLIENT_FINANCIAL_OVERVIEW_DISABILITY_LABEL_KEY,
     key: CLIENT_FINANCIAL_OVERVIEW_DISABILITY_INCOME_KEY,
     type: FIELD_TYPE_CURRENCY,
     icon: <AccessibleForwardIcon />,
