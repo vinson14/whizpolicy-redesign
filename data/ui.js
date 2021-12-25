@@ -604,7 +604,7 @@ export const policyCardFields = [
   {
     label: POLICY_NUMBER_LABEL,
     key: POLICY_NUMBER_KEY,
-    type: FIELD_TYPE_TEXT_CAMELCASE,
+    type: FIELD_TYPE_TEXT,
   },
   {
     label: POLICY_CATEGORY_LABEL,
@@ -1699,6 +1699,18 @@ export const defaultHospPolicyFields = [
   POLICY_REMARKS_KEY,
 ];
 
+export const defaultCareshieldPolicyFields = [
+  POLICY_CATEGORY_KEY,
+  POLICY_INSURER_KEY,
+  POLICY_NAME_KEY,
+  POLICY_NUMBER_KEY,
+  POLICY_PREMIUM_CASH_KEY,
+  POLICY_PREMIUM_MEDISAVE_KEY,
+  POLICY_PREMIUM_MODE_KEY,
+  POLICY_INCEPTION_DATE_KEY,
+  POLICY_DISABILITY_INCOME_KEY,
+];
+
 export const endowmentPolicyFields = [
   ...defaultPolicyFields,
   POLICY_DEATH_BENEFIT_KEY,
@@ -1715,7 +1727,7 @@ export const policyCategoryFields = {
   [POLICY_CATEGORY_ILP_KEY]: [...defaultLifePolicyFields, POLICY_ILP_FUND_RISK_KEY],
   [POLICY_CATEGORY_ACCIDENT_KEY]: [...defaultAccPolicyFields],
   [POLICY_CATEGORY_ISP_KEY]: [...defaultHospPolicyFields],
-  [POLICY_CATEGORY_CARESHIELD_KEY]: [...defaultPolicyFields, POLICY_DISABILITY_INCOME_KEY],
+  [POLICY_CATEGORY_CARESHIELD_KEY]: [...defaultCareshieldPolicyFields],
 };
 
 export const inputTypeMapping = {
@@ -1828,6 +1840,17 @@ export const ispPolicyDetailsAboutCardFields = [
   POLICY_INCEPTION_DATE_KEY,
 ];
 
+export const careshieldPolicyDetailsAboutCardFields = [
+  POLICY_NUMBER_KEY,
+  POLICY_NAME_KEY,
+  POLICY_CATEGORY_KEY,
+  POLICY_INSURER_KEY,
+  POLICY_PREMIUM_CASH_KEY,
+  POLICY_PREMIUM_MEDISAVE_KEY,
+  POLICY_PREMIUM_MODE_KEY,
+  POLICY_INCEPTION_DATE_KEY,
+];
+
 export const policyDetailsCoverageFields = {
   [POLICY_DEATH_BENEFIT_KEY]: {
     label: POLICY_DEATH_BENEFIT_LABEL,
@@ -1924,6 +1947,11 @@ export const policyDetailsCoverageFields = {
     label: POLICY_ACC_HOME_MOD_LABEL,
     type: FIELD_TYPE_CURRENCY,
   },
+  [POLICY_DISABILITY_INCOME_KEY]: {
+    key: POLICY_DISABILITY_INCOME_KEY,
+    label: POLICY_DISABILITY_INCOME_LABEL,
+    type: FIELD_TYPE_CURRENCY,
+  },
 };
 
 export const endowmentPolicyDetailsCoverageCardFields = [
@@ -1959,6 +1987,8 @@ export const ispPolicyDetailsCoverageCardFields = [
   POLICY_HOSP_RIDER_TYPE_KEY,
   POLICY_REMARKS_KEY,
 ];
+
+export const careshieldPolicyDetailsCoverageCardFields = [POLICY_DISABILITY_INCOME_KEY, POLICY_REMARKS_KEY];
 
 export const defaultDependantFormValues = {
   [CLIENT_DEPENDANT_NAME_KEY]: "",

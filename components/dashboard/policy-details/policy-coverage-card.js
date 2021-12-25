@@ -1,12 +1,14 @@
 import { Grid } from "@mui/material";
 import {
   accPolicyDetailsCoverageCardFields,
+  careshieldPolicyDetailsCoverageCardFields,
   endowmentPolicyDetailsCoverageCardFields,
   ilpPolicyDetailsCoverageCardFields,
   ispPolicyDetailsCoverageCardFields,
   lifePolicyDetailsCoverageCardFields,
   policyDetailsCoverageFields,
   POLICY_CATEGORY_ACCIDENT_KEY,
+  POLICY_CATEGORY_CARESHIELD_KEY,
   POLICY_CATEGORY_ENDOWMENT_KEY,
   POLICY_CATEGORY_ILP_KEY,
   POLICY_CATEGORY_ISP_KEY,
@@ -26,6 +28,7 @@ const PolicyCoverageCard = ({ policy }) => {
     [POLICY_CATEGORY_ILP_KEY]: ilpPolicyDetailsCoverageCardFields,
     [POLICY_CATEGORY_ENDOWMENT_KEY]: endowmentPolicyDetailsCoverageCardFields,
     [POLICY_CATEGORY_ISP_KEY]: ispPolicyDetailsCoverageCardFields,
+    [POLICY_CATEGORY_CARESHIELD_KEY]: careshieldPolicyDetailsCoverageCardFields,
   };
 
   const fieldNames = policyTypeFields[policy[POLICY_CATEGORY_KEY]];
