@@ -42,7 +42,18 @@ const CoverageInfoPopover = ({ anchorEl, handleClose, selectedKey, client }) => 
           </Fragment>
         ))}
         {clientInfoText.map((text) => (
-          <ClientCardInfoText xs={12} sm={12} label={text.label} value={text.value} key={text.label} />
+          <ClientCardInfoText
+            xs={12}
+            sm={12}
+            label={text.label}
+            value={
+              (text.label === "Current Coverage" || text.label === "Ideal Coverage") &&
+              selectedKey === CLIENT_FINANCIAL_OVERVIEW_DISABILITY_INCOME_KEY
+                ? `${text.value}/month`
+                : text.value
+            }
+            key={text.label}
+          />
         ))}
       </Grid>
     </Popover>
