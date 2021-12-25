@@ -13,8 +13,11 @@ import {
 import { getDifferenceInCalendarYears } from "./api";
 
 const usePolicyTerm = (watch, setValue, setError) => {
-  const inceptionDate = watch(POLICY_INCEPTION_DATE_KEY);
-  const maturityDate = watch(POLICY_MATURITY_DATE_KEY);
+  var inceptionDate = watch(POLICY_INCEPTION_DATE_KEY);
+  var maturityDate = watch(POLICY_MATURITY_DATE_KEY);
+
+  if (typeof inceptionDate === "string") inceptionDate = new Date(inceptionDate);
+  if (typeof maturityDate === "string") maturityDate = new Date(maturityDate);
 
   useEffect(() => {
     const years = getDifferenceInCalendarYears(inceptionDate, maturityDate);

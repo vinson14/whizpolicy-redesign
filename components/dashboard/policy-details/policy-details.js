@@ -7,8 +7,6 @@ import PolicyAboutCard from "./policy-about-card";
 import PolicyCoverageCard from "./policy-coverage-card";
 
 const PolicyDetails = ({ policy }) => {
-  const [editPolicyModalState, openPolicyModal, closePolicyModal] = useModal();
-
   return (
     <>
       <CustomGrow>
