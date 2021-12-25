@@ -9,6 +9,7 @@ const POLICY_ACC_MEDICAL_KEY = "accidentalMedical";
 const POLICY_ACC_ALT_MEDICAL_KEY = "accidentalTCM";
 const POLICY_ACC_DAILY_HOSP_KEY = "accidentalDailyHospitalIncome";
 const POLICY_ACC_WEEKLY_DIS_KEY = "accidentalWeeklyDisabilityIncome";
+const POLICY_DISABILITY_INCOME_KEY = "disabilityIncome";
 const FINANCIAL_OVERVIEW_KEY = "financialOverview";
 const FINANCIAL_OVERVIEW_CURRENT_COVERAGE_KEY = "currentCoverage";
 const FINANCIAL_OVERVIEW_IDEAL_COVERAGE_KEY = "idealCoverage";
@@ -26,6 +27,7 @@ const benefitTypeKeys = [
   POLICY_EARLY_CI_BENEFIT_KEY,
   POLICY_ACC_DEATH_BENEFIT_KEY,
   POLICY_ACC_TPD_BENEFIT_KEY,
+  POLICY_DISABILITY_INCOME_KEY,
 ];
 
 const incomeMultiplier = {
@@ -35,6 +37,7 @@ const incomeMultiplier = {
   [POLICY_EARLY_CI_BENEFIT_KEY]: 10,
   [POLICY_ACC_DEATH_BENEFIT_KEY]: 1,
   [POLICY_ACC_TPD_BENEFIT_KEY]: 1,
+  [POLICY_DISABILITY_INCOME_KEY]: 0.0583,
 };
 
 const calculateCurrentCoverage = (client) => {

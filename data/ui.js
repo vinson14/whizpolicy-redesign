@@ -212,12 +212,14 @@ export const CLIENT_FINANCIAL_OVERVIEW_MAJOR_CI_KEY = "majorCiBenefit";
 export const CLIENT_FINANCIAL_OVERVIEW_EARLY_CI_KEY = "earlyCiBenefit";
 export const CLIENT_FINANCIAL_OVERVIEW_ACC_DEATH_KEY = "accidentalDeath";
 export const CLIENT_FINANCIAL_OVERVIEW_ACC_MED_KEY = "accidentalMedicalBenefit";
+export const CLIENT_FINANCIAL_OVERVIEW_DISABILITY_INCOME_KEY = "disabilityIncome";
 export const CLIENT_FINANCIAL_OVERVIEW_DEATH_LABEL = "Death";
 export const CLIENT_FINANCIAL_OVERVIEW_TPD_LABEL = "Total Permanent Disability";
 export const CLIENT_FINANCIAL_OVERVIEW_MAJOR_CI_LABEL = "Major Critical Illness";
 export const CLIENT_FINANCIAL_OVERVIEW_EARLY_CI_LABEL = "Early Critical Illness";
 export const CLIENT_FINANCIAL_OVERVIEW_ACC_DEATH_LABEL = "Accidental Death";
 export const CLIENT_FINANCIAL_OVERVIEW_ACC_MED_LABEL = "Accidental Medical Reimbursement";
+export const CLIENT_FINANCIAL_OVERVIEW_DISABILITY_INCOME_LABEL = "Disability Income";
 
 // Client Dependant Field key and value
 export const CLIENT_DEPENDANT_NAME_KEY = "name";
@@ -592,6 +594,12 @@ export const clientDetailsFinancialOverviewFields = [
     type: FIELD_TYPE_CURRENCY,
     icon: <AccidentIcon />,
   },
+  {
+    label: CLIENT_FINANCIAL_OVERVIEW_DISABILITY_INCOME_LABEL,
+    key: CLIENT_FINANCIAL_OVERVIEW_DISABILITY_INCOME_KEY,
+    type: FIELD_TYPE_CURRENCY,
+    icon: <AccessibleForwardIcon />,
+  },
   // {
   //   label: CLIENT_FINANCIAL_OVERVIEW_ACC_MED_LABEL,
   //   key: CLIENT_FINANCIAL_OVERVIEW_ACC_MED_KEY,
@@ -658,6 +666,12 @@ export const coverageInfoPopoverContent = {
     { qns: "Why do you need accMed1", ans: "because thats why" },
     { qns: "Why do you need accMed2", ans: "because thats why" },
     { qns: "Why do you need accMed3", ans: "because thats why" },
+  ],
+  [CLIENT_FINANCIAL_OVERVIEW_DISABILITY_INCOME_KEY]: [
+    {
+      qns: "What is the purpose of Disability Income?",
+      ans: "Disability Income is a long-term care insurance financial support should you become severely disabled, especially during old age, and need personal and medical care for a prolonged duration (i.e. long-term care).",
+    },
   ],
 };
 
