@@ -213,6 +213,8 @@ export const CLIENT_FINANCIAL_OVERVIEW_EARLY_CI_KEY = "earlyCiBenefit";
 export const CLIENT_FINANCIAL_OVERVIEW_ACC_DEATH_KEY = "accidentalDeath";
 export const CLIENT_FINANCIAL_OVERVIEW_ACC_MED_KEY = "accidentalMedicalBenefit";
 export const CLIENT_FINANCIAL_OVERVIEW_DISABILITY_INCOME_KEY = "disabilityIncome";
+export const CLIENT_FINANCIAL_OVERVIEW_ENDOWMENT_BENEFIT_KEY = "endowmentBenefit";
+
 export const CLIENT_FINANCIAL_OVERVIEW_DEATH_LABEL = "Death";
 export const CLIENT_FINANCIAL_OVERVIEW_TPD_LABEL = "Total Permanent Disability";
 export const CLIENT_FINANCIAL_OVERVIEW_MAJOR_CI_LABEL = "Major Critical Illness";
@@ -562,7 +564,7 @@ export const clientDetailsAboutFields = [
   },
 ];
 
-export const clientDetailsFinancialOverviewFields = [
+export const clientDetailsFinancialOverviewProtectionFields = [
   {
     label: CLIENT_FINANCIAL_OVERVIEW_DEATH_LABEL,
     key: CLIENT_FINANCIAL_OVERVIEW_DEATH_KEY,

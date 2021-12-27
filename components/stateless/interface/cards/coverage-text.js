@@ -15,25 +15,17 @@ import { formatNumber } from "../../../../utils/utils";
 import AccidentIcon from "../icons/accident-icon";
 import SkullIcon from "../icons/skull-icon";
 import CoverageIcon from "../icons/coverage-icon";
+import CoverageTextContainer from "./coverage-text-container";
+import CoverageTextValueContainer from "./coverage-text-value-container";
+import CoverageTextIconContainer from "./coverage-text-icon-container";
 
-const CoverageText = ({ icon, label, value, color, onClick, xs = 12, sm = 8, md = 8, lg = 5 }) => {
+const CoverageText = ({ icon, label, value, color, onClick }) => {
   return (
-    <Grid item xs={xs} sm={sm} md={md} lg={lg} display="flex" alignItems="stretch" justifyContent="center" p={2}>
-      <Box mr={3} display="flex" alignItems="center">
+    <CoverageTextContainer>
+      <CoverageTextIconContainer>
         <CoverageIcon icon={icon} color={color} />
-      </Box>
-      <Box
-        flexGrow={1}
-        bgcolor={`${color}.main`}
-        borderRadius={3}
-        p={2}
-        color={`${color}.contrastText`}
-        display="flex"
-        justifyContent="space-between"
-        alignItems="center"
-        onClick={onClick}
-        sx={{ cursor: "pointer" }}
-      >
+      </CoverageTextIconContainer>
+      <CoverageTextValueContainer color={color} onClick={onClick}>
         <Box>
           <Typography variant="body2">{label}</Typography>
           <Typography variant="body1">${formatNumber(value)}</Typography>
@@ -43,8 +35,8 @@ const CoverageText = ({ icon, label, value, color, onClick, xs = 12, sm = 8, md 
             <InfoIcon sx={{ cursor: "pointer", color: (theme) => theme.palette.common.white }} />
           </IconButton>
         </Box>
-      </Box>
-    </Grid>
+      </CoverageTextValueContainer>
+    </CoverageTextContainer>
   );
 };
 

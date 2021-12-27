@@ -16,7 +16,6 @@ const ClientDetails = ({ client, policyOnClick, setLoading }) => {
     { Component: <AboutCard client={client} />, col: { xs: 12, lg: 6 } },
     { Component: <DependantsCard client={client} setLoading={setLoading} />, col: { xs: 12, lg: 6 } },
     { Component: <CoverageCard client={client} />, col: { xs: 12 } },
-    { Component: <ShieldPlanCard client={client} />, col: { xs: 12 } },
     { Component: <RemarksCard client={client} />, col: { xs: 12 } },
     { Component: <Divider client={client} variant="middle" />, col: { xs: 12, lg: 6 } },
     { Component: <PolicyCards policies={client.policies} policyOnClick={policyOnClick} />, col: { xs: 12 } },

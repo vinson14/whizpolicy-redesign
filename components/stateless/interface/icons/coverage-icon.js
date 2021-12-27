@@ -3,6 +3,7 @@ import {
   CLIENT_FINANCIAL_OVERVIEW_DEATH_KEY,
   CLIENT_FINANCIAL_OVERVIEW_DISABILITY_INCOME_KEY,
   CLIENT_FINANCIAL_OVERVIEW_EARLY_CI_KEY,
+  CLIENT_FINANCIAL_OVERVIEW_ENDOWMENT_BENEFIT_KEY,
   CLIENT_FINANCIAL_OVERVIEW_MAJOR_CI_KEY,
   CLIENT_FINANCIAL_OVERVIEW_TPD_KEY,
 } from "../../../../data/ui";
@@ -10,6 +11,7 @@ import AccidentIcon from "./accident-icon";
 import SkullIcon from "./skull-icon";
 import AccessibleForwardIcon from "@mui/icons-material/AccessibleForward";
 import HotelIcon from "@mui/icons-material/Hotel";
+import PaidIcon from "@mui/icons-material/Paid";
 
 const CoverageIcon = ({ icon, color }) => {
   const mapping = {
@@ -19,6 +21,7 @@ const CoverageIcon = ({ icon, color }) => {
     [CLIENT_FINANCIAL_OVERVIEW_EARLY_CI_KEY]: SickIcon,
     [CLIENT_FINANCIAL_OVERVIEW_ACC_DEATH_KEY]: AccIcon,
     [CLIENT_FINANCIAL_OVERVIEW_DISABILITY_INCOME_KEY]: DisabledIcon,
+    [CLIENT_FINANCIAL_OVERVIEW_ENDOWMENT_BENEFIT_KEY]: EndowmentIcon,
   };
 
   const Icon = mapping[icon];
@@ -42,4 +45,8 @@ const DisabledIcon = ({ color }) => {
 
 const SickIcon = ({ color }) => {
   return <HotelIcon color={color} fontSize="large" />;
+};
+
+const EndowmentIcon = ({ color }) => {
+  return <PaidIcon color={color} fontSize="large" />;
 };
