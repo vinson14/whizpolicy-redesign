@@ -22,8 +22,11 @@ const EndowmentCoverageText = ({ overview }) => {
         <Box>
           <Typography variant="body2">Endowment</Typography>
           <Typography variant="body1">
-            ${formatNumber(overview.endowmentLowerProjectedValue)} - $
-            {formatNumber(overview.endowmentHigherProjectedValue)}
+            {overview.endowmentLowerProjectedValue === 0 && overview.endowmentHigherProjectedValue === 0
+              ? `$0`
+              : `$${formatNumber(overview.endowmentLowerProjectedValue)} - $${formatNumber(
+                  overview.endowmentHigherProjectedValue
+                )}`}
           </Typography>
         </Box>
         <CoverageTextInfoIcon onClick={onClick} />
