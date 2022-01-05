@@ -19,7 +19,7 @@
         },
         "whizpolicynodejsclientslambda": {
           "deploymentBucketName": "amplify-whizpolicynodejs-dev-130704-deployment",
-          "s3Key": "amplify-builds/whizpolicynodejsclientslambda-4d67492b6a627761552f-build.zip"
+          "s3Key": "amplify-builds/whizpolicynodejsclientslambda-69467a55385a4d716576-build.zip"
         }
       },
       "auth": {

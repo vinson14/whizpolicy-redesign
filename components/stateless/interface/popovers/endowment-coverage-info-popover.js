@@ -13,6 +13,14 @@ const EndowmentCoverageInfoPopover = ({ client, anchorEl, handleClose }) => {
       <ClientCardInfoText
         xs={12}
         sm={12}
+        label="Guaranteed Maturity Benefit"
+        value={`$${formatNumber(
+          client.financialOverview[CLIENT_FINANCIAL_OVERVIEW_ENDOWMENT_BENEFIT_KEY].endowmentGuaranteedValue
+        )}`}
+      />
+      <ClientCardInfoText
+        xs={12}
+        sm={12}
         label="Projected Maturity Benefit (Higher)"
         value={`$${formatNumber(
           client.financialOverview[CLIENT_FINANCIAL_OVERVIEW_ENDOWMENT_BENEFIT_KEY].endowmentHigherProjectedValue
