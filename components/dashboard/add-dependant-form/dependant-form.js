@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import DashboardContext from "../../../context/dashboard-context";
 import { addDependantFormFields, defaultDependantFormValues, inputTypeMapping } from "../../../data/ui";
-import { postDependantToClient } from "../../../utils/api";
+import { editDependant, postDependantToClient } from "../../../utils/api";
 import AddButton from "../../stateless/interface/buttons/add-button";
 import CancelButton from "../../stateless/interface/buttons/cancel-button";
 import EditButton from "../../stateless/interface/buttons/edit-button";
@@ -22,12 +22,29 @@ const DependantForm = ({ client, open, handleClose, setLoading, values }) => {
   const [addDependantLoading, setAddDependantLoading] = useState(false);
 
   const onSubmit = (dependant) => {
+    if (values) {
+      submitEditDependant(client, dependant);
+    } else {
+      submitNewDependant(client, dependant);
+    }
+  };
+
+  const submitEditDependant = (client, dependant) => {
+    setAddDependantLoading(true);
+    editDependant(client, dependant)
+      .then(() => setAddDependantLoading(false))
+      .then(() => handleClose())
+      .then(() => setLoading(true));
+  };
+
+  const submitNewDependant = (client, dependant) => {
     setAddDependantLoading(true);
     postDependantToClient(client, dependant)
       .then(() => setAddDependantLoading(false))
       .then(() => handleClose())
       .then(() => setLoading(true));
   };
+
   const resetForm = () => {
     reset({ ...defaultDependantFormValues });
   };
@@ -50,7 +67,9 @@ const DependantForm = ({ client, open, handleClose, setLoading, values }) => {
             })}
             <Grid item xs={12}>
               {values ? (
-                <EditButton type="submit">Update</EditButton>
+                <EditButton loading={addDependantLoading} type="submit">
+                  Update
+                </EditButton>
               ) : (
                 <AddButton loading={addDependantLoading} type="submit">
                   Add

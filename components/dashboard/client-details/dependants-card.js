@@ -23,6 +23,12 @@ const DependantsCard = ({ client, setLoading }) => {
       setLoading(true);
     });
   };
+
+  const handleClose = () => {
+    closeDeleteModal();
+    setEditDep(null);
+  };
+
   const deleteOnClick = (dep) => {
     setDeletingDep(dep);
     openDeleteModal();
@@ -34,7 +40,7 @@ const DependantsCard = ({ client, setLoading }) => {
 
   return (
     <ClientDetailCard>
-      <DeleteConfirmation deleteFunction={deleteDependant} open={deleteModalState} handleClose={closeDeleteModal} />
+      <DeleteConfirmation deleteFunction={deleteDependant} open={deleteModalState} handleClose={handleClose} />
       <ClientCardHeader>Dependants</ClientCardHeader>
       <Grid container py={1}>
         {client.dependants &&

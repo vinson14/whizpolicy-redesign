@@ -82,6 +82,9 @@ export const deserializeClient = (formData) => {
     const value = formData[field.name];
     formData[field.name] = new Date(value);
   });
+  formData.dependants.forEach((dep, index, arr) => {
+    arr[index].birthday = new Date(dep.birthday);
+  });
 };
 
 export const getAge = (birthday) => {

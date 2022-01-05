@@ -15,6 +15,7 @@ import DeleteConfirmation from "../../stateless/interface/modal/delete-confirmat
 import ModalContainer from "../../stateless/interface/modal/modal-container";
 
 const ClientForm = ({ open, onClose, values, setLoading }) => {
+  console.log(values);
   const {
     control,
     handleSubmit,

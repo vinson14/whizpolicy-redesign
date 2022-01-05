@@ -175,7 +175,7 @@ export const postDependantToClient = async (client, dependant) => {
 
 export const deleteDependantToClient = async (client, dependant) => {
   const jwtToken = await getJwtToken();
-  const path = `/clients/${client.clientId}/dependants/${dependant.name}`;
+  const path = `/clients/${client.clientId}/dependants/${dependant.dependantId}`;
   const init = {
     body: {},
     headers: {
@@ -185,6 +185,24 @@ export const deleteDependantToClient = async (client, dependant) => {
   };
   try {
     const response = await API.del(apiName, path, init);
+    return response;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const editDependant = async (client, dependant) => {
+  const jwtToken = await getJwtToken();
+  const path = `/clients/${client.clientId}/dependants/${dependant.dependantId}`;
+  const init = {
+    body: dependant,
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `${jwtToken}`,
+    },
+  };
+  try {
+    const response = await API.put(apiName, path, init);
     return response;
   } catch (err) {
     console.log(err);
