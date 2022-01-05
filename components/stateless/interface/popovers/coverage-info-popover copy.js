@@ -3,11 +3,11 @@ import {
   CLIENT_ANNUAL_INCOME_KEY,
   CLIENT_FINANCIAL_OVERVIEW_DISABILITY_INCOME_KEY,
   coverageInfoPopoverContent,
-} from "../../../data/ui";
+} from "../../../../data/ui";
 import CloseIcon from "@mui/icons-material/Close";
 import { Fragment } from "react";
-import ClientCardInfoText from "../../stateless/interface/cards/client-card-info-text";
-import { formatNumber } from "../../../utils/utils";
+import ClientCardInfoText from "../cards/client-card-info-text";
+import { formatNumber } from "../../../../utils/utils";
 
 const CoverageInfoPopover = ({ anchorEl, handleClose, selectedKey, client }) => {
   const content = coverageInfoPopoverContent[selectedKey];

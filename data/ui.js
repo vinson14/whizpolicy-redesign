@@ -675,6 +675,12 @@ export const coverageInfoPopoverContent = {
       ans: "Disability Income is a long-term care insurance financial support should you become severely disabled, especially during old age, and need personal and medical care for a prolonged duration (i.e. long-term care).",
     },
   ],
+  [CLIENT_FINANCIAL_OVERVIEW_ENDOWMENT_BENEFIT_KEY]: [
+    {
+      qns: "What is an Endowment policy?",
+      ans: "An endowment plan is a life insurance policy that provides life coverage along with an opportunity to save regularly over a specific period of time so that you can receive a lump-sum amount on the maturity of the policy (depending on your policy). Subsequently, you can use this maturity benefit to fulfill your future financial needs such as funding children’s education, retirement, buying a house, marriage, etc.",
+    },
+  ],
 };
 
 export const newClientDefaultValues = {

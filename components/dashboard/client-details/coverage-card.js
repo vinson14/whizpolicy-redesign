@@ -10,7 +10,7 @@ import { useState } from "react";
 
 import CoverageText from "../../stateless/interface/cards/coverage-text";
 import Legend from "../../stateless/interface/misc/legend";
-import CoverageInfoPopover from "./coverage-info-popover";
+import CoverageInfoPopover from "../../stateless/interface/popovers/coverage-info-popover";
 import EndowmentCoverageText from "../../stateless/interface/cards/endowment-coverage-text";
 
 const CoverageCard = ({ client }) => {
@@ -49,7 +49,10 @@ const CoverageCard = ({ client }) => {
               color={getColor(client.financialOverview[field.key])}
             />
           ))}
-        <EndowmentCoverageText overview={client.financialOverview[CLIENT_FINANCIAL_OVERVIEW_ENDOWMENT_BENEFIT_KEY]} />
+        <EndowmentCoverageText
+          overview={client.financialOverview[CLIENT_FINANCIAL_OVERVIEW_ENDOWMENT_BENEFIT_KEY]}
+          onClick={(event) => openPopover(event, CLIENT_FINANCIAL_OVERVIEW_ENDOWMENT_BENEFIT_KEY)}
+        />
         <Grid item xs={12}>
           <Legend legend={coverageOverviewLegend} />
         </Grid>

@@ -8,8 +8,7 @@ import InfoIcon from "@mui/icons-material/Info";
 import CoverageTextInfoIcon from "./coverage-text-info-icon";
 import { formatNumber } from "../../../../utils/utils";
 
-const EndowmentCoverageText = ({ overview }) => {
-  const onClick = () => console.log("clicked");
+const EndowmentCoverageText = ({ overview, onClick }) => {
   const getColor = () => {
     return overview.endowmentLowerProjectedValue > 0 ? "secondary" : "error";
   };
