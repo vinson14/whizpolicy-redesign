@@ -20,7 +20,7 @@
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-whizpolicynodejs-dev-130704-deployment/amplify-cfn-templates/storage/whizpolicynodejsdynamodb-cloudformation-template.json",
         "logicalId": "storagewhizpolicynodejsdynamodb"
       },
-      "lastPushTimeStamp": "2021-12-25T01:29:39.475Z",
+      "lastPushTimeStamp": "2022-01-05T08:34:57.816Z",
       "output": {
         "PartitionKeyName": "agentId",
         "SortKeyName": "clientId",
@@ -53,28 +53,26 @@
           }
         }
       ],
-      "lastBuildTimeStamp": "2021-12-25T01:27:57.005Z",
+      "lastBuildTimeStamp": "2022-01-05T08:32:51.864Z",
       "lastBuildType": "PROD",
-      "lastPackageTimeStamp": "2021-12-25T01:28:10.706Z",
-      "distZipFilename": "whizpolicynodejsclientslambda-657a574b464c38305330-build.zip",
+      "lastPackageTimeStamp": "2022-01-05T08:33:08.386Z",
+      "distZipFilename": "whizpolicynodejsclientslambda-69467a55385a4d716576-build.zip",
       "s3Bucket": {
         "deploymentBucketName": "amplify-whizpolicynodejs-dev-130704-deployment",
-        "s3Key": "amplify-builds/whizpolicynodejsclientslambda-657a574b464c38305330-build.zip"
-
+        "s3Key": "amplify-builds/whizpolicynodejsclientslambda-69467a55385a4d716576-build.zip"
       },
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-whizpolicynodejs-dev-130704-deployment/amplify-cfn-templates/function/whizpolicynodejsclientslambda-cloudformation-template.json",
         "logicalId": "functionwhizpolicynodejsclientslambda"
       },
-      "lastPushTimeStamp": "2021-12-25T01:29:39.551Z",
+      "lastPushTimeStamp": "2022-01-05T08:34:57.901Z",
       "output": {
         "Region": "us-east-1",
         "Arn": "arn:aws:lambda:us-east-1:066354352598:function:whizpolicynodejsclientslambda-dev",
         "Name": "whizpolicynodejsclientslambda-dev",
         "LambdaExecutionRole": "whizpolicynodejsLambdaRole952edba5-dev"
       },
-      "lastPushDirHash": "anrMTfHkRbWuHTdl91+KBozyZ00="
-
+      "lastPushDirHash": "67JF4tn0ZZJC0t0DZ10iwPIoWbQ="
     },
     "whizpolicynodejspolicieslambda": {
       "build": true,
@@ -106,7 +104,7 @@
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-whizpolicynodejs-dev-130704-deployment/amplify-cfn-templates/function/whizpolicynodejspolicieslambda-cloudformation-template.json",
         "logicalId": "functionwhizpolicynodejspolicieslambda"
       },
-      "lastPushTimeStamp": "2021-12-25T01:29:39.489Z",
+      "lastPushTimeStamp": "2022-01-05T08:34:57.837Z",
       "output": {
         "Region": "us-east-1",
         "Arn": "arn:aws:lambda:us-east-1:066354352598:function:whizpolicynodejspolicieslambda-dev",
@@ -142,8 +140,7 @@
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-whizpolicynodejs-dev-130704-deployment/amplify-cfn-templates/api/whizpolicynodejsapi-cloudformation-template.json",
         "logicalId": "apiwhizpolicynodejsapi"
       },
-      "lastPushTimeStamp": "2021-12-25T01:29:39.496Z",
-
+      "lastPushTimeStamp": "2022-01-05T08:34:57.848Z",
       "output": {
         "ApiName": "whizpolicynodejsapi",
         "RootUrl": "https://1cw7jfd3jg.execute-api.us-east-1.amazonaws.com/dev",

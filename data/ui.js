@@ -213,6 +213,8 @@ export const CLIENT_FINANCIAL_OVERVIEW_EARLY_CI_KEY = "earlyCiBenefit";
 export const CLIENT_FINANCIAL_OVERVIEW_ACC_DEATH_KEY = "accidentalDeath";
 export const CLIENT_FINANCIAL_OVERVIEW_ACC_MED_KEY = "accidentalMedicalBenefit";
 export const CLIENT_FINANCIAL_OVERVIEW_DISABILITY_INCOME_KEY = "disabilityIncome";
+export const CLIENT_FINANCIAL_OVERVIEW_ENDOWMENT_BENEFIT_KEY = "endowmentBenefit";
+
 export const CLIENT_FINANCIAL_OVERVIEW_DEATH_LABEL = "Death";
 export const CLIENT_FINANCIAL_OVERVIEW_TPD_LABEL = "Total Permanent Disability";
 export const CLIENT_FINANCIAL_OVERVIEW_MAJOR_CI_LABEL = "Major Critical Illness";
@@ -562,7 +564,7 @@ export const clientDetailsAboutFields = [
   },
 ];
 
-export const clientDetailsFinancialOverviewFields = [
+export const clientDetailsFinancialOverviewProtectionFields = [
   {
     label: CLIENT_FINANCIAL_OVERVIEW_DEATH_LABEL,
     key: CLIENT_FINANCIAL_OVERVIEW_DEATH_KEY,
@@ -671,6 +673,12 @@ export const coverageInfoPopoverContent = {
     {
       qns: "What is the purpose of Disability Income?",
       ans: "Disability Income is a long-term care insurance financial support should you become severely disabled, especially during old age, and need personal and medical care for a prolonged duration (i.e. long-term care).",
+    },
+  ],
+  [CLIENT_FINANCIAL_OVERVIEW_ENDOWMENT_BENEFIT_KEY]: [
+    {
+      qns: "What is an Endowment policy?",
+      ans: "An endowment plan is a life insurance policy that provides life coverage along with an opportunity to save regularly over a specific period of time so that you can receive a lump-sum amount on the maturity of the policy (depending on your policy). Subsequently, you can use this maturity benefit to fulfill your future financial needs such as funding children’s education, retirement, buying a house, marriage, etc.",
     },
   ],
 };
