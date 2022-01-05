@@ -34,7 +34,7 @@ const UNAUTH = "UNAUTH";
 const hashKeyPath = "/:" + partitionKeyName;
 const sortKeyPath = hasSortKey ? "/:" + sortKeyName : "";
 const dependantsPath = "/dependants";
-const dependantKeyName = "name";
+const dependantKeyName = "dependantId";
 const dependantKeyPath = `/:${dependantKeyName}`;
 const dependantKeyType = "S";
 const policiesPath = "/policies";
@@ -80,10 +80,7 @@ app.get(path, function (req, res) {
   };
 
   condition[partitionKeyName]["AttributeValueList"] = [
-    convertUrlType(
-      req.apiGateway.event.requestContext.authorizer.claims.sub,
-      partitionKeyType
-    ),
+    convertUrlType(req.apiGateway.event.requestContext.authorizer.claims.sub, partitionKeyType),
   ];
 
   let queryParams = {
@@ -110,15 +107,11 @@ app.get(path, function (req, res) {
 app.get(path + "/object" + hashKeyPath + sortKeyPath, function (req, res) {
   var params = {};
   if (userIdPresent && req.apiGateway) {
-    params[partitionKeyName] =
-      req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH;
+    params[partitionKeyName] = req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH;
   } else {
     params[partitionKeyName] = req.params[partitionKeyName];
     try {
-      params[partitionKeyName] = convertUrlType(
-        req.params[partitionKeyName],
-        partitionKeyType
-      );
+      params[partitionKeyName] = convertUrlType(req.params[partitionKeyName], partitionKeyType);
     } catch (err) {
       res.statusCode = 500;
       res.json({ error: "Wrong column type " + err });
@@ -126,10 +119,7 @@ app.get(path + "/object" + hashKeyPath + sortKeyPath, function (req, res) {
   }
   if (hasSortKey) {
     try {
-      params[sortKeyName] = convertUrlType(
-        req.params[sortKeyName],
-        sortKeyType
-      );
+      params[sortKeyName] = convertUrlType(req.params[sortKeyName], sortKeyType);
     } catch (err) {
       res.statusCode = 500;
       res.json({ error: "Wrong column type " + err });
@@ -160,10 +150,7 @@ app.get(path + "/object" + hashKeyPath + sortKeyPath, function (req, res) {
  *************************************/
 
 app.put(path + sortKeyPath, function (req, res) {
-  req.body.agentId = convertUrlType(
-    req.apiGateway.event.requestContext.authorizer.claims.sub,
-    partitionKeyType
-  );
+  req.body.agentId = convertUrlType(req.apiGateway.event.requestContext.authorizer.claims.sub, partitionKeyType);
 
   req.body.clientId = convertUrlType(req.params[sortKeyName], sortKeyType);
 
@@ -193,10 +180,7 @@ app.post(path, checkSchema(clientSchema), function (req, res) {
     return;
   }
   // Populating primary and secondary key
-  req.body.agentId = convertUrlType(
-    req.apiGateway.event.requestContext.authorizer.claims.sub,
-    partitionKeyType
-  );
+  req.body.agentId = convertUrlType(req.apiGateway.event.requestContext.authorizer.claims.sub, partitionKeyType);
   req.body.clientId = convertUrlType(generateUuid(), sortKeyType);
   // Adding empty policies and dependants array
   req.body.dependants = [];
@@ -279,7 +263,10 @@ app.post(path + sortKeyPath + dependantsPath, function (req, res) {
       const client = data.Item;
 
       const dependants = client.dependants;
-      dependants.push(req.body);
+      dependants.push({
+        [dependantKeyName]: generateUuid(),
+        ...req.body,
+      });
 
       let updateItemParms = {
         TableName: tableName,
@@ -307,68 +294,119 @@ app.post(path + sortKeyPath + dependantsPath, function (req, res) {
 /**************************************
  * HTTP DELETE method to delete dependant *
  ***************************************/
-app.delete(
-  path + sortKeyPath + dependantsPath + dependantKeyPath,
-  function (req, res) {
-    keyParams = {};
-    keyParams[partitionKeyName] = convertUrlType(
-      req.apiGateway.event.requestContext.authorizer.claims.sub,
-      partitionKeyType
-    );
-    keyParams[sortKeyName] = convertUrlType(
-      req.params[sortKeyName],
-      sortKeyType
-    );
-    const dependantId = convertUrlType(
-      req.params[dependantKeyName],
-      dependantKeyType
-    );
-    const getItemParams = {
-      TableName: tableName,
-      Key: keyParams,
-    };
+app.delete(path + sortKeyPath + dependantsPath + dependantKeyPath, function (req, res) {
+  keyParams = {};
+  keyParams[partitionKeyName] = convertUrlType(
+    req.apiGateway.event.requestContext.authorizer.claims.sub,
+    partitionKeyType
+  );
+  keyParams[sortKeyName] = convertUrlType(req.params[sortKeyName], sortKeyType);
+  const dependantId = convertUrlType(req.params[dependantKeyName], dependantKeyType);
+  const getItemParams = {
+    TableName: tableName,
+    Key: keyParams,
+  };
 
-    dynamodb.get(getItemParams, (err, data) => {
-      if (err) {
-        res.statusCode = 500;
-        res.json({ error: err, url: req.url, body: req.body });
-      } else {
-        const client = data.Item;
+  dynamodb.get(getItemParams, (err, data) => {
+    if (err) {
+      res.statusCode = 500;
+      res.json({ error: err, url: req.url, body: req.body });
+    } else {
+      const client = data.Item;
 
-        const dependants = client.dependants.filter(
-          (dep) => dep[dependantKeyName] !== dependantId
-        );
-        console.log(dependantId);
+      const dependants = client.dependants.filter((dep) => dep[dependantKeyName] !== dependantId);
+      console.log(dependantId);
 
-        console.log(dependants);
+      console.log(dependants);
 
-        let updateItemParms = {
-          TableName: tableName,
-          Key: keyParams,
-          AttributeUpdates: {
-            dependants: {
-              Action: "PUT",
-              Value: dependants,
-            },
+      let updateItemParms = {
+        TableName: tableName,
+        Key: keyParams,
+        AttributeUpdates: {
+          dependants: {
+            Action: "PUT",
+            Value: dependants,
           },
-        };
+        },
+      };
 
-        dynamodb.update(updateItemParms, (err, data) => {
-          if (err) {
-            res.statusCode = 500;
-            res.json({ error: err, url: req.url, body: req.body });
-          } else {
-            res.json({
-              success: "delete call succeed!",
-              url: req.url,
-              data: data,
-            });
-          }
-        });
-      }
-    });
-  }
-);
+      dynamodb.update(updateItemParms, (err, data) => {
+        if (err) {
+          res.statusCode = 500;
+          res.json({ error: err, url: req.url, body: req.body });
+        } else {
+          res.json({
+            success: "delete call succeed!",
+            url: req.url,
+            data: data,
+          });
+        }
+      });
+    }
+  });
+});
+
+/**************************************
+ * HTTP PUT method to edit dependant *
+ ***************************************/
+
+app.put(path + sortKeyPath + dependantsPath + dependantKeyPath, function (req, res) {
+  keyParams = {};
+  keyParams[partitionKeyName] = convertUrlType(
+    req.apiGateway.event.requestContext.authorizer.claims.sub,
+    partitionKeyType
+  );
+  keyParams[sortKeyName] = convertUrlType(req.params[sortKeyName], sortKeyType);
+  const dependantId = convertUrlType(req.params[dependantKeyName], dependantKeyType);
+  const getItemParams = {
+    TableName: tableName,
+    Key: keyParams,
+  };
+
+  dynamodb.get(getItemParams, (err, data) => {
+    if (err) {
+      res.statusCode = 500;
+      res.json({ error: err, url: req.url, body: req.body });
+    } else {
+      const client = data.Item;
+
+      const dependants = client.dependants.map((dep) => {
+        if (dep[dependantKeyName] === dependantId) {
+          return {
+            [dependantKeyName]: generateUuid(),
+            ...req.body,
+          };
+        } else {
+          return dep;
+        }
+      });
+
+      let updateItemParms = {
+        TableName: tableName,
+        Key: keyParams,
+        AttributeUpdates: {
+          dependants: {
+            Action: "PUT",
+            Value: dependants,
+          },
+        },
+      };
+
+      dynamodb.update(updateItemParms, (err, data) => {
+        if (err) {
+          res.statusCode = 500;
+          res.json({ error: err, url: req.url, body: req.body });
+        } else {
+          res.json({
+            success: "delete call succeed!",
+            url: req.url,
+            data: data,
+          });
+        }
+      });
+    }
+  });
+});
 
 /**************************************
  * HTTP POST method to add policy *
@@ -430,137 +468,115 @@ app.post(path + sortKeyPath + policiesPath, function (req, res) {
 /**************************************
  * HTTP PUT method to edit policy *
  ***************************************/
-app.put(
-  path + sortKeyPath + policiesPath + policyIdKeyPath,
-  function (req, res) {
-    // const errors = validationResult(req);
-    // if (!errors.isEmpty()) {
-    //   res.statusCode = 400;
-    //   res.json({ errors: errors.array() });
-    //   return;
-    // }
+app.put(path + sortKeyPath + policiesPath + policyIdKeyPath, function (req, res) {
+  // const errors = validationResult(req);
+  // if (!errors.isEmpty()) {
+  //   res.statusCode = 400;
+  //   res.json({ errors: errors.array() });
+  //   return;
+  // }
 
-    keyParams = {};
-    keyParams[partitionKeyName] = convertUrlType(
-      req.apiGateway.event.requestContext.authorizer.claims.sub,
-      partitionKeyType
-    );
-    keyParams[sortKeyName] = convertUrlType(
-      req.params[sortKeyName],
-      sortKeyType
-    );
-    const policyId = convertUrlType(
-      req.params[policyIdKeyName],
-      policyIdKeyType
-    );
-    const getItemParams = {
-      TableName: tableName,
-      Key: keyParams,
-    };
+  keyParams = {};
+  keyParams[partitionKeyName] = convertUrlType(
+    req.apiGateway.event.requestContext.authorizer.claims.sub,
+    partitionKeyType
+  );
+  keyParams[sortKeyName] = convertUrlType(req.params[sortKeyName], sortKeyType);
+  const policyId = convertUrlType(req.params[policyIdKeyName], policyIdKeyType);
+  const getItemParams = {
+    TableName: tableName,
+    Key: keyParams,
+  };
 
-    dynamodb.get(getItemParams, (err, data) => {
-      if (err) {
-        res.statusCode = 500;
-        res.json({ error: err, url: req.url, body: req.body });
-      } else {
-        const client = data.Item;
+  dynamodb.get(getItemParams, (err, data) => {
+    if (err) {
+      res.statusCode = 500;
+      res.json({ error: err, url: req.url, body: req.body });
+    } else {
+      const client = data.Item;
 
-        const policies = client.policies;
-        const index = policies.findIndex(
-          (p) => p[policyIdKeyName] === policyId
-        );
-        policies[index] = req.body;
+      const policies = client.policies;
+      const index = policies.findIndex((p) => p[policyIdKeyName] === policyId);
+      policies[index] = req.body;
 
-        let updateItemParms = {
-          TableName: tableName,
-          Key: keyParams,
-          AttributeUpdates: {
-            policies: {
-              Action: "PUT",
-              Value: policies,
-            },
+      let updateItemParms = {
+        TableName: tableName,
+        Key: keyParams,
+        AttributeUpdates: {
+          policies: {
+            Action: "PUT",
+            Value: policies,
           },
-        };
+        },
+      };
 
-        dynamodb.update(updateItemParms, (err, data) => {
-          if (err) {
-            res.statusCode = 500;
-            res.json({ error: err, url: req.url, body: req.body });
-          } else {
-            res.json({
-              success: "put call succeed!",
-              url: req.url,
-              data: data,
-            });
-          }
-        });
-      }
-    });
-  }
-);
+      dynamodb.update(updateItemParms, (err, data) => {
+        if (err) {
+          res.statusCode = 500;
+          res.json({ error: err, url: req.url, body: req.body });
+        } else {
+          res.json({
+            success: "put call succeed!",
+            url: req.url,
+            data: data,
+          });
+        }
+      });
+    }
+  });
+});
 
 /**************************************
  * HTTP DELETE method to edit policy *
  ***************************************/
-app.delete(
-  path + sortKeyPath + policiesPath + policyIdKeyPath,
-  function (req, res) {
-    keyParams = {};
-    keyParams[partitionKeyName] = convertUrlType(
-      req.apiGateway.event.requestContext.authorizer.claims.sub,
-      partitionKeyType
-    );
-    keyParams[sortKeyName] = convertUrlType(
-      req.params[sortKeyName],
-      sortKeyType
-    );
-    const policyId = convertUrlType(
-      req.params[policyIdKeyName],
-      policyIdKeyType
-    );
-    const getItemParams = {
-      TableName: tableName,
-      Key: keyParams,
-    };
+app.delete(path + sortKeyPath + policiesPath + policyIdKeyPath, function (req, res) {
+  keyParams = {};
+  keyParams[partitionKeyName] = convertUrlType(
+    req.apiGateway.event.requestContext.authorizer.claims.sub,
+    partitionKeyType
+  );
+  keyParams[sortKeyName] = convertUrlType(req.params[sortKeyName], sortKeyType);
+  const policyId = convertUrlType(req.params[policyIdKeyName], policyIdKeyType);
+  const getItemParams = {
+    TableName: tableName,
+    Key: keyParams,
+  };
 
-    dynamodb.get(getItemParams, (err, data) => {
-      if (err) {
-        res.statusCode = 500;
-        res.json({ error: err, url: req.url, body: req.body });
-      } else {
-        const client = data.Item;
+  dynamodb.get(getItemParams, (err, data) => {
+    if (err) {
+      res.statusCode = 500;
+      res.json({ error: err, url: req.url, body: req.body });
+    } else {
+      const client = data.Item;
 
-        const policies = client.policies.filter(
-          (policy) => policy[policyIdKeyName] != policyId
-        );
+      const policies = client.policies.filter((policy) => policy[policyIdKeyName] != policyId);
 
-        let updateItemParms = {
-          TableName: tableName,
-          Key: keyParams,
-          AttributeUpdates: {
-            policies: {
-              Action: "PUT",
-              Value: policies,
-            },
+      let updateItemParms = {
+        TableName: tableName,
+        Key: keyParams,
+        AttributeUpdates: {
+          policies: {
+            Action: "PUT",
+            Value: policies,
           },
-        };
+        },
+      };
 
-        dynamodb.update(updateItemParms, (err, data) => {
-          if (err) {
-            res.statusCode = 500;
-            res.json({ error: err, url: req.url, body: req.body });
-          } else {
-            res.json({
-              success: "delete call succeed!",
-              url: req.url,
-              data: data,
-            });
-          }
-        });
-      }
-    });
-  }
-);
+      dynamodb.update(updateItemParms, (err, data) => {
+        if (err) {
+          res.statusCode = 500;
+          res.json({ error: err, url: req.url, body: req.body });
+        } else {
+          res.json({
+            success: "delete call succeed!",
+            url: req.url,
+            data: data,
+          });
+        }
+      });
+    }
+  });
+});
 
 app.listen(3000, function () {
   console.log("App started");

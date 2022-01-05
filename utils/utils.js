@@ -1,5 +1,5 @@
 import { ConstructionOutlined } from "@mui/icons-material";
-import { differenceInYears } from "date-fns";
+import { differenceInYears, format } from "date-fns";
 import {
   addClientFormFields,
   addPolicyFormFields,
@@ -82,9 +82,16 @@ export const deserializeClient = (formData) => {
     const value = formData[field.name];
     formData[field.name] = new Date(value);
   });
+  formData.dependants.forEach((dep, index, arr) => {
+    arr[index].birthday = new Date(dep.birthday);
+  });
 };
 
 export const getAge = (birthday) => {
   if (typeof birthday === "string") return differenceInYears(new Date(), new Date(birthday));
   return differenceInYears(new Date(), birthday);
+};
+
+export const formatDate = (birthday) => {
+  return format(new Date(birthday), "d MMM yyyy");
 };

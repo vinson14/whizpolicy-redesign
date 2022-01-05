@@ -35,6 +35,7 @@ const useDashboardClientsState = (authState) => {
   }, [loading, authState]);
 
   useEffect(() => {
+    console.log(clients);
     const newSelectedClient = findClientById(clients, selectedClient?.clientId);
     setSelectedClient(newSelectedClient);
     if (newSelectedClient) {
