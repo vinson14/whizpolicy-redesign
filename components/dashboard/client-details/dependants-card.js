@@ -6,6 +6,7 @@ import ClientDetailCard from "../../stateless/interface/cards/client-detail-card
 import useModal from "../../../utils/useModal";
 import DependantForm from "../add-dependant-form/dependant-form";
 import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 import { deleteDependantToClient } from "../../../utils/api";
 import DeleteConfirmation from "../../stateless/interface/modal/delete-confirmation";
 import { formatDate, formatString, getAge } from "../../../utils/utils";
@@ -14,14 +15,21 @@ import React, { useState } from "react";
 const DependantsCard = ({ client, setLoading }) => {
   const [dependantFormState, openDependantForm, closeDependantForm] = useModal();
   const [deletingDep, setDeletingDep] = useState(null);
+  const [editDep, setEditDep] = useState(null);
   const [deleteModalState, openDeleteModal, closeDeleteModal] = useModal();
   const deleteDependant = () => {
-    closeDeleteModal();
-    deleteDependantToClient(client, deletingDep).then(() => setLoading(true));
+    deleteDependantToClient(client, deletingDep).then(() => {
+      closeDeleteModal();
+      setLoading(true);
+    });
   };
   const deleteOnClick = (dep) => {
     setDeletingDep(dep);
     openDeleteModal();
+  };
+  const editOnClick = (dep) => {
+    setEditDep(dep);
+    openDependantForm();
   };
 
   return (
@@ -36,11 +44,14 @@ const DependantsCard = ({ client, setLoading }) => {
               <ClientCardInfoText label="Date of Birth" value={formatDate(dependant.birthday)} />
               <ClientCardInfoText label="Age" value={getAge(dependant.birthday)} />
               <Grid item xs={12} sm={6} display="flex" alignItems="center">
+                <IconButton onClick={() => editOnClick(dependant)}>
+                  <EditIcon />
+                </IconButton>
                 <IconButton onClick={() => deleteOnClick(dependant)}>
                   <DeleteIcon />
                 </IconButton>
               </Grid>
-              <Grid item xs={12} mb={3}>
+              <Grid item xs={12} my={2}>
                 <Divider variant="middle" />
               </Grid>
             </React.Fragment>
@@ -60,6 +71,7 @@ const DependantsCard = ({ client, setLoading }) => {
               handleClose={closeDependantForm}
               client={client}
               setLoading={setLoading}
+              values={editDep}
             />
           )}
         </Grid>
