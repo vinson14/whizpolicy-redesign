@@ -1,4 +1,4 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Divider, Grid, IconButton, Typography } from "@mui/material";
 import AddButton from "../../stateless/interface/buttons/add-button";
 import ClientCardHeader from "../../stateless/interface/cards/client-card-header";
 import ClientCardInfoText from "../../stateless/interface/cards/client-card-info-text";
@@ -8,7 +8,7 @@ import DependantForm from "../add-dependant-form/dependant-form";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { deleteDependantToClient } from "../../../utils/api";
 import DeleteConfirmation from "../../stateless/interface/modal/delete-confirmation";
-import { formatString, getAge } from "../../../utils/utils";
+import { formatDate, formatString, getAge } from "../../../utils/utils";
 import React, { useState } from "react";
 
 const DependantsCard = ({ client, setLoading }) => {
@@ -33,13 +33,16 @@ const DependantsCard = ({ client, setLoading }) => {
           client.dependants.map((dependant) => (
             <React.Fragment key={dependant.name}>
               <ClientCardInfoText label={formatString(dependant.relationship)} value={dependant.name} />
-              <ClientCardInfoText
-                label="Age"
-                value={getAge(dependant.birthday)}
-                mb={1}
-                endIcon={<DeleteIcon />}
-                endIconOnClick={() => deleteOnClick(dependant)}
-              />
+              <ClientCardInfoText label="Date of Birth" value={formatDate(dependant.birthday)} />
+              <ClientCardInfoText label="Age" value={getAge(dependant.birthday)} />
+              <Grid item xs={12} sm={6} display="flex" alignItems="center">
+                <IconButton onClick={() => deleteOnClick(dependant)}>
+                  <DeleteIcon />
+                </IconButton>
+              </Grid>
+              <Grid item xs={12} mb={3}>
+                <Divider variant="middle" />
+              </Grid>
             </React.Fragment>
           ))}
         {(!client.dependants || client.dependants.length === 0) && (
