@@ -46,10 +46,10 @@ const DependantsCard = ({ client, setLoading }) => {
         {client.dependants &&
           client.dependants.map((dependant) => (
             <React.Fragment key={dependant.name}>
-              <ClientCardInfoText label={formatString(dependant.relationship)} value={dependant.name} />
-              <ClientCardInfoText label="Date of Birth" value={formatDate(dependant.birthday)} />
-              <ClientCardInfoText label="Age" value={getAge(dependant.birthday)} />
-              <Grid item xs={12} sm={6} display="flex" alignItems="center">
+              <ClientCardInfoText xs={5} sm={5} label={formatString(dependant.relationship)} value={dependant.name} />
+              <ClientCardInfoText xs={3} sm={3} label="Date of Birth" value={formatDate(dependant.birthday)} />
+              <ClientCardInfoText xs={2} sm={2} label="Age" value={getAge(dependant.birthday)} />
+              <Grid item xs={2} sm={2} display="flex" alignItems="center">
                 <IconButton onClick={() => editOnClick(dependant)}>
                   <EditIcon />
                 </IconButton>
