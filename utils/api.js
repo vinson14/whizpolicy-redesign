@@ -212,8 +212,10 @@ export const editDependant = async (client, dependant) => {
 export const signInUser = async (user) => {
   try {
     const loggedInUser = await Auth.signIn(user.username, user.password);
+    console.log(loggedInUser);
     return { ok: true, loggedInUser };
   } catch (error) {
+    console.log(error);
     return { ok: false, error };
   }
 };
@@ -281,4 +283,15 @@ export const forgotPassword = async (email) => {
 
 export const getDifferenceInCalendarYears = (earlierDate, laterDate) => {
   return differenceInCalendarYears(laterDate, earlierDate);
+};
+
+export const getAgentDetails = async () => {
+  const agent = await Auth.currentAuthenticatedUser();
+  return agent;
+};
+
+export const updateAgentDetails = async (agent) => {
+  const currAgent = await Auth.currentAuthenticatedUser();
+  const result = await Auth.updateUserAttributes(currAgent, agent);
+  return { ok: true, result };
 };
