@@ -221,6 +221,7 @@ export const signInUser = async (user) => {
 };
 
 export const signUpUser = async (formData) => {
+  formData["custom:productsLifeIns"] = "true";
   try {
     const { user } = await Auth.signUp(formData);
     console.log(user);

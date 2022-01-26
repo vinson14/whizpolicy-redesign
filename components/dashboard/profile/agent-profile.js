@@ -7,6 +7,7 @@ import FloatingEditButton from "../../stateless/interface/buttons/floating-edit-
 import ClientCardHeader from "../../stateless/interface/cards/client-card-header";
 import ClientCardInfoText from "../../stateless/interface/cards/client-card-info-text";
 import ClientDetailCard from "../../stateless/interface/cards/client-detail-card";
+import LoadingIcon from "../../stateless/interface/misc/loading-icon";
 import ModalContainer from "../../stateless/interface/modal/modal-container";
 import TopAppBar from "../../stateless/interface/navigation/top-appbar";
 import MainHeader from "../../stateless/interface/text/main-header";
@@ -16,26 +17,33 @@ import AgentProfileForm from "./profile-form";
 const AgentProfile = ({ openSidebar }) => {
   const [editModal, openEditModal, closeEditModal] = useModal();
   const [agentAttr, setAgentAttr] = useState({});
-
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     console.log("useEffect ran");
-    getAgentDetails().then((res) => {
-      console.log(res);
-      setAgentAttr({
-        given_name: res.attributes.given_name,
-        family_name: res.attributes.family_name,
-        email: res.attributes.email,
-        "custom:rnf_code": res.attributes["custom:rnf_code"],
-      });
-    });
-  }, []);
+    getAgentDetails()
+      .then((res) => {
+        console.log(res.attributes);
+        setAgentAttr({
+          given_name: res.attributes.given_name,
+          family_name: res.attributes.family_name,
+          email: res.attributes.email,
+          "custom:rnf_code": res.attributes["custom:rnf_code"],
+          // "custom:productsLifeIns": res.attributes["custom:productsLifeIns"] === "true" ? true : false,
+        });
+      })
+      .then(() => setLoading(false));
+  }, [loading]);
 
-  return (
+  return loading ? (
+    <LoadingIcon />
+  ) : (
     <>
       <TopAppBar menuOnClick={openSidebar} />
       <Box p={{ md: 5, xs: 1 }}>
         <FloatingEditButton onClick={openEditModal}>Edit Profile</FloatingEditButton>
-        {editModal && <AgentProfileForm open={editModal} onClose={closeEditModal} values={agentAttr} />}
+        {editModal && (
+          <AgentProfileForm open={editModal} onClose={closeEditModal} values={agentAttr} setLoading={setLoading} />
+        )}
         <MainHeader>Profile</MainHeader>
         <Grid container my={3} justifyContent="center">
           <Grid item xs={7} justifyContent="center">
