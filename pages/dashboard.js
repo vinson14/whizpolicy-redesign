@@ -17,6 +17,7 @@ import awsConfig from "../src/aws-exports";
 
 import DashboardSidebar from "../components/dashboard/dashboard-sidebar";
 import useAuthState from "../utils/useAuthState";
+import AgentProfile from "../components/dashboard/profile/agent-profile";
 
 Amplify.configure(awsConfig);
 
@@ -28,6 +29,7 @@ const Dashboard = () => {
   const mainComponent = {
     [SIDEBAR_CLIENTS_VALUE]: <DashboardClients authState={authState} openSidebar={openSidebar} />,
     [SIDEBAR_PORTFOLIO_VALUE]: <Typography>Dashboard Portfolio</Typography>,
+    [SIDEBAR_PROFILE_VALUE]: <AgentProfile openSidebar={openSidebar} />,
   };
 
   return (

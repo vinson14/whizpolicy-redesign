@@ -20,7 +20,9 @@ const awsmobile = {
     "aws_cognito_region": "us-east-1",
     "aws_user_pools_id": "us-east-1_5SyTgz5AW",
     "aws_user_pools_web_client_id": "5k6s0j4ql2hbdn2l0te4fqkehd",
-    "oauth": {},
+    "oauth": {
+        "domain": "whizpolicy.auth.us-east-1.amazoncognito.com"
+    },
     "aws_cognito_username_attributes": [
         "EMAIL"
     ],

@@ -95,3 +95,10 @@ export const getAge = (birthday) => {
 export const formatDate = (birthday) => {
   return format(new Date(birthday), "d MMM yyyy");
 };
+
+export const serializeAgent = (agent) => {
+  // agent["custom:productsLifeIns"] = agent["custom:productsLifeIns"] ? "true" : "false";
+  // agent["custom:productsInvestment"] = agent["custom:productsInvestment"] ? "true" : "false";
+  // agent["custom:productsPersonalAcc"] = agent["custom:productsPersonalAcc"] ? "true" : "false";
+  // agent["custom:productsHealthIns"] = agent["custom:productsHealthIns"] ? "true" : "false";
+};
