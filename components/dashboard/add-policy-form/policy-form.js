@@ -43,19 +43,20 @@ const PolicyForm = ({ open, onClose, values, client, setLoading }) => {
 
   const fieldNames = policyCategoryFields[policyCategory];
   const onSubmit = (policy) => {
-    if (values) {
-      setEditLoading(true);
-      putPolicyToClient(client, policy)
-        .then(() => setEditLoading(false))
-        .then(() => onClose())
-        .then(() => setLoading(true));
-    } else {
-      setAddLoading(true);
-      postPolicyToClient(client, policy)
-        .then(() => setAddLoading(false))
-        .then(() => onClose())
-        .then(() => setLoading(true));
-    }
+    console.log(policy);
+    // if (values) {
+    //   setEditLoading(true);
+    //   putPolicyToClient(client, policy)
+    //     .then(() => setEditLoading(false))
+    //     .then(() => onClose())
+    //     .then(() => setLoading(true));
+    // } else {
+    //   setAddLoading(true);
+    //   postPolicyToClient(client, policy)
+    //     .then(() => setAddLoading(false))
+    //     .then(() => onClose())
+    //     .then(() => setLoading(true));
+    // }
   };
 
   const onDelete = () => {
